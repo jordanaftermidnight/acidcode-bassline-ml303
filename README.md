@@ -22,6 +22,7 @@ The Acidcode Bassline ML-303 is a faithful TB-303 clone that combines:
 
 ```
 ├── README.md                           # Complete build guide (start here)
+├── CREDITS.md                          # 🌟 FULL CREDITS - Original creators and community
 ├── MODIFICATION_INDEX.md               # 🎯 CHOOSE YOUR PATH - Navigation guide
 ├── EXISTING_ML303_MODIFICATIONS.md    # Already have ML-303? Start here
 ├── OTHER_BASSLINE_MODIFICATIONS.md    # x0xb0x, TD-3, MB-33 modifications  
@@ -223,18 +224,35 @@ Key German terms:
 
 ## 📄 License and Credits
 
-### Original Design
-- **Acidcode** - Original ML-303 hardware design
-- **Transistor** - Main firmware development  
-- **Matze** - Alternative firmware implementations
+### Acknowledgments
+This open source project builds upon the incredible work of the original creators:
+- **Acidcode (Mathias Märker)** - Original ML-303 hardware design and engineering
+- **Transistor** - Primary firmware development and MIDI implementation
+- **Matze** - Alternative firmware implementations and enhancements
+- **Christian Wiesner (Midimonster.de)** - Documentation and community preservation
+- **x0xb0x Team (Limor Fried/Adafruit)** - Open source hardware pioneering
+- **Entire 303 Community** - Forums, builders, and knowledge sharers
 
-### Arduino Integration
-- Modern enhancement and documentation
-- Additional firmware and examples
-- Integration guides and modifications
+**Full credits and community acknowledgments**: See [CREDITS.md](CREDITS.md)
+
+### Open Source Additions
+This repository contributes to the open source 303 community:
+- **Arduino integration** and modern enhancement frameworks
+- **English translations** of German documentation for accessibility
+- **Multi-clone adaptation guides** for various TB-303 clones
+- **Technical corrections** and verification for accuracy
+- **Reverse engineered firmware analysis** for educational purposes
+- **Community documentation** preservation and improvement
+
+### Open Source License
+This project embraces the open source spirit of the 303 clone community. Following the example of the x0xb0x (MIT License), this repository is intended for:
+- **Educational use** - Learning and understanding TB-303 design principles
+- **DIY building** - Enabling more people to build and enjoy 303 clones
+- **Community improvement** - Collaborative enhancement and error correction
+- **Knowledge preservation** - Ensuring these designs aren't lost to time
 
 ### Disclaimer
-This project is for educational and personal use. Build at your own risk. Always follow proper electronics safety procedures.
+This project is for educational and personal use. Build at your own risk. Always follow proper electronics safety procedures. Respect the intellectual property and hard work of all original creators and contributors. Commercial use should benefit and give back to the community.
 
 ## 🔗 Related Projects
 
