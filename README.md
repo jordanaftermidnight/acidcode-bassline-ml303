@@ -21,7 +21,12 @@ The Acidcode Bassline ML-303 is a faithful TB-303 clone that combines:
 ## 📁 Repository Structure
 
 ```
-├── README.md                           # This file
+├── README.md                           # Complete build guide (start here)
+├── MODIFICATION_INDEX.md               # 🎯 CHOOSE YOUR PATH - Navigation guide
+├── EXISTING_ML303_MODIFICATIONS.md    # Already have ML-303? Start here
+├── OTHER_BASSLINE_MODIFICATIONS.md    # x0xb0x, TD-3, MB-33 modifications  
+├── CORRECTIONS.md                      # Critical technical corrections
+├── FINAL_BUILD_REVIEW.md              # Build verification and logic check
 ├── build_instructions_v5/              # V5 German build documentation
 ├── build_instructions_v6/              # V6 English build documentation  
 ├── firmware/                           # All firmware versions
@@ -34,9 +39,17 @@ The Acidcode Bassline ML-303 is a faithful TB-303 clone that combines:
 ├── ml303-arduino-code.txt             # Arduino integration firmware
 ├── ml303-arduino-wiring.html          # Arduino wiring diagrams
 ├── ml303-sequencer-mod.html           # Hardware modification guide
-├── ml303-test-sketch.txt              # Arduino testing code
-└── Documentation/                      # Additional docs (auto-generated)
+└── ml303-test-sketch.txt              # Arduino testing code
 ```
+
+## 🎯 **QUICK START - Choose Your Situation:**
+
+| Your Situation | Go To |
+|----------------|-------|
+| **Want to build ML-303 from scratch** | Continue reading this README |
+| **Have working ML-303, want to enhance it** | [EXISTING_ML303_MODIFICATIONS.md](EXISTING_ML303_MODIFICATIONS.md) |
+| **Have x0xb0x, TD-3, or other TB-303 clone** | [OTHER_BASSLINE_MODIFICATIONS.md](OTHER_BASSLINE_MODIFICATIONS.md) |
+| **Need guidance on which approach to take** | [MODIFICATION_INDEX.md](MODIFICATION_INDEX.md) |
 
 ## 🔧 Hardware Specifications
 
