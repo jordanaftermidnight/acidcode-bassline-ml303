@@ -1,170 +1,201 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<svg viewBox="0 0 1000 700" xmlns="http://www.w3.org/2000/svg">
+<svg width="1400" height="1000" viewBox="0 0 1400 1000" xmlns="http://www.w3.org/2000/svg">
   <defs>
     <style>
-      .component { fill: #444; stroke: #888; stroke-width: 2; }
-      .ml303 { fill: #440000; stroke: #ff0000; }
-      .arduino { fill: #005C5C; stroke: #00a0a0; }
-      .wire { fill: none; stroke-width: 2; }
-      .power { stroke: #ff0000; }
-      .ground { stroke: #000000; }
-      .signal { stroke: #00ff00; }
-      .analog { stroke: #ffaa00; }
-      .digital { stroke: #00aaff; }
-      text { fill: #fff; font-size: 12px; font-family: Arial, sans-serif; }
-      .label { font-size: 14px; font-weight: bold; }
-      .title { font-size: 18px; font-weight: bold; fill: #ff3333; }
-      .pin-label { font-size: 10px; fill: #ccc; }
-      .value { fill: #ffff00; font-weight: bold; }
-      .testpoint { fill: #ff6600; stroke: #ff6600; }
+      .component { fill: #444; stroke: #888; stroke-width: 3; }
+      .ml303 { fill: #440000; stroke: #ff0000; stroke-width: 3; }
+      .arduino { fill: #005C5C; stroke: #00a0a0; stroke-width: 3; }
+      .testpoint { fill: #ff6600; stroke: #ff6600; stroke-width: 2; }
+      .wire { fill: none; stroke-width: 4; }
+      .power { stroke: #ff0000; stroke-width: 5; }
+      .ground { stroke: #000000; stroke-width: 5; }
+      .signal { stroke: #00ff00; stroke-width: 4; }
+      .analog { stroke: #ffaa00; stroke-width: 4; }
+      .digital { stroke: #00aaff; stroke-width: 4; }
+      text { fill: #fff; font-size: 16px; font-family: Arial, sans-serif; font-weight: bold; }
+      .label { font-size: 24px; font-weight: bold; }
+      .title { font-size: 32px; font-weight: bold; fill: #ff3333; }
+      .pin-label { font-size: 14px; fill: #ccc; }
+      .value { fill: #ffff00; font-weight: bold; font-size: 18px; }
+      .section-title { font-size: 20px; fill: #00ffff; font-weight: bold; }
+      .warning { fill: #ff0000; font-size: 18px; font-weight: bold; }
     </style>
   </defs>
   
+  <!-- Background -->
+  <rect width="1400" height="1000" fill="#222"/>
+  
   <!-- Title -->
-  <text x="500" y="30" text-anchor="middle" class="title">ML-303 Interface Connection Points</text>
-  <text x="500" y="50" text-anchor="middle" class="label">Arduino Integration Test Points and Connections</text>
+  <text x="700" y="40" text-anchor="middle" class="title">ML-303 Interface Connection Points</text>
+  <text x="700" y="70" text-anchor="middle" class="label">Test Points and Arduino Integration Locations</text>
   
   <!-- ML-303 Main Board Representation -->
-  <rect class="ml303" x="100" y="100" width="400" height="500" rx="10"/>
-  <text x="300" y="90" text-anchor="middle" class="label">ML-303 V5 Main Board</text>
-  
-  <!-- Arduino Interface Box -->
-  <rect class="arduino" x="600" y="150" width="250" height="450" rx="5"/>
-  <text x="725" y="140" text-anchor="middle" class="label">Arduino Interface</text>
+  <rect class="ml303" x="100" y="100" width="600" height="700" rx="20"/>
+  <text x="400" y="85" text-anchor="middle" class="label">ML-303 V5 Main Board</text>
   
   <!-- Power Supply Section -->
-  <text x="120" y="130" class="label" fill="#ff3333">Power Supply Test Points:</text>
-  <circle cx="150" cy="150" r="5" class="testpoint"/>
-  <text x="160" y="155" class="value">+12V Input</text>
+  <text x="130" y="140" class="section-title">Power Supply Test Points:</text>
   
-  <circle cx="150" cy="170" r="5" class="testpoint"/>
-  <text x="160" y="175" class="value">+5.333V Digital</text>
+  <circle cx="170" cy="170" r="8" class="testpoint"/>
+  <text x="190" y="175" class="value">+12V Input</text>
+  <text x="190" y="195" class="pin-label">External Power Jack</text>
   
-  <circle cx="150" cy="190" r="5" class="testpoint"/>
-  <text x="160" y="195" class="value">+15V Analog</text>
+  <circle cx="170" cy="220" r="8" class="testpoint"/>
+  <text x="190" y="225" class="value">+5.333V Digital</text>
+  <text x="190" y="245" class="pin-label">Regulated from +12V</text>
   
-  <circle cx="150" cy="210" r="5" class="testpoint"/>
-  <text x="160" y="215" class="value">-15V Analog</text>
+  <circle cx="170" cy="270" r="8" class="testpoint"/>
+  <text x="190" y="275" class="value">+15V Analog</text>
+  <text x="190" y="295" class="pin-label">RECOM 0515S Output</text>
   
-  <circle cx="150" cy="230" r="5" class="testpoint"/>
-  <text x="160" y="235" class="value">Ground (Digital)</text>
+  <circle cx="170" cy="320" r="8" class="testpoint"/>
+  <text x="190" y="325" class="value">-15V Analog</text>
+  <text x="190" y="345" class="pin-label">RECOM 0515S Output</text>
   
-  <circle cx="150" cy="250" r="5" class="testpoint"/>
-  <text x="160" y="255" class="value">Ground (Analog)</text>
+  <circle cx="170" cy="370" r="8" class="testpoint"/>
+  <text x="190" y="375" class="value">Digital GND</text>
+  <text x="190" y="395" class="pin-label">Common Reference</text>
   
-  <!-- Microcontroller Section -->
-  <text x="120" y="290" class="label" fill="#00aaff">PIC18LF452 Interface:</text>
-  <circle cx="150" cy="310" r="5" class="testpoint"/>
-  <text x="160" y="315" class="value">Clock Output (Pin)</text>
+  <circle cx="170" cy="420" r="8" class="testpoint"/>
+  <text x="190" y="425" class="value">Analog GND</text>
+  <text x="190" y="445" class="pin-label">Star Ground Point</text>
   
-  <circle cx="150" cy="330" r="5" class="testpoint"/>
-  <text x="160" y="335" class="value">Gate Output (Pin)</text>
+  <!-- Microcontroller Interface Section -->
+  <text x="130" y="490" class="section-title">PIC18LF452 Interface:</text>
   
-  <circle cx="150" cy="350" r="5" class="testpoint"/>
-  <text x="160" y="355" class="value">MIDI RX (Pin)</text>
+  <circle cx="170" cy="520" r="8" class="testpoint"/>
+  <text x="190" y="525" class="value">Clock Output</text>
+  <text x="190" y="545" class="pin-label">Sequencer Timing</text>
   
-  <circle cx="150" cy="370" r="5" class="testpoint"/>
-  <text x="160" y="375" class="value">MIDI TX (Pin)</text>
+  <circle cx="170" cy="570" r="8" class="testpoint"/>
+  <text x="190" y="575" class="value">Gate Output</text>
+  <text x="190" y="595" class="pin-label">Note Trigger</text>
   
-  <!-- VCO/VCF Control Section -->
-  <text x="120" y="410" class="label" fill="#ffaa00">Control Voltage Access:</text>
-  <circle cx="150" cy="430" r="5" class="testpoint"/>
-  <text x="160" y="435" class="value">Cutoff CV (VCF)</text>
+  <circle cx="170" cy="620" r="8" class="testpoint"/>
+  <text x="190" y="625" class="value">MIDI RX</text>
+  <text x="190" y="645" class="pin-label">Pin RB5 (Software)</text>
   
-  <circle cx="150" cy="450" r="5" class="testpoint"/>
-  <text x="160" y="455" class="value">Resonance CV</text>
+  <circle cx="170" cy="670" r="8" class="testpoint"/>
+  <text x="190" y="675" class="value">MIDI TX</text>
+  <text x="190" y="695" class="pin-label">Pin RB4 (Software)</text>
   
-  <circle cx="150" cy="470" r="5" class="testpoint"/>
-  <text x="160" y="475" class="value">Env Mod CV</text>
+  <!-- Control Voltage Access Section -->
+  <text x="440" y="140" class="section-title">Control Voltage Access:</text>
   
-  <circle cx="150" cy="490" r="5" class="testpoint"/>
-  <text x="160" y="495" class="value">Decay CV</text>
+  <circle cx="480" cy="170" r="8" class="testpoint"/>
+  <text x="500" y="175" class="value">Cutoff CV</text>
+  <text x="500" y="195" class="pin-label">VCF Frequency Control</text>
   
-  <circle cx="150" cy="510" r="5" class="testpoint"/>
-  <text x="160" y="515" class="value">VCO CV Input</text>
+  <circle cx="480" cy="220" r="8" class="testpoint"/>
+  <text x="500" y="225" class="value">Resonance CV</text>
+  <text x="500" y="245" class="pin-label">VCF Resonance (Q)</text>
+  
+  <circle cx="480" cy="270" r="8" class="testpoint"/>
+  <text x="500" y="275" class="value">Env Mod CV</text>
+  <text x="500" y="295" class="pin-label">Envelope Amount</text>
+  
+  <circle cx="480" cy="320" r="8" class="testpoint"/>
+  <text x="500" y="325" class="value">Decay CV</text>
+  <text x="500" y="345" class="pin-label">Envelope Decay Time</text>
+  
+  <circle cx="480" cy="370" r="8" class="testpoint"/>
+  <text x="500" y="375" class="value">VCO CV Input</text>
+  <text x="500" y="395" class="pin-label">Note Pitch Control</text>
   
   <!-- User Interface Section -->
-  <text x="320" y="290" class="label" fill="#00ff00">User Interface:</text>
-  <circle cx="350" cy="310" r="5" class="testpoint"/>
-  <text x="360" y="315" class="value">Run/Stop Switch</text>
+  <text x="440" y="440" class="section-title">User Interface:</text>
   
-  <circle cx="350" cy="330" r="5" class="testpoint"/>
-  <text x="360" y="335" class="value">Pattern Select</text>
+  <circle cx="480" cy="470" r="8" class="testpoint"/>
+  <text x="500" y="475" class="value">Run/Stop Switch</text>
+  <text x="500" y="495" class="pin-label">Transport Control</text>
   
-  <circle cx="350" cy="350" r="5" class="testpoint"/>
-  <text x="360" y="355" class="value">Mode Switch</text>
+  <circle cx="480" cy="520" r="8" class="testpoint"/>
+  <text x="500" y="525" class="value">Pattern Select</text>
+  <text x="500" y="545" class="pin-label">Bank/Pattern Button</text>
   
-  <circle cx="350" cy="370" r="5" class="testpoint"/>
-  <text x="360" y="375" class="value">Tempo Pot</text>
+  <circle cx="480" cy="570" r="8" class="testpoint"/>
+  <text x="500" y="575" class="value">Mode Switch</text>
+  <text x="500" y="595" class="pin-label">Play/Track/Pattern</text>
   
-  <!-- Audio Section -->
-  <text x="320" y="410" class="label" fill="#ffaa00">Audio Path:</text>
-  <circle cx="350" cy="430" r="5" class="testpoint"/>
-  <text x="360" y="435" class="value">VCO Output</text>
+  <circle cx="480" cy="620" r="8" class="testpoint"/>
+  <text x="500" y="625" class="value">Tempo Control</text>
+  <text x="500" y="645" class="pin-label">BPM Adjustment</text>
   
-  <circle cx="350" cy="450" r="5" class="testpoint"/>
-  <text x="360" y="455" class="value">VCF Output</text>
+  <!-- Audio Signal Path -->
+  <text x="440" y="690" class="section-title">Audio Path:</text>
   
-  <circle cx="350" cy="470" r="5" class="testpoint"/>
-  <text x="360" y="475" class="value">VCA Output</text>
+  <circle cx="480" cy="720" r="8" class="testpoint"/>
+  <text x="500" y="725" class="value">VCO Output</text>
+  <text x="500" y="745" class="pin-label">Raw Oscillator</text>
   
-  <circle cx="350" cy="490" r="5" class="testpoint"/>
-  <text x="360" y="495" class="value">Final Output</text>
+  <circle cx="480" cy="770" r="8" class="testpoint"/>
+  <text x="500" y="775" class="value">VCF Output</text>
+  <text x="500" y="795" class="pin-label">Filtered Audio</text>
   
-  <!-- Arduino Connections -->
-  <text x="620" y="180" class="label">Power:</text>
-  <text x="630" y="195" class="value">+5V from USB/Ext</text>
-  <text x="630" y="210" class="value">GND (shared)</text>
+  <!-- Arduino Interface Box -->
+  <rect class="arduino" x="800" y="150" width="400" height="650" rx="15"/>
+  <text x="1000" y="130" text-anchor="middle" class="label">Arduino Integration Points</text>
   
-  <text x="620" y="240" class="label">Analog Inputs:</text>
-  <text x="630" y="255" class="value">A0 → Cutoff Monitor</text>
-  <text x="630" y="270" class="value">A1 → Resonance Monitor</text>
-  <text x="630" y="285" class="value">A2 → Env Mod Monitor</text>
-  <text x="630" y="300" class="value">A3 → Decay Monitor</text>
+  <!-- Arduino Connection Sections -->
+  <text x="820" y="190" class="section-title">Power Connections:</text>
+  <text x="840" y="220" class="value">+5V from Arduino USB/External</text>
+  <text x="840" y="245" class="value">GND (shared digital ground)</text>
   
-  <text x="620" y="330" class="label">Digital I/O:</text>
-  <text x="630" y="345" class="value">D2 → Run/Stop (INT0)</text>
-  <text x="630" y="360" class="value">D3 → Pattern (INT1)</text>
-  <text x="630" y="375" class="value">D4 → Clock Input</text>
-  <text x="630" y="390" class="value">D5 → Gate Input</text>
-  <text x="630" y="405" class="value">D6 → Gate Output</text>
+  <text x="820" y="290" class="section-title">Analog Monitoring (CV Inputs):</text>
+  <text x="840" y="320" class="value">A0 → Cutoff CV Monitor</text>
+  <text x="840" y="345" class="value">A1 → Resonance CV Monitor</text>
+  <text x="840" y="370" class="value">A2 → Env Mod CV Monitor</text>
+  <text x="840" y="395" class="value">A3 → Decay CV Monitor</text>
   
-  <text x="620" y="435" class="label">Communication:</text>
-  <text x="630" y="450" class="value">A4 → MIDI RX</text>
-  <text x="630" y="465" class="value">A5 → MIDI TX</text>
+  <text x="820" y="440" class="section-title">Digital I/O:</text>
+  <text x="840" y="470" class="value">D2 → Run/Stop Button (INT0)</text>
+  <text x="840" y="495" class="value">D3 → Pattern Button (INT1)</text>
+  <text x="840" y="520" class="value">D4 → Clock Input Monitor</text>
+  <text x="840" y="545" class="value">D5 → Gate Input Monitor</text>
+  <text x="840" y="570" class="value">D6 → Gate Output Control</text>
   
-  <text x="620" y="495" class="label">SPI/DAC:</text>
-  <text x="630" y="510" class="value">D11 → SCK/MOSI</text>
-  <text x="630" y="525" class="value">D13 → DAC CS</text>
-  <text x="630" y="540" class="value">CV Out → VCO Input</text>
+  <text x="820" y="615" class="section-title">Communication:</text>
+  <text x="840" y="645" class="value">A4 → MIDI RX (via optocoupler)</text>
+  <text x="840" y="670" class="value">A5 → MIDI TX (direct connection)</text>
   
-  <!-- Connection Wires -->
+  <text x="820" y="715" class="section-title">SPI/DAC Interface:</text>
+  <text x="840" y="745" class="value">D11 → SPI SCK/MOSI (shared)</text>
+  <text x="840" y="770" class="value">D13 → DAC Chip Select</text>
+  <text x="840" y="795" class="value">CV Output → VCO Input</text>
+  
+  <!-- Connection Wires (Key Connections) -->
   <!-- Power connections -->
-  <line class="wire power" x1="155" y1="170" x2="620" y2="195"/>
-  <line class="wire ground" x1="155" y1="230" x2="620" y2="210"/>
+  <line class="power" x1="175" y1="220" x2="820" y2="220"/>    <!-- +5V digital -->
+  <line class="ground" x1="175" y1="370" x2="820" y2="245"/>   <!-- GND -->
   
   <!-- Analog monitoring -->
-  <line class="wire analog" x1="155" y1="430" x2="620" y2="255"/>
-  <line class="wire analog" x1="155" y1="450" x2="620" y2="270"/>
-  <line class="wire analog" x1="155" y1="470" x2="620" y2="285"/>
-  <line class="wire analog" x1="155" y1="490" x2="620" y2="300"/>
+  <line class="analog" x1="485" y1="170" x2="820" y2="320"/>   <!-- Cutoff -->
+  <line class="analog" x1="485" y1="220" x2="820" y2="345"/>   <!-- Resonance -->
+  <line class="analog" x1="485" y1="270" x2="820" y2="370"/>   <!-- Env Mod -->
+  <line class="analog" x1="485" y1="320" x2="820" y2="395"/>   <!-- Decay -->
   
   <!-- Digital I/O -->
-  <line class="wire digital" x1="355" y1="310" x2="620" y2="345"/>
-  <line class="wire digital" x1="355" y1="330" x2="620" y2="360"/>
-  <line class="wire digital" x1="155" y1="310" x2="620" y2="375"/>
-  <line class="wire digital" x1="155" y1="330" x2="620" y2="390"/>
+  <line class="digital" x1="485" y1="470" x2="820" y2="470"/>  <!-- Run/Stop -->
+  <line class="digital" x1="485" y1="520" x2="820" y2="495"/>  <!-- Pattern -->
+  <line class="digital" x1="175" y1="520" x2="820" y2="520"/>  <!-- Clock -->
+  <line class="digital" x1="175" y1="570" x2="820" y2="545"/>  <!-- Gate In -->
   
   <!-- MIDI -->
-  <line class="wire signal" x1="155" y1="350" x2="620" y2="450"/>
-  <line class="wire signal" x1="155" y1="370" x2="620" y2="465"/>
+  <line class="signal" x1="175" y1="620" x2="820" y2="645"/>   <!-- MIDI RX -->
+  <line class="signal" x1="175" y1="670" x2="820" y2="670"/>   <!-- MIDI TX -->
   
-  <!-- DAC Output -->
-  <line class="wire analog" x1="840" y1="540" x2="155" y2="510"/>
+  <!-- CV Output -->
+  <line class="analog" x1="1180" y1="795" x2="485" y2="370"/>  <!-- DAC to VCO -->
   
-  <!-- Safety Warning Box -->
-  <rect fill="#440000" stroke="#ff0000" stroke-width="2" x="50" y="620" width="900" height="70" rx="5"/>
-  <text x="60" y="645" class="label" fill="#ff0000">⚠️ CRITICAL SAFETY WARNINGS:</text>
-  <text x="70" y="660" fill="#fff">• SEQUENCER BOARD NOT REVERSE-POLARITY PROTECTED - Verify all power connections before first power-up!</text>
-  <text x="70" y="675" fill="#fff">• Use continuity tester to verify VDC wiring - GND connections may be misleading due to MIDI ground loops</text>
+  <!-- Critical Safety Warning Box -->
+  <rect fill="#330000" stroke="#ff0000" stroke-width="4" x="100" y="850" width="1200" height="120" rx="10"/>
+  <text x="120" y="880" class="warning">⚠️ CRITICAL SAFETY WARNINGS:</text>
+  <text x="140" y="910" fill="#fff">• ML-303 sequencer board has NO reverse polarity protection</text>
+  <text x="140" y="935" fill="#fff">• ALWAYS verify all power connections with continuity tester before first power-up</text>
+  <text x="140" y="960" fill="#fff">• GND connections may show false continuity due to MIDI ground loops - verify VDC polarity!</text>
+  
+  <!-- Interface Notes -->
+  <text x="750" y="950" class="section-title">Interface Notes:</text>
+  <text x="750" y="975" fill="#fff">All test points accessible with standard oscilloscope probes</text>
+  <text x="750" y="995" fill="#fff">Use isolated measurement techniques for analog section</text>
 </svg>

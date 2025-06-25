@@ -1,642 +1,531 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<svg viewBox="0 0 1200 900" xmlns="http://www.w3.org/2000/svg">
+<svg width="1600" height="1200" viewBox="0 0 1600 1200" xmlns="http://www.w3.org/2000/svg">
   <defs>
     <style>
-      .stripboard { fill: #8B4513; stroke: #654321; stroke-width: 1; }
-      .hole { fill: #444; stroke: #222; stroke-width: 0.5; }
-      .copper { fill: none; stroke: #CD7F32; stroke-width: 3; }
-      .component { fill: #333; stroke: #666; stroke-width: 1; }
-      .resistor { fill: #DEB887; stroke: #8B7355; stroke-width: 1; }
-      .capacitor { fill: #4169E1; stroke: #191970; stroke-width: 1; }
-      .ic { fill: #222; stroke: #666; stroke-width: 1; }
-      .wire { fill: none; stroke: #FF0000; stroke-width: 2; }
-      .cut { stroke: #FF0000; stroke-width: 2; }
-      text { fill: #fff; font-size: 8px; font-family: Arial, sans-serif; }
-      .label { font-size: 12px; font-weight: bold; }
-      .title { font-size: 16px; font-weight: bold; fill: #ff3333; }
-      .grid-label { font-size: 6px; fill: #999; }
+      .stripboard { fill: #8B4513; stroke: #654321; stroke-width: 2; }
+      .hole { fill: #333; stroke: #222; stroke-width: 1; }
+      .copper { fill: none; stroke: #CD7F32; stroke-width: 4; }
+      .component { fill: #444; stroke: #666; stroke-width: 2; }
+      .resistor { fill: #DEB887; stroke: #8B7355; stroke-width: 2; }
+      .capacitor { fill: #4169E1; stroke: #191970; stroke-width: 2; }
+      .ic { fill: #222; stroke: #666; stroke-width: 2; }
+      .wire { fill: none; stroke: #FF0000; stroke-width: 3; }
+      .cut { stroke: #FF0000; stroke-width: 4; stroke-dasharray: "5,5"; }
+      text { fill: #fff; font-size: 14px; font-family: Arial, sans-serif; font-weight: bold; }
+      .label { font-size: 20px; font-weight: bold; }
+      .title { font-size: 28px; font-weight: bold; fill: #ff3333; }
+      .grid-label { font-size: 12px; fill: #999; }
+      .value { fill: #ffff00; font-weight: bold; }
+      .section-title { font-size: 18px; fill: #00ffff; font-weight: bold; }
     </style>
   </defs>
   
+  <!-- Background -->
+  <rect width="1600" height="1200" fill="#222"/>
+  
   <!-- Title -->
-  <text x="600" y="25" text-anchor="middle" class="title">Stripboard Layouts for ML-303 Interface Circuits</text>
+  <text x="800" y="35" text-anchor="middle" class="title">Stripboard Construction Layouts</text>
+  <text x="800" y="60" text-anchor="middle" class="label">ML-303 Interface Circuits - Detailed Build Guide</text>
   
   <!-- MIDI Interface Layout -->
-  <text x="150" y="60" text-anchor="middle" class="label">MIDI Interface (6N138)</text>
+  <text x="200" y="110" text-anchor="middle" class="section-title">MIDI Interface Circuit (6N138)</text>
+  <text x="200" y="130" text-anchor="middle" class="label">Size: 15×9 holes</text>
   
-  <!-- Stripboard grid for MIDI -->
-  <rect class="stripboard" x="50" y="70" width="200" height="120" rx="2"/>
+  <!-- MIDI Stripboard -->
+  <rect class="stripboard" x="50" y="150" width="300" height="180" rx="5"/>
   
-  <!-- Grid holes -->
-  <g id="midi-holes">
-    <!-- Create 20x12 grid of holes -->
-    <circle cx="60" cy="80" r="2" class="hole"/>
-    <circle cx="70" cy="80" r="2" class="hole"/>
-    <circle cx="80" cy="80" r="2" class="hole"/>
-    <circle cx="90" cy="80" r="2" class="hole"/>
-    <circle cx="100" cy="80" r="2" class="hole"/>
-    <circle cx="110" cy="80" r="2" class="hole"/>
-    <circle cx="120" cy="80" r="2" class="hole"/>
-    <circle cx="130" cy="80" r="2" class="hole"/>
-    <circle cx="140" cy="80" r="2" class="hole"/>
-    <circle cx="150" cy="80" r="2" class="hole"/>
-    <circle cx="160" cy="80" r="2" class="hole"/>
-    <circle cx="170" cy="80" r="2" class="hole"/>
-    <circle cx="180" cy="80" r="2" class="hole"/>
-    <circle cx="190" cy="80" r="2" class="hole"/>
-    <circle cx="200" cy="80" r="2" class="hole"/>
-    <circle cx="210" cy="80" r="2" class="hole"/>
-    <circle cx="220" cy="80" r="2" class="hole"/>
-    <circle cx="230" cy="80" r="2" class="hole"/>
-    <circle cx="240" cy="80" r="2" class="hole"/>
+  <!-- MIDI Grid Pattern -->
+  <g id="midi-grid">
+    <!-- Copper tracks (horizontal) -->
+    <line class="copper" x1="60" y1="165" x2="340" y2="165"/>  <!-- Row A -->
+    <line class="copper" x1="60" y1="185" x2="340" y2="185"/>  <!-- Row B -->
+    <line class="copper" x1="60" y1="205" x2="340" y2="205"/>  <!-- Row C -->
+    <line class="copper" x1="60" y1="225" x2="340" y2="225"/>  <!-- Row D -->
+    <line class="copper" x1="60" y1="245" x2="340" y2="245"/>  <!-- Row E -->
+    <line class="copper" x1="60" y1="265" x2="340" y2="265"/>  <!-- Row F -->
+    <line class="copper" x1="60" y1="285" x2="340" y2="285"/>  <!-- Row G -->
+    <line class="copper" x1="60" y1="305" x2="340" y2="305"/>  <!-- Row H -->
+    <line class="copper" x1="60" y1="325" x2="340" y2="325"/>  <!-- Row I -->
     
-    <!-- Additional rows -->
-    <circle cx="60" cy="90" r="2" class="hole"/>
-    <circle cx="70" cy="90" r="2" class="hole"/>
-    <circle cx="80" cy="90" r="2" class="hole"/>
-    <circle cx="90" cy="90" r="2" class="hole"/>
-    <circle cx="100" cy="90" r="2" class="hole"/>
-    <circle cx="110" cy="90" r="2" class="hole"/>
-    <circle cx="120" cy="90" r="2" class="hole"/>
-    <circle cx="130" cy="90" r="2" class="hole"/>
-    <circle cx="140" cy="90" r="2" class="hole"/>
-    <circle cx="150" cy="90" r="2" class="hole"/>
-    <circle cx="160" cy="90" r="2" class="hole"/>
-    <circle cx="170" cy="90" r="2" class="hole"/>
-    <circle cx="180" cy="90" r="2" class="hole"/>
-    <circle cx="190" cy="90" r="2" class="hole"/>
-    <circle cx="200" cy="90" r="2" class="hole"/>
-    <circle cx="210" cy="90" r="2" class="hole"/>
-    <circle cx="220" cy="90" r="2" class="hole"/>
-    <circle cx="230" cy="90" r="2" class="hole"/>
-    <circle cx="240" cy="90" r="2" class="hole"/>
-    
-    <!-- More rows for complete grid -->
-    <circle cx="60" cy="100" r="2" class="hole"/>
-    <circle cx="70" cy="100" r="2" class="hole"/>
-    <circle cx="80" cy="100" r="2" class="hole"/>
-    <circle cx="90" cy="100" r="2" class="hole"/>
-    <circle cx="100" cy="100" r="2" class="hole"/>
-    <circle cx="110" cy="100" r="2" class="hole"/>
-    <circle cx="120" cy="100" r="2" class="hole"/>
-    <circle cx="130" cy="100" r="2" class="hole"/>
-    <circle cx="140" cy="100" r="2" class="hole"/>
-    <circle cx="150" cy="100" r="2" class="hole"/>
-    <circle cx="160" cy="100" r="2" class="hole"/>
-    <circle cx="170" cy="100" r="2" class="hole"/>
-    <circle cx="180" cy="100" r="2" class="hole"/>
-    <circle cx="190" cy="100" r="2" class="hole"/>
-    <circle cx="200" cy="100" r="2" class="hole"/>
-    <circle cx="210" cy="100" r="2" class="hole"/>
-    <circle cx="220" cy="100" r="2" class="hole"/>
-    <circle cx="230" cy="100" r="2" class="hole"/>
-    <circle cx="240" cy="100" r="2" class="hole"/>
-    
-    <circle cx="60" cy="110" r="2" class="hole"/>
-    <circle cx="70" cy="110" r="2" class="hole"/>
-    <circle cx="80" cy="110" r="2" class="hole"/>
-    <circle cx="90" cy="110" r="2" class="hole"/>
-    <circle cx="100" cy="110" r="2" class="hole"/>
-    <circle cx="110" cy="110" r="2" class="hole"/>
-    <circle cx="120" cy="110" r="2" class="hole"/>
-    <circle cx="130" cy="110" r="2" class="hole"/>
-    <circle cx="140" cy="110" r="2" class="hole"/>
-    <circle cx="150" cy="110" r="2" class="hole"/>
-    <circle cx="160" cy="110" r="2" class="hole"/>
-    <circle cx="170" cy="110" r="2" class="hole"/>
-    <circle cx="180" cy="110" r="2" class="hole"/>
-    <circle cx="190" cy="110" r="2" class="hole"/>
-    <circle cx="200" cy="110" r="2" class="hole"/>
-    <circle cx="210" cy="110" r="2" class="hole"/>
-    <circle cx="220" cy="110" r="2" class="hole"/>
-    <circle cx="230" cy="110" r="2" class="hole"/>
-    <circle cx="240" cy="110" r="2" class="hole"/>
-    
-    <circle cx="60" cy="120" r="2" class="hole"/>
-    <circle cx="70" cy="120" r="2" class="hole"/>
-    <circle cx="80" cy="120" r="2" class="hole"/>
-    <circle cx="90" cy="120" r="2" class="hole"/>
-    <circle cx="100" cy="120" r="2" class="hole"/>
-    <circle cx="110" cy="120" r="2" class="hole"/>
-    <circle cx="120" cy="120" r="2" class="hole"/>
-    <circle cx="130" cy="120" r="2" class="hole"/>
-    <circle cx="140" cy="120" r="2" class="hole"/>
-    <circle cx="150" cy="120" r="2" class="hole"/>
-    <circle cx="160" cy="120" r="2" class="hole"/>
-    <circle cx="170" cy="120" r="2" class="hole"/>
-    <circle cx="180" cy="120" r="2" class="hole"/>
-    <circle cx="190" cy="120" r="2" class="hole"/>
-    <circle cx="200" cy="120" r="2" class="hole"/>
-    <circle cx="210" cy="120" r="2" class="hole"/>
-    <circle cx="220" cy="120" r="2" class="hole"/>
-    <circle cx="230" cy="120" r="2" class="hole"/>
-    <circle cx="240" cy="120" r="2" class="hole"/>
-    
-    <circle cx="60" cy="130" r="2" class="hole"/>
-    <circle cx="70" cy="130" r="2" class="hole"/>
-    <circle cx="80" cy="130" r="2" class="hole"/>
-    <circle cx="90" cy="130" r="2" class="hole"/>
-    <circle cx="100" cy="130" r="2" class="hole"/>
-    <circle cx="110" cy="130" r="2" class="hole"/>
-    <circle cx="120" cy="130" r="2" class="hole"/>
-    <circle cx="130" cy="130" r="2" class="hole"/>
-    <circle cx="140" cy="130" r="2" class="hole"/>
-    <circle cx="150" cy="130" r="2" class="hole"/>
-    <circle cx="160" cy="130" r="2" class="hole"/>
-    <circle cx="170" cy="130" r="2" class="hole"/>
-    <circle cx="180" cy="130" r="2" class="hole"/>
-    <circle cx="190" cy="130" r="2" class="hole"/>
-    <circle cx="200" cy="130" r="2" class="hole"/>
-    <circle cx="210" cy="130" r="2" class="hole"/>
-    <circle cx="220" cy="130" r="2" class="hole"/>
-    <circle cx="230" cy="130" r="2" class="hole"/>
-    <circle cx="240" cy="130" r="2" class="hole"/>
-    
-    <circle cx="60" cy="140" r="2" class="hole"/>
-    <circle cx="70" cy="140" r="2" class="hole"/>
-    <circle cx="80" cy="140" r="2" class="hole"/>
-    <circle cx="90" cy="140" r="2" class="hole"/>
-    <circle cx="100" cy="140" r="2" class="hole"/>
-    <circle cx="110" cy="140" r="2" class="hole"/>
-    <circle cx="120" cy="140" r="2" class="hole"/>
-    <circle cx="130" cy="140" r="2" class="hole"/>
-    <circle cx="140" cy="140" r="2" class="hole"/>
-    <circle cx="150" cy="140" r="2" class="hole"/>
-    <circle cx="160" cy="140" r="2" class="hole"/>
-    <circle cx="170" cy="140" r="2" class="hole"/>
-    <circle cx="180" cy="140" r="2" class="hole"/>
-    <circle cx="190" cy="140" r="2" class="hole"/>
-    <circle cx="200" cy="140" r="2" class="hole"/>
-    <circle cx="210" cy="140" r="2" class="hole"/>
-    <circle cx="220" cy="140" r="2" class="hole"/>
-    <circle cx="230" cy="140" r="2" class="hole"/>
-    <circle cx="240" cy="140" r="2" class="hole"/>
-    
-    <circle cx="60" cy="150" r="2" class="hole"/>
-    <circle cx="70" cy="150" r="2" class="hole"/>
-    <circle cx="80" cy="150" r="2" class="hole"/>
-    <circle cx="90" cy="150" r="2" class="hole"/>
-    <circle cx="100" cy="150" r="2" class="hole"/>
-    <circle cx="110" cy="150" r="2" class="hole"/>
-    <circle cx="120" cy="150" r="2" class="hole"/>
-    <circle cx="130" cy="150" r="2" class="hole"/>
-    <circle cx="140" cy="150" r="2" class="hole"/>
-    <circle cx="150" cy="150" r="2" class="hole"/>
-    <circle cx="160" cy="150" r="2" class="hole"/>
-    <circle cx="170" cy="150" r="2" class="hole"/>
-    <circle cx="180" cy="150" r="2" class="hole"/>
-    <circle cx="190" cy="150" r="2" class="hole"/>
-    <circle cx="200" cy="150" r="2" class="hole"/>
-    <circle cx="210" cy="150" r="2" class="hole"/>
-    <circle cx="220" cy="150" r="2" class="hole"/>
-    <circle cx="230" cy="150" r="2" class="hole"/>
-    <circle cx="240" cy="150" r="2" class="hole"/>
-    
-    <circle cx="60" cy="160" r="2" class="hole"/>
-    <circle cx="70" cy="160" r="2" class="hole"/>
-    <circle cx="80" cy="160" r="2" class="hole"/>
-    <circle cx="90" cy="160" r="2" class="hole"/>
-    <circle cx="100" cy="160" r="2" class="hole"/>
-    <circle cx="110" cy="160" r="2" class="hole"/>
-    <circle cx="120" cy="160" r="2" class="hole"/>
-    <circle cx="130" cy="160" r="2" class="hole"/>
-    <circle cx="140" cy="160" r="2" class="hole"/>
-    <circle cx="150" cy="160" r="2" class="hole"/>
-    <circle cx="160" cy="160" r="2" class="hole"/>
-    <circle cx="170" cy="160" r="2" class="hole"/>
-    <circle cx="180" cy="160" r="2" class="hole"/>
-    <circle cx="190" cy="160" r="2" class="hole"/>
-    <circle cx="200" cy="160" r="2" class="hole"/>
-    <circle cx="210" cy="160" r="2" class="hole"/>
-    <circle cx="220" cy="160" r="2" class="hole"/>
-    <circle cx="230" cy="160" r="2" class="hole"/>
-    <circle cx="240" cy="160" r="2" class="hole"/>
-    
-    <circle cx="60" cy="170" r="2" class="hole"/>
-    <circle cx="70" cy="170" r="2" class="hole"/>
-    <circle cx="80" cy="170" r="2" class="hole"/>
-    <circle cx="90" cy="170" r="2" class="hole"/>
-    <circle cx="100" cy="170" r="2" class="hole"/>
-    <circle cx="110" cy="170" r="2" class="hole"/>
-    <circle cx="120" cy="170" r="2" class="hole"/>
-    <circle cx="130" cy="170" r="2" class="hole"/>
-    <circle cx="140" cy="170" r="2" class="hole"/>
-    <circle cx="150" cy="170" r="2" class="hole"/>
-    <circle cx="160" cy="170" r="2" class="hole"/>
-    <circle cx="170" cy="170" r="2" class="hole"/>
-    <circle cx="180" cy="170" r="2" class="hole"/>
-    <circle cx="190" cy="170" r="2" class="hole"/>
-    <circle cx="200" cy="170" r="2" class="hole"/>
-    <circle cx="210" cy="170" r="2" class="hole"/>
-    <circle cx="220" cy="170" r="2" class="hole"/>
-    <circle cx="230" cy="170" r="2" class="hole"/>
-    <circle cx="240" cy="170" r="2" class="hole"/>
-    
-    <circle cx="60" cy="180" r="2" class="hole"/>
-    <circle cx="70" cy="180" r="2" class="hole"/>
-    <circle cx="80" cy="180" r="2" class="hole"/>
-    <circle cx="90" cy="180" r="2" class="hole"/>
-    <circle cx="100" cy="180" r="2" class="hole"/>
-    <circle cx="110" cy="180" r="2" class="hole"/>
-    <circle cx="120" cy="180" r="2" class="hole"/>
-    <circle cx="130" cy="180" r="2" class="hole"/>
-    <circle cx="140" cy="180" r="2" class="hole"/>
-    <circle cx="150" cy="180" r="2" class="hole"/>
-    <circle cx="160" cy="180" r="2" class="hole"/>
-    <circle cx="170" cy="180" r="2" class="hole"/>
-    <circle cx="180" cy="180" r="2" class="hole"/>
-    <circle cx="190" cy="180" r="2" class="hole"/>
-    <circle cx="200" cy="180" r="2" class="hole"/>
-    <circle cx="210" cy="180" r="2" class="hole"/>
-    <circle cx="220" cy="180" r="2" class="hole"/>
-    <circle cx="230" cy="180" r="2" class="hole"/>
-    <circle cx="240" cy="180" r="2" class="hole"/>
+    <!-- Grid holes -->
+    <g fill="#333" stroke="#666">
+      <!-- Row by row holes -->
+      <circle cx="80" cy="165" r="3"/>
+      <circle cx="100" cy="165" r="3"/>
+      <circle cx="120" cy="165" r="3"/>
+      <circle cx="140" cy="165" r="3"/>
+      <circle cx="160" cy="165" r="3"/>
+      <circle cx="180" cy="165" r="3"/>
+      <circle cx="200" cy="165" r="3"/>
+      <circle cx="220" cy="165" r="3"/>
+      <circle cx="240" cy="165" r="3"/>
+      <circle cx="260" cy="165" r="3"/>
+      <circle cx="280" cy="165" r="3"/>
+      <circle cx="300" cy="165" r="3"/>
+      <circle cx="320" cy="165" r="3"/>
+      
+      <circle cx="80" cy="185" r="3"/>
+      <circle cx="100" cy="185" r="3"/>
+      <circle cx="120" cy="185" r="3"/>
+      <circle cx="140" cy="185" r="3"/>
+      <circle cx="160" cy="185" r="3"/>
+      <circle cx="180" cy="185" r="3"/>
+      <circle cx="200" cy="185" r="3"/>
+      <circle cx="220" cy="185" r="3"/>
+      <circle cx="240" cy="185" r="3"/>
+      <circle cx="260" cy="185" r="3"/>
+      <circle cx="280" cy="185" r="3"/>
+      <circle cx="300" cy="185" r="3"/>
+      <circle cx="320" cy="185" r="3"/>
+      
+      <circle cx="80" cy="205" r="3"/>
+      <circle cx="100" cy="205" r="3"/>
+      <circle cx="120" cy="205" r="3"/>
+      <circle cx="140" cy="205" r="3"/>
+      <circle cx="160" cy="205" r="3"/>
+      <circle cx="180" cy="205" r="3"/>
+      <circle cx="200" cy="205" r="3"/>
+      <circle cx="220" cy="205" r="3"/>
+      <circle cx="240" cy="205" r="3"/>
+      <circle cx="260" cy="205" r="3"/>
+      <circle cx="280" cy="205" r="3"/>
+      <circle cx="300" cy="205" r="3"/>
+      <circle cx="320" cy="205" r="3"/>
+      
+      <circle cx="80" cy="225" r="3"/>
+      <circle cx="100" cy="225" r="3"/>
+      <circle cx="120" cy="225" r="3"/>
+      <circle cx="140" cy="225" r="3"/>
+      <circle cx="160" cy="225" r="3"/>
+      <circle cx="180" cy="225" r="3"/>
+      <circle cx="200" cy="225" r="3"/>
+      <circle cx="220" cy="225" r="3"/>
+      <circle cx="240" cy="225" r="3"/>
+      <circle cx="260" cy="225" r="3"/>
+      <circle cx="280" cy="225" r="3"/>
+      <circle cx="300" cy="225" r="3"/>
+      <circle cx="320" cy="225" r="3"/>
+      
+      <circle cx="80" cy="245" r="3"/>
+      <circle cx="100" cy="245" r="3"/>
+      <circle cx="120" cy="245" r="3"/>
+      <circle cx="140" cy="245" r="3"/>
+      <circle cx="160" cy="245" r="3"/>
+      <circle cx="180" cy="245" r="3"/>
+      <circle cx="200" cy="245" r="3"/>
+      <circle cx="220" cy="245" r="3"/>
+      <circle cx="240" cy="245" r="3"/>
+      <circle cx="260" cy="245" r="3"/>
+      <circle cx="280" cy="245" r="3"/>
+      <circle cx="300" cy="245" r="3"/>
+      <circle cx="320" cy="245" r="3"/>
+      
+      <circle cx="80" cy="265" r="3"/>
+      <circle cx="100" cy="265" r="3"/>
+      <circle cx="120" cy="265" r="3"/>
+      <circle cx="140" cy="265" r="3"/>
+      <circle cx="160" cy="265" r="3"/>
+      <circle cx="180" cy="265" r="3"/>
+      <circle cx="200" cy="265" r="3"/>
+      <circle cx="220" cy="265" r="3"/>
+      <circle cx="240" cy="265" r="3"/>
+      <circle cx="260" cy="265" r="3"/>
+      <circle cx="280" cy="265" r="3"/>
+      <circle cx="300" cy="265" r="3"/>
+      <circle cx="320" cy="265" r="3"/>
+      
+      <circle cx="80" cy="285" r="3"/>
+      <circle cx="100" cy="285" r="3"/>
+      <circle cx="120" cy="285" r="3"/>
+      <circle cx="140" cy="285" r="3"/>
+      <circle cx="160" cy="285" r="3"/>
+      <circle cx="180" cy="285" r="3"/>
+      <circle cx="200" cy="285" r="3"/>
+      <circle cx="220" cy="285" r="3"/>
+      <circle cx="240" cy="285" r="3"/>
+      <circle cx="260" cy="285" r="3"/>
+      <circle cx="280" cy="285" r="3"/>
+      <circle cx="300" cy="285" r="3"/>
+      <circle cx="320" cy="285" r="3"/>
+      
+      <circle cx="80" cy="305" r="3"/>
+      <circle cx="100" cy="305" r="3"/>
+      <circle cx="120" cy="305" r="3"/>
+      <circle cx="140" cy="305" r="3"/>
+      <circle cx="160" cy="305" r="3"/>
+      <circle cx="180" cy="305" r="3"/>
+      <circle cx="200" cy="305" r="3"/>
+      <circle cx="220" cy="305" r="3"/>
+      <circle cx="240" cy="305" r="3"/>
+      <circle cx="260" cy="305" r="3"/>
+      <circle cx="280" cy="305" r="3"/>
+      <circle cx="300" cy="305" r="3"/>
+      <circle cx="320" cy="305" r="3"/>
+      
+      <circle cx="80" cy="325" r="3"/>
+      <circle cx="100" cy="325" r="3"/>
+      <circle cx="120" cy="325" r="3"/>
+      <circle cx="140" cy="325" r="3"/>
+      <circle cx="160" cy="325" r="3"/>
+      <circle cx="180" cy="325" r="3"/>
+      <circle cx="200" cy="325" r="3"/>
+      <circle cx="220" cy="325" r="3"/>
+      <circle cx="240" cy="325" r="3"/>
+      <circle cx="260" cy="325" r="3"/>
+      <circle cx="280" cy="325" r="3"/>
+      <circle cx="300" cy="325" r="3"/>
+      <circle cx="320" cy="325" r="3"/>
+    </g>
   </g>
   
-  <!-- Copper tracks for MIDI interface -->
-  <line class="copper" x1="60" y1="100" x2="240" y2="100"/>  <!-- Power rail -->
-  <line class="copper" x1="60" y1="160" x2="240" y2="160"/>  <!-- Ground rail -->
+  <!-- MIDI Components -->
+  <rect class="ic" x="170" y="215" width="40" height="20" rx="3"/>
+  <text x="190" y="228" text-anchor="middle" class="value">6N138</text>
   
-  <!-- Component placements for MIDI -->
-  <rect class="ic" x="115" y="115" width="30" height="15" rx="2"/>
-  <text x="130" y="125" text-anchor="middle" class="label">6N138</text>
+  <rect class="resistor" x="115" y="200" width="25" height="6" rx="3"/>
+  <text x="127" y="210" text-anchor="middle" class="value">220Ω</text>
   
-  <rect class="resistor" x="90" y="95" width="15" height="4" rx="1"/>
-  <text x="97" y="102" text-anchor="middle">220Ω</text>
+  <rect class="resistor" x="115" y="250" width="25" height="6" rx="3"/>
+  <text x="127" y="260" text-anchor="middle" class="value">220Ω</text>
   
-  <rect class="resistor" x="110" y="95" width="15" height="4" rx="1"/>
-  <text x="117" y="102" text-anchor="middle">220Ω</text>
+  <rect class="resistor" x="235" y="215" width="6" height="15" rx="3"/>
+  <text x="250" y="225" text-anchor="middle" class="value">4.7k</text>
   
-  <rect class="resistor" x="160" y="95" width="15" height="4" rx="1"/>
-  <text x="167" y="102" text-anchor="middle">4.7k</text>
+  <!-- Track cuts for MIDI -->
+  <line class="cut" x1="185" y1="225" x2="185" y2="235"/>
+  <line class="cut" x1="195" y1="225" x2="195" y2="235"/>
   
-  <!-- Track breaks -->
-  <line class="cut" x1="125" y1="100" x2="125" y2="105"/>
-  <line class="cut" x1="135" y1="100" x2="135" y2="105"/>
+  <!-- Grid labels for MIDI -->
+  <text x="65" y="170" class="grid-label">A</text>
+  <text x="65" y="190" class="grid-label">B</text>
+  <text x="65" y="210" class="grid-label">C</text>
+  <text x="65" y="230" class="grid-label">D</text>
+  <text x="65" y="250" class="grid-label">E</text>
+  <text x="65" y="270" class="grid-label">F</text>
+  <text x="65" y="290" class="grid-label">G</text>
+  <text x="65" y="310" class="grid-label">H</text>
+  <text x="65" y="330" class="grid-label">I</text>
   
-  <!-- Grid labels -->
-  <text x="55" y="85" class="grid-label">A</text>
-  <text x="55" y="95" class="grid-label">B</text>
-  <text x="55" y="105" class="grid-label">C</text>
-  <text x="55" y="115" class="grid-label">D</text>
-  <text x="55" y="125" class="grid-label">E</text>
-  <text x="55" y="135" class="grid-label">F</text>
-  <text x="55" y="145" class="grid-label">G</text>
-  <text x="55" y="155" class="grid-label">H</text>
-  <text x="55" y="165" class="grid-label">I</text>
-  <text x="55" y="175" class="grid-label">J</text>
+  <text x="85" y="345" class="grid-label">1</text>
+  <text x="105" y="345" class="grid-label">2</text>
+  <text x="125" y="345" class="grid-label">3</text>
+  <text x="145" y="345" class="grid-label">4</text>
+  <text x="165" y="345" class="grid-label">5</text>
+  <text x="185" y="345" class="grid-label">6</text>
+  <text x="205" y="345" class="grid-label">7</text>
+  <text x="225" y="345" class="grid-label">8</text>
+  <text x="245" y="345" class="grid-label">9</text>
+  <text x="265" y="345" class="grid-label">10</text>
+  <text x="285" y="345" class="grid-label">11</text>
+  <text x="305" y="345" class="grid-label">12</text>
+  <text x="325" y="345" class="grid-label">13</text>
   
-  <text x="65" y="200" class="grid-label">1</text>
-  <text x="75" y="200" class="grid-label">2</text>
-  <text x="85" y="200" class="grid-label">3</text>
-  <text x="95" y="200" class="grid-label">4</text>
-  <text x="105" y="200" class="grid-label">5</text>
-  <text x="115" y="200" class="grid-label">6</text>
-  <text x="125" y="200" class="grid-label">7</text>
-  <text x="135" y="200" class="grid-label">8</text>
-  <text x="145" y="200" class="grid-label">9</text>
-  <text x="155" y="200" class="grid-label">10</text>
-  <text x="165" y="200" class="grid-label">11</text>
-  <text x="175" y="200" class="grid-label">12</text>
-  <text x="185" y="200" class="grid-label">13</text>
-  <text x="195" y="200" class="grid-label">14</text>
-  <text x="205" y="200" class="grid-label">15</text>
-  <text x="215" y="200" class="grid-label">16</text>
-  <text x="225" y="200" class="grid-label">17</text>
-  <text x="235" y="200" class="grid-label">18</text>
+  <!-- DAC Layout -->
+  <text x="600" y="110" text-anchor="middle" class="section-title">MCP4921 DAC Circuit</text>
+  <text x="600" y="130" text-anchor="middle" class="label">Size: 13×7 holes</text>
   
-  <!-- CD4049 Overdrive Layout -->
-  <text x="450" y="60" text-anchor="middle" class="label">CD4049 Overdrive</text>
+  <!-- DAC Stripboard -->
+  <rect class="stripboard" x="450" y="150" width="300" height="140" rx="5"/>
   
-  <!-- Stripboard for CD4049 -->
-  <rect class="stripboard" x="350" y="70" width="200" height="100" rx="2"/>
+  <!-- DAC Grid -->
+  <g id="dac-grid">
+    <!-- Copper tracks -->
+    <line class="copper" x1="460" y1="165" x2="740" y2="165"/>  <!-- +5V rail -->
+    <line class="copper" x1="460" y1="185" x2="740" y2="185"/>
+    <line class="copper" x1="460" y1="205" x2="740" y2="205"/>
+    <line class="copper" x1="460" y1="225" x2="740" y2="225"/>
+    <line class="copper" x1="460" y1="245" x2="740" y2="245"/>
+    <line class="copper" x1="460" y1="265" x2="740" y2="265"/>  <!-- GND rail -->
+    <line class="copper" x1="460" y1="285" x2="740" y2="285"/>
+    
+    <!-- Grid holes for DAC -->
+    <g fill="#333" stroke="#666">
+      <circle cx="480" cy="165" r="3"/>
+      <circle cx="500" cy="165" r="3"/>
+      <circle cx="520" cy="165" r="3"/>
+      <circle cx="540" cy="165" r="3"/>
+      <circle cx="560" cy="165" r="3"/>
+      <circle cx="580" cy="165" r="3"/>
+      <circle cx="600" cy="165" r="3"/>
+      <circle cx="620" cy="165" r="3"/>
+      <circle cx="640" cy="165" r="3"/>
+      <circle cx="660" cy="165" r="3"/>
+      <circle cx="680" cy="165" r="3"/>
+      <circle cx="700" cy="165" r="3"/>
+      <circle cx="720" cy="165" r="3"/>
+      
+      <circle cx="480" cy="185" r="3"/>
+      <circle cx="500" cy="185" r="3"/>
+      <circle cx="520" cy="185" r="3"/>
+      <circle cx="540" cy="185" r="3"/>
+      <circle cx="560" cy="185" r="3"/>
+      <circle cx="580" cy="185" r="3"/>
+      <circle cx="600" cy="185" r="3"/>
+      <circle cx="620" cy="185" r="3"/>
+      <circle cx="640" cy="185" r="3"/>
+      <circle cx="660" cy="185" r="3"/>
+      <circle cx="680" cy="185" r="3"/>
+      <circle cx="700" cy="185" r="3"/>
+      <circle cx="720" cy="185" r="3"/>
+      
+      <circle cx="480" cy="205" r="3"/>
+      <circle cx="500" cy="205" r="3"/>
+      <circle cx="520" cy="205" r="3"/>
+      <circle cx="540" cy="205" r="3"/>
+      <circle cx="560" cy="205" r="3"/>
+      <circle cx="580" cy="205" r="3"/>
+      <circle cx="600" cy="205" r="3"/>
+      <circle cx="620" cy="205" r="3"/>
+      <circle cx="640" cy="205" r="3"/>
+      <circle cx="660" cy="205" r="3"/>
+      <circle cx="680" cy="205" r="3"/>
+      <circle cx="700" cy="205" r="3"/>
+      <circle cx="720" cy="205" r="3"/>
+      
+      <circle cx="480" cy="225" r="3"/>
+      <circle cx="500" cy="225" r="3"/>
+      <circle cx="520" cy="225" r="3"/>
+      <circle cx="540" cy="225" r="3"/>
+      <circle cx="560" cy="225" r="3"/>
+      <circle cx="580" cy="225" r="3"/>
+      <circle cx="600" cy="225" r="3"/>
+      <circle cx="620" cy="225" r="3"/>
+      <circle cx="640" cy="225" r="3"/>
+      <circle cx="660" cy="225" r="3"/>
+      <circle cx="680" cy="225" r="3"/>
+      <circle cx="700" cy="225" r="3"/>
+      <circle cx="720" cy="225" r="3"/>
+      
+      <circle cx="480" cy="245" r="3"/>
+      <circle cx="500" cy="245" r="3"/>
+      <circle cx="520" cy="245" r="3"/>
+      <circle cx="540" cy="245" r="3"/>
+      <circle cx="560" cy="245" r="3"/>
+      <circle cx="580" cy="245" r="3"/>
+      <circle cx="600" cy="245" r="3"/>
+      <circle cx="620" cy="245" r="3"/>
+      <circle cx="640" cy="245" r="3"/>
+      <circle cx="660" cy="245" r="3"/>
+      <circle cx="680" cy="245" r="3"/>
+      <circle cx="700" cy="245" r="3"/>
+      <circle cx="720" cy="245" r="3"/>
+      
+      <circle cx="480" cy="265" r="3"/>
+      <circle cx="500" cy="265" r="3"/>
+      <circle cx="520" cy="265" r="3"/>
+      <circle cx="540" cy="265" r="3"/>
+      <circle cx="560" cy="265" r="3"/>
+      <circle cx="580" cy="265" r="3"/>
+      <circle cx="600" cy="265" r="3"/>
+      <circle cx="620" cy="265" r="3"/>
+      <circle cx="640" cy="265" r="3"/>
+      <circle cx="660" cy="265" r="3"/>
+      <circle cx="680" cy="265" r="3"/>
+      <circle cx="700" cy="265" r="3"/>
+      <circle cx="720" cy="265" r="3"/>
+      
+      <circle cx="480" cy="285" r="3"/>
+      <circle cx="500" cy="285" r="3"/>
+      <circle cx="520" cy="285" r="3"/>
+      <circle cx="540" cy="285" r="3"/>
+      <circle cx="560" cy="285" r="3"/>
+      <circle cx="580" cy="285" r="3"/>
+      <circle cx="600" cy="285" r="3"/>
+      <circle cx="620" cy="285" r="3"/>
+      <circle cx="640" cy="285" r="3"/>
+      <circle cx="660" cy="285" r="3"/>
+      <circle cx="680" cy="285" r="3"/>
+      <circle cx="700" cy="285" r="3"/>
+      <circle cx="720" cy="285" r="3"/>
+    </g>
+  </g>
   
-  <!-- CD4049 holes and components -->
-  <circle cx="400" cy="100" r="2" class="hole"/>
-  <circle cx="410" cy="100" r="2" class="hole"/>
-  <circle cx="420" cy="100" r="2" class="hole"/>
-  <circle cx="430" cy="100" r="2" class="hole"/>
-  <circle cx="440" cy="100" r="2" class="hole"/>
-  <circle cx="450" cy="100" r="2" class="hole"/>
-  <circle cx="460" cy="100" r="2" class="hole"/>
-  <circle cx="470" cy="100" r="2" class="hole"/>
-  <circle cx="480" cy="100" r="2" class="hole"/>
-  <circle cx="490" cy="100" r="2" class="hole"/>
-  <circle cx="500" cy="100" r="2" class="hole"/>
-  <circle cx="510" cy="100" r="2" class="hole"/>
-  <circle cx="520" cy="100" r="2" class="hole"/>
+  <!-- DAC Components -->
+  <rect class="ic" x="570" y="195" width="60" height="30" rx="5"/>
+  <text x="600" y="213" text-anchor="middle" class="value">MCP4921</text>
   
-  <circle cx="400" cy="110" r="2" class="hole"/>
-  <circle cx="410" cy="110" r="2" class="hole"/>
-  <circle cx="420" cy="110" r="2" class="hole"/>
-  <circle cx="430" cy="110" r="2" class="hole"/>
-  <circle cx="440" cy="110" r="2" class="hole"/>
-  <circle cx="450" cy="110" r="2" class="hole"/>
-  <circle cx="460" cy="110" r="2" class="hole"/>
-  <circle cx="470" cy="110" r="2" class="hole"/>
-  <circle cx="480" cy="110" r="2" class="hole"/>
-  <circle cx="490" cy="110" r="2" class="hole"/>
-  <circle cx="500" cy="110" r="2" class="hole"/>
-  <circle cx="510" cy="110" r="2" class="hole"/>
-  <circle cx="520" cy="110" r="2" class="hole"/>
+  <!-- Track cuts for DAC -->
+  <line class="cut" x1="585" y1="205" x2="585" y2="215"/>
+  <line class="cut" x1="615" y1="205" x2="615" y2="215"/>
   
-  <circle cx="400" cy="120" r="2" class="hole"/>
-  <circle cx="410" cy="120" r="2" class="hole"/>
-  <circle cx="420" cy="120" r="2" class="hole"/>
-  <circle cx="430" cy="120" r="2" class="hole"/>
-  <circle cx="440" cy="120" r="2" class="hole"/>
-  <circle cx="450" cy="120" r="2" class="hole"/>
-  <circle cx="460" cy="120" r="2" class="hole"/>
-  <circle cx="470" cy="120" r="2" class="hole"/>
-  <circle cx="480" cy="120" r="2" class="hole"/>
-  <circle cx="490" cy="120" r="2" class="hole"/>
-  <circle cx="500" cy="120" r="2" class="hole"/>
-  <circle cx="510" cy="120" r="2" class="hole"/>
-  <circle cx="520" cy="120" r="2" class="hole"/>
+  <!-- CD4049 Layout -->
+  <text x="1100" y="110" text-anchor="middle" class="section-title">CD4049 Overdrive</text>
+  <text x="1100" y="130" text-anchor="middle" class="label">Size: 11×6 holes</text>
   
-  <circle cx="400" cy="130" r="2" class="hole"/>
-  <circle cx="410" cy="130" r="2" class="hole"/>
-  <circle cx="420" cy="130" r="2" class="hole"/>
-  <circle cx="430" cy="130" r="2" class="hole"/>
-  <circle cx="440" cy="130" r="2" class="hole"/>
-  <circle cx="450" cy="130" r="2" class="hole"/>
-  <circle cx="460" cy="130" r="2" class="hole"/>
-  <circle cx="470" cy="130" r="2" class="hole"/>
-  <circle cx="480" cy="130" r="2" class="hole"/>
-  <circle cx="490" cy="130" r="2" class="hole"/>
-  <circle cx="500" cy="130" r="2" class="hole"/>
-  <circle cx="510" cy="130" r="2" class="hole"/>
-  <circle cx="520" cy="130" r="2" class="hole"/>
+  <!-- CD4049 Stripboard -->
+  <rect class="stripboard" x="950" y="150" width="300" height="120" rx="5"/>
   
-  <circle cx="400" cy="140" r="2" class="hole"/>
-  <circle cx="410" cy="140" r="2" class="hole"/>
-  <circle cx="420" cy="140" r="2" class="hole"/>
-  <circle cx="430" cy="140" r="2" class="hole"/>
-  <circle cx="440" cy="140" r="2" class="hole"/>
-  <circle cx="450" cy="140" r="2" class="hole"/>
-  <circle cx="460" cy="140" r="2" class="hole"/>
-  <circle cx="470" cy="140" r="2" class="hole"/>
-  <circle cx="480" cy="140" r="2" class="hole"/>
-  <circle cx="490" cy="140" r="2" class="hole"/>
-  <circle cx="500" cy="140" r="2" class="hole"/>
-  <circle cx="510" cy="140" r="2" class="hole"/>
-  <circle cx="520" cy="140" r="2" class="hole"/>
+  <!-- CD4049 Grid -->
+  <g id="cd4049-grid">
+    <!-- Copper tracks -->
+    <line class="copper" x1="960" y1="165" x2="1240" y2="165"/>  <!-- +V rail -->
+    <line class="copper" x1="960" y1="185" x2="1240" y2="185"/>
+    <line class="copper" x1="960" y1="205" x2="1240" y2="205"/>
+    <line class="copper" x1="960" y1="225" x2="1240" y2="225"/>
+    <line class="copper" x1="960" y1="245" x2="1240" y2="245"/>  <!-- GND/-V rail -->
+    <line class="copper" x1="960" y1="265" x2="1240" y2="265"/>
+    
+    <!-- Grid holes for CD4049 -->
+    <g fill="#333" stroke="#666">
+      <circle cx="980" cy="165" r="3"/>
+      <circle cx="1000" cy="165" r="3"/>
+      <circle cx="1020" cy="165" r="3"/>
+      <circle cx="1040" cy="165" r="3"/>
+      <circle cx="1060" cy="165" r="3"/>
+      <circle cx="1080" cy="165" r="3"/>
+      <circle cx="1100" cy="165" r="3"/>
+      <circle cx="1120" cy="165" r="3"/>
+      <circle cx="1140" cy="165" r="3"/>
+      <circle cx="1160" cy="165" r="3"/>
+      <circle cx="1180" cy="165" r="3"/>
+      
+      <circle cx="980" cy="185" r="3"/>
+      <circle cx="1000" cy="185" r="3"/>
+      <circle cx="1020" cy="185" r="3"/>
+      <circle cx="1040" cy="185" r="3"/>
+      <circle cx="1060" cy="185" r="3"/>
+      <circle cx="1080" cy="185" r="3"/>
+      <circle cx="1100" cy="185" r="3"/>
+      <circle cx="1120" cy="185" r="3"/>
+      <circle cx="1140" cy="185" r="3"/>
+      <circle cx="1160" cy="185" r="3"/>
+      <circle cx="1180" cy="185" r="3"/>
+      
+      <circle cx="980" cy="205" r="3"/>
+      <circle cx="1000" cy="205" r="3"/>
+      <circle cx="1020" cy="205" r="3"/>
+      <circle cx="1040" cy="205" r="3"/>
+      <circle cx="1060" cy="205" r="3"/>
+      <circle cx="1080" cy="205" r="3"/>
+      <circle cx="1100" cy="205" r="3"/>
+      <circle cx="1120" cy="205" r="3"/>
+      <circle cx="1140" cy="205" r="3"/>
+      <circle cx="1160" cy="205" r="3"/>
+      <circle cx="1180" cy="205" r="3"/>
+      
+      <circle cx="980" cy="225" r="3"/>
+      <circle cx="1000" cy="225" r="3"/>
+      <circle cx="1020" cy="225" r="3"/>
+      <circle cx="1040" cy="225" r="3"/>
+      <circle cx="1060" cy="225" r="3"/>
+      <circle cx="1080" cy="225" r="3"/>
+      <circle cx="1100" cy="225" r="3"/>
+      <circle cx="1120" cy="225" r="3"/>
+      <circle cx="1140" cy="225" r="3"/>
+      <circle cx="1160" cy="225" r="3"/>
+      <circle cx="1180" cy="225" r="3"/>
+      
+      <circle cx="980" cy="245" r="3"/>
+      <circle cx="1000" cy="245" r="3"/>
+      <circle cx="1020" cy="245" r="3"/>
+      <circle cx="1040" cy="245" r="3"/>
+      <circle cx="1060" cy="245" r="3"/>
+      <circle cx="1080" cy="245" r="3"/>
+      <circle cx="1100" cy="245" r="3"/>
+      <circle cx="1120" cy="245" r="3"/>
+      <circle cx="1140" cy="245" r="3"/>
+      <circle cx="1160" cy="245" r="3"/>
+      <circle cx="1180" cy="245" r="3"/>
+      
+      <circle cx="980" cy="265" r="3"/>
+      <circle cx="1000" cy="265" r="3"/>
+      <circle cx="1020" cy="265" r="3"/>
+      <circle cx="1040" cy="265" r="3"/>
+      <circle cx="1060" cy="265" r="3"/>
+      <circle cx="1080" cy="265" r="3"/>
+      <circle cx="1100" cy="265" r="3"/>
+      <circle cx="1120" cy="265" r="3"/>
+      <circle cx="1140" cy="265" r="3"/>
+      <circle cx="1160" cy="265" r="3"/>
+      <circle cx="1180" cy="265" r="3"/>
+    </g>
+  </g>
   
-  <circle cx="400" cy="150" r="2" class="hole"/>
-  <circle cx="410" cy="150" r="2" class="hole"/>
-  <circle cx="420" cy="150" r="2" class="hole"/>
-  <circle cx="430" cy="150" r="2" class="hole"/>
-  <circle cx="440" cy="150" r="2" class="hole"/>
-  <circle cx="450" cy="150" r="2" class="hole"/>
-  <circle cx="460" cy="150" r="2" class="hole"/>
-  <circle cx="470" cy="150" r="2" class="hole"/>
-  <circle cx="480" cy="150" r="2" class="hole"/>
-  <circle cx="490" cy="150" r="2" class="hole"/>
-  <circle cx="500" cy="150" r="2" class="hole"/>
-  <circle cx="510" cy="150" r="2" class="hole"/>
-  <circle cx="520" cy="150" r="2" class="hole"/>
+  <!-- CD4049 Components -->
+  <rect class="ic" x="1040" y="195" width="80" height="25" rx="5"/>
+  <text x="1080" y="210" text-anchor="middle" class="value">CD4049UBE</text>
   
-  <!-- CD4049 IC placement -->
-  <rect class="ic" x="425" y="115" width="40" height="15" rx="2"/>
-  <text x="445" y="125" text-anchor="middle" class="label">CD4049</text>
+  <rect class="capacitor" x="980" y="200" width="12" height="8" rx="2"/>
+  <text x="986" y="215" text-anchor="middle" class="value">0.1µF</text>
   
-  <!-- Input/Output capacitors -->
-  <rect class="capacitor" x="400" y="125" width="8" height="6" rx="1"/>
-  <text x="404" y="135" text-anchor="middle" class="grid-label">0.1µF</text>
+  <rect class="resistor" x="1140" y="195" width="25" height="8" rx="3"/>
+  <text x="1152" y="205" text-anchor="middle" class="value">100k</text>
   
-  <!-- Level pot -->
-  <rect class="component" x="480" y="125" width="20" height="6" rx="1"/>
-  <text x="490" y="135" text-anchor="middle" class="grid-label">100k</text>
+  <!-- Construction Guide -->
+  <rect fill="#333" stroke="#666" stroke-width="3" x="50" y="400" width="1500" height="750" rx="10"/>
+  <text x="70" y="430" class="label" fill="#ff3333">Stripboard Construction Guide:</text>
   
-  <!-- Power rails -->
-  <line class="copper" x1="400" y1="110" x2="520" y2="110"/>  <!-- +15V -->
-  <line class="copper" x1="400" y1="140" x2="520" y2="140"/>  <!-- -15V/GND -->
+  <!-- MIDI Construction -->
+  <text x="70" y="470" class="section-title">MIDI Interface (6N138) - 15×9 holes:</text>
   
-  <!-- MCP4921 DAC Layout -->
-  <text x="800" y="60" text-anchor="middle" class="label">MCP4921 DAC Interface</text>
+  <text x="90" y="500" class="value">Step 1 - Track Cuts:</text>
+  <text x="110" y="520" fill="#fff">• Cut tracks between IC pins 6-7 and 5-6 (rows D-E, columns 6-7)</text>
+  <text x="110" y="540" fill="#fff">• Use 3mm drill bit or track cutting tool</text>
+  <text x="110" y="560" fill="#fff">• Verify cuts with continuity tester</text>
   
-  <!-- Stripboard for DAC -->
-  <rect class="stripboard" x="700" y="70" width="200" height="120" rx="2"/>
+  <text x="90" y="590" class="value">Step 2 - Component Placement:</text>
+  <text x="110" y="610" fill="#fff">• 6N138: Pins in rows D-E, columns 6-7 (DIP-8 socket recommended)</text>
+  <text x="110" y="630" fill="#fff">• 220Ω resistors: R1 at C3-C4, R2 at F3-F4</text>
+  <text x="110" y="650" fill="#fff">• 4.7kΩ resistor: C9 (vertical orientation)</text>
   
-  <!-- DAC stripboard holes -->
-  <circle cx="720" cy="90" r="2" class="hole"/>
-  <circle cx="730" cy="90" r="2" class="hole"/>
-  <circle cx="740" cy="90" r="2" class="hole"/>
-  <circle cx="750" cy="90" r="2" class="hole"/>
-  <circle cx="760" cy="90" r="2" class="hole"/>
-  <circle cx="770" cy="90" r="2" class="hole"/>
-  <circle cx="780" cy="90" r="2" class="hole"/>
-  <circle cx="790" cy="90" r="2" class="hole"/>
-  <circle cx="800" cy="90" r="2" class="hole"/>
-  <circle cx="810" cy="90" r="2" class="hole"/>
-  <circle cx="820" cy="90" r="2" class="hole"/>
-  <circle cx="830" cy="90" r="2" class="hole"/>
-  <circle cx="840" cy="90" r="2" class="hole"/>
-  <circle cx="850" cy="90" r="2" class="hole"/>
-  <circle cx="860" cy="90" r="2" class="hole"/>
-  <circle cx="870" cy="90" r="2" class="hole"/>
-  <circle cx="880" cy="90" r="2" class="hole"/>
+  <text x="90" y="680" class="value">Step 3 - Connections:</text>
+  <text x="110" y="700" fill="#fff">• +5V: Row A (power rail)   • GND: Row I (ground rail)</text>
+  <text x="110" y="720" fill="#fff">• MIDI IN: DIN pins 4,5 to resistors   • Arduino A4: From pin 6 output</text>
   
-  <circle cx="720" cy="100" r="2" class="hole"/>
-  <circle cx="730" cy="100" r="2" class="hole"/>
-  <circle cx="740" cy="100" r="2" class="hole"/>
-  <circle cx="750" cy="100" r="2" class="hole"/>
-  <circle cx="760" cy="100" r="2" class="hole"/>
-  <circle cx="770" cy="100" r="2" class="hole"/>
-  <circle cx="780" cy="100" r="2" class="hole"/>
-  <circle cx="790" cy="100" r="2" class="hole"/>
-  <circle cx="800" cy="100" r="2" class="hole"/>
-  <circle cx="810" cy="100" r="2" class="hole"/>
-  <circle cx="820" cy="100" r="2" class="hole"/>
-  <circle cx="830" cy="100" r="2" class="hole"/>
-  <circle cx="840" cy="100" r="2" class="hole"/>
-  <circle cx="850" cy="100" r="2" class="hole"/>
-  <circle cx="860" cy="100" r="2" class="hole"/>
-  <circle cx="870" cy="100" r="2" class="hole"/>
-  <circle cx="880" cy="100" r="2" class="hole"/>
+  <!-- DAC Construction -->
+  <text x="800" y="470" class="section-title">MCP4921 DAC - 13×7 holes:</text>
   
-  <circle cx="720" cy="110" r="2" class="hole"/>
-  <circle cx="730" cy="110" r="2" class="hole"/>
-  <circle cx="740" cy="110" r="2" class="hole"/>
-  <circle cx="750" cy="110" r="2" class="hole"/>
-  <circle cx="760" cy="110" r="2" class="hole"/>
-  <circle cx="770" cy="110" r="2" class="hole"/>
-  <circle cx="780" cy="110" r="2" class="hole"/>
-  <circle cx="790" cy="110" r="2" class="hole"/>
-  <circle cx="800" cy="110" r="2" class="hole"/>
-  <circle cx="810" cy="110" r="2" class="hole"/>
-  <circle cx="820" cy="110" r="2" class="hole"/>
-  <circle cx="830" cy="110" r="2" class="hole"/>
-  <circle cx="840" cy="110" r="2" class="hole"/>
-  <circle cx="850" cy="110" r="2" class="hole"/>
-  <circle cx="860" cy="110" r="2" class="hole"/>
-  <circle cx="870" cy="110" r="2" class="hole"/>
-  <circle cx="880" cy="110" r="2" class="hole"/>
+  <text x="820" y="500" class="value">Step 1 - Track Cuts:</text>
+  <text x="840" y="520" fill="#fff">• Cut between IC pins to isolate each pin</text>
+  <text x="840" y="540" fill="#fff">• Cut at columns 5-6 and 7-8, rows C-D</text>
   
-  <circle cx="720" cy="120" r="2" class="hole"/>
-  <circle cx="730" cy="120" r="2" class="hole"/>
-  <circle cx="740" cy="120" r="2" class="hole"/>
-  <circle cx="750" cy="120" r="2" class="hole"/>
-  <circle cx="760" cy="120" r="2" class="hole"/>
-  <circle cx="770" cy="120" r="2" class="hole"/>
-  <circle cx="780" cy="120" r="2" class="hole"/>
-  <circle cx="790" cy="120" r="2" class="hole"/>
-  <circle cx="800" cy="120" r="2" class="hole"/>
-  <circle cx="810" cy="120" r="2" class="hole"/>
-  <circle cx="820" cy="120" r="2" class="hole"/>
-  <circle cx="830" cy="120" r="2" class="hole"/>
-  <circle cx="840" cy="120" r="2" class="hole"/>
-  <circle cx="850" cy="120" r="2" class="hole"/>
-  <circle cx="860" cy="120" r="2" class="hole"/>
-  <circle cx="870" cy="120" r="2" class="hole"/>
-  <circle cx="880" cy="120" r="2" class="hole"/>
+  <text x="820" y="570" class="value">Step 2 - Component Placement:</text>
+  <text x="840" y="590" fill="#fff">• MCP4921: DIP-8 socket at columns 5-8, rows C-D</text>
+  <text x="840" y="610" fill="#fff">• Bypass capacitors: 0.1µF near VCC and VSS pins</text>
   
-  <circle cx="720" cy="130" r="2" class="hole"/>
-  <circle cx="730" cy="130" r="2" class="hole"/>
-  <circle cx="740" cy="130" r="2" class="hole"/>
-  <circle cx="750" cy="130" r="2" class="hole"/>
-  <circle cx="760" cy="130" r="2" class="hole"/>
-  <circle cx="770" cy="130" r="2" class="hole"/>
-  <circle cx="780" cy="130" r="2" class="hole"/>
-  <circle cx="790" cy="130" r="2" class="hole"/>
-  <circle cx="800" cy="130" r="2" class="hole"/>
-  <circle cx="810" cy="130" r="2" class="hole"/>
-  <circle cx="820" cy="130" r="2" class="hole"/>
-  <circle cx="830" cy="130" r="2" class="hole"/>
-  <circle cx="840" cy="130" r="2" class="hole"/>
-  <circle cx="850" cy="130" r="2" class="hole"/>
-  <circle cx="860" cy="130" r="2" class="hole"/>
-  <circle cx="870" cy="130" r="2" class="hole"/>
-  <circle cx="880" cy="130" r="2" class="hole"/>
+  <text x="820" y="640" class="value">Step 3 - Connections:</text>
+  <text x="840" y="660" fill="#fff">• VCC,VREF → +5V   • VSS → GND   • LDAC → GND</text>
+  <text x="840" y="680" fill="#fff">• CS → Arduino D13   • SCK,SDI → Arduino D11</text>
+  <text x="840" y="700" fill="#fff">• VOUT → CV output jack (0-4.096V)</text>
   
-  <circle cx="720" cy="140" r="2" class="hole"/>
-  <circle cx="730" cy="140" r="2" class="hole"/>
-  <circle cx="740" cy="140" r="2" class="hole"/>
-  <circle cx="750" cy="140" r="2" class="hole"/>
-  <circle cx="760" cy="140" r="2" class="hole"/>
-  <circle cx="770" cy="140" r="2" class="hole"/>
-  <circle cx="780" cy="140" r="2" class="hole"/>
-  <circle cx="790" cy="140" r="2" class="hole"/>
-  <circle cx="800" cy="140" r="2" class="hole"/>
-  <circle cx="810" cy="140" r="2" class="hole"/>
-  <circle cx="820" cy="140" r="2" class="hole"/>
-  <circle cx="830" cy="140" r="2" class="hole"/>
-  <circle cx="840" cy="140" r="2" class="hole"/>
-  <circle cx="850" cy="140" r="2" class="hole"/>
-  <circle cx="860" cy="140" r="2" class="hole"/>
-  <circle cx="870" cy="140" r="2" class="hole"/>
-  <circle cx="880" cy="140" r="2" class="hole"/>
+  <!-- CD4049 Construction -->
+  <text x="70" y="750" class="section-title">CD4049 Overdrive - 11×6 holes:</text>
   
-  <circle cx="720" cy="150" r="2" class="hole"/>
-  <circle cx="730" cy="150" r="2" class="hole"/>
-  <circle cx="740" cy="150" r="2" class="hole"/>
-  <circle cx="750" cy="150" r="2" class="hole"/>
-  <circle cx="760" cy="150" r="2" class="hole"/>
-  <circle cx="770" cy="150" r="2" class="hole"/>
-  <circle cx="780" cy="150" r="2" class="hole"/>
-  <circle cx="790" cy="150" r="2" class="hole"/>
-  <circle cx="800" cy="150" r="2" class="hole"/>
-  <circle cx="810" cy="150" r="2" class="hole"/>
-  <circle cx="820" cy="150" r="2" class="hole"/>
-  <circle cx="830" cy="150" r="2" class="hole"/>
-  <circle cx="840" cy="150" r="2" class="hole"/>
-  <circle cx="850" cy="150" r="2" class="hole"/>
-  <circle cx="860" cy="150" r="2" class="hole"/>
-  <circle cx="870" cy="150" r="2" class="hole"/>
-  <circle cx="880" cy="150" r="2" class="hole"/>
+  <text x="90" y="780" class="value">Step 1 - Track Cuts:</text>
+  <text x="110" y="800" fill="#fff">• Cut between IC pins to prevent unwanted connections</text>
+  <text x="110" y="820" fill="#fff">• Cut at input and output connection points</text>
   
-  <circle cx="720" cy="160" r="2" class="hole"/>
-  <circle cx="730" cy="160" r="2" class="hole"/>
-  <circle cx="740" cy="160" r="2" class="hole"/>
-  <circle cx="750" cy="160" r="2" class="hole"/>
-  <circle cx="760" cy="160" r="2" class="hole"/>
-  <circle cx="770" cy="160" r="2" class="hole"/>
-  <circle cx="780" cy="160" r="2" class="hole"/>
-  <circle cx="790" cy="160" r="2" class="hole"/>
-  <circle cx="800" cy="160" r="2" class="hole"/>
-  <circle cx="810" cy="160" r="2" class="hole"/>
-  <circle cx="820" cy="160" r="2" class="hole"/>
-  <circle cx="830" cy="160" r="2" class="hole"/>
-  <circle cx="840" cy="160" r="2" class="hole"/>
-  <circle cx="850" cy="160" r="2" class="hole"/>
-  <circle cx="860" cy="160" r="2" class="hole"/>
-  <circle cx="870" cy="160" r="2" class="hole"/>
-  <circle cx="880" cy="160" r="2" class="hole"/>
+  <text x="90" y="850" class="value">Step 2 - Component Placement:</text>
+  <text x="110" y="870" fill="#fff">• CD4049UBE: DIP-16 socket spanning rows B-D</text>
+  <text x="110" y="890" fill="#fff">• 0.1µF input coupling capacitor</text>
+  <text x="110" y="910" fill="#fff">• 100kΩ level control potentiometer</text>
   
-  <circle cx="720" cy="170" r="2" class="hole"/>
-  <circle cx="730" cy="170" r="2" class="hole"/>
-  <circle cx="740" cy="170" r="2" class="hole"/>
-  <circle cx="750" cy="170" r="2" class="hole"/>
-  <circle cx="760" cy="170" r="2" class="hole"/>
-  <circle cx="770" cy="170" r="2" class="hole"/>
-  <circle cx="780" cy="170" r="2" class="hole"/>
-  <circle cx="790" cy="170" r="2" class="hole"/>
-  <circle cx="800" cy="170" r="2" class="hole"/>
-  <circle cx="810" cy="170" r="2" class="hole"/>
-  <circle cx="820" cy="170" r="2" class="hole"/>
-  <circle cx="830" cy="170" r="2" class="hole"/>
-  <circle cx="840" cy="170" r="2" class="hole"/>
-  <circle cx="850" cy="170" r="2" class="hole"/>
-  <circle cx="860" cy="170" r="2" class="hole"/>
-  <circle cx="870" cy="170" r="2" class="hole"/>
-  <circle cx="880" cy="170" r="2" class="hole"/>
+  <text x="90" y="940" class="value">Step 3 - Power Supply:</text>
+  <text x="110" y="960" fill="#fff">• Single supply: VDD = +9V to +18V, VSS = GND</text>
+  <text x="110" y="980" fill="#fff">• Dual supply: VDD = +15V, VSS = -15V (compatible with ML-303)</text>
   
-  <circle cx="720" cy="180" r="2" class="hole"/>
-  <circle cx="730" cy="180" r="2" class="hole"/>
-  <circle cx="740" cy="180" r="2" class="hole"/>
-  <circle cx="750" cy="180" r="2" class="hole"/>
-  <circle cx="760" cy="180" r="2" class="hole"/>
-  <circle cx="770" cy="180" r="2" class="hole"/>
-  <circle cx="780" cy="180" r="2" class="hole"/>
-  <circle cx="790" cy="180" r="2" class="hole"/>
-  <circle cx="800" cy="180" r="2" class="hole"/>
-  <circle cx="810" cy="180" r="2" class="hole"/>
-  <circle cx="820" cy="180" r="2" class="hole"/>
-  <circle cx="830" cy="180" r="2" class="hole"/>
-  <circle cx="840" cy="180" r="2" class="hole"/>
-  <circle cx="850" cy="180" r="2" class="hole"/>
-  <circle cx="860" cy="180" r="2" class="hole"/>
-  <circle cx="870" cy="180" r="2" class="hole"/>
-  <circle cx="880" cy="180" r="2" class="hole"/>
+  <!-- General Tips -->
+  <text x="800" y="750" class="section-title">General Construction Tips:</text>
   
-  <!-- MCP4921 IC -->
-  <rect class="ic" x="775" y="105" width="50" height="20" rx="2"/>
-  <text x="800" y="117" text-anchor="middle" class="label">MCP4921</text>
+  <text x="820" y="780" class="value">Tools Required:</text>
+  <text x="840" y="800" fill="#fff">• 3mm drill bit or track cutting tool</text>
+  <text x="840" y="820" fill="#fff">• Digital multimeter with continuity tester</text>
+  <text x="840" y="840" fill="#fff">• Fine-tip soldering iron (25-40W)</text>
+  <text x="840" y="860" fill="#fff">• Rosin-core solder (0.6-0.8mm diameter)</text>
   
-  <!-- Power rails for DAC -->
-  <line class="copper" x1="720" y1="100" x2="880" y2="100"/>  <!-- +5V -->
-  <line class="copper" x1="720" y1="170" x2="880" y2="170"/>  <!-- GND -->
+  <text x="820" y="890" class="value">Best Practices:</text>
+  <text x="840" y="910" fill="#fff">• Use IC sockets for all ICs to prevent heat damage</text>
+  <text x="840" y="930" fill="#fff">• Keep component leads short to minimize noise</text>
+  <text x="840" y="950" fill="#fff">• Test all connections before applying power</text>
+  <text x="840" y="970" fill="#fff">• Add bypass capacitors (0.1µF) near all IC power pins</text>
   
-  <!-- SPI connections -->
-  <line class="wire" x1="730" y1="120" x2="775" y2="115"/>  <!-- CS -->
-  <line class="wire" x1="740" y1="130" x2="775" y2="120"/>  <!-- SCK -->
-  <line class="wire" x1="750" y1="140" x2="775" y2="110"/>  <!-- MOSI -->
+  <text x="70" y="1020" class="value">Grid Reference:</text>
+  <text x="90" y="1040" fill="#fff">Rows: A-I (horizontal copper tracks)   Columns: 1-15 (hole positions)</text>
+  <text x="90" y="1060" fill="#fff">Hole spacing: 0.1" (2.54mm) standard perfboard grid</text>
+  <text x="90" y="1080" fill="#fff">Track width: Standard stripboard copper width (approx 2mm)</text>
   
-  <!-- Construction Notes -->
-  <rect fill="#333" stroke="#666" stroke-width="1" x="50" y="250" width="1100" height="400" rx="5"/>
-  <text x="60" y="275" class="label" fill="#ff3333">Stripboard Construction Guide:</text>
-  
-  <text x="60" y="305" class="label" fill="#ffff00">MIDI Interface (6N138) - Size: 19×11 holes</text>
-  <text x="70" y="320" fill="#fff">1. Cut copper tracks: Between IC pins (rows D-E), isolate power rails</text>
-  <text x="70" y="335" fill="#fff">2. Components: 6N138 (DIP-8) at D6-E9, 220Ω resistors at B4, B5, 4.7kΩ at B11</text>
-  <text x="70" y="350" fill="#fff">3. Power: +5V rail at row B, GND rail at row H</text>
-  <text x="70" y="365" fill="#fff">4. I/O: MIDI DIN pins to A3, A4; Arduino A4 from F9; Power from A2, H2</text>
-  
-  <text x="60" y="395" class="label" fill="#ffff00">CD4049 Overdrive - Size: 13×7 holes</text>
-  <text x="70" y="410" fill="#fff">1. Cut tracks: Between IC pins, isolate input/output</text>
-  <text x="70" y="425" fill="#fff">2. Components: CD4049 (DIP-14) at D3-E10, 0.1µF input cap, 100kΩ level pot</text>
-  <text x="70" y="440" fill="#fff">3. Power: ±15V rails or single +9V supply (see schematic for options)</text>
-  <text x="70" y="455" fill="#fff">4. Connections: Audio in/out, jumper between Pin 2→Pin 5 for cascade</text>
-  
-  <text x="60" y="485" class="label" fill="#ffff00">MCP4921 DAC - Size: 17×9 holes</text>
-  <text x="70" y="500" fill="#fff">1. Cut tracks: Isolate IC pins, separate SPI lines</text>
-  <text x="70" y="515" fill="#fff">2. Components: MCP4921 (DIP-14) at E6-F12, bypass capacitors recommended</text>
-  <text x="70" y="530" fill="#fff">3. Power: +5V rail, GND rail, tie LDAC to GND for immediate updates</text>
-  <text x="70" y="545" fill="#fff">4. SPI: CS, SCK, MOSI from Arduino; CV output buffer optional but recommended</text>
-  
-  <text x="60" y="575" class="label" fill="#ffff00">General Construction Tips:</text>
-  <text x="70" y="590" fill="#fff">• Use IC sockets for all ICs to prevent heat damage during soldering</text>
-  <text x="70" y="605" fill="#fff">• Cut tracks with a 3mm drill bit or track cutting tool</text>
-  <text x="70" y="620" fill="#fff">• Test continuity after cutting tracks to ensure proper isolation</text>
-  <text x="70" y="635" fill="#fff">• Use solid core wire for connections, keep leads short to minimize noise</text>
+  <text x="70" y="1120" class="section-title">Testing Procedures:</text>
+  <text x="90" y="1140" fill="#fff">1. Verify all track cuts with continuity tester</text>
+  <text x="90" y="1160" fill="#fff">2. Check power supply connections before inserting ICs</text>
+  <text x="90" y="1180" fill="#fff">3. Test with known good signals before connecting to ML-303</text>
 </svg>

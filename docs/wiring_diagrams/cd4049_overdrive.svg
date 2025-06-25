@@ -1,127 +1,182 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<svg viewBox="0 0 900 500" xmlns="http://www.w3.org/2000/svg">
+<svg width="1200" height="800" viewBox="0 0 1200 800" xmlns="http://www.w3.org/2000/svg">
   <defs>
     <style>
-      .component { fill: #444; stroke: #888; stroke-width: 2; }
-      .ic { fill: #222; stroke: #666; }
-      .wire { fill: none; stroke-width: 2; }
-      .power { stroke: #ff0000; }
-      .ground { stroke: #000000; }
-      .signal { stroke: #00ff00; }
-      .audio { stroke: #ffaa00; }
-      text { fill: #fff; font-size: 12px; font-family: Arial, sans-serif; }
-      .label { font-size: 14px; font-weight: bold; }
-      .title { font-size: 18px; font-weight: bold; fill: #ff3333; }
-      .pin-label { font-size: 10px; fill: #ccc; }
-      .value { fill: #ffff00; font-weight: bold; }
+      .component { fill: #444; stroke: #888; stroke-width: 3; }
+      .ic { fill: #222; stroke: #666; stroke-width: 3; }
+      .resistor { fill: #DEB887; stroke: #8B7355; stroke-width: 2; }
+      .capacitor { fill: #4169E1; stroke: #191970; stroke-width: 2; }
+      .potentiometer { fill: #8B4513; stroke: #654321; stroke-width: 2; }
+      .wire { fill: none; stroke-width: 4; }
+      .power { stroke: #ff0000; stroke-width: 5; }
+      .ground { stroke: #000000; stroke-width: 5; }
+      .signal { stroke: #00ff00; stroke-width: 4; }
+      .audio { stroke: #ffaa00; stroke-width: 4; }
+      text { fill: #fff; font-size: 16px; font-family: Arial, sans-serif; font-weight: bold; }
+      .label { font-size: 24px; font-weight: bold; }
+      .title { font-size: 32px; font-weight: bold; fill: #ff3333; }
+      .pin-label { font-size: 14px; fill: #ccc; }
+      .value { fill: #ffff00; font-weight: bold; font-size: 18px; }
+      .section-title { font-size: 20px; fill: #00ffff; font-weight: bold; }
     </style>
   </defs>
   
-  <!-- Title -->
-  <text x="450" y="30" text-anchor="middle" class="title">CD4049 Simple Overdrive Circuit</text>
-  <text x="450" y="50" text-anchor="middle" class="label">Dual Inverter Configuration for Harmonic Distortion</text>
+  <!-- Background -->
+  <rect width="1200" height="800" fill="#222"/>
   
-  <!-- Input -->
-  <text x="80" y="150" text-anchor="middle" class="label">Audio Input</text>
-  <text x="80" y="165" text-anchor="middle">(From VCA Out)</text>
-  <line class="wire audio" x1="120" y1="170" x2="160" y2="170"/>
+  <!-- Title -->
+  <text x="600" y="40" text-anchor="middle" class="title">CD4049 Simple Overdrive Circuit</text>
+  <text x="600" y="70" text-anchor="middle" class="label">Dual CMOS Inverter Configuration for Musical Distortion</text>
+  
+  <!-- Input Section -->
+  <text x="100" y="120" text-anchor="middle" class="section-title">Audio Input</text>
+  <text x="100" y="140" text-anchor="middle" class="pin-label">From VCA Output</text>
+  
+  <!-- Input Connector -->
+  <circle cx="100" cy="180" r="15" class="component"/>
+  <text x="100" y="210" text-anchor="middle" class="label">IN</text>
   
   <!-- Input Coupling Capacitor -->
-  <g transform="translate(160,170)">
-    <line x1="0" y1="-10" x2="0" y2="10" stroke="#fff" stroke-width="2"/>
-    <line x1="-5" y1="-10" x2="5" y2="-10" stroke="#fff" stroke-width="2"/>
-    <line x1="-5" y1="10" x2="5" y2="10" stroke="#fff" stroke-width="2"/>
-    <text x="15" y="5" class="value">0.1µF</text>
+  <g transform="translate(180,180)">
+    <line x1="0" y1="-15" x2="0" y2="15" stroke="#fff" stroke-width="3"/>
+    <line x1="-8" y1="-15" x2="8" y2="-15" stroke="#fff" stroke-width="3"/>
+    <line x1="-8" y1="15" x2="8" y2="15" stroke="#fff" stroke-width="3"/>
+    <text x="25" y="5" class="value">0.1µF</text>
+    <text x="25" y="25" class="pin-label">Coupling</text>
   </g>
   
   <!-- CD4049 IC -->
-  <rect class="ic" x="250" y="120" width="120" height="100" rx="5"/>
-  <text x="310" y="110" text-anchor="middle" class="label">CD4049UBE</text>
-  <text x="310" y="175" text-anchor="middle">Hex Inverter</text>
-  <text x="310" y="190" text-anchor="middle">(CMOS)</text>
+  <rect class="ic" x="350" y="120" width="200" height="120" rx="15"/>
+  <text x="450" y="100" text-anchor="middle" class="label">CD4049UBE</text>
+  <text x="450" y="180" text-anchor="middle" class="label">Hex Inverter</text>
+  <text x="450" y="200" text-anchor="middle" class="pin-label">CMOS Logic</text>
+  <text x="450" y="220" text-anchor="middle" class="pin-label">Unbuffered</text>
   
-  <!-- Pin Labels and Numbers -->
-  <text x="240" y="140" text-anchor="end" class="pin-label">3</text>
-  <text x="240" y="160" text-anchor="end" class="pin-label">5</text>
-  <text x="240" y="180" text-anchor="end" class="pin-label">VSS</text>
-  <text x="240" y="200" text-anchor="end" class="pin-label">8</text>
+  <!-- IC Pin Diagram -->
+  <text x="340" y="145" text-anchor="end" class="pin-label">3 (IN A)</text>
+  <text x="340" y="170" text-anchor="end" class="pin-label">5 (IN B)</text>
+  <text x="340" y="195" text-anchor="end" class="pin-label">8 (VSS)</text>
+  <text x="340" y="220" text-anchor="end" class="pin-label">1 (VDD)</text>
   
-  <text x="380" y="140" text-anchor="start" class="pin-label">2</text>
-  <text x="380" y="160" text-anchor="start" class="pin-label">4</text>
-  <text x="380" y="180" text-anchor="start" class="pin-label">VDD</text>
-  <text x="380" y="200" text-anchor="start" class="pin-label">1</text>
+  <text x="560" y="145" text-anchor="start" class="pin-label">2 (OUT A)</text>
+  <text x="560" y="170" text-anchor="start" class="pin-label">4 (OUT B)</text>
+  <text x="560" y="195" text-anchor="start" class="pin-label">16 (VDD)</text>
+  <text x="560" y="220" text-anchor="start" class="pin-label">7,9,11,13,15</text>
   
-  <!-- Pin Circles -->
-  <circle cx="250" cy="135" r="3" fill="#fff"/>  <!-- Pin 3 -->
-  <circle cx="250" cy="155" r="3" fill="#fff"/>  <!-- Pin 5 -->
-  <circle cx="250" cy="175" r="3" fill="#fff"/>  <!-- VSS -->
-  <circle cx="250" cy="195" r="3" fill="#fff"/>  <!-- Pin 8 -->
+  <!-- Pin Connection Points -->
+  <circle cx="350" cy="140" r="6" fill="#fff"/>  <!-- Pin 3 -->
+  <circle cx="350" cy="165" r="6" fill="#fff"/>  <!-- Pin 5 -->
+  <circle cx="350" cy="190" r="6" fill="#fff"/>  <!-- Pin 8 -->
+  <circle cx="350" cy="215" r="6" fill="#fff"/>  <!-- Pin 1 -->
   
-  <circle cx="370" cy="135" r="3" fill="#fff"/>  <!-- Pin 2 -->
-  <circle cx="370" cy="155" r="3" fill="#fff"/>  <!-- Pin 4 -->
-  <circle cx="370" cy="175" r="3" fill="#fff"/>  <!-- VDD -->
-  <circle cx="370" cy="195" r="3" fill="#fff"/>  <!-- Pin 1 -->
+  <circle cx="550" cy="140" r="6" fill="#fff"/>  <!-- Pin 2 -->
+  <circle cx="550" cy="165" r="6" fill="#fff"/>  <!-- Pin 4 -->
+  <circle cx="550" cy="190" r="6" fill="#fff"/>  <!-- Pin 16 -->
+  <circle cx="550" cy="215" r="6" fill="#fff"/>  <!-- Unused -->
   
-  <!-- Internal Inverter Gates -->
-  <path d="M 270 130 L 290 130 L 300 140 L 290 150 L 270 150 Z" fill="none" stroke="#ccc" stroke-width="1"/>
-  <circle cx="305" cy="140" r="3" fill="none" stroke="#ccc" stroke-width="1"/>
-  <text x="280" y="145" text-anchor="middle" class="pin-label">A</text>
+  <!-- Internal Gate Symbols -->
+  <!-- First Inverter -->
+  <path d="M 370 135 L 400 135 L 415 145 L 400 155 L 370 155 Z" fill="none" stroke="#ccc" stroke-width="2"/>
+  <circle cx="420" cy="145" r="4" fill="none" stroke="#ccc" stroke-width="2"/>
+  <text x="392" y="150" text-anchor="middle" class="pin-label">A</text>
   
-  <path d="M 270 150 L 290 150 L 300 160 L 290 170 L 270 170 Z" fill="none" stroke="#ccc" stroke-width="1"/>
-  <circle cx="305" cy="160" r="3" fill="none" stroke="#ccc" stroke-width="1"/>
-  <text x="280" y="165" text-anchor="middle" class="pin-label">B</text>
-  
-  <!-- Wiring between input and first inverter -->
-  <line class="wire audio" x1="175" y1="170" x2="220" y2="170"/>
-  <line class="wire audio" x1="220" y1="170" x2="220" y2="135"/>
-  <line class="wire audio" x1="220" y1="135" x2="250" y2="135"/>  <!-- To Pin 3 -->
-  
-  <!-- Wiring between inverters -->
-  <line class="wire audio" x1="370" y1="135" x2="420" y2="135"/>  <!-- Pin 2 output -->
-  <line class="wire audio" x1="420" y1="135" x2="420" y2="155"/>
-  <line class="wire audio" x1="420" y1="155" x2="250" y2="155"/>  <!-- To Pin 5 -->
-  
-  <!-- Output from second inverter -->
-  <line class="wire audio" x1="370" y1="155" x2="500" y2="155"/>  <!-- Pin 4 output -->
+  <!-- Second Inverter -->
+  <path d="M 370 160 L 400 160 L 415 170 L 400 180 L 370 180 Z" fill="none" stroke="#ccc" stroke-width="2"/>
+  <circle cx="420" cy="170" r="4" fill="none" stroke="#ccc" stroke-width="2"/>
+  <text x="392" y="175" text-anchor="middle" class="pin-label">B</text>
   
   <!-- Level Control Potentiometer -->
-  <rect class="component" x="520" y="145" width="60" height="20" rx="3"/>
-  <text x="550" y="140" text-anchor="middle" class="label">100kΩ</text>
-  <text x="550" y="160" text-anchor="middle" class="value">Level</text>
+  <rect class="potentiometer" x="700" y="160" width="80" height="25" rx="8"/>
+  <text x="740" y="145" text-anchor="middle" class="label">100kΩ</text>
+  <text x="740" y="180" text-anchor="middle" class="value">LEVEL</text>
+  <text x="740" y="200" text-anchor="middle" class="pin-label">Linear Taper</text>
   
-  <!-- Output -->
-  <line class="wire audio" x1="580" y1="155" x2="650" y2="155"/>
-  <text x="680" y="150" class="label">Audio Output</text>
-  <text x="680" y="165" class="label">(To Amp/Output)</text>
+  <!-- Output Section -->
+  <circle cx="900" cy="172" r="15" class="component"/>
+  <text x="900" y="205" text-anchor="middle" class="label">OUT</text>
+  <text x="900" y="125" text-anchor="middle" class="section-title">Audio Output</text>
+  <text x="900" y="145" text-anchor="middle" class="pin-label">To Output Jack</text>
+  
+  <!-- Main Signal Path Wiring -->
+  <!-- Input to coupling cap -->
+  <line class="audio" x1="115" y1="180" x2="172" y2="180"/>
+  
+  <!-- Coupling cap to first inverter -->
+  <line class="audio" x1="188" y1="180" x2="300" y2="180"/>
+  <line class="audio" x1="300" y1="180" x2="300" y2="140"/>
+  <line class="audio" x1="300" y1="140" x2="350" y2="140"/>
+  
+  <!-- Between inverters (cascade connection) -->
+  <line class="audio" x1="550" y1="140" x2="600" y2="140"/>
+  <line class="audio" x1="600" y1="140" x2="600" y2="165"/>
+  <line class="audio" x1="600" y1="165" x2="350" y2="165"/>
+  
+  <!-- Output from second inverter -->
+  <line class="audio" x1="550" y1="165" x2="700" y2="172"/>
+  
+  <!-- Level control to output -->
+  <line class="audio" x1="780" y1="172" x2="885" y2="172"/>
   
   <!-- Power Supply Connections -->
-  <line class="wire power" x1="370" y1="175" x2="420" y2="175"/>   <!-- VDD -->
-  <line class="wire power" x1="420" y1="175" x2="420" y2="100"/>   
-  <text x="430" y="105" class="value">+15V</text>
+  <line class="power" x1="550" y1="190" x2="600" y2="190"/>   <!-- VDD -->
+  <line class="power" x1="600" y1="190" x2="600" y2="100"/>   
+  <text x="610" y="95" class="value">+VDD</text>
+  <text x="610" y="115" class="pin-label">(9V to 18V)</text>
   
-  <line class="wire ground" x1="250" y1="175" x2="200" y2="175"/>  <!-- VSS -->
-  <line class="wire ground" x1="200" y1="175" x2="200" y2="250"/>
-  <text x="190" y="260" class="value">-15V</text>
+  <line class="ground" x1="350" y1="190" x2="300" y2="190"/>  <!-- VSS -->
+  <line class="ground" x1="300" y1="190" x2="300" y2="280"/>
+  <text x="280" y="295" class="value">VSS</text>
+  <text x="280" y="315" class="pin-label">(GND or -VDD)</text>
   
-  <!-- Alternative Power Supply Note -->
-  <text x="450" y="280" class="label" fill="#ffaa00">Alternative Power Options:</text>
-  <text x="450" y="300" fill="#fff">• +9V to +18V single supply (VDD=+V, VSS=GND)</text>
-  <text x="450" y="315" fill="#fff">• ±12V dual supply (VDD=+12V, VSS=-12V) - shown</text>
-  <text x="450" y="330" fill="#fff">• ±15V dual supply (VDD=+15V, VSS=-15V) - maximum</text>
+  <!-- Power Supply Options Box -->
+  <rect fill="#333" stroke="#666" stroke-width="3" x="50" y="350" width="1100" height="400" rx="10"/>
+  <text x="70" y="380" class="label" fill="#ff3333">CD4049 Overdrive Circuit Details:</text>
   
-  <!-- Circuit Description Box -->
-  <rect fill="#333" stroke="#666" stroke-width="1" x="50" y="350" width="800" height="130" rx="5"/>
-  <text x="60" y="375" class="label" fill="#ff3333">CD4049 Overdrive Circuit Operation:</text>
+  <!-- Power Supply Options -->
+  <text x="70" y="420" class="section-title">Power Supply Options:</text>
   
-  <text x="60" y="400" class="label" fill="#ffff00">Signal Path:</text>
-  <text x="70" y="415" fill="#fff">1. Audio input → 0.1µF coupling capacitor (blocks DC)</text>
-  <text x="70" y="430" fill="#fff">2. First inverter (Pin 3→2): Inverts and clips positive peaks</text>
-  <text x="70" y="445" fill="#fff">3. Second inverter (Pin 5→4): Re-inverts and clips negative peaks</text>
-  <text x="70" y="460" fill="#fff">4. 100kΩ level control adjusts output amplitude</text>
+  <text x="90" y="450" class="value">Single Supply (Recommended):</text>
+  <text x="110" y="470" fill="#fff">• VDD = +9V to +18V, VSS = GND (0V)</text>
+  <text x="110" y="490" fill="#fff">• Simple, requires only one voltage rail</text>
+  <text x="110" y="510" fill="#fff">• Output biased at VDD/2 (self-biasing)</text>
+  <text x="110" y="530" fill="#fff">• Good for guitar pedal applications</text>
   
-  <text x="450" y="400" class="label" fill="#ffff00">Characteristics:</text>
-  <text x="460" y="415" fill="#fff">• Symmetric clipping on both positive and negative peaks</text>
-  <text x="460" y="430" fill="#fff">• Adds odd and even harmonics (tube-like distortion)</text>
-  <text x="460" y="445" fill="#fff">• Gentle, musical saturation at moderate levels</text>
-  <text x="460" y="460" fill="#fff">• Very low parts count and cost</text>
+  <text x="90" y="570" class="value">Dual Supply (Alternative):</text>
+  <text x="110" y="590" fill="#fff">• VDD = +15V, VSS = -15V (±15V rails)</text>
+  <text x="110" y="610" fill="#fff">• Maximum voltage swing and headroom</text>
+  <text x="110" y="630" fill="#fff">• Compatible with ML-303 ±15V analog supply</text>
+  
+  <!-- Circuit Operation -->
+  <text x="600" y="420" class="section-title">Circuit Operation:</text>
+  
+  <text x="620" y="450" class="value">Signal Path:</text>
+  <text x="640" y="470" fill="#fff">1. Input coupling (0.1µF) blocks DC</text>
+  <text x="640" y="490" fill="#fff">2. First inverter clips positive peaks</text>
+  <text x="640" y="510" fill="#fff">3. Second inverter clips negative peaks</text>
+  <text x="640" y="530" fill="#fff">4. Result: Symmetric soft clipping</text>
+  
+  <text x="620" y="570" class="value">Distortion Characteristics:</text>
+  <text x="640" y="590" fill="#fff">• Adds both odd and even harmonics</text>
+  <text x="640" y="610" fill="#fff">• Tube-like, musical saturation</text>
+  <text x="640" y="630" fill="#fff">• Gentle compression at moderate levels</text>
+  <text x="640" y="650" fill="#fff">• Hard clipping only at extreme levels</text>
+  
+  <!-- Component Specifications -->
+  <text x="70" y="680" class="section-title">Component Specifications:</text>
+  
+  <text x="90" y="710" class="value">CD4049UBE IC:</text>
+  <text x="110" y="730" fill="#fff">• Unbuffered hex inverter (6 gates)</text>
+  <text x="110" y="750" fill="#fff">• Only uses 2 gates (pins 3→2, 5→4)</text>
+  <text x="110" y="770" fill="#fff">• Operating voltage: 3V to 18V</text>
+  <text x="110" y="790" fill="#fff">• DIP-16 package</text>
+  
+  <text x="500" y="710" class="value">Supporting Components:</text>
+  <text x="520" y="730" fill="#fff">• 0.1µF coupling capacitor (film type)</text>
+  <text x="520" y="750" fill="#fff">• 100kΩ linear level potentiometer</text>
+  <text x="520" y="770" fill="#fff">• Optional: 10µF output coupling cap</text>
+  
+  <text x="850" y="710" class="value">Modifications:</text>
+  <text x="870" y="730" fill="#fff">• Larger input cap = more bass</text>
+  <text x="870" y="750" fill="#fff">• Smaller level pot = more drive</text>
+  <text x="870" y="770" fill="#fff">• Add LED clipping indicator</text>
 </svg>
