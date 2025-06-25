@@ -41,17 +41,22 @@ The Acidcode Bassline ML-303 is a faithful TB-303 clone that combines:
 ## 🔧 Hardware Specifications
 
 ### V5 Board Details
-- **Button Voltage**: -16.828V
-- **LED Voltage**: -6.033V  
-- **Microcontroller**: PIC18F452
-- **VCA Options**: BA6110 (preferred) or BA662
-- **Critical Components**: 2SK30-O/Y/GR JFETs, original TB-303 transistors
+- **Test Point Voltages**: -16.828V (buttons), -6.033V (LEDs)
+- **Supply Voltages**: +12V, +5V, ±15V (from DC/DC converter)
+- **Microcontroller**: PIC18LF452-I/P (Low-voltage variant)
+- **VCA Options**: AN6562 (primary), BA6110, or BA662 (original)
+- **Audio Driver**: LA4140 or AN7112E power amplifier
+- **Critical Components**: 2SK30-O/Y/GR JFETs, precision film capacitors, metal film resistors
 
 ### Key Components
-- **Oscillator**: Sawtooth VCO using 2SC536/2SC945 transistors
+- **Oscillator**: Sawtooth VCO using 2SC945/2SC536F transistors
 - **Filter**: TB-303 style resonant lowpass using 2SK30 JFETs
-- **VCA**: BA6110 or BA662 integrated circuits
-- **Sequencer**: PIC-based with LCD and MIDI support
+- **VCA**: AN6562 (primary), BA6110, or BA662 integrated circuits
+- **Audio Output**: LA4140 or AN7112E power amplifier
+- **Sequencer**: PIC18LF452-I/P with LCD and MIDI support
+- **Power**: RECOM 0515S DC/DC converter for ±15V analog supplies
+- **MIDI Isolation**: CNY17 optocoupler
+- **Digital Logic**: 74174, 4050, 4066, 4013 support ICs
 
 ## 🎵 Firmware Features
 
@@ -109,11 +114,28 @@ The project includes Arduino enhancement capabilities:
 - **Ceramic**: 100nF (2 pieces)
 
 ### Semiconductors  
-- **Switching Diodes**: 15x 1N4148
-- **Rectifiers**: 2x 1N4001
-- **Zener**: 1x 6.2V
-- **Transistors**: 20x 2SC536, 8x 2SA733
-- **JFETs**: 2SK30 variants (critical for filter operation)
+- **Switching Diodes**: 14x 1N4148
+- **Rectifiers**: 4x 1N4001  
+- **Zener**: 1x 6.2V (ZD 6,2)
+- **Transistors**: 24x 2SC945 or 2SC536F, 11x 2SA733P
+- **Special Transistors**: 3x 2SC1583F, 1x 2SC2291F
+- **JFETs**: 2x 2SK30 variants (1x O-type, 1x Y/GR-type)
+
+### Critical ICs
+- **Microcontroller**: PIC18LF452-I/P
+- **EEPROM**: 24C64 or 24C65
+- **VCA**: 2x AN6562 (primary), or BA6110/BA662 alternatives
+- **Audio Driver**: LA4140 or AN7112E
+- **Op-Amp**: LM2904N
+- **Digital Logic**: 74174, 4050, 4066, 4013
+- **MIDI**: CNY17 optocoupler
+- **Power**: 78S05 regulator, RECOM 0515S DC/DC converter
+
+### Precision Components (Critical for Proper Operation)
+- **Metal Film Resistors**: 17x 200KΩ, 1x 27KΩ  
+- **VCF Capacitors**: 18nF (±1%), 5x 33nF, 2x 100nF (±1%)
+- **VCO Capacitors**: 2x 10nF, 1x 1nF (1% precision)
+- **Trimmers**: 5K, 50K, 500K high-precision types
 
 ### Controls (Conrad Electronics)
 - **Blue**: 707694-13
