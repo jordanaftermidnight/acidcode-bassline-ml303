@@ -18,7 +18,8 @@ This approach requires **NO cuts or permanent modifications** to your ML-303.
 
 #### What You Need:
 - Arduino Micro or Nano
-- 16x2 LCD with I2C backpack
+- 16x2 LCD (standard HD44780 parallel interface)
+- 10k potentiometer for LCD contrast
 - MCP4921 DAC (optional for CV output)
 - Breadboard and jumper wires
 - Standard MIDI interface components
@@ -136,9 +137,10 @@ Upgrade Path:
 If your ML-303 has basic LED display:
 
 #### Option 1: External LCD
-- **Connect I2C LCD** to spare pins
+- **Connect standard LCD** using 6 Arduino pins
 - **Mount in custom enclosure** above unit
 - **Display patterns, parameters, BPM**
+- **Add contrast control** via 10k potentiometer
 
 #### Option 2: Internal LCD Replacement
 - **Remove LED matrix** (if desired)

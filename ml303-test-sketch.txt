@@ -270,29 +270,25 @@ void writeDAC(unsigned int value) {
   digitalWrite(PIN_DAC_CS, HIGH);
 }
 
-// I2C Scanner function - call from setup() if LCD not working
-void scanI2C() {
-  Serial.println(F("Scanning I2C bus..."));
-  byte error, address;
-  int nDevices = 0;
+// LCD Test function - call from setup() if LCD not working
+void testLCD() {
+  Serial.println(F("Testing LCD display..."));
   
-  for(address = 1; address < 127; address++) {
-    Wire.beginTransmission(address);
-    error = Wire.endTransmission();
-    
-    if (error == 0) {
-      Serial.print(F("I2C device found at 0x"));
-      if (address < 16) Serial.print("0");
-      Serial.println(address, HEX);
-      nDevices++;
-    }
+  lcd.clear();
+  lcd.setCursor(0, 0);
+  lcd.print("LCD Test 12345");
+  lcd.setCursor(0, 1);
+  lcd.print("ABCDEFGHIJKLMNOP");
+  
+  delay(2000);
+  
+  // Test contrast by displaying solid blocks
+  lcd.clear();
+  for(int i = 0; i < 32; i++) {
+    lcd.write(255); // Solid block character
   }
   
-  if (nDevices == 0) {
-    Serial.println(F("No I2C devices found"));
-  } else {
-    Serial.println(F("I2C scan complete"));
-  }
+  Serial.println(F("LCD test complete - check display"));
 }
 
 /*
@@ -304,10 +300,11 @@ void scanI2C() {
  *    - Check if ML-303 is in RUN mode
  * 
  * 2. LCD not working:
- *    - Uncomment scanI2C() call in setup()
- *    - Try address 0x3F instead of 0x27
- *    - Check I2C pull-up resistors (4.7k)
- *    - Verify 5V power to LCD
+ *    - Call testLCD() function to verify display
+ *    - Check all 6 data line connections (RS, E, D4-D7)
+ *    - Adjust contrast potentiometer (V0 pin)
+ *    - Verify 5V power and ground connections
+ *    - Check backlight connections and current limiting resistor
  * 
  * 3. Original not working:
  *    - Check jumpers on cut traces

@@ -134,7 +134,7 @@ Complete enhancement with permanent modifications:
 
 ### Arduino Components:
 - **Arduino Micro/Nano** (5V versions recommended)
-- **16x2 LCD with I2C backpack**
+- **16x2 LCD (standard HD44780 parallel interface)**
 - **MCP4921 DAC** (for CV generation)
 - **MIDI interface components** (optocouplers, resistors)
 - **Breadboard and jumper wires** (for prototyping)

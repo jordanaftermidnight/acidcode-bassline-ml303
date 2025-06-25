@@ -62,7 +62,7 @@ x0xb0x ──→ Arduino Connections:
 ├── CV Out ────→ Arduino ADC (feedback)
 ├── Gate Out ──→ Arduino Digital In
 ├── +5V/GND ───→ Arduino Power
-└── I2C Bus ───→ Arduino (if available)
+└── Serial Bus ───→ Arduino (if available)
 ```
 
 #### Implementation:

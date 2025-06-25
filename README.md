@@ -90,7 +90,7 @@ The Acidcode Bassline ML-303 is a faithful TB-303 clone that combines:
 The project includes Arduino enhancement capabilities:
 
 ### Features
-- **LCD Display**: 16x2 character display with I2C interface
+- **LCD Display**: 16x2 character display with standard parallel interface
 - **MIDI Integration**: Full MIDI I/O with timing sync
 - **Parameter Monitoring**: Real-time pot reading and display
 - **Pattern Enhancement**: Extended pattern storage and editing
@@ -98,7 +98,8 @@ The project includes Arduino enhancement capabilities:
 
 ### Hardware Requirements
 - Arduino Micro or similar
-- 16x2 LCD with I2C backpack
+- 16x2 LCD (standard HD44780 parallel interface)
+- 10k potentiometer for LCD contrast control
 - MCP4921 DAC for CV output
 - Standard MIDI interface circuit
 - Various supporting components
@@ -186,7 +187,7 @@ BPM: 142
 
 ### Arduino Integration Issues
 1. **No Clock Detection** - Check PIC to Arduino pin 2 connection
-2. **LCD Not Working** - Try address 0x3F instead of 0x27, check I2C pullups
+2. **LCD Not Working** - Check parallel connections, verify contrast setting
 3. **Original Function Lost** - Verify jumpers on cut traces
 4. **MIDI Problems** - Check optocoupler orientation and cable connections
 

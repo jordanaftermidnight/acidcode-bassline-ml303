@@ -79,7 +79,7 @@
 ### 11. EEPROM Specification
 **✅ ADDITION**: **24C64 or 24C65** (ST 24C64 BN6)
 - Pattern storage memory
-- I2C interface for microcontroller
+- Standard parallel interface for microcontroller
 
 ### 12. Power Supply Specifications
 **✅ CORRECTIONS**:
