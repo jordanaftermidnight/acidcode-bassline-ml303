@@ -42,7 +42,7 @@ The Acidcode Bassline ML-303 is a faithful TB-303 clone that combines:
 
 ### V5 Board Details
 - **Test Point Voltages**: -16.828V (buttons), -6.033V (LEDs)
-- **Supply Voltages**: +12V, +5V, ±15V (from DC/DC converter)
+- **Supply Voltages**: +12V, +5.333V, ±15V (from DC/DC converter)
 - **Microcontroller**: PIC18LF452-I/P (Low-voltage variant)
 - **VCA Options**: AN6562 (primary), BA6110, or BA662 (original)
 - **Audio Driver**: LA4140 or AN7112E power amplifier
