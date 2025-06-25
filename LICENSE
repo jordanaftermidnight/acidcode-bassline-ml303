@@ -1,0 +1,58 @@
+MIT License
+
+Copyright (c) 2025 ML-303 Open Source Community
+
+This project builds upon and honors the work of:
+- Acidcode (Mathias Märker) - Original ML-303 hardware design
+- Transistor - Primary firmware development
+- Matze - Alternative firmware implementations
+- Christian Wiesner - Community documentation and preservation
+- x0xb0x Team (Limor Fried/Adafruit) - Open source hardware pioneering
+- The entire TB-303 clone community
+
+Permission is hereby granted, free of charge, to any person obtaining a copy
+of this software and associated documentation files (the "Software"), to deal
+in the Software without restriction, including without limitation the rights
+to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+copies of the Software, and to permit persons to whom the Software is
+furnished to do so, subject to the following conditions:
+
+The above copyright notice and this permission notice shall be included in all
+copies or substantial portions of the Software.
+
+Attribution to original creators (Acidcode, Transistor, Matze, and community
+contributors) must be maintained in any derivative works.
+
+Educational and community benefit should be prioritized over commercial gain.
+
+THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
+SOFTWARE.
+
+---
+
+IMPORTANT NOTES:
+
+1. ORIGINAL WORK RESPECT:
+   This license applies to the documentation, translations, Arduino integration,
+   and community contributions in this repository. The original ML-303 hardware
+   design by Acidcode and firmware by Transistor/Matze are used with respect
+   and proper attribution for educational and community benefit.
+
+2. EDUCATIONAL PURPOSE:
+   This repository exists primarily for educational purposes, preservation of
+   knowledge, and community benefit. Commercial use should give back to and
+   benefit the broader 303 clone community.
+
+3. REVERSE ENGINEERING:
+   Firmware analysis and documentation are provided for educational purposes
+   and to preserve knowledge for the community.
+
+4. COMMUNITY SPIRIT:
+   Following the example of the x0xb0x (MIT License), this project embraces
+   the open source spirit that has kept the TB-303 sound alive and accessible
+   for over 40 years.
