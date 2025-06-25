@@ -9,6 +9,7 @@ The Acidcode Bassline ML-303 is a faithful TB-303 clone that combines:
 - **Digital sequencer** - PIC microcontroller based with MIDI support
 - **Arduino enhancement** - Modern integration and expansion capabilities
 - **Multiple board versions** - V5 and V6 hardware iterations
+- **🎯 FULL SOURCE CODE** - Complete firmware source code with technical analysis
 - **Comprehensive firmware** - Multiple firmware versions with different features
 
 ## ⚠️ Critical Safety Warning
@@ -26,27 +27,47 @@ The Acidcode Bassline ML-303 is a faithful TB-303 clone that combines:
 ├── MODIFICATION_INDEX.md               # 🎯 CHOOSE YOUR PATH - Navigation guide
 ├── EXISTING_ML303_MODIFICATIONS.md    # Already have ML-303? Start here
 ├── OTHER_BASSLINE_MODIFICATIONS.md    # x0xb0x, TD-3, MB-33 modifications  
+├── FIRMWARE_REVERSE_ENGINEERING.md    # 🔬 COMPLETE FIRMWARE ANALYSIS - Source code deep dive
+├── ENHANCED_BUILD_GUIDE.md            # Professional-grade build instructions
+├── FIRMWARE_LOADING_GUIDE.md          # Complete programming procedures
+├── TESTING_PROCEDURES.md              # Systematic testing protocol
+├── ERROR_CHECK_SUMMARY.md             # Comprehensive error analysis
+├── CODE_REVIEW_FIXES.md               # Arduino issue documentation
+├── PROJECT_COMPLETION_SUMMARY.md      # Complete cleanup summary
 ├── CORRECTIONS.md                      # Critical technical corrections
 ├── FINAL_BUILD_REVIEW.md              # Build verification and logic check
 ├── build_instructions_v5/              # V5 German build documentation
 ├── build_instructions_v6/              # V6 English build documentation  
-├── firmware/                           # All firmware versions
+├── firmware/                           # All firmware versions with FULL SOURCE CODE
 │   ├── Matze/                         # Alternative firmware builds
 │   │   ├── fw501alpha/                # V5.01 Alpha source code
 │   │   └── mlv4/                      # ML V4 source code
 │   └── Transistor/                    # Main firmware releases
 │       ├── 6.1/                       # Latest firmware with manual
 │       └── *.syx                      # Various firmware versions
-├── ml303-arduino-code.txt             # Arduino integration firmware
-├── ml303-arduino-wiring.html          # Arduino wiring diagrams
+├── ml303-arduino-code-FIXED.txt       # ✅ CORRECTED Arduino code (use this!)
+├── ml303-arduino-code.txt             # ❌ Original Arduino code (has pin conflicts)
+├── ml303-arduino-wiring.html          # Updated wiring diagrams
 ├── ml303-sequencer-mod.html           # Hardware modification guide
 └── ml303-test-sketch.txt              # Arduino testing code
 ```
+
+## 🔬 **MAJOR DISCOVERY: Complete Firmware Source Code!**
+
+**🎯 We have the complete PIC18F452 assembly source code!** This is a rare find in the TB-303 clone world.
+
+| Interest | Document |
+|----------|----------|
+| **🔬 Firmware Analysis** | [FIRMWARE_REVERSE_ENGINEERING.md](FIRMWARE_REVERSE_ENGINEERING.md) - Complete technical analysis |
+| **💻 Source Code** | `firmware/Matze/` - Full assembly source code for multiple versions |
+| **🎵 How it works** | Pattern storage, MIDI engine, real-time algorithms revealed |
+| **🔧 Modifications** | Source code enables custom firmware development |
 
 ## 🎯 **QUICK START - Choose Your Situation:**
 
 | Your Situation | Go To |
 |----------------|-------|
+| **Want to understand the firmware** | [FIRMWARE_REVERSE_ENGINEERING.md](FIRMWARE_REVERSE_ENGINEERING.md) |
 | **Want to build ML-303 from scratch** | Continue reading this README |
 | **Have working ML-303, want to enhance it** | [EXISTING_ML303_MODIFICATIONS.md](EXISTING_ML303_MODIFICATIONS.md) |
 | **Have x0xb0x, TD-3, or other TB-303 clone** | [OTHER_BASSLINE_MODIFICATIONS.md](OTHER_BASSLINE_MODIFICATIONS.md) |
@@ -72,19 +93,27 @@ The Acidcode Bassline ML-303 is a faithful TB-303 clone that combines:
 - **MIDI Isolation**: CNY17 optocoupler
 - **Digital Logic**: 74174, 4050, 4066, 4013 support ICs
 
-## 🎵 Firmware Features
+## 🎵 Firmware Features & Source Code
 
-### Available Versions
+### 🔬 **SOURCE CODE AVAILABLE!**
+- **Complete PIC18F452 assembly source** - Two versions with full sources
+- **Professional architecture** - Real-time interrupt-driven design
+- **Advanced algorithms** - Sophisticated pattern storage and MIDI engine
+- **Educational value** - Learn TB-303 implementation details
+- **Modification friendly** - Source enables custom firmware development
+
+### Available Binary Versions
 - **V5.5 Final** - Stable release
 - **V6.1** - Latest with comprehensive manual
 - **V7 Beta** - Experimental features
 
-### Core Features
-- **Pattern Storage**: 16 steps max, 64 patterns
-- **MIDI Modes**: Master/Slave/Key-In/Key-Out/Silent
-- **Tempo Range**: 50-250 BPM
-- **Built-in Patterns**: Classic acid patterns included
-- **Real-time Control**: Live parameter adjustment
+### Core Features (Revealed by Source Analysis)
+- **Pattern Storage**: 256 patterns × 16 steps (revolutionary 2-byte encoding)
+- **MIDI Engine**: Professional 24 PPQN sync with multiple modes
+- **Real-time Architecture**: 6-tick subdivision per step
+- **Hardware Interface**: Sophisticated VCO/gate/keyboard control
+- **I2C Storage**: External EEPROM with efficient data structures
+- **Tempo Range**: 50-250 BPM with precise lookup tables
 
 ## 🔌 Arduino Integration
 
