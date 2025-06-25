@@ -1,99 +1,95 @@
-# ML-303 Wiring Diagram Collection
+# ML-303 Arduino Integration Documentation
 
-This directory contains SVG image files for all major wiring and circuit diagrams used in the ML-303 project.
+This directory contains the complete build documentation for integrating an Arduino with the ML-303 TB-303 clone.
 
-## Available Diagrams
+## 📋 Documentation
 
-### Core Integration
-- **`arduino_integration.svg`** - Complete Arduino Uno to ML-303 wiring diagram with fixed pin assignments
-- **`ml303_interface_connections.svg`** - ML-303 test points and connection locations
+### **`COMPLETE_BUILD_GUIDE.md`** - The Only Guide You Need!
 
-### Electronic Circuits  
-- **`midi_interface_6N138.svg`** - Standard MIDI input/output circuit using 6N138 optocoupler
-- **`mcp4921_dac.svg`** - 12-bit DAC for control voltage output  
-- **`cd4049_overdrive.svg`** - Simple overdrive/distortion circuit using CD4049
+This comprehensive guide contains everything required for the ML-303 Arduino integration:
 
-### Construction Guides
-- **`stripboard_layouts.svg`** - Stripboard construction layouts for all circuits
+#### 🛒 **Shopping List**
+- Complete parts list with prices and part numbers
+- Required vs optional components for each phase
+- Where to buy components
 
-## Viewing the Diagrams
+#### 🔌 **Detailed Wiring Diagrams**
+- Full PIC18LF452 40-pin pinout with exact pin numbers
+- Arduino Pro Micro connection details
+- Wire color coding and routing
+- ML-303 board component locations
 
-### In Web Browser
-All SVG files can be opened directly in any modern web browser:
-```bash
-open docs/wiring_diagrams/arduino_integration.svg
-```
+#### 🔧 **Step-by-Step Assembly**
+- Detailed soldering instructions with tips
+- Physical mounting with measurements
+- Wire preparation and connection sequence
+- Arduino programming code examples
 
-### In Graphics Applications
-SVG files are compatible with:
-- Adobe Illustrator
-- Inkscape (free)
-- GIMP
-- Vector graphics editors
-- Most image viewers
+#### 🧪 **Testing & Verification**
+- Pre-power multimeter tests
+- Voltage and continuity requirements
+- I2C communication validation
+- Success criteria for each phase
 
-### Converting to Other Formats
-To convert SVG to PNG/JPG for documentation:
-```bash
-# Using ImageMagick (if installed)
-convert arduino_integration.svg arduino_integration.png
+#### 🚨 **Troubleshooting**
+- Common problems and solutions
+- Diagnostic procedures
+- Safety checks and warnings
 
-# Using Inkscape command line
-inkscape arduino_integration.svg --export-type=png --export-dpi=300
-```
+## 🚀 Project Phases
 
-## Key Features
+### Phase 1: I2C Communication (Current)
+- Arduino Pro Micro connected to PIC18LF452
+- Basic communication protocol established
+- Foundation for all future expansions
 
-### Arduino Integration Diagram
-- **Pin assignments**: All verified to eliminate conflicts from original code
-- **Color coding**: Power (red), ground (black), signals (green), LCD data (yellow)
-- **Component details**: Complete connection tables and specifications
-- **Safety warnings**: Critical power supply and polarity protection notes
+### Phase 2: LCD Display Takeover (Planned)
+- Custom display messages
+- Real-time parameter monitoring
+- Enhanced user interface
 
-### MIDI Interface Circuit
-- **Standard compliance**: Full MIDI 1.0 electrical specification
-- **6N138 optocoupler**: Complete isolation between devices
-- **Component values**: All resistor values and part numbers specified
-- **Input/Output**: Both MIDI IN and MIDI OUT circuits shown
+### Phase 3: Effects Processing (Planned)
+- Digital audio effects
+- Real-time parameter control
+- MIDI-controlled effects
 
-### MCP4921 DAC Circuit
-- **12-bit resolution**: 4096-step control voltage output
-- **SPI interface**: Hardware SPI connection to Arduino
-- **Power supply**: Single +5V operation with internal voltage reference
-- **Output range**: 0-4.096V for ML-303 CV input
+### Phase 4: MIDI Expansion (Planned)
+- Enhanced MIDI functionality
+- USB MIDI interface
+- MIDI effects routing
 
-### CD4049 Overdrive
-- **Dual inverter**: Cascaded CMOS inverters for harmonic distortion  
-- **Power options**: ±15V dual supply or +9V single supply operation
-- **Simple design**: Minimal parts count for easy construction
-- **Level control**: 100kΩ potentiometer for output adjustment
+## 💡 Key Features
 
-### Stripboard Layouts
-- **Hole-by-hole layouts**: Exact component placement and track cutting
-- **Grid references**: Alphanumeric grid for precise positioning
-- **Construction notes**: Track cuts, component orientation, wiring guides
-- **Size specifications**: Board dimensions for each circuit
+### ✅ **Verified Pin Assignments**
+All pin assignments have been verified to eliminate conflicts:
+- **Power**: PIC Pin 11/12 → Arduino VCC/GND
+- **I2C**: PIC Pin 18/23 → Arduino Pin 3/2 (SCL/SDA)
+- **Address**: Arduino I2C slave at 0x43
 
-## Important Notes
+### ⚡ **Non-Invasive Design**
+- No modifications to original ML-303 circuits
+- Completely reversible installation
+- ML-303 functions normally if Arduino removed
 
-### Pin Assignment Verification
-**The Arduino integration diagram shows FIXED pin assignments that resolve all conflicts from the original code:**
-- LCD: D12(RS), D11(E), D10-D7(Data)
-- MIDI: A4(RX), A5(TX) 
-- DAC: D13(CS), D11(SCK/MOSI shared)
-- Controls: D2-D6 for buttons and I/O
+### 🔒 **Safety First**
+- Detailed safety warnings and precautions
+- Step-by-step testing procedures
+- Protection against reverse polarity damage
 
-### Safety Warnings
-- **ML-303 sequencer board has NO reverse polarity protection**
-- Always verify power connections with continuity tester before power-up
-- MIDI ground connections can create misleading continuity readings
+## 📖 How to Use This Documentation
 
-### Construction Quality
-- Use IC sockets for all integrated circuits
-- Keep wiring short to minimize noise and interference  
-- Test all connections before final assembly
-- Add bypass capacitors near all IC power pins
+1. **Start with** `COMPLETE_BUILD_GUIDE.md` - it contains everything you need
+2. **Follow the phases** - Phase 1 establishes the foundation
+3. **Test thoroughly** - each phase has verification steps
+4. **Ask questions** - document any issues for future improvements
+
+## ⚠️ Important Safety Notes
+
+- **ML-303 has NO reverse polarity protection** - double-check all connections
+- **Always power off** before making any connections
+- **Use multimeter** to verify all connections before applying power
+- **Start with USB power** to test Arduino before connecting to ML-303
 
 ---
 
-*These diagrams complement the interactive HTML wiring guides and provide printable references for construction and troubleshooting.*
+*This project extends the ML-303's capabilities while preserving its original analog character and functionality.*
