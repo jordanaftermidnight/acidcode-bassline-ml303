@@ -1,0 +1,19 @@
+RIPPLE ADJUST
+
+Use the trimmer RIPPLE ADJUST to fine-tune the resonance of your XPO.
+In the real TB this cant be done - it simply depends on the CV-adjustment.
+Therefore TB-Filters do not sound the same. In the XPO you can control
+both, the CV-Adj. AND the Ripple of the VCF ! This makes it ideal for
+typical "Acid-" Sound Adjustments :-))
+
+
+For adjustment of CV and VCO-Tuning please see V5 construction manual.
+The TPVCF of the V5 is simply the right PIN of the resonance-pot in the
+XPO.
+
+
+
+Rock on!
+
+Matze
+ 

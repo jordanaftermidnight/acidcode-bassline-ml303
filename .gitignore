@@ -1,0 +1,61 @@
+# macOS
+.DS_Store
+.AppleDouble
+.LSOverride
+
+# Thumbnails
+._*
+
+# Files that might appear in the root of a volume
+.DocumentRevisions-V100
+.fseventsd
+.Spotlight-V100
+.TemporaryItems
+.Trashes
+.VolumeIcon.icns
+.com.apple.timemachine.donotpresent
+
+# Directories potentially created on remote AFP share
+.AppleDB
+.AppleDesktop
+Network Trash Folder
+Temporary Items
+.apdisk
+
+# Editor files
+*~
+*.swp
+*.swo
+.vscode/
+.idea/
+
+# Compiled files
+*.hex
+*.bin
+*.elf
+*.map
+
+# Build directories
+build/
+dist/
+
+# Arduino IDE
+*.ino.eep
+*.ino.elf
+*.ino.hex
+
+# KiCad backup files
+*-bak
+*-cache.lib
+*-rescue.lib
+*.bck
+*.kicad_pcb-bak
+
+# Eagle backup files
+*.b#*
+*.s#*
+*.l#*
+
+# Temporary files
+*.tmp
+*.temp

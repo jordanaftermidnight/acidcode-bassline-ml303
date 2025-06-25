@@ -1,0 +1,308 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ML-303 Arduino Integration Wiring</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background: #1a1a1a;
+            color: #fff;
+            padding: 20px;
+        }
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+        h1, h2 {
+            color: #ff3333;
+            text-align: center;
+        }
+        .wiring-diagram {
+            background: #2a2a2a;
+            border: 2px solid #ff3333;
+            border-radius: 10px;
+            padding: 20px;
+            margin: 20px 0;
+        }
+        svg {
+            width: 100%;
+            height: auto;
+        }
+        .component {
+            fill: #444;
+            stroke: #888;
+            stroke-width: 2;
+        }
+        .arduino {
+            fill: #005C5C;
+            stroke: #00a0a0;
+        }
+        .lcd {
+            fill: #004400;
+            stroke: #00ff00;
+        }
+        .ml303 {
+            fill: #440000;
+            stroke: #ff0000;
+        }
+        .wire {
+            fill: none;
+            stroke-width: 2;
+        }
+        .power {
+            stroke: #ff0000;
+        }
+        .ground {
+            stroke: #000000;
+        }
+        .signal {
+            stroke: #00ff00;
+        }
+        .i2c {
+            stroke: #ffff00;
+        }
+        text {
+            fill: #fff;
+            font-size: 12px;
+        }
+        .label {
+            font-size: 14px;
+            font-weight: bold;
+        }
+        .connection-table {
+            background: #333;
+            border-radius: 5px;
+            padding: 15px;
+            margin: 20px 0;
+        }
+        table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+        th, td {
+            padding: 8px;
+            text-align: left;
+            border-bottom: 1px solid #555;
+        }
+        th {
+            background: #444;
+            color: #ff3333;
+        }
+        .note {
+            background: #3a3a00;
+            border-left: 4px solid #ffff00;
+            padding: 10px;
+            margin: 10px 0;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>ML-303 Arduino Integration Wiring Diagram</h1>
+        
+        <div class="wiring-diagram">
+            <svg viewBox="0 0 800 600" xmlns="http://www.w3.org/2000/svg">
+                <!-- Arduino Micro -->
+                <rect class="component arduino" x="50" y="200" width="200" height="300" rx="5"/>
+                <text x="150" y="190" text-anchor="middle" class="label">Arduino Micro</text>
+                
+                <!-- Pin labels -->
+                <text x="40" y="230" text-anchor="end">5V</text>
+                <text x="40" y="250" text-anchor="end">GND</text>
+                <text x="40" y="280" text-anchor="end">A0</text>
+                <text x="40" y="300" text-anchor="end">A1</text>
+                <text x="40" y="320" text-anchor="end">A2</text>
+                <text x="40" y="340" text-anchor="end">A3</text>
+                <text x="40" y="360" text-anchor="end">A4/SDA</text>
+                <text x="40" y="380" text-anchor="end">A5/SCL</text>
+                <text x="40" y="420" text-anchor="end">D2</text>
+                <text x="40" y="440" text-anchor="end">D3</text>
+                <text x="40" y="460" text-anchor="end">D12</text>
+                <text x="40" y="480" text-anchor="end">D13</text>
+                
+                <!-- LCD Display -->
+                <rect class="component lcd" x="350" y="100" width="150" height="80" rx="5"/>
+                <text x="425" y="90" text-anchor="middle" class="label">SMH1602A LCD</text>
+                <text x="425" y="140" text-anchor="middle">16x2 Display</text>
+                
+                <!-- LCD Pins -->
+                <text x="340" y="120" text-anchor="end">VCC</text>
+                <text x="340" y="135" text-anchor="end">GND</text>
+                <text x="340" y="150" text-anchor="end">SDA</text>
+                <text x="340" y="165" text-anchor="end">SCL</text>
+                
+                <!-- ML-303 Interface Points -->
+                <rect class="component ml303" x="350" y="250" width="200" height="250" rx="5"/>
+                <text x="450" y="240" text-anchor="middle" class="label">ML-303 Interface</text>
+                
+                <!-- ML-303 connection points -->
+                <text x="340" y="280" text-anchor="end">Cutoff</text>
+                <text x="340" y="300" text-anchor="end">Resonance</text>
+                <text x="340" y="320" text-anchor="end">Env Mod</text>
+                <text x="340" y="340" text-anchor="end">Decay</text>
+                <text x="340" y="380" text-anchor="end">Run/Stop</text>
+                <text x="340" y="400" text-anchor="end">Pattern</text>
+                <text x="340" y="440" text-anchor="end">Gate Out</text>
+                <text x="340" y="460" text-anchor="end">CV Out</text>
+                
+                <!-- MIDI Circuit -->
+                <rect class="component" x="600" y="300" width="120" height="100" rx="5"/>
+                <text x="660" y="290" text-anchor="middle" class="label">MIDI I/O</text>
+                <text x="590" y="330" text-anchor="end">MIDI IN</text>
+                <text x="590" y="370" text-anchor="end">MIDI OUT</text>
+                
+                <!-- Wiring connections -->
+                <!-- Power -->
+                <line class="wire power" x1="250" y1="225" x2="350" y2="115"/>
+                <line class="wire ground" x1="250" y1="245" x2="350" y2="130"/>
+                
+                <!-- I2C -->
+                <line class="wire i2c" x1="250" y1="355" x2="350" y2="145"/>
+                <line class="wire i2c" x1="250" y1="375" x2="350" y2="160"/>
+                
+                <!-- Analog inputs -->
+                <line class="wire signal" x1="250" y1="275" x2="350" y2="275"/>
+                <line class="wire signal" x1="250" y1="295" x2="350" y2="295"/>
+                <line class="wire signal" x1="250" y1="315" x2="350" y2="315"/>
+                <line class="wire signal" x1="250" y1="335" x2="350" y2="335"/>
+                
+                <!-- Digital I/O -->
+                <line class="wire signal" x1="250" y1="415" x2="350" y2="375"/>
+                <line class="wire signal" x1="250" y1="435" x2="350" y2="395"/>
+                
+                <!-- MIDI -->
+                <line class="wire signal" x1="250" y1="455" x2="600" y2="325"/>
+                <line class="wire signal" x1="250" y1="475" x2="600" y2="365"/>
+                
+                <!-- Power Supply -->
+                <rect class="component" x="50" y="50" width="120" height="80" rx="5"/>
+                <text x="110" y="40" text-anchor="middle" class="label">Power Supply</text>
+                <text x="110" y="90" text-anchor="middle">+12V/-12V</text>
+                <text x="110" y="105" text-anchor="middle">+5V (USB)</text>
+            </svg>
+        </div>
+        
+        <div class="connection-table">
+            <h2>Connection Details</h2>
+            <table>
+                <tr>
+                    <th>Arduino Pin</th>
+                    <th>Connection</th>
+                    <th>Function</th>
+                    <th>Notes</th>
+                </tr>
+                <tr>
+                    <td>5V</td>
+                    <td>LCD VCC</td>
+                    <td>Power supply</td>
+                    <td>Can also use external 5V</td>
+                </tr>
+                <tr>
+                    <td>GND</td>
+                    <td>LCD GND, ML-303 GND</td>
+                    <td>Common ground</td>
+                    <td>Star ground recommended</td>
+                </tr>
+                <tr>
+                    <td>A0-A3</td>
+                    <td>Pot wipers</td>
+                    <td>Parameter reading</td>
+                    <td>Use 10k linear pots</td>
+                </tr>
+                <tr>
+                    <td>A4 (SDA)</td>
+                    <td>LCD SDA</td>
+                    <td>I2C Data</td>
+                    <td>4.7k pullup to 5V</td>
+                </tr>
+                <tr>
+                    <td>A5 (SCL)</td>
+                    <td>LCD SCL</td>
+                    <td>I2C Clock</td>
+                    <td>4.7k pullup to 5V</td>
+                </tr>
+                <tr>
+                    <td>D2</td>
+                    <td>Run/Stop switch</td>
+                    <td>Transport control</td>
+                    <td>Internal pullup enabled</td>
+                </tr>
+                <tr>
+                    <td>D3</td>
+                    <td>Pattern select</td>
+                    <td>Pattern switching</td>
+                    <td>Momentary switch to GND</td>
+                </tr>
+                <tr>
+                    <td>D12</td>
+                    <td>MIDI IN (via 6N138)</td>
+                    <td>MIDI receive</td>
+                    <td>Standard MIDI circuit</td>
+                </tr>
+                <tr>
+                    <td>D13</td>
+                    <td>MIDI OUT</td>
+                    <td>MIDI transmit</td>
+                    <td>220Ω resistor to pin 5</td>
+                </tr>
+            </table>
+        </div>
+        
+        <div class="note">
+            <h3>Important Notes:</h3>
+            <ul>
+                <li>Keep digital and analog grounds separate, connect at one point only</li>
+                <li>Use shielded cable for all audio connections</li>
+                <li>Place Arduino away from sensitive analog circuits</li>
+                <li>Add 0.1µF bypass capacitors near all IC power pins</li>
+                <li>The I2C backpack for the LCD greatly simplifies wiring (only 4 connections)</li>
+            </ul>
+        </div>
+        
+        <div class="connection-table">
+            <h2>CD4049 Simple Overdrive Wiring</h2>
+            <p>For the recommended simple overdrive configuration:</p>
+            <svg viewBox="0 0 600 300" xmlns="http://www.w3.org/2000/svg">
+                <rect class="component" x="50" y="100" width="100" height="100" rx="5"/>
+                <text x="100" y="90" text-anchor="middle" class="label">CD4049</text>
+                
+                <!-- Pins -->
+                <circle cx="50" cy="130" r="5" fill="#fff"/>
+                <circle cx="150" cy="130" r="5" fill="#fff"/>
+                <circle cx="50" cy="170" r="5" fill="#fff"/>
+                <circle cx="150" cy="170" r="5" fill="#fff"/>
+                
+                <text x="40" y="135" text-anchor="end">3</text>
+                <text x="160" y="135">2</text>
+                <text x="40" y="175" text-anchor="end">5</text>
+                <text x="160" y="175">4</text>
+                
+                <!-- Input -->
+                <text x="20" y="50" class="label">From VCA Out</text>
+                <line class="wire signal" x1="20" y1="60" x2="20" y2="130"/>
+                <line class="wire signal" x1="20" y1="130" x2="50" y2="130"/>
+                
+                <!-- Between stages -->
+                <line class="wire signal" x1="150" y1="130" x2="200" y2="130"/>
+                <line class="wire signal" x1="200" y1="130" x2="200" y2="170"/>
+                <line class="wire signal" x1="200" y1="170" x2="50" y2="170"/>
+                
+                <!-- Output -->
+                <line class="wire signal" x1="150" y1="170" x2="250" y2="170"/>
+                <rect class="component" x="250" y="160" width="80" height="20" rx="2"/>
+                <text x="290" y="175" text-anchor="middle">100k Level</text>
+                <line class="wire signal" x1="330" y1="170" x2="380" y2="170"/>
+                <text x="400" y="175">To Output</text>
+                
+                <!-- Capacitor -->
+                <line x1="20" y1="120" x2="20" y2="140" stroke="#fff" stroke-width="2"/>
+                <line x1="10" y1="120" x2="30" y2="120" stroke="#fff" stroke-width="2"/>
+                <line x1="10" y1="140" x2="30" y2="140" stroke="#fff" stroke-width="2"/>
+                <text x="40" y="130">0.1µF</text>
+            </svg>
+        </div>
+    </div>
+</body>
+</html>
