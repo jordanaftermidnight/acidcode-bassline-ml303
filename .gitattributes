@@ -1,0 +1,9 @@
+# Git attributes for ML-303 project
+*.md linguist-documentation
+*.txt linguist-documentation
+*.pdf linguist-documentation
+*.ino linguist-language=Arduino
+*.inc linguist-language=Assembly
+*.asm linguist-language=Assembly
+*.syx binary
+*.hex binary
