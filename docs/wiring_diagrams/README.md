@@ -4,9 +4,19 @@ This directory contains the complete build documentation for integrating an Ardu
 
 ## 📋 Documentation
 
-### **`COMPLETE_BUILD_GUIDE.md`** - The Only Guide You Need!
+### **`COMPLETE_BUILD_GUIDE.md`** - Complete Build Instructions
 
 This comprehensive guide contains everything required for the ML-303 Arduino integration:
+
+### **`MERMAID_DIAGRAMS.md`** - Visual Flowcharts & Diagrams
+
+Interactive diagrams that GitHub renders natively, including:
+- **Connection flowcharts** showing exact pin mappings
+- **System architecture** with component relationships  
+- **Testing workflow** with decision trees
+- **Project phases** timeline and dependencies
+- **Troubleshooting** decision trees
+- **Power distribution** diagrams
 
 #### 🛒 **Shopping List**
 - Complete parts list with prices and part numbers
