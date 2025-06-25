@@ -1,0 +1,185 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="1100" height="800" viewBox="0 0 1100 800" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <style>
+      .pin-label { font-size: 10px; font-weight: bold; font-family: Arial, sans-serif; }
+      .component-label { font-size: 12px; font-weight: bold; fill: #2c3e50; font-family: Arial, sans-serif; }
+      .wire-path { stroke-width: 3; fill: none; }
+      .pin-highlight { stroke: #e74c3c; stroke-width: 2; fill: #ff6b6b; }
+      .board-outline { stroke: #34495e; stroke-width: 3; fill: #2ecc71; fill-opacity: 0.3; }
+      .chip-outline { stroke: #2c3e50; stroke-width: 2; fill: #34495e; }
+      .title-text { font-size: 20px; font-weight: bold; fill: #2c3e50; font-family: Arial, sans-serif; }
+      .subtitle-text { font-size: 14px; fill: #7f8c8d; font-family: Arial, sans-serif; }
+      .legend-text { font-size: 11px; fill: #2c3e50; font-family: Arial, sans-serif; }
+    </style>
+  </defs>
+  
+  <!-- Background -->
+  <rect width="1100" height="800" fill="#f8f9fa" stroke="#dee2e6" stroke-width="1"/>
+  
+  <!-- Title -->
+  <text x="550" y="30" text-anchor="middle" class="title-text">ML-303 Arduino Integration Wiring Diagram</text>
+  <text x="550" y="50" text-anchor="middle" class="subtitle-text">I2C Communication Setup: PIC18LF452 ↔ Arduino Pro Micro</text>
+  
+  <!-- Wire Color Legend -->
+  <rect x="50" y="70" width="500" height="60" fill="#ecf0f1" stroke="#bdc3c7" stroke-width="1" rx="5"/>
+  <text x="60" y="90" class="component-label">Wire Color Legend:</text>
+  
+  <rect x="60" y="100" width="20" height="4" fill="#e74c3c"/>
+  <text x="85" y="107" class="legend-text">+5V Power (Red)</text>
+  
+  <rect x="180" y="100" width="20" height="4" fill="#2c3e50"/>
+  <text x="205" y="107" class="legend-text">Ground (Black)</text>
+  
+  <rect x="300" y="100" width="20" height="4" fill="#3498db"/>
+  <text x="325" y="107" class="legend-text">I2C SDA Data (Blue)</text>
+  
+  <rect x="450" y="100" width="20" height="4" fill="#27ae60"/>
+  <text x="475" y="107" class="legend-text">I2C SCL Clock (Green)</text>
+  
+  <!-- ML-303 Sequencer Board -->
+  <g id="ml303-board">
+    <rect x="50" y="180" width="400" height="250" class="board-outline"/>
+    <text x="250" y="170" text-anchor="middle" class="component-label" style="font-size: 16px;">ML-303 Sequencer Board</text>
+    
+    <!-- PIC18LF452 Chip -->
+    <rect x="150" y="230" width="200" height="80" class="chip-outline"/>
+    <text x="250" y="220" text-anchor="middle" class="component-label" style="fill: white;">PIC18LF452-I/P</text>
+    <text x="250" y="275" text-anchor="middle" style="fill: white; font-size: 10px;">40-Pin DIP Microcontroller</text>
+    
+    <!-- PIC Pin Highlights and Labels -->
+    <circle cx="160" cy="250" r="5" class="pin-highlight"/>
+    <text x="120" y="255" class="pin-label">Pin 18 (RC3/SCL)</text>
+    
+    <circle cx="160" cy="270" r="5" class="pin-highlight"/>
+    <text x="120" y="275" class="pin-label">Pin 23 (RC4/SDA)</text>
+    
+    <circle cx="160" cy="290" r="5" class="pin-highlight"/>
+    <text x="120" y="295" class="pin-label">Pin 11 (VDD/+5V)</text>
+    
+    <circle cx="160" cy="310" r="5" class="pin-highlight"/>
+    <text x="120" y="315" class="pin-label">Pin 12 (VSS/GND)</text>
+    
+    <!-- Additional ML-303 components -->
+    <rect x="70" y="350" width="60" height="30" fill="#95a5a6" stroke="#7f8c8d" stroke-width="1"/>
+    <text x="100" y="368" text-anchor="middle" class="pin-label">LCD Display</text>
+    
+    <rect x="350" y="350" width="80" height="30" fill="#95a5a6" stroke="#7f8c8d" stroke-width="1"/>
+    <text x="390" y="368" text-anchor="middle" class="pin-label">Control Knobs</text>
+  </g>
+
+  <!-- Arduino Pro Micro -->
+  <g id="arduino-board">
+    <rect x="600" y="150" width="120" height="300" class="board-outline"/>
+    <text x="660" y="140" text-anchor="middle" class="component-label" style="font-size: 16px;">Arduino Pro Micro</text>
+    
+    <!-- Arduino outline detail -->
+    <rect x="610" y="160" width="100" height="280" stroke="#34495e" stroke-width="1" fill="#2c3e50"/>
+    
+    <!-- Pin highlights and labels -->
+    <circle cx="620" cy="200" r="4" fill="#ffd700"/>
+    <text x="630" y="205" class="pin-label" fill="white">Pin 2 (SDA)</text>
+    
+    <circle cx="620" cy="220" r="4" fill="#ffd700"/>
+    <text x="630" y="225" class="pin-label" fill="white">Pin 3 (SCL)</text>
+    
+    <circle cx="620" cy="400" r="4" fill="#ffd700"/>
+    <text x="630" y="405" class="pin-label" fill="white">VCC (+5V)</text>
+    
+    <circle cx="620" cy="420" r="4" fill="#ffd700"/>
+    <text x="630" y="425" class="pin-label" fill="white">GND</text>
+    
+    <!-- USB Connector -->
+    <rect x="600" y="290" width="20" height="12" fill="#95a5a6"/>
+    <text x="575" y="300" class="pin-label">USB</text>
+  </g>
+
+  <!-- Connection Wires -->
+  <g id="wires">
+    <!-- I2C SDA (Blue) -->
+    <path d="M 165 270 Q 400 270 615 200" class="wire-path" stroke="#3498db"/>
+    <text x="350" y="240" class="pin-label" fill="#3498db">I2C SDA Data Line</text>
+    
+    <!-- I2C SCL (Green) -->
+    <path d="M 165 250 Q 380 250 615 220" class="wire-path" stroke="#27ae60"/>
+    <text x="330" y="220" class="pin-label" fill="#27ae60">I2C SCL Clock Line</text>
+    
+    <!-- Power +5V (Red) -->
+    <path d="M 165 290 Q 420 360 615 400" class="wire-path" stroke="#e74c3c"/>
+    <text x="350" y="380" class="pin-label" fill="#e74c3c">+5V Power Supply</text>
+    
+    <!-- Ground (Black) -->
+    <path d="M 165 310 Q 400 380 615 420" class="wire-path" stroke="#2c3e50"/>
+    <text x="330" y="400" class="pin-label" fill="#2c3e50">Ground Connection</text>
+  </g>
+
+  <!-- Connection Table -->
+  <rect x="750" y="150" width="320" height="280" fill="white" stroke="#bdc3c7" stroke-width="1"/>
+  <text x="910" y="175" text-anchor="middle" class="component-label">Pin Connection Details</text>
+  
+  <!-- Table headers -->
+  <rect x="760" y="185" width="300" height="25" fill="#3498db"/>
+  <text x="780" y="200" class="pin-label" fill="white">PIC18LF452</text>
+  <text x="900" y="200" class="pin-label" fill="white">Arduino Pro Micro</text>
+  <text x="1000" y="200" class="pin-label" fill="white">Function</text>
+  
+  <!-- Table rows -->
+  <rect x="760" y="210" width="300" height="20" fill="#f8f9fa"/>
+  <text x="770" y="223" class="pin-label">Pin 18 (RC3)</text>
+  <text x="900" y="223" class="pin-label">Pin 3</text>
+  <text x="980" y="223" class="pin-label" fill="#27ae60">I2C SCL</text>
+  
+  <rect x="760" y="230" width="300" height="20" fill="white"/>
+  <text x="770" y="243" class="pin-label">Pin 23 (RC4)</text>
+  <text x="900" y="243" class="pin-label">Pin 2</text>
+  <text x="980" y="243" class="pin-label" fill="#3498db">I2C SDA</text>
+  
+  <rect x="760" y="250" width="300" height="20" fill="#f8f9fa"/>
+  <text x="770" y="263" class="pin-label">Pin 11 (VDD)</text>
+  <text x="900" y="263" class="pin-label">VCC</text>
+  <text x="980" y="263" class="pin-label" fill="#e74c3c">+5V Power</text>
+  
+  <rect x="760" y="270" width="300" height="20" fill="white"/>
+  <text x="770" y="283" class="pin-label">Pin 12 (VSS)</text>
+  <text x="900" y="283" class="pin-label">GND</text>
+  <text x="980" y="283" class="pin-label" fill="#2c3e50">Ground</text>
+  
+  <!-- I2C Configuration -->
+  <rect x="750" y="300" width="320" height="130" fill="#e8f5e8" stroke="#27ae60" stroke-width="2"/>
+  <text x="910" y="320" text-anchor="middle" class="component-label">I2C Configuration</text>
+  
+  <text x="760" y="340" class="pin-label">PIC18LF452 (Master):</text>
+  <text x="770" y="355" class="pin-label">• Clock Speed: 100kHz</text>
+  <text x="770" y="370" class="pin-label">• SSPADD: 24 (10MHz osc)</text>
+  
+  <text x="760" y="390" class="pin-label">Arduino (Slave):</text>
+  <text x="770" y="405" class="pin-label">• Address: 0x43 (67 decimal)</text>
+  <text x="770" y="420" class="pin-label">• Library: Wire.h</text>
+  
+  <!-- Warning Box -->
+  <rect x="50" y="480" width="1020" height="80" fill="#fff3cd" stroke="#ffc107" stroke-width="3"/>
+  <text x="70" y="505" class="component-label" fill="#856404">⚠️ Safety Warnings:</text>
+  <text x="70" y="525" class="pin-label" fill="#856404">• Always power off ML-303 before making connections</text>
+  <text x="70" y="540" class="pin-label" fill="#856404">• Verify all connections with multimeter before applying power</text>
+  <text x="70" y="555" class="pin-label" fill="#856404">• Use proper ESD precautions when handling both boards</text>
+  
+  <!-- Mounting Info -->
+  <rect x="50" y="580" width="500" height="100" fill="#ecf0f1" stroke="#95a5a6" stroke-width="1"/>
+  <text x="70" y="600" class="component-label">Physical Mounting:</text>
+  <text x="70" y="620" class="pin-label">• Use 4× M3×10mm standoffs above sequencer board</text>
+  <text x="70" y="635" class="pin-label">• USB connector facing outward for programming</text>
+  <text x="70" y="650" class="pin-label">• Secure wires to prevent stress on solder joints</text>
+  <text x="70" y="665" class="pin-label">• Ensure 15mm clearance for case closure</text>
+  
+  <!-- Testing Checklist -->
+  <rect x="570" y="580" width="500" height="100" fill="#fef9e7" stroke="#f39c12" stroke-width="1"/>
+  <text x="590" y="600" class="component-label">Testing Checklist:</text>
+  <text x="590" y="620" class="pin-label">• Verify +5V supply voltage: 4.8V - 5.2V</text>
+  <text x="590" y="635" class="pin-label">• Check all pin continuity before power-on</text>
+  <text x="590" y="650" class="pin-label">• Test Arduino programming via USB first</text>
+  <text x="590" y="665" class="pin-label">• Monitor serial output for I2C communication</text>
+  
+  <!-- Footer -->
+  <text x="550" y="750" text-anchor="middle" class="subtitle-text">ML-303 Arduino Integration - Phase 1: I2C Communication Setup</text>
+  <text x="550" y="770" text-anchor="middle" class="pin-label">Next Phase: LCD Display Takeover & Effects Control</text>
+</svg>
