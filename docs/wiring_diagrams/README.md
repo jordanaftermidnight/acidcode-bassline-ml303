@@ -14,6 +14,18 @@ This professional wiring diagram shows the complete ML-303 to Arduino Pro Micro 
 - **Component specifications** and mounting instructions
 - **Testing checklist** and I2C communication settings
 
+### **`Additional_Wiring_Diagram.png`** - Comprehensive System Diagram
+
+![Additional ML-303 Arduino Integration Diagram](Additional_Wiring_Diagram.png)
+
+This comprehensive diagram shows the complete ML-303 Arduino integration including:
+- **LCD Display Interface** - Complete pin assignments and connections
+- **MCP4921 DAC Wiring** - 12-bit DAC for CV output control
+- **MIDI Interface Circuit** - MIDI I/O integration points
+- **CD4049 Overdrive Wiring** - Simple overdrive circuit implementation
+- **Power Supply Distribution** - +12V/+5V power routing
+- **Connection Details Table** - Complete pin reference for all components
+
 ### **`COMPLETE_BUILD_GUIDE.md`** - Complete Build Instructions
 
 This comprehensive guide contains everything required for the ML-303 Arduino integration:
