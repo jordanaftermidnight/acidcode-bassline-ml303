@@ -60,7 +60,7 @@
         .signal {
             stroke: #00ff00;
         }
-        .i2c {
+        .lcd-data {
             stroke: #ffff00;
         }
         text {
@@ -162,9 +162,10 @@
                 <line class="wire power" x1="250" y1="225" x2="350" y2="115"/>
                 <line class="wire ground" x1="250" y1="245" x2="350" y2="130"/>
                 
-                <!-- I2C -->
-                <line class="wire i2c" x1="250" y1="355" x2="350" y2="145"/>
-                <line class="wire i2c" x1="250" y1="375" x2="350" y2="160"/>
+                <!-- LCD Data Lines -->
+                <line class="wire lcd-data" x1="250" y1="355" x2="350" y2="165"/>
+                <line class="wire lcd-data" x1="250" y1="375" x2="350" y2="180"/>
+                <line class="wire lcd-data" x1="250" y1="395" x2="350" y2="195"/>
                 
                 <!-- Analog inputs -->
                 <line class="wire signal" x1="250" y1="275" x2="350" y2="275"/>
