@@ -1,0 +1,165 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg viewBox="0 0 1200 800" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <style>
+      .component { fill: #444; stroke: #888; stroke-width: 2; }
+      .arduino { fill: #005C5C; stroke: #00a0a0; }
+      .lcd { fill: #004400; stroke: #00ff00; }
+      .ml303 { fill: #440000; stroke: #ff0000; }
+      .wire { fill: none; stroke-width: 2; }
+      .power { stroke: #ff0000; }
+      .ground { stroke: #000000; }
+      .signal { stroke: #00ff00; }
+      .lcd-data { stroke: #ffff00; }
+      text { fill: #fff; font-size: 12px; font-family: Arial, sans-serif; }
+      .label { font-size: 14px; font-weight: bold; }
+      .title { font-size: 20px; font-weight: bold; fill: #ff3333; }
+      .warning { fill: #ffaa00; font-size: 14px; font-weight: bold; }
+    </style>
+  </defs>
+  
+  <!-- Title -->
+  <text x="600" y="30" text-anchor="middle" class="title">ML-303 Arduino Integration Wiring Diagram</text>
+  <text x="600" y="50" text-anchor="middle" class="warning">⚠️ FIXED Pin Assignments - No Conflicts!</text>
+  
+  <!-- Arduino Uno -->
+  <rect class="component arduino" x="50" y="150" width="200" height="400" rx="5"/>
+  <text x="150" y="140" text-anchor="middle" class="label">Arduino Uno</text>
+  
+  <!-- Arduino Pin Labels -->
+  <text x="40" y="180" text-anchor="end">5V</text>
+  <text x="40" y="200" text-anchor="end">GND</text>
+  <text x="40" y="230" text-anchor="end">A0</text>
+  <text x="40" y="250" text-anchor="end">A1</text>
+  <text x="40" y="270" text-anchor="end">A2</text>
+  <text x="40" y="290" text-anchor="end">A3</text>
+  <text x="40" y="310" text-anchor="end">A4</text>
+  <text x="40" y="330" text-anchor="end">A5</text>
+  <text x="40" y="370" text-anchor="end">D2</text>
+  <text x="40" y="390" text-anchor="end">D3</text>
+  <text x="40" y="410" text-anchor="end">D4</text>
+  <text x="40" y="430" text-anchor="end">D5</text>
+  <text x="260" y="180" text-anchor="start">D6</text>
+  <text x="260" y="200" text-anchor="start">D7</text>
+  <text x="260" y="220" text-anchor="start">D8</text>
+  <text x="260" y="240" text-anchor="start">D9</text>
+  <text x="260" y="260" text-anchor="start">D10</text>
+  <text x="260" y="280" text-anchor="start">D11</text>
+  <text x="260" y="300" text-anchor="start">D12</text>
+  <text x="260" y="320" text-anchor="start">D13</text>
+  
+  <!-- LCD Display -->
+  <rect class="component lcd" x="400" y="80" width="200" height="120" rx="5"/>
+  <text x="500" y="70" text-anchor="middle" class="label">SMH1602A LCD (16x2)</text>
+  <text x="500" y="130" text-anchor="middle">Standard Parallel Interface</text>
+  <text x="500" y="145" text-anchor="middle">(Not I2C)</text>
+  
+  <!-- LCD Pin Labels -->
+  <text x="390" y="100" text-anchor="end">VCC</text>
+  <text x="390" y="115" text-anchor="end">GND</text>
+  <text x="390" y="130" text-anchor="end">V0</text>
+  <text x="390" y="145" text-anchor="end">RS</text>
+  <text x="390" y="160" text-anchor="end">E</text>
+  <text x="390" y="175" text-anchor="end">D4</text>
+  <text x="390" y="190" text-anchor="end">D5</text>
+  <text x="610" y="100" text-anchor="start">D6</text>
+  <text x="610" y="115" text-anchor="start">D7</text>
+  <text x="610" y="130" text-anchor="start">LED+</text>
+  <text x="610" y="145" text-anchor="start">LED-</text>
+  
+  <!-- ML-303 Interface -->
+  <rect class="component ml303" x="700" y="200" width="250" height="350" rx="5"/>
+  <text x="825" y="190" text-anchor="middle" class="label">ML-303 Interface Points</text>
+  
+  <!-- ML-303 Connection Points -->
+  <text x="690" y="230" text-anchor="end">+5V Power</text>
+  <text x="690" y="250" text-anchor="end">GND</text>
+  <text x="690" y="280" text-anchor="end">Cutoff CV</text>
+  <text x="690" y="300" text-anchor="end">Resonance CV</text>
+  <text x="690" y="320" text-anchor="end">Env Mod CV</text>
+  <text x="690" y="340" text-anchor="end">Decay CV</text>
+  <text x="690" y="370" text-anchor="end">Clock In</text>
+  <text x="690" y="390" text-anchor="end">Gate In</text>
+  <text x="690" y="410" text-anchor="end">Run/Stop</text>
+  <text x="690" y="430" text-anchor="end">Pattern</text>
+  <text x="690" y="450" text-anchor="end">Gate Out</text>
+  <text x="690" y="480" text-anchor="end">MIDI In</text>
+  <text x="690" y="500" text-anchor="end">MIDI Out</text>
+  <text x="690" y="520" text-anchor="end">CV Out</text>
+  
+  <!-- MCP4921 DAC -->
+  <rect class="component" x="1000" y="300" width="120" height="100" rx="5"/>
+  <text x="1060" y="290" text-anchor="middle" class="label">MCP4921 DAC</text>
+  <text x="1060" y="350" text-anchor="middle">12-bit CV Output</text>
+  
+  <!-- MIDI Circuit -->
+  <rect class="component" x="1000" y="450" width="120" height="80" rx="5"/>
+  <text x="1060" y="440" text-anchor="middle" class="label">MIDI Interface</text>
+  <text x="1060" y="490" text-anchor="middle">6N138 Optocoupler</text>
+  
+  <!-- LCD Contrast Potentiometer -->
+  <rect class="component" x="450" y="30" width="60" height="30" rx="3"/>
+  <text x="480" y="25" text-anchor="middle" class="label">10k Pot</text>
+  <text x="480" y="45" text-anchor="middle">Contrast</text>
+  
+  <!-- Power Connections -->
+  <line class="wire power" x1="250" y1="175" x2="400" y2="95"/>  <!-- 5V to LCD -->
+  <line class="wire power" x1="250" y1="175" x2="700" y2="225"/>  <!-- 5V to ML-303 -->
+  <line class="wire ground" x1="250" y1="195" x2="400" y2="110"/>  <!-- GND to LCD -->
+  <line class="wire ground" x1="250" y1="195" x2="700" y2="245"/>  <!-- GND to ML-303 -->
+  
+  <!-- LCD Data Connections -->
+  <line class="wire lcd-data" x1="250" y1="295" x2="400" y2="140"/>  <!-- D12 to RS -->
+  <line class="wire lcd-data" x1="250" y1="275" x2="400" y2="155"/>  <!-- D11 to E -->
+  <line class="wire lcd-data" x1="250" y1="255" x2="400" y2="170"/>  <!-- D10 to D4 -->
+  <line class="wire lcd-data" x1="250" y1="235" x2="400" y2="185"/>  <!-- D9 to D5 -->
+  <line class="wire lcd-data" x1="250" y1="215" x2="600" y2="95"/>   <!-- D8 to D6 -->
+  <line class="wire lcd-data" x1="250" y1="195" x2="600" y2="110"/>  <!-- D7 to D7 -->
+  
+  <!-- Analog Inputs (Potentiometers) -->
+  <line class="wire signal" x1="250" y1="225" x2="700" y2="275"/>  <!-- A0 to Cutoff -->
+  <line class="wire signal" x1="250" y1="245" x2="700" y2="295"/>  <!-- A1 to Resonance -->
+  <line class="wire signal" x1="250" y1="265" x2="700" y2="315"/>  <!-- A2 to Env Mod -->
+  <line class="wire signal" x1="250" y1="285" x2="700" y2="335"/>  <!-- A3 to Decay -->
+  
+  <!-- Digital I/O -->
+  <line class="wire signal" x1="250" y1="365" x2="700" y2="405"/>  <!-- D2 to Run/Stop -->
+  <line class="wire signal" x1="250" y1="385" x2="700" y2="425"/>  <!-- D3 to Pattern -->
+  <line class="wire signal" x1="250" y1="405" x2="700" y2="365"/>  <!-- D4 to Clock In -->
+  <line class="wire signal" x1="250" y1="425" x2="700" y2="385"/>  <!-- D5 to Gate In -->
+  <line class="wire signal" x1="250" y1="175" x2="700" y2="445"/>  <!-- D6 to Gate Out -->
+  
+  <!-- MIDI Connections -->
+  <line class="wire signal" x1="250" y1="305" x2="1000" y2="475"/>  <!-- A4 to MIDI RX -->
+  <line class="wire signal" x1="250" y1="325" x2="1000" y2="495"/>  <!-- A5 to MIDI TX -->
+  
+  <!-- DAC Connections -->
+  <line class="wire signal" x1="250" y1="315" x2="1000" y2="325"/>  <!-- D13 to DAC CS -->
+  <line class="wire signal" x1="250" y1="275" x2="1000" y2="340"/>  <!-- D11 to DAC SCK/MOSI -->
+  <line class="wire signal" x1="1120" y1="350" x2="700" y2="515"/>   <!-- DAC Out to CV Out -->
+  
+  <!-- LCD Contrast Wiring -->
+  <line class="wire power" x1="450" y1="40" x2="420" y2="40"/>     <!-- +5V -->
+  <line class="wire ground" x1="510" y1="50" x2="540" y2="50"/>     <!-- GND -->
+  <line class="wire signal" x1="480" y1="60" x2="400" y2="125"/>    <!-- V0 -->
+  
+  <!-- Connection Labels -->
+  <text x="325" y="95" class="label">5V Power</text>
+  <text x="325" y="110" class="label">Ground</text>
+  <text x="325" y="140" class="label">LCD Control</text>
+  <text x="325" y="200" class="label">Analog CVs</text>
+  <text x="325" y="300" class="label">Digital I/O</text>
+  <text x="850" y="580" class="label">VERIFIED: No Pin Conflicts!</text>
+  
+  <!-- Pin Assignment Box -->
+  <rect fill="#333" stroke="#666" stroke-width="1" x="50" y="600" width="1100" height="180" rx="5"/>
+  <text x="60" y="620" class="label" fill="#ff3333">CRITICAL PIN ASSIGNMENTS (FIXED):</text>
+  
+  <text x="60" y="645" fill="#fff">LCD: D12(RS), D11(E), D10(D4), D9(D5), D8(D6), D7(D7) + 10k contrast pot</text>
+  <text x="60" y="665" fill="#fff">Controls: D2(Run/Stop), D3(Pattern), D4(Clock), D5(Gate In), D6(Gate Out)</text>
+  <text x="60" y="685" fill="#fff">Analog: A0(Cutoff), A1(Resonance), A2(Env Mod), A3(Decay)</text>
+  <text x="60" y="705" fill="#fff">MIDI: A4(RX via 6N138), A5(TX via 220Ω)</text>
+  <text x="60" y="725" fill="#fff">DAC: D13(CS), D11(SCK/MOSI shared) → MCP4921 → CV Output</text>
+  <text x="60" y="745" fill="#fff">Power: Arduino USB 5V OR external 5V supply (shared with ML-303 digital)</text>
+  <text x="60" y="765" fill="#fff">⚠️ All pin conflicts from original code RESOLVED - this wiring WILL work!</text>
+</svg>

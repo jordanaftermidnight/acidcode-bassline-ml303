@@ -1,0 +1,169 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg viewBox="0 0 900 600" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <style>
+      .component { fill: #444; stroke: #888; stroke-width: 2; }
+      .ic { fill: #222; stroke: #666; }
+      .wire { fill: none; stroke-width: 2; }
+      .power { stroke: #ff0000; }
+      .ground { stroke: #000000; }
+      .signal { stroke: #00ff00; }
+      .spi { stroke: #00aaff; }
+      .analog { stroke: #ffaa00; }
+      text { fill: #fff; font-size: 12px; font-family: Arial, sans-serif; }
+      .label { font-size: 14px; font-weight: bold; }
+      .title { font-size: 18px; font-weight: bold; fill: #ff3333; }
+      .pin-label { font-size: 10px; fill: #ccc; }
+      .value { fill: #ffff00; font-weight: bold; }
+    </style>
+  </defs>
+  
+  <!-- Title -->
+  <text x="450" y="30" text-anchor="middle" class="title">MCP4921 12-bit DAC Wiring</text>
+  <text x="450" y="50" text-anchor="middle" class="label">Control Voltage Output for ML-303</text>
+  
+  <!-- Arduino Section -->
+  <rect class="component" x="50" y="120" width="150" height="200" rx="5"/>
+  <text x="125" y="110" text-anchor="middle" class="label">Arduino Uno</text>
+  
+  <!-- Arduino Pins -->
+  <text x="40" y="150" text-anchor="end" class="pin-label">5V</text>
+  <text x="40" y="170" text-anchor="end" class="pin-label">GND</text>
+  <text x="40" y="200" text-anchor="end" class="pin-label">D11</text>
+  <text x="40" y="220" text-anchor="end" class="pin-label">D13</text>
+  
+  <circle cx="50" cy="145" r="3" fill="#fff"/>
+  <circle cx="50" cy="165" r="3" fill="#fff"/>
+  <circle cx="50" cy="195" r="3" fill="#fff"/>
+  <circle cx="50" cy="215" r="3" fill="#fff"/>
+  
+  <text x="210" y="190" class="pin-label">SCK/MOSI</text>
+  <text x="210" y="210" class="pin-label">CS</text>
+  
+  <!-- MCP4921 IC -->
+  <rect class="ic" x="350" y="120" width="120" height="160" rx="5"/>
+  <text x="410" y="110" text-anchor="middle" class="label">MCP4921</text>
+  <text x="410" y="200" text-anchor="middle">12-bit DAC</text>
+  <text x="410" y="215" text-anchor="middle">SPI Interface</text>
+  
+  <!-- MCP4921 Pin Diagram -->
+  <text x="340" y="140" text-anchor="end" class="pin-label">1</text>
+  <text x="340" y="160" text-anchor="end" class="pin-label">2</text>
+  <text x="340" y="180" text-anchor="end" class="pin-label">3</text>
+  <text x="340" y="200" text-anchor="end" class="pin-label">4</text>
+  <text x="340" y="220" text-anchor="end" class="pin-label">5</text>
+  <text x="340" y="240" text-anchor="end" class="pin-label">6</text>
+  <text x="340" y="260" text-anchor="end" class="pin-label">7</text>
+  
+  <text x="480" y="140" text-anchor="start" class="pin-label">14</text>
+  <text x="480" y="160" text-anchor="start" class="pin-label">13</text>
+  <text x="480" y="180" text-anchor="start" class="pin-label">12</text>
+  <text x="480" y="200" text-anchor="start" class="pin-label">11</text>
+  <text x="480" y="220" text-anchor="start" class="pin-label">10</text>
+  <text x="480" y="240" text-anchor="start" class="pin-label">9</text>
+  <text x="480" y="260" text-anchor="start" class="pin-label">8</text>
+  
+  <!-- Pin Functions -->
+  <text x="320" y="140" text-anchor="end" class="label">VCC</text>
+  <text x="320" y="160" text-anchor="end" class="label">CS</text>
+  <text x="320" y="180" text-anchor="end" class="label">SCK</text>
+  <text x="320" y="200" text-anchor="end" class="label">SDI</text>
+  <text x="320" y="220" text-anchor="end" class="label">NC</text>
+  <text x="320" y="240" text-anchor="end" class="label">NC</text>
+  <text x="320" y="260" text-anchor="end" class="label">VSS</text>
+  
+  <text x="500" y="140" text-anchor="start" class="label">VREF</text>
+  <text x="500" y="160" text-anchor="start" class="label">AVSS</text>
+  <text x="500" y="180" text-anchor="start" class="label">VOUT</text>
+  <text x="500" y="200" text-anchor="start" class="label">NC</text>
+  <text x="500" y="220" text-anchor="start" class="label">NC</text>
+  <text x="500" y="240" text-anchor="start" class="label">NC</text>
+  <text x="500" y="260" text-anchor="start" class="label">LDAC</text>
+  
+  <!-- Pin Circles -->
+  <circle cx="350" cy="135" r="3" fill="#fff"/>  <!-- VCC -->
+  <circle cx="350" cy="155" r="3" fill="#fff"/>  <!-- CS -->
+  <circle cx="350" cy="175" r="3" fill="#fff"/>  <!-- SCK -->
+  <circle cx="350" cy="195" r="3" fill="#fff"/>  <!-- SDI -->
+  <circle cx="350" cy="255" r="3" fill="#fff"/>  <!-- VSS -->
+  
+  <circle cx="470" cy="135" r="3" fill="#fff"/>  <!-- VREF -->
+  <circle cx="470" cy="155" r="3" fill="#fff"/>  <!-- AVSS -->
+  <circle cx="470" cy="175" r="3" fill="#fff"/>  <!-- VOUT -->
+  <circle cx="470" cy="255" r="3" fill="#fff"/>  <!-- LDAC -->
+  
+  <!-- Power Connections -->
+  <line class="wire power" x1="50" y1="145" x2="300" y2="145"/>    <!-- 5V -->
+  <line class="wire power" x1="300" y1="145" x2="300" y2="135"/>
+  <line class="wire power" x1="300" y1="135" x2="350" y2="135"/>   <!-- To VCC -->
+  <line class="wire power" x1="300" y1="135" x2="470" y2="135"/>   <!-- To VREF -->
+  
+  <line class="wire ground" x1="50" y1="165" x2="280" y2="165"/>   <!-- GND -->
+  <line class="wire ground" x1="280" y1="165" x2="280" y2="255"/>
+  <line class="wire ground" x1="280" y1="255" x2="350" y2="255"/>  <!-- To VSS -->
+  <line class="wire ground" x1="280" y1="255" x2="470" y2="155"/>  <!-- To AVSS -->
+  <line class="wire ground" x1="280" y1="255" x2="470" y2="255"/>  <!-- To LDAC (tied low) -->
+  
+  <!-- SPI Connections -->
+  <line class="wire spi" x1="50" y1="195" x2="320" y2="195"/>      <!-- D11 (SCK/MOSI) -->
+  <line class="wire spi" x1="320" y1="195" x2="320" y2="175"/>
+  <line class="wire spi" x1="320" y1="175" x2="350" y2="175"/>     <!-- To SCK -->
+  <line class="wire spi" x1="320" y1="195" x2="350" y2="195"/>     <!-- To SDI -->
+  
+  <line class="wire spi" x1="50" y1="215" x2="350" y2="155"/>      <!-- D13 to CS -->
+  
+  <!-- CV Output Section -->
+  <line class="wire analog" x1="470" y1="175" x2="580" y2="175"/>  <!-- VOUT -->
+  
+  <!-- Output Buffer/Amplifier (Optional) -->
+  <rect class="component" x="600" y="160" width="80" height="30" rx="3"/>
+  <text x="640" y="175" text-anchor="middle" class="label">Buffer</text>
+  <text x="640" y="185" text-anchor="middle" class="pin-label">(Optional)</text>
+  
+  <!-- CV Output Jack -->
+  <circle cx="750" cy="175" r="20" class="component"/>
+  <text x="750" y="155" text-anchor="middle" class="label">CV OUT</text>
+  <text x="750" y="200" text-anchor="middle" class="value">0-4.096V</text>
+  
+  <line class="wire analog" x1="680" y1="175" x2="730" y2="175"/>
+  
+  <!-- Power Supply Labels -->
+  <text x="310" y="125" class="value">+5V</text>
+  <text x="290" y="275" class="value">GND</text>
+  
+  <!-- SPI Signal Labels -->
+  <text x="220" y="185" class="value">SCK</text>
+  <text x="220" y="205" class="value">MOSI</text>
+  <text x="220" y="145" class="value">CS</text>
+  
+  <!-- Reference Voltage Note -->
+  <text x="520" y="125" class="value">VREF = VCC</text>
+  <text x="520" y="140" class="pin-label">(Internal)</text>
+  
+  <!-- LDAC Note -->
+  <text x="520" y="265" class="pin-label">LDAC → GND</text>
+  <text x="520" y="280" class="pin-label">(Immediate update)</text>
+  
+  <!-- Circuit Details Box -->
+  <rect fill="#333" stroke="#666" stroke-width="1" x="50" y="350" width="800" height="220" rx="5"/>
+  <text x="60" y="375" class="label" fill="#ff3333">MCP4921 DAC Implementation Details:</text>
+  
+  <text x="60" y="400" class="label" fill="#ffff00">Key Features:</text>
+  <text x="70" y="415" fill="#fff">• 12-bit resolution (4096 steps)</text>
+  <text x="70" y="430" fill="#fff">• 0 to VREF output range (0-5V with 5V supply)</text>
+  <text x="70" y="445" fill="#fff">• SPI interface (compatible with Arduino hardware SPI)</text>
+  <text x="70" y="460" fill="#fff">• Single supply operation (2.7V to 5.5V)</text>
+  <text x="70" y="475" fill="#fff">• Low power consumption (<1mA typical)</text>
+  
+  <text x="450" y="400" class="label" fill="#ffff00">Arduino Code Example:</text>
+  <text x="460" y="415" fill="#ccc">void setCV(uint16_t value) {</text>
+  <text x="470" y="430" fill="#ccc">  digitalWrite(DAC_CS, LOW);</text>
+  <text x="470" y="445" fill="#ccc">  SPI.transfer16(0x3000 | value);</text>
+  <text x="470" y="460" fill="#ccc">  digitalWrite(DAC_CS, HIGH);</text>
+  <text x="460" y="475" fill="#ccc">}</text>
+  
+  <text x="60" y="500" class="label" fill="#ffff00">Connections Summary:</text>
+  <text x="70" y="515" fill="#fff">• VCC, VREF → +5V   • VSS, AVSS → GND   • CS → D13   • SCK, SDI → D11</text>
+  <text x="70" y="530" fill="#fff">• LDAC → GND (immediate output update)   • VOUT → CV Output (0-4.096V)</text>
+  <text x="70" y="545" fill="#fff">• Optional: Add unity-gain buffer (TL072) for higher current drive capability</text>
+</svg>

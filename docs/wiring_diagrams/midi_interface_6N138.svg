@@ -1,0 +1,160 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg viewBox="0 0 1000 600" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <style>
+      .component { fill: #444; stroke: #888; stroke-width: 2; }
+      .ic { fill: #222; stroke: #666; }
+      .wire { fill: none; stroke-width: 2; }
+      .power { stroke: #ff0000; }
+      .ground { stroke: #000000; }
+      .signal { stroke: #00ff00; }
+      .midi { stroke: #ffaa00; }
+      text { fill: #fff; font-size: 12px; font-family: Arial, sans-serif; }
+      .label { font-size: 14px; font-weight: bold; }
+      .title { font-size: 18px; font-weight: bold; fill: #ff3333; }
+      .pin-label { font-size: 10px; fill: #ccc; }
+      .value { fill: #ffff00; font-weight: bold; }
+    </style>
+  </defs>
+  
+  <!-- Title -->
+  <text x="500" y="30" text-anchor="middle" class="title">MIDI Interface Circuit - 6N138 Optocoupler</text>
+  <text x="500" y="50" text-anchor="middle" class="label">Standard MIDI Input/Output Implementation</text>
+  
+  <!-- MIDI Input Section -->
+  <text x="150" y="90" text-anchor="middle" class="label">MIDI INPUT</text>
+  
+  <!-- MIDI DIN Socket (Input) -->
+  <circle cx="80" cy="150" r="40" class="component"/>
+  <text x="80" y="120" text-anchor="middle" class="label">DIN-5</text>
+  <text x="80" y="135" text-anchor="middle">MIDI IN</text>
+  
+  <!-- Pin numbers on DIN socket -->
+  <circle cx="80" cy="130" r="3" fill="#fff"/>
+  <circle cx="95" cy="145" r="3" fill="#fff"/>
+  <circle cx="95" cy="155" r="3" fill="#fff"/>
+  <circle cx="65" cy="145" r="3" fill="#fff"/>
+  <circle cx="65" cy="155" r="3" fill="#fff"/>
+  
+  <text x="75" y="125" class="pin-label">2</text>
+  <text x="100" y="150" class="pin-label">4</text>
+  <text x="100" y="160" class="pin-label">5</text>
+  <text x="55" y="150" class="pin-label">1</text>
+  <text x="55" y="160" class="pin-label">3</text>
+  
+  <!-- 220Ω Resistors for MIDI Input -->
+  <rect class="component" x="150" y="140" width="40" height="8" rx="2"/>
+  <text x="170" y="150" text-anchor="middle" class="value">220Ω</text>
+  <rect class="component" x="150" y="160" width="40" height="8" rx="2"/>
+  <text x="170" y="170" text-anchor="middle" class="value">220Ω</text>
+  
+  <!-- 6N138 Optocoupler -->
+  <rect class="ic" x="250" y="120" width="80" height="100" rx="5"/>
+  <text x="290" y="110" text-anchor="middle" class="label">6N138</text>
+  <text x="290" y="175" text-anchor="middle">Optocoupler</text>
+  
+  <!-- 6N138 Pin Labels -->
+  <text x="240" y="135" text-anchor="end" class="pin-label">2</text>
+  <text x="240" y="150" text-anchor="end" class="pin-label">3</text>
+  <text x="240" y="165" text-anchor="end" class="pin-label">4</text>
+  <text x="240" y="180" text-anchor="end" class="pin-label">5</text>
+  <text x="340" y="135" text-anchor="start" class="pin-label">7</text>
+  <text x="340" y="150" text-anchor="start" class="pin-label">6</text>
+  <text x="340" y="165" text-anchor="start" class="pin-label">5</text>
+  <text x="340" y="180" text-anchor="start" class="pin-label">8</text>
+  
+  <!-- Pin circles for 6N138 -->
+  <circle cx="250" cy="130" r="3" fill="#fff"/>
+  <circle cx="250" cy="145" r="3" fill="#fff"/>
+  <circle cx="250" cy="160" r="3" fill="#fff"/>
+  <circle cx="250" cy="175" r="3" fill="#fff"/>
+  <circle cx="330" cy="130" r="3" fill="#fff"/>
+  <circle cx="330" cy="145" r="3" fill="#fff"/>
+  <circle cx="330" cy="160" r="3" fill="#fff"/>
+  <circle cx="330" cy="175" r="3" fill="#fff"/>
+  
+  <!-- 4.7k Pull-up Resistor -->
+  <rect class="component" x="380" y="140" width="8" height="30" rx="2"/>
+  <text x="400" y="155" class="value">4.7kΩ</text>
+  <text x="400" y="170" class="value">Pull-up</text>
+  
+  <!-- MIDI Input Wiring -->
+  <line class="wire midi" x1="95" y1="145" x2="150" y2="145"/>  <!-- DIN Pin 4 to R1 -->
+  <line class="wire midi" x1="95" y1="155" x2="150" y2="165"/>  <!-- DIN Pin 5 to R2 -->
+  <line class="wire midi" x1="190" y1="145" x2="250" y2="130"/>  <!-- R1 to 6N138 Pin 2 -->
+  <line class="wire midi" x1="190" y1="165" x2="250" y2="145"/>  <!-- R2 to 6N138 Pin 3 -->
+  
+  <!-- Power connections for 6N138 -->
+  <line class="wire power" x1="330" y1="175" x2="380" y2="175"/>  <!-- Pin 8 to +5V -->
+  <line class="wire power" x1="380" y1="175" x2="380" y2="145"/>  <!-- +5V line -->
+  <line class="wire power" x1="380" y1="145" x2="430" y2="145"/>  <!-- To supply -->
+  <line class="wire signal" x1="330" y1="145" x2="450" y2="145"/> <!-- Output to Arduino A4 -->
+  <line class="wire ground" x1="330" y1="160" x2="380" y2="160"/>  <!-- Pin 5 to GND -->
+  <line class="wire ground" x1="380" y1="160" x2="430" y2="160"/>  <!-- GND line -->
+  
+  <!-- MIDI Output Section -->
+  <text x="650" y="90" text-anchor="middle" class="label">MIDI OUTPUT</text>
+  
+  <!-- MIDI DIN Socket (Output) -->
+  <circle cx="750" cy="150" r="40" class="component"/>
+  <text x="750" y="120" text-anchor="middle" class="label">DIN-5</text>
+  <text x="750" y="135" text-anchor="middle">MIDI OUT</text>
+  
+  <!-- Pin numbers on output DIN socket -->
+  <circle cx="750" cy="130" r="3" fill="#fff"/>
+  <circle cx="765" cy="145" r="3" fill="#fff"/>
+  <circle cx="765" cy="155" r="3" fill="#fff"/>
+  <circle cx="735" cy="145" r="3" fill="#fff"/>
+  <circle cx="735" cy="155" r="3" fill="#fff"/>
+  
+  <text x="745" y="125" class="pin-label">2</text>
+  <text x="770" y="150" class="pin-label">4</text>
+  <text x="770" y="160" class="pin-label">5</text>
+  <text x="725" y="150" class="pin-label">1</text>
+  <text x="725" y="160" class="pin-label">3</text>
+  
+  <!-- 220Ω Resistor for MIDI Output -->
+  <rect class="component" x="600" y="160" width="40" height="8" rx="2"/>
+  <text x="620" y="170" text-anchor="middle" class="value">220Ω</text>
+  
+  <!-- MIDI Output Wiring -->
+  <line class="wire signal" x1="550" y1="165" x2="600" y2="165"/>  <!-- Arduino A5 to resistor -->
+  <line class="wire midi" x1="640" y1="165" x2="765" y2="155"/>    <!-- Resistor to DIN Pin 5 -->
+  <line class="wire power" x1="765" y1="145" x2="800" y2="145"/>   <!-- DIN Pin 4 to +5V -->
+  <line class="wire power" x1="800" y1="145" x2="800" y2="120"/>   <!-- +5V line -->
+  
+  <!-- Arduino Connection Labels -->
+  <text x="450" y="135" class="label">To Arduino A4</text>
+  <text x="450" y="150" class="label">(MIDI RX)</text>
+  <text x="550" y="155" class="label">From Arduino A5</text>
+  <text x="550" y="170" class="label">(MIDI TX)</text>
+  
+  <!-- Power Supply Labels -->
+  <text x="440" y="135" class="value">+5V</text>
+  <text x="440" y="170" class="value">GND</text>
+  <text x="810" y="115" class="value">+5V</text>
+  
+  <!-- Component Values Box -->
+  <rect fill="#333" stroke="#666" stroke-width="1" x="50" y="350" width="900" height="220" rx="5"/>
+  <text x="60" y="375" class="label" fill="#ff3333">MIDI Interface Components & Connections:</text>
+  
+  <text x="60" y="400" class="label" fill="#ffff00">MIDI INPUT (Standard Optoisolated):</text>
+  <text x="70" y="420" fill="#fff">• 6N138 Optocoupler IC (or equivalent like H11L1, PC900V)</text>
+  <text x="70" y="435" fill="#fff">• 2x 220Ω resistors (current limiting for MIDI input)</text>
+  <text x="70" y="450" fill="#fff">• 1x 4.7kΩ resistor (pull-up for logic output)</text>
+  <text x="70" y="465" fill="#fff">• DIN-5 female socket (panel mount)</text>
+  <text x="70" y="480" fill="#fff">• Connect: DIN Pin 4 → 220Ω → 6N138 Pin 2</text>
+  <text x="70" y="495" fill="#fff">• Connect: DIN Pin 5 → 220Ω → 6N138 Pin 3</text>
+  <text x="70" y="510" fill="#fff">• Connect: 6N138 Pin 6 → 4.7kΩ → +5V AND → Arduino A4</text>
+  
+  <text x="500" y="400" class="label" fill="#ffff00">MIDI OUTPUT (Standard):</text>
+  <text x="510" y="420" fill="#fff">• 1x 220Ω resistor (current limiting)</text>
+  <text x="510" y="435" fill="#fff">• DIN-5 female socket (panel mount)</text>
+  <text x="510" y="450" fill="#fff">• Connect: Arduino A5 → 220Ω → DIN Pin 5</text>
+  <text x="510" y="465" fill="#fff">• Connect: +5V → DIN Pin 4</text>
+  <text x="510" y="480" fill="#fff">• Pins 1, 2, 3 not connected (standard)</text>
+  
+  <text x="60" y="535" class="label" fill="#ffaa00">Notes:</text>
+  <text x="70" y="550" fill="#fff">• This is the standard MIDI 1.0 electrical specification</text>
+  <text x="70" y="565" fill="#fff">• 6N138 provides complete electrical isolation between MIDI devices</text>
+</svg>

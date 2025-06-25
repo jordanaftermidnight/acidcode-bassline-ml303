@@ -1,0 +1,642 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg viewBox="0 0 1200 900" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <style>
+      .stripboard { fill: #8B4513; stroke: #654321; stroke-width: 1; }
+      .hole { fill: #444; stroke: #222; stroke-width: 0.5; }
+      .copper { fill: none; stroke: #CD7F32; stroke-width: 3; }
+      .component { fill: #333; stroke: #666; stroke-width: 1; }
+      .resistor { fill: #DEB887; stroke: #8B7355; stroke-width: 1; }
+      .capacitor { fill: #4169E1; stroke: #191970; stroke-width: 1; }
+      .ic { fill: #222; stroke: #666; stroke-width: 1; }
+      .wire { fill: none; stroke: #FF0000; stroke-width: 2; }
+      .cut { stroke: #FF0000; stroke-width: 2; }
+      text { fill: #fff; font-size: 8px; font-family: Arial, sans-serif; }
+      .label { font-size: 12px; font-weight: bold; }
+      .title { font-size: 16px; font-weight: bold; fill: #ff3333; }
+      .grid-label { font-size: 6px; fill: #999; }
+    </style>
+  </defs>
+  
+  <!-- Title -->
+  <text x="600" y="25" text-anchor="middle" class="title">Stripboard Layouts for ML-303 Interface Circuits</text>
+  
+  <!-- MIDI Interface Layout -->
+  <text x="150" y="60" text-anchor="middle" class="label">MIDI Interface (6N138)</text>
+  
+  <!-- Stripboard grid for MIDI -->
+  <rect class="stripboard" x="50" y="70" width="200" height="120" rx="2"/>
+  
+  <!-- Grid holes -->
+  <g id="midi-holes">
+    <!-- Create 20x12 grid of holes -->
+    <circle cx="60" cy="80" r="2" class="hole"/>
+    <circle cx="70" cy="80" r="2" class="hole"/>
+    <circle cx="80" cy="80" r="2" class="hole"/>
+    <circle cx="90" cy="80" r="2" class="hole"/>
+    <circle cx="100" cy="80" r="2" class="hole"/>
+    <circle cx="110" cy="80" r="2" class="hole"/>
+    <circle cx="120" cy="80" r="2" class="hole"/>
+    <circle cx="130" cy="80" r="2" class="hole"/>
+    <circle cx="140" cy="80" r="2" class="hole"/>
+    <circle cx="150" cy="80" r="2" class="hole"/>
+    <circle cx="160" cy="80" r="2" class="hole"/>
+    <circle cx="170" cy="80" r="2" class="hole"/>
+    <circle cx="180" cy="80" r="2" class="hole"/>
+    <circle cx="190" cy="80" r="2" class="hole"/>
+    <circle cx="200" cy="80" r="2" class="hole"/>
+    <circle cx="210" cy="80" r="2" class="hole"/>
+    <circle cx="220" cy="80" r="2" class="hole"/>
+    <circle cx="230" cy="80" r="2" class="hole"/>
+    <circle cx="240" cy="80" r="2" class="hole"/>
+    
+    <!-- Additional rows -->
+    <circle cx="60" cy="90" r="2" class="hole"/>
+    <circle cx="70" cy="90" r="2" class="hole"/>
+    <circle cx="80" cy="90" r="2" class="hole"/>
+    <circle cx="90" cy="90" r="2" class="hole"/>
+    <circle cx="100" cy="90" r="2" class="hole"/>
+    <circle cx="110" cy="90" r="2" class="hole"/>
+    <circle cx="120" cy="90" r="2" class="hole"/>
+    <circle cx="130" cy="90" r="2" class="hole"/>
+    <circle cx="140" cy="90" r="2" class="hole"/>
+    <circle cx="150" cy="90" r="2" class="hole"/>
+    <circle cx="160" cy="90" r="2" class="hole"/>
+    <circle cx="170" cy="90" r="2" class="hole"/>
+    <circle cx="180" cy="90" r="2" class="hole"/>
+    <circle cx="190" cy="90" r="2" class="hole"/>
+    <circle cx="200" cy="90" r="2" class="hole"/>
+    <circle cx="210" cy="90" r="2" class="hole"/>
+    <circle cx="220" cy="90" r="2" class="hole"/>
+    <circle cx="230" cy="90" r="2" class="hole"/>
+    <circle cx="240" cy="90" r="2" class="hole"/>
+    
+    <!-- More rows for complete grid -->
+    <circle cx="60" cy="100" r="2" class="hole"/>
+    <circle cx="70" cy="100" r="2" class="hole"/>
+    <circle cx="80" cy="100" r="2" class="hole"/>
+    <circle cx="90" cy="100" r="2" class="hole"/>
+    <circle cx="100" cy="100" r="2" class="hole"/>
+    <circle cx="110" cy="100" r="2" class="hole"/>
+    <circle cx="120" cy="100" r="2" class="hole"/>
+    <circle cx="130" cy="100" r="2" class="hole"/>
+    <circle cx="140" cy="100" r="2" class="hole"/>
+    <circle cx="150" cy="100" r="2" class="hole"/>
+    <circle cx="160" cy="100" r="2" class="hole"/>
+    <circle cx="170" cy="100" r="2" class="hole"/>
+    <circle cx="180" cy="100" r="2" class="hole"/>
+    <circle cx="190" cy="100" r="2" class="hole"/>
+    <circle cx="200" cy="100" r="2" class="hole"/>
+    <circle cx="210" cy="100" r="2" class="hole"/>
+    <circle cx="220" cy="100" r="2" class="hole"/>
+    <circle cx="230" cy="100" r="2" class="hole"/>
+    <circle cx="240" cy="100" r="2" class="hole"/>
+    
+    <circle cx="60" cy="110" r="2" class="hole"/>
+    <circle cx="70" cy="110" r="2" class="hole"/>
+    <circle cx="80" cy="110" r="2" class="hole"/>
+    <circle cx="90" cy="110" r="2" class="hole"/>
+    <circle cx="100" cy="110" r="2" class="hole"/>
+    <circle cx="110" cy="110" r="2" class="hole"/>
+    <circle cx="120" cy="110" r="2" class="hole"/>
+    <circle cx="130" cy="110" r="2" class="hole"/>
+    <circle cx="140" cy="110" r="2" class="hole"/>
+    <circle cx="150" cy="110" r="2" class="hole"/>
+    <circle cx="160" cy="110" r="2" class="hole"/>
+    <circle cx="170" cy="110" r="2" class="hole"/>
+    <circle cx="180" cy="110" r="2" class="hole"/>
+    <circle cx="190" cy="110" r="2" class="hole"/>
+    <circle cx="200" cy="110" r="2" class="hole"/>
+    <circle cx="210" cy="110" r="2" class="hole"/>
+    <circle cx="220" cy="110" r="2" class="hole"/>
+    <circle cx="230" cy="110" r="2" class="hole"/>
+    <circle cx="240" cy="110" r="2" class="hole"/>
+    
+    <circle cx="60" cy="120" r="2" class="hole"/>
+    <circle cx="70" cy="120" r="2" class="hole"/>
+    <circle cx="80" cy="120" r="2" class="hole"/>
+    <circle cx="90" cy="120" r="2" class="hole"/>
+    <circle cx="100" cy="120" r="2" class="hole"/>
+    <circle cx="110" cy="120" r="2" class="hole"/>
+    <circle cx="120" cy="120" r="2" class="hole"/>
+    <circle cx="130" cy="120" r="2" class="hole"/>
+    <circle cx="140" cy="120" r="2" class="hole"/>
+    <circle cx="150" cy="120" r="2" class="hole"/>
+    <circle cx="160" cy="120" r="2" class="hole"/>
+    <circle cx="170" cy="120" r="2" class="hole"/>
+    <circle cx="180" cy="120" r="2" class="hole"/>
+    <circle cx="190" cy="120" r="2" class="hole"/>
+    <circle cx="200" cy="120" r="2" class="hole"/>
+    <circle cx="210" cy="120" r="2" class="hole"/>
+    <circle cx="220" cy="120" r="2" class="hole"/>
+    <circle cx="230" cy="120" r="2" class="hole"/>
+    <circle cx="240" cy="120" r="2" class="hole"/>
+    
+    <circle cx="60" cy="130" r="2" class="hole"/>
+    <circle cx="70" cy="130" r="2" class="hole"/>
+    <circle cx="80" cy="130" r="2" class="hole"/>
+    <circle cx="90" cy="130" r="2" class="hole"/>
+    <circle cx="100" cy="130" r="2" class="hole"/>
+    <circle cx="110" cy="130" r="2" class="hole"/>
+    <circle cx="120" cy="130" r="2" class="hole"/>
+    <circle cx="130" cy="130" r="2" class="hole"/>
+    <circle cx="140" cy="130" r="2" class="hole"/>
+    <circle cx="150" cy="130" r="2" class="hole"/>
+    <circle cx="160" cy="130" r="2" class="hole"/>
+    <circle cx="170" cy="130" r="2" class="hole"/>
+    <circle cx="180" cy="130" r="2" class="hole"/>
+    <circle cx="190" cy="130" r="2" class="hole"/>
+    <circle cx="200" cy="130" r="2" class="hole"/>
+    <circle cx="210" cy="130" r="2" class="hole"/>
+    <circle cx="220" cy="130" r="2" class="hole"/>
+    <circle cx="230" cy="130" r="2" class="hole"/>
+    <circle cx="240" cy="130" r="2" class="hole"/>
+    
+    <circle cx="60" cy="140" r="2" class="hole"/>
+    <circle cx="70" cy="140" r="2" class="hole"/>
+    <circle cx="80" cy="140" r="2" class="hole"/>
+    <circle cx="90" cy="140" r="2" class="hole"/>
+    <circle cx="100" cy="140" r="2" class="hole"/>
+    <circle cx="110" cy="140" r="2" class="hole"/>
+    <circle cx="120" cy="140" r="2" class="hole"/>
+    <circle cx="130" cy="140" r="2" class="hole"/>
+    <circle cx="140" cy="140" r="2" class="hole"/>
+    <circle cx="150" cy="140" r="2" class="hole"/>
+    <circle cx="160" cy="140" r="2" class="hole"/>
+    <circle cx="170" cy="140" r="2" class="hole"/>
+    <circle cx="180" cy="140" r="2" class="hole"/>
+    <circle cx="190" cy="140" r="2" class="hole"/>
+    <circle cx="200" cy="140" r="2" class="hole"/>
+    <circle cx="210" cy="140" r="2" class="hole"/>
+    <circle cx="220" cy="140" r="2" class="hole"/>
+    <circle cx="230" cy="140" r="2" class="hole"/>
+    <circle cx="240" cy="140" r="2" class="hole"/>
+    
+    <circle cx="60" cy="150" r="2" class="hole"/>
+    <circle cx="70" cy="150" r="2" class="hole"/>
+    <circle cx="80" cy="150" r="2" class="hole"/>
+    <circle cx="90" cy="150" r="2" class="hole"/>
+    <circle cx="100" cy="150" r="2" class="hole"/>
+    <circle cx="110" cy="150" r="2" class="hole"/>
+    <circle cx="120" cy="150" r="2" class="hole"/>
+    <circle cx="130" cy="150" r="2" class="hole"/>
+    <circle cx="140" cy="150" r="2" class="hole"/>
+    <circle cx="150" cy="150" r="2" class="hole"/>
+    <circle cx="160" cy="150" r="2" class="hole"/>
+    <circle cx="170" cy="150" r="2" class="hole"/>
+    <circle cx="180" cy="150" r="2" class="hole"/>
+    <circle cx="190" cy="150" r="2" class="hole"/>
+    <circle cx="200" cy="150" r="2" class="hole"/>
+    <circle cx="210" cy="150" r="2" class="hole"/>
+    <circle cx="220" cy="150" r="2" class="hole"/>
+    <circle cx="230" cy="150" r="2" class="hole"/>
+    <circle cx="240" cy="150" r="2" class="hole"/>
+    
+    <circle cx="60" cy="160" r="2" class="hole"/>
+    <circle cx="70" cy="160" r="2" class="hole"/>
+    <circle cx="80" cy="160" r="2" class="hole"/>
+    <circle cx="90" cy="160" r="2" class="hole"/>
+    <circle cx="100" cy="160" r="2" class="hole"/>
+    <circle cx="110" cy="160" r="2" class="hole"/>
+    <circle cx="120" cy="160" r="2" class="hole"/>
+    <circle cx="130" cy="160" r="2" class="hole"/>
+    <circle cx="140" cy="160" r="2" class="hole"/>
+    <circle cx="150" cy="160" r="2" class="hole"/>
+    <circle cx="160" cy="160" r="2" class="hole"/>
+    <circle cx="170" cy="160" r="2" class="hole"/>
+    <circle cx="180" cy="160" r="2" class="hole"/>
+    <circle cx="190" cy="160" r="2" class="hole"/>
+    <circle cx="200" cy="160" r="2" class="hole"/>
+    <circle cx="210" cy="160" r="2" class="hole"/>
+    <circle cx="220" cy="160" r="2" class="hole"/>
+    <circle cx="230" cy="160" r="2" class="hole"/>
+    <circle cx="240" cy="160" r="2" class="hole"/>
+    
+    <circle cx="60" cy="170" r="2" class="hole"/>
+    <circle cx="70" cy="170" r="2" class="hole"/>
+    <circle cx="80" cy="170" r="2" class="hole"/>
+    <circle cx="90" cy="170" r="2" class="hole"/>
+    <circle cx="100" cy="170" r="2" class="hole"/>
+    <circle cx="110" cy="170" r="2" class="hole"/>
+    <circle cx="120" cy="170" r="2" class="hole"/>
+    <circle cx="130" cy="170" r="2" class="hole"/>
+    <circle cx="140" cy="170" r="2" class="hole"/>
+    <circle cx="150" cy="170" r="2" class="hole"/>
+    <circle cx="160" cy="170" r="2" class="hole"/>
+    <circle cx="170" cy="170" r="2" class="hole"/>
+    <circle cx="180" cy="170" r="2" class="hole"/>
+    <circle cx="190" cy="170" r="2" class="hole"/>
+    <circle cx="200" cy="170" r="2" class="hole"/>
+    <circle cx="210" cy="170" r="2" class="hole"/>
+    <circle cx="220" cy="170" r="2" class="hole"/>
+    <circle cx="230" cy="170" r="2" class="hole"/>
+    <circle cx="240" cy="170" r="2" class="hole"/>
+    
+    <circle cx="60" cy="180" r="2" class="hole"/>
+    <circle cx="70" cy="180" r="2" class="hole"/>
+    <circle cx="80" cy="180" r="2" class="hole"/>
+    <circle cx="90" cy="180" r="2" class="hole"/>
+    <circle cx="100" cy="180" r="2" class="hole"/>
+    <circle cx="110" cy="180" r="2" class="hole"/>
+    <circle cx="120" cy="180" r="2" class="hole"/>
+    <circle cx="130" cy="180" r="2" class="hole"/>
+    <circle cx="140" cy="180" r="2" class="hole"/>
+    <circle cx="150" cy="180" r="2" class="hole"/>
+    <circle cx="160" cy="180" r="2" class="hole"/>
+    <circle cx="170" cy="180" r="2" class="hole"/>
+    <circle cx="180" cy="180" r="2" class="hole"/>
+    <circle cx="190" cy="180" r="2" class="hole"/>
+    <circle cx="200" cy="180" r="2" class="hole"/>
+    <circle cx="210" cy="180" r="2" class="hole"/>
+    <circle cx="220" cy="180" r="2" class="hole"/>
+    <circle cx="230" cy="180" r="2" class="hole"/>
+    <circle cx="240" cy="180" r="2" class="hole"/>
+  </g>
+  
+  <!-- Copper tracks for MIDI interface -->
+  <line class="copper" x1="60" y1="100" x2="240" y2="100"/>  <!-- Power rail -->
+  <line class="copper" x1="60" y1="160" x2="240" y2="160"/>  <!-- Ground rail -->
+  
+  <!-- Component placements for MIDI -->
+  <rect class="ic" x="115" y="115" width="30" height="15" rx="2"/>
+  <text x="130" y="125" text-anchor="middle" class="label">6N138</text>
+  
+  <rect class="resistor" x="90" y="95" width="15" height="4" rx="1"/>
+  <text x="97" y="102" text-anchor="middle">220Ω</text>
+  
+  <rect class="resistor" x="110" y="95" width="15" height="4" rx="1"/>
+  <text x="117" y="102" text-anchor="middle">220Ω</text>
+  
+  <rect class="resistor" x="160" y="95" width="15" height="4" rx="1"/>
+  <text x="167" y="102" text-anchor="middle">4.7k</text>
+  
+  <!-- Track breaks -->
+  <line class="cut" x1="125" y1="100" x2="125" y2="105"/>
+  <line class="cut" x1="135" y1="100" x2="135" y2="105"/>
+  
+  <!-- Grid labels -->
+  <text x="55" y="85" class="grid-label">A</text>
+  <text x="55" y="95" class="grid-label">B</text>
+  <text x="55" y="105" class="grid-label">C</text>
+  <text x="55" y="115" class="grid-label">D</text>
+  <text x="55" y="125" class="grid-label">E</text>
+  <text x="55" y="135" class="grid-label">F</text>
+  <text x="55" y="145" class="grid-label">G</text>
+  <text x="55" y="155" class="grid-label">H</text>
+  <text x="55" y="165" class="grid-label">I</text>
+  <text x="55" y="175" class="grid-label">J</text>
+  
+  <text x="65" y="200" class="grid-label">1</text>
+  <text x="75" y="200" class="grid-label">2</text>
+  <text x="85" y="200" class="grid-label">3</text>
+  <text x="95" y="200" class="grid-label">4</text>
+  <text x="105" y="200" class="grid-label">5</text>
+  <text x="115" y="200" class="grid-label">6</text>
+  <text x="125" y="200" class="grid-label">7</text>
+  <text x="135" y="200" class="grid-label">8</text>
+  <text x="145" y="200" class="grid-label">9</text>
+  <text x="155" y="200" class="grid-label">10</text>
+  <text x="165" y="200" class="grid-label">11</text>
+  <text x="175" y="200" class="grid-label">12</text>
+  <text x="185" y="200" class="grid-label">13</text>
+  <text x="195" y="200" class="grid-label">14</text>
+  <text x="205" y="200" class="grid-label">15</text>
+  <text x="215" y="200" class="grid-label">16</text>
+  <text x="225" y="200" class="grid-label">17</text>
+  <text x="235" y="200" class="grid-label">18</text>
+  
+  <!-- CD4049 Overdrive Layout -->
+  <text x="450" y="60" text-anchor="middle" class="label">CD4049 Overdrive</text>
+  
+  <!-- Stripboard for CD4049 -->
+  <rect class="stripboard" x="350" y="70" width="200" height="100" rx="2"/>
+  
+  <!-- CD4049 holes and components -->
+  <circle cx="400" cy="100" r="2" class="hole"/>
+  <circle cx="410" cy="100" r="2" class="hole"/>
+  <circle cx="420" cy="100" r="2" class="hole"/>
+  <circle cx="430" cy="100" r="2" class="hole"/>
+  <circle cx="440" cy="100" r="2" class="hole"/>
+  <circle cx="450" cy="100" r="2" class="hole"/>
+  <circle cx="460" cy="100" r="2" class="hole"/>
+  <circle cx="470" cy="100" r="2" class="hole"/>
+  <circle cx="480" cy="100" r="2" class="hole"/>
+  <circle cx="490" cy="100" r="2" class="hole"/>
+  <circle cx="500" cy="100" r="2" class="hole"/>
+  <circle cx="510" cy="100" r="2" class="hole"/>
+  <circle cx="520" cy="100" r="2" class="hole"/>
+  
+  <circle cx="400" cy="110" r="2" class="hole"/>
+  <circle cx="410" cy="110" r="2" class="hole"/>
+  <circle cx="420" cy="110" r="2" class="hole"/>
+  <circle cx="430" cy="110" r="2" class="hole"/>
+  <circle cx="440" cy="110" r="2" class="hole"/>
+  <circle cx="450" cy="110" r="2" class="hole"/>
+  <circle cx="460" cy="110" r="2" class="hole"/>
+  <circle cx="470" cy="110" r="2" class="hole"/>
+  <circle cx="480" cy="110" r="2" class="hole"/>
+  <circle cx="490" cy="110" r="2" class="hole"/>
+  <circle cx="500" cy="110" r="2" class="hole"/>
+  <circle cx="510" cy="110" r="2" class="hole"/>
+  <circle cx="520" cy="110" r="2" class="hole"/>
+  
+  <circle cx="400" cy="120" r="2" class="hole"/>
+  <circle cx="410" cy="120" r="2" class="hole"/>
+  <circle cx="420" cy="120" r="2" class="hole"/>
+  <circle cx="430" cy="120" r="2" class="hole"/>
+  <circle cx="440" cy="120" r="2" class="hole"/>
+  <circle cx="450" cy="120" r="2" class="hole"/>
+  <circle cx="460" cy="120" r="2" class="hole"/>
+  <circle cx="470" cy="120" r="2" class="hole"/>
+  <circle cx="480" cy="120" r="2" class="hole"/>
+  <circle cx="490" cy="120" r="2" class="hole"/>
+  <circle cx="500" cy="120" r="2" class="hole"/>
+  <circle cx="510" cy="120" r="2" class="hole"/>
+  <circle cx="520" cy="120" r="2" class="hole"/>
+  
+  <circle cx="400" cy="130" r="2" class="hole"/>
+  <circle cx="410" cy="130" r="2" class="hole"/>
+  <circle cx="420" cy="130" r="2" class="hole"/>
+  <circle cx="430" cy="130" r="2" class="hole"/>
+  <circle cx="440" cy="130" r="2" class="hole"/>
+  <circle cx="450" cy="130" r="2" class="hole"/>
+  <circle cx="460" cy="130" r="2" class="hole"/>
+  <circle cx="470" cy="130" r="2" class="hole"/>
+  <circle cx="480" cy="130" r="2" class="hole"/>
+  <circle cx="490" cy="130" r="2" class="hole"/>
+  <circle cx="500" cy="130" r="2" class="hole"/>
+  <circle cx="510" cy="130" r="2" class="hole"/>
+  <circle cx="520" cy="130" r="2" class="hole"/>
+  
+  <circle cx="400" cy="140" r="2" class="hole"/>
+  <circle cx="410" cy="140" r="2" class="hole"/>
+  <circle cx="420" cy="140" r="2" class="hole"/>
+  <circle cx="430" cy="140" r="2" class="hole"/>
+  <circle cx="440" cy="140" r="2" class="hole"/>
+  <circle cx="450" cy="140" r="2" class="hole"/>
+  <circle cx="460" cy="140" r="2" class="hole"/>
+  <circle cx="470" cy="140" r="2" class="hole"/>
+  <circle cx="480" cy="140" r="2" class="hole"/>
+  <circle cx="490" cy="140" r="2" class="hole"/>
+  <circle cx="500" cy="140" r="2" class="hole"/>
+  <circle cx="510" cy="140" r="2" class="hole"/>
+  <circle cx="520" cy="140" r="2" class="hole"/>
+  
+  <circle cx="400" cy="150" r="2" class="hole"/>
+  <circle cx="410" cy="150" r="2" class="hole"/>
+  <circle cx="420" cy="150" r="2" class="hole"/>
+  <circle cx="430" cy="150" r="2" class="hole"/>
+  <circle cx="440" cy="150" r="2" class="hole"/>
+  <circle cx="450" cy="150" r="2" class="hole"/>
+  <circle cx="460" cy="150" r="2" class="hole"/>
+  <circle cx="470" cy="150" r="2" class="hole"/>
+  <circle cx="480" cy="150" r="2" class="hole"/>
+  <circle cx="490" cy="150" r="2" class="hole"/>
+  <circle cx="500" cy="150" r="2" class="hole"/>
+  <circle cx="510" cy="150" r="2" class="hole"/>
+  <circle cx="520" cy="150" r="2" class="hole"/>
+  
+  <!-- CD4049 IC placement -->
+  <rect class="ic" x="425" y="115" width="40" height="15" rx="2"/>
+  <text x="445" y="125" text-anchor="middle" class="label">CD4049</text>
+  
+  <!-- Input/Output capacitors -->
+  <rect class="capacitor" x="400" y="125" width="8" height="6" rx="1"/>
+  <text x="404" y="135" text-anchor="middle" class="grid-label">0.1µF</text>
+  
+  <!-- Level pot -->
+  <rect class="component" x="480" y="125" width="20" height="6" rx="1"/>
+  <text x="490" y="135" text-anchor="middle" class="grid-label">100k</text>
+  
+  <!-- Power rails -->
+  <line class="copper" x1="400" y1="110" x2="520" y2="110"/>  <!-- +15V -->
+  <line class="copper" x1="400" y1="140" x2="520" y2="140"/>  <!-- -15V/GND -->
+  
+  <!-- MCP4921 DAC Layout -->
+  <text x="800" y="60" text-anchor="middle" class="label">MCP4921 DAC Interface</text>
+  
+  <!-- Stripboard for DAC -->
+  <rect class="stripboard" x="700" y="70" width="200" height="120" rx="2"/>
+  
+  <!-- DAC stripboard holes -->
+  <circle cx="720" cy="90" r="2" class="hole"/>
+  <circle cx="730" cy="90" r="2" class="hole"/>
+  <circle cx="740" cy="90" r="2" class="hole"/>
+  <circle cx="750" cy="90" r="2" class="hole"/>
+  <circle cx="760" cy="90" r="2" class="hole"/>
+  <circle cx="770" cy="90" r="2" class="hole"/>
+  <circle cx="780" cy="90" r="2" class="hole"/>
+  <circle cx="790" cy="90" r="2" class="hole"/>
+  <circle cx="800" cy="90" r="2" class="hole"/>
+  <circle cx="810" cy="90" r="2" class="hole"/>
+  <circle cx="820" cy="90" r="2" class="hole"/>
+  <circle cx="830" cy="90" r="2" class="hole"/>
+  <circle cx="840" cy="90" r="2" class="hole"/>
+  <circle cx="850" cy="90" r="2" class="hole"/>
+  <circle cx="860" cy="90" r="2" class="hole"/>
+  <circle cx="870" cy="90" r="2" class="hole"/>
+  <circle cx="880" cy="90" r="2" class="hole"/>
+  
+  <circle cx="720" cy="100" r="2" class="hole"/>
+  <circle cx="730" cy="100" r="2" class="hole"/>
+  <circle cx="740" cy="100" r="2" class="hole"/>
+  <circle cx="750" cy="100" r="2" class="hole"/>
+  <circle cx="760" cy="100" r="2" class="hole"/>
+  <circle cx="770" cy="100" r="2" class="hole"/>
+  <circle cx="780" cy="100" r="2" class="hole"/>
+  <circle cx="790" cy="100" r="2" class="hole"/>
+  <circle cx="800" cy="100" r="2" class="hole"/>
+  <circle cx="810" cy="100" r="2" class="hole"/>
+  <circle cx="820" cy="100" r="2" class="hole"/>
+  <circle cx="830" cy="100" r="2" class="hole"/>
+  <circle cx="840" cy="100" r="2" class="hole"/>
+  <circle cx="850" cy="100" r="2" class="hole"/>
+  <circle cx="860" cy="100" r="2" class="hole"/>
+  <circle cx="870" cy="100" r="2" class="hole"/>
+  <circle cx="880" cy="100" r="2" class="hole"/>
+  
+  <circle cx="720" cy="110" r="2" class="hole"/>
+  <circle cx="730" cy="110" r="2" class="hole"/>
+  <circle cx="740" cy="110" r="2" class="hole"/>
+  <circle cx="750" cy="110" r="2" class="hole"/>
+  <circle cx="760" cy="110" r="2" class="hole"/>
+  <circle cx="770" cy="110" r="2" class="hole"/>
+  <circle cx="780" cy="110" r="2" class="hole"/>
+  <circle cx="790" cy="110" r="2" class="hole"/>
+  <circle cx="800" cy="110" r="2" class="hole"/>
+  <circle cx="810" cy="110" r="2" class="hole"/>
+  <circle cx="820" cy="110" r="2" class="hole"/>
+  <circle cx="830" cy="110" r="2" class="hole"/>
+  <circle cx="840" cy="110" r="2" class="hole"/>
+  <circle cx="850" cy="110" r="2" class="hole"/>
+  <circle cx="860" cy="110" r="2" class="hole"/>
+  <circle cx="870" cy="110" r="2" class="hole"/>
+  <circle cx="880" cy="110" r="2" class="hole"/>
+  
+  <circle cx="720" cy="120" r="2" class="hole"/>
+  <circle cx="730" cy="120" r="2" class="hole"/>
+  <circle cx="740" cy="120" r="2" class="hole"/>
+  <circle cx="750" cy="120" r="2" class="hole"/>
+  <circle cx="760" cy="120" r="2" class="hole"/>
+  <circle cx="770" cy="120" r="2" class="hole"/>
+  <circle cx="780" cy="120" r="2" class="hole"/>
+  <circle cx="790" cy="120" r="2" class="hole"/>
+  <circle cx="800" cy="120" r="2" class="hole"/>
+  <circle cx="810" cy="120" r="2" class="hole"/>
+  <circle cx="820" cy="120" r="2" class="hole"/>
+  <circle cx="830" cy="120" r="2" class="hole"/>
+  <circle cx="840" cy="120" r="2" class="hole"/>
+  <circle cx="850" cy="120" r="2" class="hole"/>
+  <circle cx="860" cy="120" r="2" class="hole"/>
+  <circle cx="870" cy="120" r="2" class="hole"/>
+  <circle cx="880" cy="120" r="2" class="hole"/>
+  
+  <circle cx="720" cy="130" r="2" class="hole"/>
+  <circle cx="730" cy="130" r="2" class="hole"/>
+  <circle cx="740" cy="130" r="2" class="hole"/>
+  <circle cx="750" cy="130" r="2" class="hole"/>
+  <circle cx="760" cy="130" r="2" class="hole"/>
+  <circle cx="770" cy="130" r="2" class="hole"/>
+  <circle cx="780" cy="130" r="2" class="hole"/>
+  <circle cx="790" cy="130" r="2" class="hole"/>
+  <circle cx="800" cy="130" r="2" class="hole"/>
+  <circle cx="810" cy="130" r="2" class="hole"/>
+  <circle cx="820" cy="130" r="2" class="hole"/>
+  <circle cx="830" cy="130" r="2" class="hole"/>
+  <circle cx="840" cy="130" r="2" class="hole"/>
+  <circle cx="850" cy="130" r="2" class="hole"/>
+  <circle cx="860" cy="130" r="2" class="hole"/>
+  <circle cx="870" cy="130" r="2" class="hole"/>
+  <circle cx="880" cy="130" r="2" class="hole"/>
+  
+  <circle cx="720" cy="140" r="2" class="hole"/>
+  <circle cx="730" cy="140" r="2" class="hole"/>
+  <circle cx="740" cy="140" r="2" class="hole"/>
+  <circle cx="750" cy="140" r="2" class="hole"/>
+  <circle cx="760" cy="140" r="2" class="hole"/>
+  <circle cx="770" cy="140" r="2" class="hole"/>
+  <circle cx="780" cy="140" r="2" class="hole"/>
+  <circle cx="790" cy="140" r="2" class="hole"/>
+  <circle cx="800" cy="140" r="2" class="hole"/>
+  <circle cx="810" cy="140" r="2" class="hole"/>
+  <circle cx="820" cy="140" r="2" class="hole"/>
+  <circle cx="830" cy="140" r="2" class="hole"/>
+  <circle cx="840" cy="140" r="2" class="hole"/>
+  <circle cx="850" cy="140" r="2" class="hole"/>
+  <circle cx="860" cy="140" r="2" class="hole"/>
+  <circle cx="870" cy="140" r="2" class="hole"/>
+  <circle cx="880" cy="140" r="2" class="hole"/>
+  
+  <circle cx="720" cy="150" r="2" class="hole"/>
+  <circle cx="730" cy="150" r="2" class="hole"/>
+  <circle cx="740" cy="150" r="2" class="hole"/>
+  <circle cx="750" cy="150" r="2" class="hole"/>
+  <circle cx="760" cy="150" r="2" class="hole"/>
+  <circle cx="770" cy="150" r="2" class="hole"/>
+  <circle cx="780" cy="150" r="2" class="hole"/>
+  <circle cx="790" cy="150" r="2" class="hole"/>
+  <circle cx="800" cy="150" r="2" class="hole"/>
+  <circle cx="810" cy="150" r="2" class="hole"/>
+  <circle cx="820" cy="150" r="2" class="hole"/>
+  <circle cx="830" cy="150" r="2" class="hole"/>
+  <circle cx="840" cy="150" r="2" class="hole"/>
+  <circle cx="850" cy="150" r="2" class="hole"/>
+  <circle cx="860" cy="150" r="2" class="hole"/>
+  <circle cx="870" cy="150" r="2" class="hole"/>
+  <circle cx="880" cy="150" r="2" class="hole"/>
+  
+  <circle cx="720" cy="160" r="2" class="hole"/>
+  <circle cx="730" cy="160" r="2" class="hole"/>
+  <circle cx="740" cy="160" r="2" class="hole"/>
+  <circle cx="750" cy="160" r="2" class="hole"/>
+  <circle cx="760" cy="160" r="2" class="hole"/>
+  <circle cx="770" cy="160" r="2" class="hole"/>
+  <circle cx="780" cy="160" r="2" class="hole"/>
+  <circle cx="790" cy="160" r="2" class="hole"/>
+  <circle cx="800" cy="160" r="2" class="hole"/>
+  <circle cx="810" cy="160" r="2" class="hole"/>
+  <circle cx="820" cy="160" r="2" class="hole"/>
+  <circle cx="830" cy="160" r="2" class="hole"/>
+  <circle cx="840" cy="160" r="2" class="hole"/>
+  <circle cx="850" cy="160" r="2" class="hole"/>
+  <circle cx="860" cy="160" r="2" class="hole"/>
+  <circle cx="870" cy="160" r="2" class="hole"/>
+  <circle cx="880" cy="160" r="2" class="hole"/>
+  
+  <circle cx="720" cy="170" r="2" class="hole"/>
+  <circle cx="730" cy="170" r="2" class="hole"/>
+  <circle cx="740" cy="170" r="2" class="hole"/>
+  <circle cx="750" cy="170" r="2" class="hole"/>
+  <circle cx="760" cy="170" r="2" class="hole"/>
+  <circle cx="770" cy="170" r="2" class="hole"/>
+  <circle cx="780" cy="170" r="2" class="hole"/>
+  <circle cx="790" cy="170" r="2" class="hole"/>
+  <circle cx="800" cy="170" r="2" class="hole"/>
+  <circle cx="810" cy="170" r="2" class="hole"/>
+  <circle cx="820" cy="170" r="2" class="hole"/>
+  <circle cx="830" cy="170" r="2" class="hole"/>
+  <circle cx="840" cy="170" r="2" class="hole"/>
+  <circle cx="850" cy="170" r="2" class="hole"/>
+  <circle cx="860" cy="170" r="2" class="hole"/>
+  <circle cx="870" cy="170" r="2" class="hole"/>
+  <circle cx="880" cy="170" r="2" class="hole"/>
+  
+  <circle cx="720" cy="180" r="2" class="hole"/>
+  <circle cx="730" cy="180" r="2" class="hole"/>
+  <circle cx="740" cy="180" r="2" class="hole"/>
+  <circle cx="750" cy="180" r="2" class="hole"/>
+  <circle cx="760" cy="180" r="2" class="hole"/>
+  <circle cx="770" cy="180" r="2" class="hole"/>
+  <circle cx="780" cy="180" r="2" class="hole"/>
+  <circle cx="790" cy="180" r="2" class="hole"/>
+  <circle cx="800" cy="180" r="2" class="hole"/>
+  <circle cx="810" cy="180" r="2" class="hole"/>
+  <circle cx="820" cy="180" r="2" class="hole"/>
+  <circle cx="830" cy="180" r="2" class="hole"/>
+  <circle cx="840" cy="180" r="2" class="hole"/>
+  <circle cx="850" cy="180" r="2" class="hole"/>
+  <circle cx="860" cy="180" r="2" class="hole"/>
+  <circle cx="870" cy="180" r="2" class="hole"/>
+  <circle cx="880" cy="180" r="2" class="hole"/>
+  
+  <!-- MCP4921 IC -->
+  <rect class="ic" x="775" y="105" width="50" height="20" rx="2"/>
+  <text x="800" y="117" text-anchor="middle" class="label">MCP4921</text>
+  
+  <!-- Power rails for DAC -->
+  <line class="copper" x1="720" y1="100" x2="880" y2="100"/>  <!-- +5V -->
+  <line class="copper" x1="720" y1="170" x2="880" y2="170"/>  <!-- GND -->
+  
+  <!-- SPI connections -->
+  <line class="wire" x1="730" y1="120" x2="775" y2="115"/>  <!-- CS -->
+  <line class="wire" x1="740" y1="130" x2="775" y2="120"/>  <!-- SCK -->
+  <line class="wire" x1="750" y1="140" x2="775" y2="110"/>  <!-- MOSI -->
+  
+  <!-- Construction Notes -->
+  <rect fill="#333" stroke="#666" stroke-width="1" x="50" y="250" width="1100" height="400" rx="5"/>
+  <text x="60" y="275" class="label" fill="#ff3333">Stripboard Construction Guide:</text>
+  
+  <text x="60" y="305" class="label" fill="#ffff00">MIDI Interface (6N138) - Size: 19×11 holes</text>
+  <text x="70" y="320" fill="#fff">1. Cut copper tracks: Between IC pins (rows D-E), isolate power rails</text>
+  <text x="70" y="335" fill="#fff">2. Components: 6N138 (DIP-8) at D6-E9, 220Ω resistors at B4, B5, 4.7kΩ at B11</text>
+  <text x="70" y="350" fill="#fff">3. Power: +5V rail at row B, GND rail at row H</text>
+  <text x="70" y="365" fill="#fff">4. I/O: MIDI DIN pins to A3, A4; Arduino A4 from F9; Power from A2, H2</text>
+  
+  <text x="60" y="395" class="label" fill="#ffff00">CD4049 Overdrive - Size: 13×7 holes</text>
+  <text x="70" y="410" fill="#fff">1. Cut tracks: Between IC pins, isolate input/output</text>
+  <text x="70" y="425" fill="#fff">2. Components: CD4049 (DIP-14) at D3-E10, 0.1µF input cap, 100kΩ level pot</text>
+  <text x="70" y="440" fill="#fff">3. Power: ±15V rails or single +9V supply (see schematic for options)</text>
+  <text x="70" y="455" fill="#fff">4. Connections: Audio in/out, jumper between Pin 2→Pin 5 for cascade</text>
+  
+  <text x="60" y="485" class="label" fill="#ffff00">MCP4921 DAC - Size: 17×9 holes</text>
+  <text x="70" y="500" fill="#fff">1. Cut tracks: Isolate IC pins, separate SPI lines</text>
+  <text x="70" y="515" fill="#fff">2. Components: MCP4921 (DIP-14) at E6-F12, bypass capacitors recommended</text>
+  <text x="70" y="530" fill="#fff">3. Power: +5V rail, GND rail, tie LDAC to GND for immediate updates</text>
+  <text x="70" y="545" fill="#fff">4. SPI: CS, SCK, MOSI from Arduino; CV output buffer optional but recommended</text>
+  
+  <text x="60" y="575" class="label" fill="#ffff00">General Construction Tips:</text>
+  <text x="70" y="590" fill="#fff">• Use IC sockets for all ICs to prevent heat damage during soldering</text>
+  <text x="70" y="605" fill="#fff">• Cut tracks with a 3mm drill bit or track cutting tool</text>
+  <text x="70" y="620" fill="#fff">• Test continuity after cutting tracks to ensure proper isolation</text>
+  <text x="70" y="635" fill="#fff">• Use solid core wire for connections, keep leads short to minimize noise</text>
+</svg>
