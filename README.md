@@ -20,33 +20,36 @@ We have the complete PIC18F452 assembly source code - a rare find in the TB-303 
 - **Pattern storage algorithms** - MIDI engine, real-time algorithms revealed
 - **Modification ready** - Source code enables custom firmware development
 
+## 🚀 Arduino Integration - Start Here!
+
+**Want to add Arduino control to your ML-303?** 
+
+👉 **[Go to Arduino Integration Guide](docs/wiring_diagrams/QUICK_START.md)** 👈
+
+Add modern Arduino features to your ML-303 in about 1 hour:
+- I2C communication with PIC microcontroller
+- Foundation for LCD control, effects, and MIDI expansion
+- Non-invasive installation (completely reversible)
+- Only $13-33 in parts needed
+
 ## Repository Structure
 
 ```
-├── README.md                    # Project overview
-├── LICENSE                      # MIT open source license
-├── CREDITS.md                   # Attribution to original creators
-├── docs/                        # All documentation
-│   ├── BUILD_GUIDE.md           # Complete build instructions
-│   ├── FIRMWARE_ANALYSIS.md     # Source code analysis
+├── docs/wiring_diagrams/        # ⭐ ARDUINO INTEGRATION GUIDES
+│   ├── QUICK_START.md           # 🚀 Start here for Arduino integration  
+│   ├── ML303_Arduino_Wiring_Diagram.png  # Professional wiring diagrams
+│   ├── COMPLETE_BUILD_GUIDE.md  # Detailed step-by-step instructions
+│   └── MERMAID_DIAGRAMS.md      # Interactive flowcharts
+├── docs/                        # Technical Documentation
+│   ├── FIRMWARE_ANALYSIS.md     # Complete source code analysis
 │   ├── FIRMWARE_LOADING.md      # Programming procedures
-│   └── modifications/           # Modification guides
-│       ├── EXISTING_ML303_MODIFICATIONS.md  # Enhance existing ML-303
-│       └── OTHER_BASSLINE_MODIFICATIONS.md  # Modify other basslines
-├── arduino/                     # Arduino integration
-│   ├── ml303_enhanced.ino       # Main Arduino code
-│   ├── test_sketch.ino          # Hardware testing
-│   └── wiring.html              # Wiring diagrams
-├── firmware/                    # All firmware versions
-│   ├── source/                  # Complete PIC18F452 source code
-│   └── binaries/                # Compiled firmware releases
-├── hardware/                    # Hardware documentation
-│   ├── v5/                      # V5 build documents
-│   └── v6/                      # V6 build documents
-└── examples/                    # Example patterns and code
+│   └── modifications/           # Enhancement guides
+├── firmware/source/             # Complete PIC18F452 assembly source
+├── hardware/                    # Hardware build documentation
+└── arduino/                     # Arduino code examples
 ```
 
-## Quick Start
+## Build Your Own ML-303
 
 | Your Goal | Start Here |
 |-----------|------------|
