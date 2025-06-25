@@ -1,13 +1,13 @@
 // ML-303 Bassline Arduino Control System
 // Integrates LCD display, MIDI, and parameter monitoring
 
-#include <Wire.h>
-#include <LiquidCrystal_I2C.h>
+#include <LiquidCrystal.h>
 #include <MIDI.h>
 #include <EEPROM.h>
 
-// LCD Setup (address 0x27 is common for I2C backpacks)
-LiquidCrystal_I2C lcd(0x27, 16, 2);
+// LCD Setup - Standard parallel interface (4-bit mode)
+// LiquidCrystal lcd(RS, E, D4, D5, D6, D7);
+LiquidCrystal lcd(12, 11, 5, 4, 3, 2);
 
 // MIDI Setup
 MIDI_CREATE_DEFAULT_INSTANCE();
@@ -61,8 +61,7 @@ void setup() {
   pinMode(GATE_IN, INPUT);
   
   // Initialize LCD
-  lcd.init();
-  lcd.backlight();
+  lcd.begin(16, 2);
   lcd.setCursor(0, 0);
   lcd.print("ML-303 BASSLINE");
   lcd.setCursor(0, 1);

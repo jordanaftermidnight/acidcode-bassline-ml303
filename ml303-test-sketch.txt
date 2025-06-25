@@ -19,12 +19,11 @@
  * - MIDI monitor shows activity
  */
 
-#include <Wire.h>
-#include <LiquidCrystal_I2C.h>
+#include <LiquidCrystal.h>
 #include <MIDI.h>
 #include <SPI.h>
 
-// Pin Definitions
+// Pin Definitions - Updated for standard LCD
 const int PIN_CLOCK_IN = 2;      // INT0 - From original CPU
 const int PIN_GATE_IN = 3;       // Monitor original gate
 const int PIN_CLOCK_OUT = 4;     // To 4017 
@@ -32,17 +31,25 @@ const int PIN_RESET_OUT = 5;     // To 4017 reset
 const int PIN_GATE_OUT = 6;      // To analog section
 const int PIN_ACCENT_OUT = 7;    // To accent circuit  
 const int PIN_SLIDE_OUT = 8;     // To slide circuit
+const int PIN_DAC_CS = 9;        // MCP4921 chip select (moved from 15)
 const int LED_BUILTIN = 13;      // Arduino LED
-const int PIN_DAC_CS = 15;       // MCP4921 chip select
 
-// Analog inputs
-const int POT_CUTOFF = A0;
-const int POT_RESONANCE = A1;
-const int POT_ENVMOD = A2;
-const int POT_DECAY = A3;
+// LCD pins (standard parallel interface) - Corrected pin assignments
+const int LCD_RS = 12;           // Register Select
+const int LCD_E = 11;            // Enable  
+const int LCD_D4 = 10;           // Data 4
+const int LCD_D5 = 16;           // Data 5 (A2 as digital)
+const int LCD_D6 = 17;           // Data 6 (A3 as digital)  
+const int LCD_D7 = 18;           // Data 7 (A4 as digital)
 
-// LCD - try both common addresses
-LiquidCrystal_I2C lcd(0x27, 16, 2);  // or 0x3F
+// Analog inputs - Moved to higher analog pins
+const int POT_CUTOFF = A0;       // Still available
+const int POT_RESONANCE = A1;    // Still available
+const int POT_ENVMOD = A5;       // Moved from A2
+const int POT_DECAY = A6;        // Moved from A3
+
+// LCD - Standard parallel interface
+LiquidCrystal lcd(LCD_RS, LCD_E, LCD_D4, LCD_D5, LCD_D6, LCD_D7);
 
 // MIDI
 MIDI_CREATE_DEFAULT_INSTANCE();
@@ -99,8 +106,7 @@ void setup() {
   
   // Initialize LCD
   Serial.println(F("Initializing LCD..."));
-  lcd.init();
-  lcd.backlight();
+  lcd.begin(16, 2);
   lcd.clear();
   lcd.setCursor(0, 0);
   lcd.print("ML-303 REMOD");
