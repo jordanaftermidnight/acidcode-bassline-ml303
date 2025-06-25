@@ -4,6 +4,16 @@ This directory contains the complete build documentation for integrating an Ardu
 
 ## 📋 Documentation
 
+### **`ML303_Arduino_Wiring_Diagram.png`** - Professional Wiring Diagram
+
+![ML-303 Arduino Integration Wiring Diagram](ML303_Arduino_Wiring_Diagram.png)
+
+This professional wiring diagram shows the complete ML-303 to Arduino Pro Micro connection with:
+- **Wire color legend** (Red=+5V, Black=Ground, Blue=I2C SDA, Green=I2C SCL)
+- **Physical connection overview** with exact pin mappings
+- **Component specifications** and mounting instructions
+- **Testing checklist** and I2C communication settings
+
 ### **`COMPLETE_BUILD_GUIDE.md`** - Complete Build Instructions
 
 This comprehensive guide contains everything required for the ML-303 Arduino integration:
