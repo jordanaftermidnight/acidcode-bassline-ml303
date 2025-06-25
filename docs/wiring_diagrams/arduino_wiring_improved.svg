@@ -1,0 +1,286 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="1000" height="800" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <!-- Define wire colors for consistency -->
+    <style>
+      .power-wire { stroke: #FF0000; stroke-width: 4; fill: none; }
+      .ground-wire { stroke: #000000; stroke-width: 4; fill: none; }
+      .digital-wire { stroke: #0066FF; stroke-width: 3; fill: none; }
+      .analog-wire { stroke: #FF6600; stroke-width: 3; fill: none; }
+      .spi-wire { stroke: #9900CC; stroke-width: 3; fill: none; }
+      .i2c-wire { stroke: #00CC66; stroke-width: 3; fill: none; }
+      
+      .arduino-board { fill: #006666; stroke: #004444; stroke-width: 3; }
+      .ml303-board { fill: #660000; stroke: #440000; stroke-width: 3; }
+      .lcd-display { fill: #003300; stroke: #002200; stroke-width: 2; }
+      
+      .pin-power { fill: #FF0000; stroke: #CC0000; stroke-width: 2; }
+      .pin-ground { fill: #000000; stroke: #333333; stroke-width: 2; }
+      .pin-digital { fill: #0066FF; stroke: #0044CC; stroke-width: 2; }
+      .pin-analog { fill: #FF6600; stroke: #CC4400; stroke-width: 2; }
+      .pin-spi { fill: #9900CC; stroke: #770099; stroke-width: 2; }
+      .pin-i2c { fill: #00CC66; stroke: #009944; stroke-width: 2; }
+      
+      .label-title { font-size: 24px; font-weight: bold; fill: #000000; font-family: Arial, sans-serif; }
+      .label-board { font-size: 16px; font-weight: bold; fill: #000000; font-family: Arial, sans-serif; }
+      .label-pin { font-size: 12px; font-weight: bold; fill: #000000; font-family: Arial, sans-serif; }
+      .label-wire { font-size: 10px; font-weight: bold; fill: #000000; font-family: Arial, sans-serif; }
+    </style>
+  </defs>
+  
+  <!-- Background -->
+  <rect width="1000" height="800" fill="#F5F5F5"/>
+  
+  <!-- Title -->
+  <text x="500" y="30" text-anchor="middle" class="label-title">ML-303 Arduino Integration - Detailed Wiring</text>
+  <text x="500" y="55" text-anchor="middle" class="label-board">Fixed Pin Assignments (All Conflicts Resolved)</text>
+  
+  <!-- Arduino Uno -->
+  <rect class="arduino-board" x="50" y="100" width="200" height="350" rx="10"/>
+  <text x="150" y="85" text-anchor="middle" class="label-board">Arduino Uno R3</text>
+  
+  <!-- Arduino USB connector -->
+  <rect x="60" y="80" width="30" height="15" fill="#CCCCCC" stroke="#999999" stroke-width="1" rx="2"/>
+  <text x="75" y="92" text-anchor="middle" font-size="8" fill="#000">USB</text>
+  
+  <!-- Arduino Power connector -->
+  <circle cx="220" cy="120" r="8" fill="#000000" stroke="#333333" stroke-width="2"/>
+  <text x="235" y="125" font-size="8" fill="#000">PWR</text>
+  
+  <!-- Left side pins (Power) -->
+  <circle class="pin-power" cx="70" cy="130" r="6"/>
+  <text x="50" y="135" text-anchor="end" class="label-pin">5V</text>
+  
+  <circle class="pin-ground" cx="70" cy="150" r="6"/>
+  <text x="50" y="155" text-anchor="end" class="label-pin">GND</text>
+  
+  <circle class="pin-ground" cx="70" cy="170" r="6"/>
+  <text x="50" y="175" text-anchor="end" class="label-pin">GND</text>
+  
+  <!-- Left side pins (Analog) -->
+  <circle class="pin-analog" cx="70" cy="200" r="6"/>
+  <text x="50" y="205" text-anchor="end" class="label-pin">A0</text>
+  
+  <circle class="pin-analog" cx="70" cy="220" r="6"/>
+  <text x="50" y="225" text-anchor="end" class="label-pin">A1</text>
+  
+  <circle class="pin-analog" cx="70" cy="240" r="6"/>
+  <text x="50" y="245" text-anchor="end" class="label-pin">A2</text>
+  
+  <circle class="pin-analog" cx="70" cy="260" r="6"/>
+  <text x="50" y="265" text-anchor="end" class="label-pin">A3</text>
+  
+  <circle class="pin-i2c" cx="70" cy="280" r="6"/>
+  <text x="50" y="285" text-anchor="end" class="label-pin">A4</text>
+  
+  <circle class="pin-i2c" cx="70" cy="300" r="6"/>
+  <text x="50" y="305" text-anchor="end" class="label-pin">A5</text>
+  
+  <!-- Left side pins (Digital) -->
+  <circle class="pin-digital" cx="70" cy="330" r="6"/>
+  <text x="50" y="335" text-anchor="end" class="label-pin">D2</text>
+  
+  <circle class="pin-digital" cx="70" cy="350" r="6"/>
+  <text x="50" y="355" text-anchor="end" class="label-pin">D3</text>
+  
+  <circle class="pin-digital" cx="70" cy="370" r="6"/>
+  <text x="50" y="375" text-anchor="end" class="label-pin">D4</text>
+  
+  <circle class="pin-digital" cx="70" cy="390" r="6"/>
+  <text x="50" y="395" text-anchor="end" class="label-pin">D5</text>
+  
+  <circle class="pin-digital" cx="70" cy="410" r="6"/>
+  <text x="50" y="415" text-anchor="end" class="label-pin">D6</text>
+  
+  <circle class="pin-digital" cx="70" cy="430" r="6"/>
+  <text x="50" y="435" text-anchor="end" class="label-pin">D7</text>
+  
+  <!-- Right side pins (Digital) -->
+  <circle class="pin-digital" cx="230" cy="130" r="6"/>
+  <text x="250" y="135" class="label-pin">D13</text>
+  
+  <circle class="pin-digital" cx="230" cy="150" r="6"/>
+  <text x="250" y="155" class="label-pin">D12</text>
+  
+  <circle class="pin-spi" cx="230" cy="170" r="6"/>
+  <text x="250" y="175" class="label-pin">D11</text>
+  
+  <circle class="pin-digital" cx="230" cy="190" r="6"/>
+  <text x="250" y="195" class="label-pin">D10</text>
+  
+  <circle class="pin-digital" cx="230" cy="210" r="6"/>
+  <text x="250" y="215" class="label-pin">D9</text>
+  
+  <circle class="pin-digital" cx="230" cy="230" r="6"/>
+  <text x="250" y="235" class="label-pin">D8</text>
+  
+  <!-- LCD Display -->
+  <rect class="lcd-display" x="400" y="100" width="250" height="100" rx="8"/>
+  <text x="525" y="85" text-anchor="middle" class="label-board">16x2 LCD Display</text>
+  <text x="525" y="135" text-anchor="middle" font-size="14" fill="#00FF00">ML-303 BASSLINE</text>
+  <text x="525" y="155" text-anchor="middle" font-size="14" fill="#00FF00">PATTERN: 01 BPM:120</text>
+  
+  <!-- LCD connection points -->
+  <circle class="pin-power" cx="410" cy="120" r="5"/>
+  <circle class="pin-ground" cx="410" cy="140" r="5"/>
+  <circle class="pin-digital" cx="410" cy="160" r="5"/>
+  <circle class="pin-digital" cx="410" cy="180" r="5"/>
+  
+  <circle class="pin-digital" cx="640" cy="120" r="5"/>
+  <circle class="pin-digital" cx="640" cy="140" r="5"/>
+  <circle class="pin-digital" cx="640" cy="160" r="5"/>
+  <circle class="pin-digital" cx="640" cy="180" r="5"/>
+  
+  <!-- LCD pin labels -->
+  <text x="390" y="125" text-anchor="end" font-size="9" fill="#000">VCC</text>
+  <text x="390" y="145" text-anchor="end" font-size="9" fill="#000">GND</text>
+  <text x="390" y="165" text-anchor="end" font-size="9" fill="#000">RS</text>
+  <text x="390" y="185" text-anchor="end" font-size="9" fill="#000">E</text>
+  
+  <text x="660" y="125" font-size="9" fill="#000">D4</text>
+  <text x="660" y="145" font-size="9" fill="#000">D5</text>
+  <text x="660" y="165" font-size="9" fill="#000">D6</text>
+  <text x="660" y="185" font-size="9" fill="#000">D7</text>
+  
+  <!-- ML-303 Board -->
+  <rect class="ml303-board" x="700" y="250" width="250" height="200" rx="10"/>
+  <text x="825" y="235" text-anchor="middle" class="label-board">ML-303 V5 Board</text>
+  <text x="825" y="340" text-anchor="middle" font-size="14" fill="#FFCCCC">Interface Points</text>
+  <text x="825" y="360" text-anchor="middle" font-size="12" fill="#FFCCCC">Test Points & Controls</text>
+  
+  <!-- ML-303 connection points -->
+  <circle class="pin-analog" cx="720" cy="280" r="5"/>
+  <circle class="pin-analog" cx="720" cy="300" r="5"/>
+  <circle class="pin-analog" cx="720" cy="320" r="5"/>
+  <circle class="pin-analog" cx="720" cy="340" r="5"/>
+  
+  <circle class="pin-digital" cx="720" cy="370" r="5"/>
+  <circle class="pin-digital" cx="720" cy="390" r="5"/>
+  <circle class="pin-digital" cx="720" cy="410" r="5"/>
+  
+  <circle class="pin-i2c" cx="930" cy="280" r="5"/>
+  <circle class="pin-i2c" cx="930" cy="300" r="5"/>
+  
+  <!-- ML-303 pin labels -->
+  <text x="700" y="285" text-anchor="end" font-size="9" fill="#FFF">Cutoff</text>
+  <text x="700" y="305" text-anchor="end" font-size="9" fill="#FFF">Resonance</text>
+  <text x="700" y="325" text-anchor="end" font-size="9" fill="#FFF">Env Mod</text>
+  <text x="700" y="345" text-anchor="end" font-size="9" fill="#FFF">Decay</text>
+  
+  <text x="700" y="375" text-anchor="end" font-size="9" fill="#FFF">Run/Stop</text>
+  <text x="700" y="395" text-anchor="end" font-size="9" fill="#FFF">Pattern</text>
+  <text x="700" y="415" text-anchor="end" font-size="9" fill="#FFF">Clock</text>
+  
+  <text x="950" y="285" font-size="9" fill="#FFF">MIDI RX</text>
+  <text x="950" y="305" font-size="9" fill="#FFF">MIDI TX</text>
+  
+  <!-- Power Connections (RED) -->
+  <path class="power-wire" d="M 70 130 Q 200 80 410 120"/>
+  <text x="200" y="75" text-anchor="middle" class="label-wire">+5V POWER</text>
+  
+  <!-- Ground Connections (BLACK) -->
+  <path class="ground-wire" d="M 70 150 Q 150 90 410 140"/>
+  <path class="ground-wire" d="M 70 170 Q 200 110 410 140"/>
+  <text x="200" y="105" text-anchor="middle" class="label-wire">GROUND</text>
+  
+  <!-- LCD Data Connections (BLUE) -->
+  <path class="digital-wire" d="M 230 150 Q 350 130 410 160"/>
+  <text x="320" y="125" class="label-wire">D12→RS</text>
+  
+  <path class="digital-wire" d="M 230 170 Q 350 150 410 180"/>
+  <text x="320" y="145" class="label-wire">D11→E</text>
+  
+  <path class="digital-wire" d="M 230 190 Q 450 200 640 120"/>
+  <text x="440" y="195" class="label-wire">D10→D4</text>
+  
+  <path class="digital-wire" d="M 230 210 Q 450 220 640 140"/>
+  <text x="440" y="215" class="label-wire">D9→D5</text>
+  
+  <path class="digital-wire" d="M 230 230 Q 450 240 640 160"/>
+  <text x="440" y="235" class="label-wire">D8→D6</text>
+  
+  <path class="digital-wire" d="M 70 430 Q 450 260 640 180"/>
+  <text x="350" y="290" class="label-wire">D7→D7</text>
+  
+  <!-- Analog Monitoring Connections (ORANGE) -->
+  <path class="analog-wire" d="M 70 200 Q 400 240 720 280"/>
+  <text x="350" y="235" class="label-wire">A0→Cutoff</text>
+  
+  <path class="analog-wire" d="M 70 220 Q 400 260 720 300"/>
+  <text x="350" y="255" class="label-wire">A1→Resonance</text>
+  
+  <path class="analog-wire" d="M 70 240 Q 400 280 720 320"/>
+  <text x="350" y="275" class="label-wire">A2→Env Mod</text>
+  
+  <path class="analog-wire" d="M 70 260 Q 400 300 720 340"/>
+  <text x="350" y="295" class="label-wire">A3→Decay</text>
+  
+  <!-- Digital Control Connections (BLUE) -->
+  <path class="digital-wire" d="M 70 330 Q 400 350 720 370"/>
+  <text x="350" y="345" class="label-wire">D2→Run/Stop</text>
+  
+  <path class="digital-wire" d="M 70 350 Q 400 370 720 390"/>
+  <text x="350" y="365" class="label-wire">D3→Pattern</text>
+  
+  <path class="digital-wire" d="M 70 370 Q 400 390 720 410"/>
+  <text x="350" y="385" class="label-wire">D4→Clock</text>
+  
+  <!-- MIDI Connections (GREEN) -->
+  <path class="i2c-wire" d="M 70 280 Q 500 240 930 280"/>
+  <text x="500" y="235" class="label-wire">A4→MIDI RX</text>
+  
+  <path class="i2c-wire" d="M 70 300 Q 500 260 930 300"/>
+  <text x="500" y="255" class="label-wire">A5→MIDI TX</text>
+  
+  <!-- SPI Connection (PURPLE) -->
+  <path class="spi-wire" d="M 230 130 Q 300 50 600 50"/>
+  <text x="400" y="45" class="label-wire">D13→DAC CS</text>
+  
+  <path class="spi-wire" d="M 230 170 Q 320 70 620 70"/>
+  <text x="420" y="65" class="label-wire">D11→SPI</text>
+  
+  <!-- Connection Legend -->
+  <rect x="50" y="500" width="900" height="280" fill="#FFFFFF" stroke="#CCCCCC" stroke-width="2" rx="10"/>
+  <text x="70" y="525" class="label-board">Connection Legend & Pin Assignments</text>
+  
+  <!-- Legend colors -->
+  <line x1="80" y1="550" x2="120" y2="550" class="power-wire"/>
+  <text x="130" y="555" class="label-pin">Power (+5V) - Red</text>
+  
+  <line x1="80" y1="570" x2="120" y2="570" class="ground-wire"/>
+  <text x="130" y="575" class="label-pin">Ground (GND) - Black</text>
+  
+  <line x1="80" y1="590" x2="120" y2="590" class="digital-wire"/>
+  <text x="130" y="595" class="label-pin">Digital I/O - Blue</text>
+  
+  <line x1="80" y1="610" x2="120" y2="610" class="analog-wire"/>
+  <text x="130" y="615" class="label-pin">Analog Input - Orange</text>
+  
+  <line x1="80" y1="630" x2="120" y2="630" class="i2c-wire"/>
+  <text x="130" y="635" class="label-pin">MIDI/I2C - Green</text>
+  
+  <line x1="80" y1="650" x2="120" y2="650" class="spi-wire"/>
+  <text x="130" y="655" class="label-pin">SPI/DAC - Purple</text>
+  
+  <!-- Pin assignments -->
+  <text x="350" y="550" class="label-pin">LCD Display (6 pins):</text>
+  <text x="360" y="570" font-size="11" fill="#000">D12→RS, D11→E, D10→D4, D9→D5, D8→D6, D7→D7</text>
+  
+  <text x="350" y="600" class="label-pin">Control Inputs (5 pins):</text>
+  <text x="360" y="620" font-size="11" fill="#000">D2→Run/Stop, D3→Pattern, D4→Clock, D5→Gate In, D6→Gate Out</text>
+  
+  <text x="350" y="650" class="label-pin">Analog Monitoring (4 pins):</text>
+  <text x="360" y="670" font-size="11" fill="#000">A0→Cutoff, A1→Resonance, A2→Env Mod, A3→Decay</text>
+  
+  <text x="650" y="550" class="label-pin">MIDI Interface (2 pins):</text>
+  <text x="660" y="570" font-size="11" fill="#000">A4→MIDI RX (via 6N138), A5→MIDI TX</text>
+  
+  <text x="650" y="600" class="label-pin">SPI/DAC (2 pins):</text>
+  <text x="660" y="620" font-size="11" fill="#000">D13→DAC CS, D11→SPI Clock/Data</text>
+  
+  <!-- Safety warning -->
+  <rect x="80" y="700" width="840" height="60" fill="#FFCCCC" stroke="#FF0000" stroke-width="3" rx="5"/>
+  <text x="90" y="720" font-size="14" font-weight="bold" fill="#CC0000">⚠️ SAFETY WARNING:</text>
+  <text x="100" y="740" font-size="12" fill="#000">ML-303 has NO reverse polarity protection! Always verify power connections before first power-up.</text>
+  <text x="100" y="755" font-size="12" fill="#000">Use continuity tester to verify all connections. Test with multimeter before connecting power.</text>
+</svg>

@@ -1,0 +1,108 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="800" height="600" xmlns="http://www.w3.org/2000/svg">
+  <rect width="800" height="600" fill="#f0f0f0"/>
+  
+  <!-- Title -->
+  <text x="400" y="30" text-anchor="middle" font-size="24" font-weight="bold" fill="#000">ML-303 Arduino Wiring - Fixed Pin Assignments</text>
+  
+  <!-- Arduino -->
+  <rect x="50" y="80" width="150" height="250" fill="#005C5C" stroke="#000" stroke-width="2" rx="5"/>
+  <text x="125" y="70" text-anchor="middle" font-size="16" font-weight="bold" fill="#000">Arduino Uno</text>
+  
+  <!-- Arduino Pins -->
+  <text x="40" y="110" text-anchor="end" font-size="12" fill="#000">5V</text>
+  <text x="40" y="130" text-anchor="end" font-size="12" fill="#000">GND</text>
+  <text x="40" y="160" text-anchor="end" font-size="12" fill="#000">A0</text>
+  <text x="40" y="180" text-anchor="end" font-size="12" fill="#000">A1</text>
+  <text x="40" y="200" text-anchor="end" font-size="12" fill="#000">A2</text>
+  <text x="40" y="220" text-anchor="end" font-size="12" fill="#000">A3</text>
+  <text x="40" y="240" text-anchor="end" font-size="12" fill="#000">A4</text>
+  <text x="40" y="260" text-anchor="end" font-size="12" fill="#000">A5</text>
+  <text x="40" y="280" text-anchor="end" font-size="12" fill="#000">D2</text>
+  <text x="40" y="300" text-anchor="end" font-size="12" fill="#000">D3</text>
+  
+  <text x="210" y="110" font-size="12" fill="#000">D13</text>
+  <text x="210" y="130" font-size="12" fill="#000">D12</text>
+  <text x="210" y="150" font-size="12" fill="#000">D11</text>
+  <text x="210" y="170" font-size="12" fill="#000">D10</text>
+  <text x="210" y="190" font-size="12" fill="#000">D9</text>
+  <text x="210" y="210" font-size="12" fill="#000">D8</text>
+  <text x="210" y="230" font-size="12" fill="#000">D7</text>
+  <text x="210" y="250" font-size="12" fill="#000">D6</text>
+  <text x="210" y="270" font-size="12" fill="#000">D5</text>
+  <text x="210" y="290" font-size="12" fill="#000">D4</text>
+  
+  <!-- Pin connection points -->
+  <circle cx="50" cy="105" r="4" fill="#ff0000"/>
+  <circle cx="50" cy="125" r="4" fill="#000"/>
+  <circle cx="50" cy="155" r="4" fill="#ffa500"/>
+  <circle cx="50" cy="175" r="4" fill="#ffa500"/>
+  <circle cx="50" cy="195" r="4" fill="#ffa500"/>
+  <circle cx="50" cy="215" r="4" fill="#ffa500"/>
+  <circle cx="50" cy="235" r="4" fill="#00ff00"/>
+  <circle cx="50" cy="255" r="4" fill="#00ff00"/>
+  <circle cx="50" cy="275" r="4" fill="#0080ff"/>
+  <circle cx="50" cy="295" r="4" fill="#0080ff"/>
+  
+  <circle cx="200" cy="105" r="4" fill="#0080ff"/>
+  <circle cx="200" cy="125" r="4" fill="#ffff00"/>
+  <circle cx="200" cy="145" r="4" fill="#ffff00"/>
+  <circle cx="200" cy="165" r="4" fill="#ffff00"/>
+  <circle cx="200" cy="185" r="4" fill="#ffff00"/>
+  <circle cx="200" cy="205" r="4" fill="#ffff00"/>
+  <circle cx="200" cy="225" r="4" fill="#ffff00"/>
+  <circle cx="200" cy="245" r="4" fill="#0080ff"/>
+  <circle cx="200" cy="265" r="4" fill="#0080ff"/>
+  <circle cx="200" cy="285" r="4" fill="#0080ff"/>
+  
+  <!-- LCD -->
+  <rect x="350" y="80" width="200" height="80" fill="#004400" stroke="#000" stroke-width="2" rx="5"/>
+  <text x="450" y="70" text-anchor="middle" font-size="16" font-weight="bold" fill="#000">16x2 LCD</text>
+  <text x="450" y="120" text-anchor="middle" font-size="12" fill="#fff">Standard Parallel</text>
+  <text x="450" y="135" text-anchor="middle" font-size="12" fill="#fff">(NOT I2C)</text>
+  
+  <!-- ML-303 -->
+  <rect x="350" y="220" width="200" height="150" fill="#800000" stroke="#000" stroke-width="2" rx="5"/>
+  <text x="450" y="210" text-anchor="middle" font-size="16" font-weight="bold" fill="#000">ML-303</text>
+  <text x="450" y="290" text-anchor="middle" font-size="12" fill="#fff">Interface Points</text>
+  
+  <!-- Connection lines -->
+  <line x1="50" y1="105" x2="350" y2="105" stroke="#ff0000" stroke-width="3"/>
+  <line x1="50" y1="125" x2="350" y2="125" stroke="#000" stroke-width="3"/>
+  
+  <line x1="200" y1="125" x2="350" y2="125" stroke="#ffff00" stroke-width="2"/>
+  <line x1="200" y1="145" x2="350" y2="140" stroke="#ffff00" stroke-width="2"/>
+  <line x1="200" y1="165" x2="350" y2="135" stroke="#ffff00" stroke-width="2"/>
+  <line x1="200" y1="185" x2="350" y2="130" stroke="#ffff00" stroke-width="2"/>
+  <line x1="200" y1="205" x2="350" y2="125" stroke="#ffff00" stroke-width="2"/>
+  <line x1="200" y1="225" x2="350" y2="120" stroke="#ffff00" stroke-width="2"/>
+  
+  <line x1="50" y1="155" x2="350" y2="250" stroke="#ffa500" stroke-width="2"/>
+  <line x1="50" y1="175" x2="350" y2="270" stroke="#ffa500" stroke-width="2"/>
+  <line x1="50" y1="195" x2="350" y2="290" stroke="#ffa500" stroke-width="2"/>
+  <line x1="50" y1="215" x2="350" y2="310" stroke="#ffa500" stroke-width="2"/>
+  
+  <line x1="50" y1="235" x2="350" y2="330" stroke="#00ff00" stroke-width="2"/>
+  <line x1="50" y1="255" x2="350" y2="350" stroke="#00ff00" stroke-width="2"/>
+  
+  <!-- Connection table -->
+  <rect x="50" y="400" width="700" height="180" fill="#fff" stroke="#000" stroke-width="1"/>
+  <text x="60" y="420" font-size="14" font-weight="bold" fill="#000">FIXED PIN ASSIGNMENTS (All Conflicts Resolved):</text>
+  
+  <text x="60" y="445" font-size="12" font-weight="bold" fill="#000">LCD (6 pins):</text>
+  <text x="70" y="460" font-size="11" fill="#000">D12→RS, D11→E, D10→D4, D9→D5, D8→D6, D7→D7</text>
+  
+  <text x="60" y="480" font-size="12" font-weight="bold" fill="#000">Controls:</text>
+  <text x="70" y="495" font-size="11" fill="#000">D2→Run/Stop, D3→Pattern, D4→Clock, D5→Gate In, D6→Gate Out</text>
+  
+  <text x="60" y="515" font-size="12" font-weight="bold" fill="#000">Analog:</text>
+  <text x="70" y="530" font-size="11" fill="#000">A0→Cutoff, A1→Resonance, A2→Env Mod, A3→Decay</text>
+  
+  <text x="60" y="550" font-size="12" font-weight="bold" fill="#000">MIDI/DAC:</text>
+  <text x="70" y="565" font-size="11" fill="#000">A4→MIDI RX, A5→MIDI TX, D13→DAC CS, D11→SPI</text>
+  
+  <!-- Warning -->
+  <rect x="400" y="445" width="340" height="40" fill="#ffcccc" stroke="#ff0000" stroke-width="2"/>
+  <text x="410" y="460" font-size="12" font-weight="bold" fill="#ff0000">⚠️ SAFETY WARNING:</text>
+  <text x="410" y="475" font-size="11" fill="#000">ML-303 has NO reverse polarity protection!</text>
+</svg>

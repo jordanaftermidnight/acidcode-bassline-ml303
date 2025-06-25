@@ -1,0 +1,249 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="1000" height="800" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <style>
+      .power-wire { stroke: #FF0000; stroke-width: 4; fill: none; }
+      .ground-wire { stroke: #000000; stroke-width: 4; fill: none; }
+      .spi-wire { stroke: #9900CC; stroke-width: 3; fill: none; }
+      .analog-wire { stroke: #FF6600; stroke-width: 4; fill: none; }
+      .data-wire { stroke: #0066FF; stroke-width: 3; fill: none; }
+      
+      .arduino-board { fill: #006666; stroke: #004444; stroke-width: 2; }
+      .dac-ic { fill: #222222; stroke: #666666; stroke-width: 2; }
+      .output-section { fill: #444444; stroke: #888888; stroke-width: 2; }
+      .ml303-board { fill: #660000; stroke: #440000; stroke-width: 2; }
+      
+      .pin-power { fill: #FF0000; stroke: #CC0000; stroke-width: 1; }
+      .pin-ground { fill: #000000; stroke: #333333; stroke-width: 1; }
+      .pin-spi { fill: #9900CC; stroke: #770099; stroke-width: 1; }
+      .pin-analog { fill: #FF6600; stroke: #CC4400; stroke-width: 1; }
+      .pin-data { fill: #0066FF; stroke: #0044CC; stroke-width: 1; }
+      
+      .label-title { font-size: 24px; font-weight: bold; fill: #000000; font-family: Arial, sans-serif; }
+      .label-section { font-size: 16px; font-weight: bold; fill: #000000; font-family: Arial, sans-serif; }
+      .label-component { font-size: 12px; font-weight: bold; fill: #FFFFFF; font-family: Arial, sans-serif; }
+      .label-pin { font-size: 10px; font-weight: bold; fill: #000000; font-family: Arial, sans-serif; }
+      .label-wire { font-size: 10px; font-weight: bold; fill: #000000; font-family: Arial, sans-serif; }
+    </style>
+  </defs>
+  
+  <!-- Background -->
+  <rect width="1000" height="800" fill="#F5F5F5"/>
+  
+  <!-- Title -->
+  <text x="500" y="30" text-anchor="middle" class="label-title">MCP4921 DAC Control Voltage - Detailed Wiring</text>
+  <text x="500" y="55" text-anchor="middle" class="label-section">12-bit SPI DAC for ML-303 Integration</text>
+  
+  <!-- Arduino Section -->
+  <rect class="arduino-board" x="50" y="100" width="150" height="250" rx="10"/>
+  <text x="125" y="85" text-anchor="middle" class="label-section">Arduino Uno</text>
+  
+  <!-- Arduino Power Pins -->
+  <circle class="pin-power" cx="70" cy="130" r="6"/>
+  <text x="50" y="135" text-anchor="end" class="label-pin">5V</text>
+  
+  <circle class="pin-ground" cx="70" cy="150" r="6"/>
+  <text x="50" y="155" text-anchor="end" class="label-pin">GND</text>
+  
+  <circle class="pin-ground" cx="70" cy="170" r="6"/>
+  <text x="50" y="175" text-anchor="end" class="label-pin">GND</text>
+  
+  <!-- Arduino SPI Pins -->
+  <circle class="pin-spi" cx="180" cy="130" r="6"/>
+  <text x="200" y="135" class="label-pin">D13 (SCK)</text>
+  
+  <circle class="pin-spi" cx="180" cy="150" r="6"/>
+  <text x="200" y="155" class="label-pin">D12 (MISO)</text>
+  
+  <circle class="pin-spi" cx="180" cy="170" r="6"/>
+  <text x="200" y="175" class="label-pin">D11 (MOSI)</text>
+  
+  <circle class="pin-data" cx="180" cy="190" r="6"/>
+  <text x="200" y="195" class="label-pin">D10 (CS)</text>
+  
+  <!-- Arduino Digital Pins -->
+  <circle class="pin-data" cx="70" cy="210" r="6"/>
+  <text x="50" y="215" text-anchor="end" class="label-pin">D9</text>
+  
+  <circle class="pin-data" cx="70" cy="230" r="6"/>
+  <text x="50" y="235" text-anchor="end" class="label-pin">D8</text>
+  
+  <circle class="pin-data" cx="70" cy="250" r="6"/>
+  <text x="50" y="255" text-anchor="end" class="label-pin">D7</text>
+  
+  <circle class="pin-data" cx="70" cy="270" r="6"/>
+  <text x="50" y="275" text-anchor="end" class="label-pin">D6</text>
+  
+  <circle class="pin-data" cx="70" cy="290" r="6"/>
+  <text x="50" y="295" text-anchor="end" class="label-pin">D5</text>
+  
+  <circle class="pin-data" cx="70" cy="310" r="6"/>
+  <text x="50" y="315" text-anchor="end" class="label-pin">D4</text>
+  
+  <circle class="pin-data" cx="70" cy="330" r="6"/>
+  <text x="50" y="335" text-anchor="end" class="label-pin">D3</text>
+  
+  <!-- MCP4921 DAC IC -->
+  <rect class="dac-ic" x="350" y="120" width="120" height="100" rx="8"/>
+  <text x="410" y="105" text-anchor="middle" class="label-section">MCP4921</text>
+  <text x="410" y="150" text-anchor="middle" class="label-component">12-bit DAC</text>
+  <text x="410" y="165" text-anchor="middle" font-size="10" fill="#CCCCCC">Single Channel</text>
+  <text x="410" y="180" text-anchor="middle" font-size="10" fill="#CCCCCC">SPI Interface</text>
+  <text x="410" y="195" text-anchor="middle" font-size="10" fill="#CCCCCC">2.7V - 5.5V</text>
+  
+  <!-- MCP4921 Pin Layout (DIP-8) -->
+  <!-- Left side pins -->
+  <circle class="pin-power" cx="350" cy="140" r="5"/>
+  <text x="330" y="145" text-anchor="end" class="label-pin">1-VCC</text>
+  
+  <circle class="pin-data" cx="350" cy="160" r="5"/>
+  <text x="330" y="165" text-anchor="end" class="label-pin">2-CS</text>
+  
+  <circle class="pin-spi" cx="350" cy="180" r="5"/>
+  <text x="330" y="185" text-anchor="end" class="label-pin">3-SCK</text>
+  
+  <circle class="pin-spi" cx="350" cy="200" r="5"/>
+  <text x="330" y="205" text-anchor="end" class="label-pin">4-SDI</text>
+  
+  <!-- Right side pins -->
+  <circle class="pin-analog" cx="470" cy="140" r="5"/>
+  <text x="490" y="145" class="label-pin">8-VOUT</text>
+  
+  <circle class="pin-ground" cx="470" cy="160" r="5"/>
+  <text x="490" y="165" class="label-pin">7-VSS</text>
+  
+  <circle class="pin-power" cx="470" cy="180" r="5"/>
+  <text x="490" y="185" class="label-pin">6-VREF</text>
+  
+  <circle class="pin-ground" cx="470" cy="200" r="5"/>
+  <text x="490" y="205" class="label-pin">5-LDAC</text>
+  
+  <!-- Bypass Capacitor -->
+  <rect x="480" y="120" width="8" height="15" fill="#4169E1" stroke="#191970" stroke-width="2" rx="2"/>
+  <text x="500" y="130" class="label-pin">0.1µF</text>
+  <text x="500" y="115" class="label-pin">Bypass</text>
+  
+  <!-- CV Output Section -->
+  <rect class="output-section" x="600" y="130" width="120" height="80" rx="8"/>
+  <text x="660" y="115" text-anchor="middle" class="label-section">CV Output</text>
+  <text x="660" y="155" text-anchor="middle" class="label-component">0 - 4.096V</text>
+  <text x="660" y="175" text-anchor="middle" font-size="10" fill="#CCCCCC">12-bit Resolution</text>
+  <text x="660" y="190" text-anchor="middle" font-size="10" fill="#CCCCCC">4096 Steps</text>
+  
+  <!-- CV Output Connector -->
+  <circle cx="680" cy="160" r="8" fill="#FF6600" stroke="#CC4400" stroke-width="2"/>
+  <text x="680" y="165" text-anchor="middle" font-size="8" fill="#FFF">CV</text>
+  
+  <!-- Optional Buffer Amplifier -->
+  <rect class="output-section" x="600" y="240" width="120" height="60" rx="8"/>
+  <text x="660" y="225" text-anchor="middle" class="label-pin">Optional Buffer</text>
+  <text x="660" y="265" text-anchor="middle" class="label-component">TL072</text>
+  <text x="660" y="280" text-anchor="middle" font-size="10" fill="#CCCCCC">Unity Gain</text>
+  <text x="660" y="295" text-anchor="middle" font-size="10" fill="#CCCCCC">Low Z Output</text>
+  
+  <!-- ML-303 Section -->
+  <rect class="ml303-board" x="800" y="130" width="150" height="180" rx="10"/>
+  <text x="875" y="115" text-anchor="middle" class="label-section">ML-303</text>
+  <text x="875" y="180" text-anchor="middle" class="label-component">VCO CV Input</text>
+  <text x="875" y="200" text-anchor="middle" font-size="10" fill="#CCCCCC">1V/Octave</text>
+  <text x="875" y="215" text-anchor="middle" font-size="10" fill="#CCCCCC">Standard</text>
+  
+  <!-- ML-303 CV Input -->
+  <circle cx="820" cy="180" r="8" fill="#FF6600" stroke="#CC4400" stroke-width="2"/>
+  <text x="820" y="185" text-anchor="middle" font-size="8" fill="#FFF">CV</text>
+  
+  <!-- Power Connections -->
+  <path class="power-wire" d="M 70 130 Q 200 100 350 140"/>
+  <text x="200" y="95" class="label-wire">+5V POWER</text>
+  
+  <path class="power-wire" d="M 350 140 Q 410 120 470 180"/>
+  <text x="410" y="115" class="label-wire">VREF = VCC</text>
+  
+  <path class="power-wire" d="M 480 120 Q 500 110 520 120"/>
+  
+  <!-- Ground Connections -->
+  <path class="ground-wire" d="M 70 150 Q 200 120 350 160"/>
+  <path class="ground-wire" d="M 350 160 Q 410 140 470 160"/>
+  <path class="ground-wire" d="M 470 160 Q 500 150 520 150"/>
+  <path class="ground-wire" d="M 470 200 Q 500 190 520 190"/>
+  <text x="250" y="115" class="label-wire">GROUND</text>
+  
+  <!-- SPI Connections -->
+  <path class="spi-wire" d="M 180 130 Q 250 110 350 180"/>
+  <text x="250" y="105" class="label-wire">SCK</text>
+  
+  <path class="spi-wire" d="M 180 170 Q 250 150 350 200"/>
+  <text x="250" y="145" class="label-wire">MOSI (SDI)</text>
+  
+  <path class="data-wire" d="M 180 190 Q 250 175 350 160"/>
+  <text x="250" y="170" class="label-wire">CS (Chip Select)</text>
+  
+  <!-- CV Output Connection -->
+  <path class="analog-wire" d="M 470 140 Q 550 140 600 160"/>
+  <text x="550" y="135" class="label-wire">CV OUTPUT</text>
+  
+  <path class="analog-wire" d="M 720 160 Q 760 160 800 180"/>
+  <text x="760" y="155" class="label-wire">TO ML-303</text>
+  
+  <!-- Voltage Reference Lines -->
+  <line x1="350" y1="230" x2="470" y2="230" stroke="#FF0000" stroke-width="2" stroke-dasharray="5,5"/>
+  <text x="410" y="245" text-anchor="middle" class="label-wire">VREF = 5V</text>
+  
+  <line x1="470" y1="250" x2="600" y2="250" stroke="#FF6600" stroke-width="2" stroke-dasharray="5,5"/>
+  <text x="535" y="265" text-anchor="middle" class="label-wire">VOUT = 0 to 4.096V</text>
+  
+  <!-- Component Details Box -->
+  <rect x="50" y="400" width="900" height="350" fill="#FFFFFF" stroke="#CCCCCC" stroke-width="2" rx="10"/>
+  <text x="70" y="425" class="label-section">MCP4921 DAC Implementation Details</text>
+  
+  <!-- Technical Specifications -->
+  <text x="70" y="455" font-size="14" font-weight="bold" fill="#000">Technical Specifications:</text>
+  <text x="90" y="475" font-size="11" fill="#000">• Resolution: 12-bit (4096 discrete output levels)</text>
+  <text x="90" y="490" font-size="11" fill="#000">• Output Range: 0V to VREF (0-5V with 5V supply)</text>
+  <text x="90" y="505" font-size="11" fill="#000">• Interface: SPI (Serial Peripheral Interface)</text>
+  <text x="90" y="520" font-size="11" fill="#000">• Maximum SPI Clock: 20 MHz</text>
+  <text x="90" y="535" font-size="11" fill="#000">• Supply Voltage: 2.7V to 5.5V</text>
+  <text x="90" y="550" font-size="11" fill="#000">• Current Consumption: &lt;1mA typical</text>
+  
+  <!-- Connection Details -->
+  <text x="400" y="455" font-size="14" font-weight="bold" fill="#000">SPI Connection Details:</text>
+  <text x="420" y="475" font-size="11" fill="#000">VCC (Pin 1) → Arduino 5V</text>
+  <text x="420" y="490" font-size="11" fill="#000">CS (Pin 2) → Arduino D10 (Chip Select)</text>
+  <text x="420" y="505" font-size="11" fill="#000">SCK (Pin 3) → Arduino D13 (SPI Clock)</text>
+  <text x="420" y="520" font-size="11" fill="#000">SDI (Pin 4) → Arduino D11 (MOSI Data)</text>
+  <text x="420" y="535" font-size="11" fill="#000">LDAC (Pin 5) → Ground (immediate update)</text>
+  <text x="420" y="550" font-size="11" fill="#000">VREF (Pin 6) → Arduino 5V (reference)</text>
+  <text x="420" y="565" font-size="11" fill="#000">VSS (Pin 7) → Ground</text>
+  <text x="420" y="580" font-size="11" fill="#000">VOUT (Pin 8) → CV Output</text>
+  
+  <!-- Arduino Code Example -->
+  <text x="70" y="605" font-size="14" font-weight="bold" fill="#000">Arduino Code Example:</text>
+  
+  <text x="90" y="625" font-size="10" fill="#000">#include &lt;SPI.h&gt;</text>
+  <text x="90" y="640" font-size="10" fill="#000">#define DAC_CS 10</text>
+  <text x="90" y="655" font-size="10" fill="#000"></text>
+  <text x="90" y="670" font-size="10" fill="#000">void setup() {</text>
+  <text x="100" y="685" font-size="10" fill="#000">  SPI.begin();</text>
+  <text x="100" y="700" font-size="10" fill="#000">  pinMode(DAC_CS, OUTPUT);</text>
+  <text x="100" y="715" font-size="10" fill="#000">  digitalWrite(DAC_CS, HIGH);</text>
+  <text x="90" y="730" font-size="10" fill="#000">}</text>
+  
+  <text x="400" y="625" font-size="10" fill="#000">void setControlVoltage(uint16_t value) {</text>
+  <text x="410" y="640" font-size="10" fill="#000">  // Limit to 12-bit range (0-4095)</text>
+  <text x="410" y="655" font-size="10" fill="#000">  value &= 0x0FFF;</text>
+  <text x="410" y="670" font-size="10" fill="#000">  // Format: [0011xxxxxxxxxxxx]</text>
+  <text x="410" y="685" font-size="10" fill="#000">  uint16_t command = 0x3000 | value;</text>
+  <text x="410" y="700" font-size="10" fill="#000">  digitalWrite(DAC_CS, LOW);</text>
+  <text x="410" y="715" font-size="10" fill="#000">  SPI.transfer16(command);</text>
+  <text x="410" y="730" font-size="10" fill="#000">  digitalWrite(DAC_CS, HIGH);</text>
+  <text x="400" y="745" font-size="10" fill="#000">}</text>
+  
+  <!-- Control Voltage Information -->
+  <text x="700" y="625" font-size="12" font-weight="bold" fill="#000">Control Voltage Notes:</text>
+  <text x="720" y="645" font-size="11" fill="#000">• 1V/Octave standard for ML-303</text>
+  <text x="720" y="660" font-size="11" fill="#000">• 4096 steps = ~1mV resolution</text>
+  <text x="720" y="675" font-size="11" fill="#000">• Range: C0 to C4 (4 octaves)</text>
+  <text x="720" y="690" font-size="11" fill="#000">• Value 0 = 0V, Value 4095 = 4.096V</text>
+  <text x="720" y="705" font-size="11" fill="#000">• Optional TL072 buffer for drive</text>
+  <text x="720" y="720" font-size="11" fill="#000">• Add 0.1µF bypass capacitor</text>
+</svg>
