@@ -31,6 +31,8 @@ We have the complete PIC18F452 assembly source code - a rare find in the TB-303 
 │   ├── FIRMWARE_ANALYSIS.md     # Source code analysis
 │   ├── FIRMWARE_LOADING.md      # Programming procedures
 │   └── modifications/           # Modification guides
+│       ├── EXISTING_ML303_MODIFICATIONS.md  # Enhance existing ML-303
+│       └── OTHER_BASSLINE_MODIFICATIONS.md  # Modify other basslines
 ├── arduino/                     # Arduino integration
 │   ├── ml303_enhanced.ino       # Main Arduino code
 │   ├── test_sketch.ino          # Hardware testing
@@ -50,8 +52,8 @@ We have the complete PIC18F452 assembly source code - a rare find in the TB-303 
 |-----------|------------|
 | **Understand the firmware** | [docs/FIRMWARE_ANALYSIS.md](docs/FIRMWARE_ANALYSIS.md) |
 | **Build ML-303 from scratch** | [docs/BUILD_GUIDE.md](docs/BUILD_GUIDE.md) |
-| **Enhance existing ML-303** | [docs/modifications/EXISTING_ML303.md](docs/modifications/EXISTING_ML303.md) |
-| **Modify other TB-303 clones** | [docs/modifications/OTHER_BASSLINES.md](docs/modifications/OTHER_BASSLINES.md) |
+| **Enhance existing ML-303** | [docs/modifications/EXISTING_ML303_MODIFICATIONS.md](docs/modifications/EXISTING_ML303_MODIFICATIONS.md) |
+| **Modify other TB-303 clones** | [docs/modifications/OTHER_BASSLINE_MODIFICATIONS.md](docs/modifications/OTHER_BASSLINE_MODIFICATIONS.md) |
 | **Test Arduino hardware** | [arduino/test_sketch.ino](arduino/test_sketch.ino) |
 
 ## Critical Safety Warning
