@@ -1,0 +1,69 @@
+REICHELT BESELLNUMMERN FÜR MKT KONDIS
+ANALOGBOARD
+
+1x MKH400-7,5 1,0n
+2x MKH400-7,5 1,5n
+1x MKH400-7,5 6,8n
+5x MKH400-7,5 10n
+1x MKH400-7,5 15n
+
+4x MKH250-7,5 33n
+1x MKH250-7,5 47n
+1x MKH250-7,5 68n
+4x MKH250-7,5 100n
+
+1x MKH100-7,5 220n
+
+---------------------------------------------
+Bei den Elkos gibts teilweise nur größere Spannungswerte
+
+12x RAD 1/63 (nicht 16)
+1x 2,2/63 (nicht 16)
+13x 10/35 (nicht 16)
+2x RAD 22/16
+6x RAD 47/35
+4x RAD 100/16
+1x RAD 470/35
+1x RAD 1000/16
+
+2x TANTAL 1/35 (nicht 16)
+
+2x Kerko 100n
+
+15x 1N 4148
+2x 1N 4001
+1x ZF 6,2
+
+
+Taster (Conrad-Elektronik):
+
+Blau: 707694-13
+Weiß (Grau): 707660-13
+Gelb: 707686-13
+Rot: 707678-13
+Schwarz: 707651-13
+
+o Platine Analog, komplett überarbeitetet weitgehend nach Original-Vorbild, mit Anschlüssen für MKH-Kondensatoren, Print-Potis (Alphastat), original PSU (12/5,333), Anschlußmöglichkeit für BA662 oder BA6110 wahlweise, direkte Anschlüsse beide IC`s sind vorgesehen(!)
+o Platine Digital
+o Prozessor
+o Acidcode TypO Transistor als 2SK30 (versuche trotzdem noch -AO`s zu kriegen!)
+o 2SK30-GR als -Y (macht keinen Unterschied!)
+o 20 Stück 2SC536 (TB-303 original erste Baureihe, später 2SC945)
+o 8 Stück 2SA733
+o BA 6110 ROHM VCA
+o neue Bauanleitung
+
+
+Hi
+BestellNr.Reichelt für MKH
+
+MKH100-7,5 100N 
+MKH100-7,5 220N 
+MKH400-10 33N 
+MKH400-10 47N 
+MKH400-15 68N 
+MKH400-7,5 1,0N 
+MKH400-7,5 1,5N 
+MKH400-7,5 10N 
+MKH400-7,5 15N 
+MKH400-7,5 6,8N 

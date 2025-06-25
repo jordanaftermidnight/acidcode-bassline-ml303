@@ -1,0 +1,87 @@
+###########################
+PATTERN DATAFORMAT
+###########################
+
+-----------------
+BYTE 1
+-----------------
+
+01234567
+NNNNUDAS
+
+NNNN = Note Bit 1 bis 4
+U = UP
+D = DOWN
+A = ACCENT
+S = SLIDE
+
+-----------------
+BYTE 2
+-----------------
+
+01234567
+BWxxxxxx
+
+B = BLACK
+W = WHITE
+
+BW 00 = PAUSE
+BW 10 = BLACK
+BW 01 = WHITE
+BW 11 = PAUSE
+
+xxxxxx = NOT USED
+
+16 Steps a 2 Byte = 32 Byte je Pattern
+
+-----------------
+STATUS BYTE 
+-----------------
+
+01234567
+LLLLTZxxx
+
+LLLL = PATTERN LENGTH 
+T = TRIOLEN
+Z = LOCK BIT
+xxx = UNUSED
+
+###########################
+EEPROM
+###########################
+00 = BPM LOW
+01 = BPM HIGH
+02 = unused
+03 = unused
+04 = Init-Kennung A
+05 = Init-Kennung C
+06 = Init-Kennung D
+07 = LAST PATTERN BEFORE SHUTDOWN
+08 = MEMFAIL COUNTER LOW
+09 = MEMFAIL COUNTER HIGH
+0A = MIDI CHANNEL IN
+0B = MIDI CHANNEL OUT
+0C = 
+0D = 
+0E = 
+0F = 
+
+###########################
+MEMORYMAP
+###########################
+
+0000-0003 = JUMP TO BOOTCODE
+0004-0007 = EINSPRUNGPUNKT
+0008-0010 = IRQ
+001A-5FFF = PGM
+6000-6FFF = 128 PATTERN JE 32 BYTE
+7000-73FF = 128 PATTERN NAMEN JE 8 BYTE
+7400-747F = 128 PATTERN STATUS BYTE
+7480-74FF = UNUSED
+7500-78FF = 16 SONGS (je 64 PATTERNS)
+7900-797F = 16 SONG NAMEN JE 8 BYTE
+7980-7BFF = UNUSED
+7C00 = BOOTLOADER
+7FFF = END
+
+SONG BIT 7 = END
