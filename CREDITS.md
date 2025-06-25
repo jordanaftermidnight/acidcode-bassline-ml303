@@ -2,6 +2,14 @@
 
 ## 🎛️ Original Creators and Contributors
 
+### **This Repository**: **jordanaftermidnight**
+- Complete project analysis, documentation, and organization
+- Arduino code development, testing, and optimization
+- Firmware source code analysis and technical documentation
+- Repository restructuring and professional presentation
+- Community research and related projects documentation
+- Built upon the foundational work of the original creators below
+
 ### **Acidcode Bassline ML-303**
 **Original Hardware Design**: **Acidcode (Mathias Märker)**
 - Complete analog circuit design based on original Roland TB-303
