@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="600" height="400" xmlns="http://www.w3.org/2000/svg">
+  <rect width="600" height="400" fill="white"/>
+  
+  <!-- Title -->
+  <text x="300" y="25" text-anchor="middle" font-size="16" font-weight="bold">CD4049 Overdrive Circuit</text>
+  
+  <!-- Input -->
+  <circle cx="80" cy="100" r="15" fill="#333" stroke="black" stroke-width="2"/>
+  <text x="80" y="105" text-anchor="middle" font-size="10" fill="white">IN</text>
+  <text x="80" y="130" text-anchor="middle" font-size="10">Audio</text>
+  
+  <!-- Input cap -->
+  <rect x="140" y="95" width="8" height="12" fill="blue" stroke="black"/>
+  <text x="155" y="105" font-size="9">0.1µF</text>
+  
+  <!-- CD4049 -->
+  <rect x="200" y="80" width="80" height="40" fill="#333" stroke="black" stroke-width="2"/>
+  <text x="240" y="95" text-anchor="middle" font-size="10" fill="white">CD4049</text>
+  <text x="240" y="110" text-anchor="middle" font-size="9" fill="white">Inverter</text>
+  
+  <!-- Level control -->
+  <rect x="330" y="85" width="50" height="30" fill="#8B4513" stroke="black" stroke-width="2"/>
+  <text x="355" y="100" text-anchor="middle" font-size="10" fill="white">LEVEL</text>
+  <text x="355" y="112" text-anchor="middle" font-size="9" fill="white">100k</text>
+  
+  <!-- Output -->
+  <circle cx="450" cy="100" r="15" fill="#333" stroke="black" stroke-width="2"/>
+  <text x="450" y="105" text-anchor="middle" font-size="10" fill="white">OUT</text>
+  <text x="450" y="130" text-anchor="middle" font-size="10">Distorted</text>
+  
+  <!-- Power supply -->
+  <rect x="200" y="180" width="80" height="50" fill="#666" stroke="black" stroke-width="2"/>
+  <text x="240" y="195" text-anchor="middle" font-size="10" fill="white">POWER</text>
+  <text x="240" y="210" text-anchor="middle" font-size="9" fill="white">+9V to +18V</text>
+  <text x="240" y="222" text-anchor="middle" font-size="9" fill="white">or ±15V</text>
+  
+  <!-- Connections -->
+  <line x1="95" y1="100" x2="140" y2="100" stroke="green" stroke-width="2"/>
+  <line x1="148" y1="100" x2="200" y2="100" stroke="green" stroke-width="2"/>
+  <line x1="280" y1="100" x2="330" y2="100" stroke="green" stroke-width="2"/>
+  <line x1="380" y1="100" x2="435" y2="100" stroke="green" stroke-width="2"/>
+  
+  <!-- Power connections -->
+  <line x1="240" y1="120" x2="240" y2="180" stroke="red" stroke-width="2"/>
+  <text x="250" y="150" font-size="9">VDD</text>
+  
+  <line x1="220" y1="140" x2="220" y2="250" stroke="black" stroke-width="2"/>
+  <line x1="80" y1="250" x2="450" y2="250" stroke="black" stroke-width="2"/>
+  <line x1="80" y1="115" x2="80" y2="250" stroke="black" stroke-width="2"/>
+  <line x1="450" y1="115" x2="450" y2="250" stroke="black" stroke-width="2"/>
+  <text x="150" y="265" font-size="9">Ground/VSS</text>
+  
+  <!-- Component details -->
+  <rect x="50" y="300" width="500" height="80" fill="white" stroke="black"/>
+  <text x="60" y="320" font-size="12" font-weight="bold">Component List:</text>
+  
+  <text x="60" y="340" font-size="11">• CD4049UBE CMOS Inverter IC</text>
+  <text x="60" y="355" font-size="11">• 0.1µF input coupling capacitor</text>
+  <text x="60" y="370" font-size="11">• 100kΩ level control potentiometer</text>
+  
+  <text x="300" y="340" font-size="11">Power: +9V to +18V single supply</text>
+  <text x="300" y="355" font-size="11">OR ±15V dual supply (ML-303)</text>
+  <text x="300" y="370" font-size="11">Use only one inverter gate (pins 1→2)</text>
+</svg>
