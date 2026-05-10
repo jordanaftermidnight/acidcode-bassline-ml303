@@ -1,0 +1,45 @@
+02	Resistor (0204) 1k2			400262 - LN		CONRAD
+01	Resistor (0204) 1k8			400289 - LN		CONRAD
+04	Resistor (0204) 1k			400254 - LN		CONRAD
+01	Resistor (0204) 1M			400610 - LN		CONRAD
+15	Resistor (0204) 2k2			400297 - LN		CONRAD
+01	Resistor (0204) 3k3			400319 - LN		CONRAD
+02	Resistor (0204) 4k7			400335 - LN		CONRAD
+01	Resistor (0204) 5k6			400343 - LN		CONRAD
+33	Resistor (0204) 10k			400378 - LN		CONRAD
+02	Resistor (0204) 10 Ohms		400017 - LN		CONRAD
+25	Resistor (0204) 100k		400491 - LN		CONRAD
+01	Resistor (0204) 560k		400580 - LN		CONRAD
+01	Resistor (0204) 560			400220 - LN		CONRAD
+06	Resistor (0204) 220k		400530 - LN		CONRAD
+02	Resistor (0204) 6k8			400351 - LN		CONRAD
+01	Resistor (0204) 120k		400505 - LN		CONRAD
+01	Resistor (0204) 680k		400599 - LN		CONRAD
+01	Resistor (0204) 12k			400386 - LN		CONRAD
+01	Resistor (0204) 18k			400408 - LN		CONRAD
+12	Resistor (0204) 22k			400416 - LN		CONRAD
+02	Resistor (0204) 330 Ohms	400190 - LN		CONRAD
+01	Resistor (0204) 22 Ohms		400050 - LN		CONRAD
+07	Resistor (0204) 100 Ohms	400130 - LN		CONRAD
+06	Resistor (0204) 220 Ohms	400173 - LN		CONRAD
+02	Resistor (0204) 33k			400432 - LN		CONRAD
+01	Resistor (0204) 39k			400440 - LN		CONRAD
+05	Resistor (0204) 47k			400459 - LN		CONRAD
+01	Resistor (0204) 68k			400475 - LN		CONRAD
+	
+01	Resistor (0207) 1M5			403636 - LN		CONRAD
+
+01	Resistor 1W 6,8 Ohms		419303 - LN		CONRAD
+	(for DISPLAYTECH 6,8 Ohms, for TRONICO 68 Ohms, check LCD-Datasheet)
+	
+01	Capacitor 18n (VCF)			460885 - PT		CONRAD
+05	Capacitor 33n (VCF)			500760 - LN 	CONRAD
+02	Capacitor 10n (VCO)			500868 - LN		CONRAD
+02	Capacitor 100n (VCF) (µ1)	501047 - PT		CONRAD
+01	RECOM 0515S DC/DC 1,2W		152684 - PT		CONRAD
+01	TRIM HIGH-PRECISION 5k		424404 - LN		CONRAD
+01	TRIM HIGH-PRECISION 50k		424439 - LN		CONRAD
+01	TRIM HIGH-PRECISION 500k	424463 - LN		CONRAD
+24	DELTRON TACTSWITCH			705268 - PT		CONRAD (or collected-order by Pempelson/Forum)
+24	DELTRON MULTIMEC CAP 11,5MM	705191 - PT		CONRAD (or collected-order by Pempelson/Forum)
+	(different forms and sizes available, check out also FARNELL for more types!)

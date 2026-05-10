@@ -1,0 +1,441 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>ML-303 Button Clearance Solutions</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 20px;
+            background-color: #f5f5f5;
+        }
+        .container {
+            background: white;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+            margin-bottom: 20px;
+            max-width: 1200px;
+            margin: 20px auto;
+        }
+        .ml303-title {
+            font-family: 'Arial Black', sans-serif;
+            font-size: 28px;
+            color: #ff0000;
+            text-align: center;
+            margin: 20px 0;
+            text-transform: uppercase;
+        }
+        .comparison-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 20px;
+            margin: 20px 0;
+        }
+        .solution {
+            border: 2px solid #333;
+            padding: 15px;
+            border-radius: 8px;
+        }
+        .solution h3 {
+            color: #ff0000;
+            margin-top: 0;
+        }
+        .specs {
+            background: #e8f5e9;
+            padding: 10px;
+            border-radius: 4px;
+            margin: 10px 0;
+        }
+        .warning {
+            background: #ffebee;
+            padding: 10px;
+            border-radius: 4px;
+            margin: 10px 0;
+            border-left: 4px solid #f44336;
+        }
+        .pros-cons {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 10px;
+            margin: 10px 0;
+        }
+        .pros, .cons {
+            padding: 10px;
+            border-radius: 4px;
+        }
+        .pros {
+            background: #e8f5e9;
+            border-left: 4px solid #4CAF50;
+        }
+        .cons {
+            background: #ffebee;
+            border-left: 4px solid #f44336;
+        }
+        canvas {
+            border: 2px solid #333;
+            margin: 10px 0;
+            background: white;
+            display: block;
+            margin: 0 auto;
+        }
+        table {
+            border-collapse: collapse;
+            width: 100%;
+            margin: 10px 0;
+        }
+        th, td {
+            border: 1px solid #ddd;
+            padding: 8px;
+            text-align: left;
+        }
+        th {
+            background-color: #ff0000;
+            color: white;
+        }
+        .ribbon-diagram {
+            background: #f0f0f0;
+            padding: 15px;
+            border-radius: 4px;
+            margin: 10px 0;
+            font-family: monospace;
+        }
+    </style>
+</head>
+<body>
+    <div class="ml303-title">ML-303 Button Clearance Solutions</div>
+    
+    <div class="container">
+        <h2>Problem Overview</h2>
+        <div class="warning">
+            <strong>Clearance Issue:</strong> The original Conrad 3-pin buttons are discontinued. Standard 4-pin tactile switches with adapters may not fit due to:
+            <ul>
+                <li>40-pin PIC processor height (~15mm with socket)</li>
+                <li>LEDs on the main board (5-8mm)</li>
+                <li>Limited panel-to-PCB clearance</li>
+                <li>Other tall components (capacitors, crystal)</li>
+            </ul>
+        </div>
+    </div>
+
+    <div class="container">
+        <h2>Two Solutions</h2>
+        
+        <div class="comparison-grid">
+            <div class="solution">
+                <h3>Solution 1: Low-Profile Adapters</h3>
+                
+                <canvas id="lowProfileCanvas" width="400" height="300"></canvas>
+                
+                <div class="specs">
+                    <h4>Specifications:</h4>
+                    <ul>
+                        <li><strong>PCB Thickness:</strong> 0.8mm (vs standard 1.6mm)</li>
+                        <li><strong>Switch Type:</strong> 6mm or 7mm height tactile</li>
+                        <li><strong>Total Stack:</strong> ~8mm maximum</li>
+                        <li><strong>Connection:</strong> SMD traces, minimal vias</li>
+                        <li><strong>Manufacturing:</strong> Requires thin PCB option</li>
+                    </ul>
+                </div>
+                
+                <div class="pros-cons">
+                    <div class="pros">
+                        <h5>✓ Pros:</h5>
+                        <ul>
+                            <li>Maintains original layout</li>
+                            <li>No case modifications</li>
+                            <li>Clean installation</li>
+                            <li>Direct replacement</li>
+                        </ul>
+                    </div>
+                    <div class="cons">
+                        <h5>✗ Cons:</h5>
+                        <ul>
+                            <li>Still may not fit</li>
+                            <li>Requires special PCB</li>
+                            <li>Limited switch options</li>
+                            <li>More expensive PCBs</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="solution">
+                <h3>Solution 2: Remote Mount Board</h3>
+                
+                <canvas id="remoteMountCanvas" width="400" height="300"></canvas>
+                
+                <div class="specs">
+                    <h4>Specifications:</h4>
+                    <ul>
+                        <li><strong>Board Size:</strong> 279.4 × 177.8mm (matches panel)</li>
+                        <li><strong>Connection:</strong> 40-pin ribbon cable</li>
+                        <li><strong>Switch Type:</strong> Any 12×12mm tactile</li>
+                        <li><strong>Features:</strong> Built-in pull-ups, matrix wiring</li>
+                        <li><strong>Mounting:</strong> Behind front panel</li>
+                    </ul>
+                </div>
+                
+                <div class="pros-cons">
+                    <div class="pros">
+                        <h5>✓ Pros:</h5>
+                        <ul>
+                            <li>Guaranteed to fit</li>
+                            <li>Use any switches</li>
+                            <li>Easy debugging</li>
+                            <li>Arduino integration</li>
+                        </ul>
+                    </div>
+                    <div class="cons">
+                        <h5>✗ Cons:</h5>
+                        <ul>
+                            <li>Requires ribbon cable</li>
+                            <li>More complex assembly</li>
+                            <li>Cable management</li>
+                            <li>Larger PCB cost</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="container">
+        <h2>Ribbon Cable Connection (Remote Mount)</h2>
+        
+        <div class="ribbon-diagram">
+            <pre>
+ML-303 Main Board                    Remote Button Board
+=================                    ===================
+                                    
+PIC Processor                        40-pin IDC Header
+    |                                      |
+    +-- Pin 1  ----[RED]-------- VCC -----+
+    +-- Pin 2  ----[BLK]-------- GND
+    +-- Pin 3  ----[BLU]-------- ROW1
+    +-- Pin 4  ----[GRN]-------- ROW2
+    +-- Pin 5  ----[YEL]-------- COL1
+    +-- Pin 6  ----[ORG]-------- COL2
+    +-- Pin 7  ----[PRP]-------- COL3
+    +-- Pin 8  ----[GRY]-------- COL4
+    ... (continue for all matrix connections)
+            </pre>
+        </div>
+        
+        <table>
+            <tr>
+                <th>Signal</th>
+                <th>PIC Pin</th>
+                <th>IDC Pin</th>
+                <th>Function</th>
+                <th>Wire Color</th>
+            </tr>
+            <tr>
+                <td>VCC</td>
+                <td>11</td>
+                <td>1</td>
+                <td>+5V Power</td>
+                <td>Red</td>
+            </tr>
+            <tr>
+                <td>GND</td>
+                <td>12, 31</td>
+                <td>2, 40</td>
+                <td>Ground</td>
+                <td>Black</td>
+            </tr>
+            <tr>
+                <td>ROW1</td>
+                <td>33</td>
+                <td>3</td>
+                <td>Function Row 1</td>
+                <td>Blue</td>
+            </tr>
+            <tr>
+                <td>ROW2</td>
+                <td>34</td>
+                <td>4</td>
+                <td>Function Row 2</td>
+                <td>Green</td>
+            </tr>
+            <tr>
+                <td>I2C_SDA</td>
+                <td>23</td>
+                <td>5</td>
+                <td>Arduino Data</td>
+                <td>Yellow</td>
+            </tr>
+            <tr>
+                <td>I2C_SCL</td>
+                <td>18</td>
+                <td>6</td>
+                <td>Arduino Clock</td>
+                <td>Orange</td>
+            </tr>
+        </table>
+    </div>
+
+    <div class="container">
+        <h2>Height Comparison</h2>
+        <canvas id="heightCanvas" width="800" height="400"></canvas>
+    </div>
+
+    <div class="container">
+        <h2>Recommendations</h2>
+        
+        <div class="specs">
+            <h3>Before Choosing:</h3>
+            <ol>
+                <li><strong>Measure First:</strong> Remove one Conrad switch and measure exact clearance</li>
+                <li><strong>Check Components:</strong> Identify tallest component on main board</li>
+                <li><strong>Test Fit:</strong> Try a standard tactile switch in the space</li>
+            </ol>
+        </div>
+        
+        <div class="warning">
+            <h3>If Clearance < 10mm:</h3>
+            <p>Go with <strong>Remote Mount Solution</strong> - it's guaranteed to work and provides most flexibility for future modifications.</p>
+        </div>
+        
+        <div class="specs">
+            <h3>If Clearance > 10mm:</h3>
+            <p>Try <strong>Low-Profile Adapters</strong> first - simpler installation and maintains original design intent.</p>
+        </div>
+    </div>
+
+    <script>
+        // Low Profile Adapter Diagram
+        const lpCanvas = document.getElementById('lowProfileCanvas');
+        const lpCtx = lpCanvas.getContext('2d');
+        
+        // Draw side view of low-profile adapter
+        lpCtx.fillStyle = '#f0f0f0';
+        lpCtx.fillRect(50, 100, 300, 150);
+        
+        // Original PCB
+        lpCtx.fillStyle = '#4a4a4a';
+        lpCtx.fillRect(50, 200, 300, 20);
+        lpCtx.fillStyle = 'white';
+        lpCtx.font = '12px Arial';
+        lpCtx.fillText('Main PCB', 180, 215);
+        
+        // 3-pin holes
+        lpCtx.strokeStyle = '#333';
+        lpCtx.beginPath();
+        lpCtx.arc(150, 210, 3, 0, 2 * Math.PI);
+        lpCtx.arc(200, 210, 3, 0, 2 * Math.PI);
+        lpCtx.arc(250, 210, 3, 0, 2 * Math.PI);
+        lpCtx.stroke();
+        
+        // Adapter PCB (0.8mm)
+        lpCtx.fillStyle = '#90EE90';
+        lpCtx.fillRect(120, 190, 160, 5);
+        lpCtx.fillStyle = '#333';
+        lpCtx.font = '10px Arial';
+        lpCtx.fillText('0.8mm adapter', 170, 194);
+        
+        // Low-profile switch
+        lpCtx.fillStyle = '#808080';
+        lpCtx.fillRect(140, 165, 120, 25);
+        lpCtx.fillStyle = '#333';
+        lpCtx.fillRect(190, 155, 20, 10);
+        lpCtx.fillStyle = 'white';
+        lpCtx.font = '10px Arial';
+        lpCtx.fillText('6mm switch', 175, 180);
+        
+        // Dimensions
+        lpCtx.strokeStyle = '#ff0000';
+        lpCtx.setLineDash([2, 2]);
+        lpCtx.beginPath();
+        lpCtx.moveTo(320, 155);
+        lpCtx.lineTo(320, 220);
+        lpCtx.stroke();
+        lpCtx.setLineDash([]);
+        lpCtx.fillStyle = '#ff0000';
+        lpCtx.fillText('~8mm total', 325, 185);
+        
+        // Remote Mount Board Diagram
+        const rmCanvas = document.getElementById('remoteMountCanvas');
+        const rmCtx = rmCanvas.getContext('2d');
+        
+        // Main board
+        rmCtx.fillStyle = '#4a4a4a';
+        rmCtx.fillRect(50, 50, 100, 200);
+        rmCtx.fillStyle = 'white';
+        rmCtx.font = '12px Arial';
+        rmCtx.fillText('Main PCB', 70, 150);
+        
+        // Remote button board
+        rmCtx.fillStyle = '#1e3a1e';
+        rmCtx.fillRect(250, 50, 100, 200);
+        rmCtx.fillStyle = 'white';
+        rmCtx.fillText('Button PCB', 265, 150);
+        
+        // Ribbon cable
+        rmCtx.strokeStyle = '#666';
+        rmCtx.lineWidth = 20;
+        rmCtx.beginPath();
+        rmCtx.moveTo(150, 100);
+        rmCtx.quadraticCurveTo(200, 120, 250, 100);
+        rmCtx.stroke();
+        
+        // IDC connectors
+        rmCtx.fillStyle = '#333';
+        rmCtx.fillRect(140, 90, 20, 20);
+        rmCtx.fillRect(240, 90, 20, 20);
+        
+        // Labels
+        rmCtx.fillStyle = '#333';
+        rmCtx.font = '10px Arial';
+        rmCtx.fillText('40-pin IDC', 135, 85);
+        rmCtx.fillText('Ribbon Cable', 170, 140);
+        
+        // Height Comparison
+        const hCanvas = document.getElementById('heightCanvas');
+        const hCtx = hCanvas.getContext('2d');
+        
+        // Draw comparison bars
+        const components = [
+            { name: 'Original Conrad Switch', height: 60, color: '#4CAF50' },
+            { name: 'Standard Switch + Adapter', height: 110, color: '#ff9800' },
+            { name: 'Low-Profile + Adapter', height: 80, color: '#2196F3' },
+            { name: 'PIC Processor (DIP-40)', height: 150, color: '#f44336' },
+            { name: 'Typical Clearance', height: 100, color: '#9E9E9E', dashed: true }
+        ];
+        
+        let x = 50;
+        components.forEach(comp => {
+            if (comp.dashed) {
+                hCtx.setLineDash([5, 5]);
+                hCtx.strokeStyle = comp.color;
+                hCtx.strokeRect(x, 350 - comp.height, 120, comp.height);
+                hCtx.setLineDash([]);
+            } else {
+                hCtx.fillStyle = comp.color;
+                hCtx.fillRect(x, 350 - comp.height, 120, comp.height);
+            }
+            
+            hCtx.fillStyle = '#333';
+            hCtx.font = '12px Arial';
+            hCtx.save();
+            hCtx.translate(x + 60, 370);
+            hCtx.rotate(-Math.PI / 4);
+            hCtx.fillText(comp.name, -40, 0);
+            hCtx.restore();
+            
+            hCtx.fillStyle = '#333';
+            hCtx.fillText(comp.height / 10 + 'mm', x + 45, 340 - comp.height);
+            
+            x += 140;
+        });
+        
+        // Base line
+        hCtx.strokeStyle = '#333';
+        hCtx.lineWidth = 2;
+        hCtx.beginPath();
+        hCtx.moveTo(30, 350);
+        hCtx.lineTo(770, 350);
+        hCtx.stroke();
+    </script>
+</body>
+</html>

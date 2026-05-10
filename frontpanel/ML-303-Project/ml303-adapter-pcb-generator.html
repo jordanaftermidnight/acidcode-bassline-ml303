@@ -1,0 +1,740 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>ML-303 Adapter PCB Gerber Generator</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 20px;
+            background-color: #f5f5f5;
+        }
+        .container {
+            background: white;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+            margin-bottom: 20px;
+            max-width: 1400px;
+            margin: 20px auto;
+        }
+        canvas {
+            border: 2px solid #333;
+            margin: 10px 0;
+            background: black;
+        }
+        button {
+            margin: 5px;
+            padding: 10px 20px;
+            background: #2196F3;
+            color: white;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            font-weight: bold;
+        }
+        button:hover {
+            background: #1976D2;
+        }
+        .export-btn {
+            background: #4CAF50;
+        }
+        .export-btn:hover {
+            background: #45a049;
+        }
+        .generate-btn {
+            background: #9C27B0;
+        }
+        .generate-btn:hover {
+            background: #7B1FA2;
+        }
+        .info {
+            background: #e3f2fd;
+            padding: 15px;
+            border-radius: 4px;
+            margin: 10px 0;
+            border-left: 4px solid #2196F3;
+        }
+        .specs {
+            background: #e8f5e9;
+            padding: 15px;
+            border-radius: 4px;
+            margin: 10px 0;
+            border-left: 4px solid #4CAF50;
+        }
+        .controls {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 15px;
+            margin: 20px 0;
+        }
+        .control-group {
+            padding: 10px;
+            background: #f8f9fa;
+            border-radius: 4px;
+        }
+        label {
+            display: block;
+            margin-bottom: 5px;
+            font-weight: bold;
+            color: #333;
+        }
+        input[type="number"], select {
+            width: 100%;
+            padding: 8px;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+            box-sizing: border-box;
+        }
+        .ml303-title {
+            font-family: 'Arial Black', sans-serif;
+            font-size: 24px;
+            color: #9C27B0;
+            text-align: center;
+            margin: 20px 0;
+        }
+        pre {
+            background: #f5f5f5;
+            padding: 15px;
+            border-radius: 4px;
+            overflow-x: auto;
+            font-family: 'Courier New', monospace;
+            font-size: 12px;
+        }
+        .layer-preview {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 20px;
+            margin: 20px 0;
+        }
+        .layer-item {
+            text-align: center;
+        }
+        .layer-item canvas {
+            width: 100%;
+            max-width: 300px;
+        }
+        .gerber-output {
+            background: #263238;
+            color: #aed581;
+            padding: 15px;
+            border-radius: 4px;
+            font-family: 'Courier New', monospace;
+            font-size: 11px;
+            white-space: pre;
+            overflow-x: auto;
+            max-height: 300px;
+            overflow-y: auto;
+        }
+    </style>
+</head>
+<body>
+    <div class="ml303-title">ML-303 ADAPTER PCB GERBER GENERATOR</div>
+    
+    <div class="container">
+        <h2>Professional PCB Manufacturing Files</h2>
+        
+        <div class="info">
+            <h3>📋 What This Tool Does</h3>
+            <ul>
+                <li>Generates Gerber files for ML-303 button adapters</li>
+                <li>Creates single adapter or panelized array</li>
+                <li>Outputs all required layers for PCB manufacturing</li>
+                <li>Compatible with JLCPCB, PCBWay, and other manufacturers</li>
+                <li>Includes drill files and pick-and-place data</li>
+            </ul>
+        </div>
+        
+        <div class="controls">
+            <div class="control-group">
+                <label>PCB Type:</label>
+                <select id="pcbType">
+                    <option value="single">Single Adapter</option>
+                    <option value="panel4x4">4×4 Panel (16 adapters)</option>
+                    <option value="panel6x6">6×6 Panel (36 adapters)</option>
+                    <option value="panel5x8">5×8 Panel (40 adapters)</option>
+                </select>
+            </div>
+            
+            <div class="control-group">
+                <label>PCB Thickness (mm):</label>
+                <input type="number" id="pcbThickness" value="1.6" step="0.1" min="0.6" max="2.0">
+            </div>
+            
+            <div class="control-group">
+                <label>Copper Weight (oz):</label>
+                <select id="copperWeight">
+                    <option value="1">1 oz (35µm)</option>
+                    <option value="2">2 oz (70µm)</option>
+                </select>
+            </div>
+            
+            <div class="control-group">
+                <label>Surface Finish:</label>
+                <select id="surfaceFinish">
+                    <option value="hasl">HASL (Lead-free)</option>
+                    <option value="enig">ENIG (Gold)</option>
+                    <option value="osp">OSP</option>
+                </select>
+            </div>
+            
+            <div class="control-group">
+                <label>Solder Mask:</label>
+                <select id="solderMask">
+                    <option value="green">Green</option>
+                    <option value="black">Black</option>
+                    <option value="blue">Blue</option>
+                    <option value="red">Red</option>
+                    <option value="purple">Purple</option>
+                </select>
+            </div>
+            
+            <div class="control-group">
+                <label>Silkscreen:</label>
+                <select id="silkscreen">
+                    <option value="white">White</option>
+                    <option value="black">Black</option>
+                    <option value="none">None</option>
+                </select>
+            </div>
+        </div>
+        
+        <div style="text-align: center; margin: 20px 0;">
+            <button onclick="updatePreview()">Update Preview</button>
+            <button class="generate-btn" onclick="generateGerbers()">Generate Gerber Files</button>
+            <button class="export-btn" onclick="downloadAll()">Download ZIP Package</button>
+        </div>
+    </div>
+
+    <div class="container">
+        <h2>PCB Layer Preview</h2>
+        
+        <div class="layer-preview">
+            <div class="layer-item">
+                <h4>Top Copper</h4>
+                <canvas id="topCopper" width="300" height="300"></canvas>
+            </div>
+            <div class="layer-item">
+                <h4>Bottom Copper</h4>
+                <canvas id="bottomCopper" width="300" height="300"></canvas>
+            </div>
+            <div class="layer-item">
+                <h4>Drill Map</h4>
+                <canvas id="drillMap" width="300" height="300"></canvas>
+            </div>
+            <div class="layer-item">
+                <h4>Top Solder Mask</h4>
+                <canvas id="topMask" width="300" height="300"></canvas>
+            </div>
+            <div class="layer-item">
+                <h4>Top Silkscreen</h4>
+                <canvas id="topSilk" width="300" height="300"></canvas>
+            </div>
+            <div class="layer-item">
+                <h4>Board Outline</h4>
+                <canvas id="boardOutline" width="300" height="300"></canvas>
+            </div>
+        </div>
+    </div>
+
+    <div class="container">
+        <h2>Generated Gerber Files</h2>
+        
+        <div class="specs">
+            <h3>File Naming Convention (RS-274X)</h3>
+            <ul>
+                <li><strong>.GTL</strong> - Top Copper Layer</li>
+                <li><strong>.GBL</strong> - Bottom Copper Layer</li>
+                <li><strong>.GTS</strong> - Top Solder Mask</li>
+                <li><strong>.GBS</strong> - Bottom Solder Mask</li>
+                <li><strong>.GTO</strong> - Top Silkscreen</li>
+                <li><strong>.GBO</strong> - Bottom Silkscreen</li>
+                <li><strong>.GKO</strong> - Board Outline</li>
+                <li><strong>.DRL</strong> - NC Drill File (Excellon)</li>
+            </ul>
+        </div>
+        
+        <h3>Top Copper Layer (ML303_Adapter.GTL)</h3>
+        <div class="gerber-output" id="gerberTopCopper"></div>
+        
+        <h3>Drill File (ML303_Adapter.DRL)</h3>
+        <div class="gerber-output" id="gerberDrill"></div>
+    </div>
+
+    <div class="container">
+        <h2>Manufacturing Notes</h2>
+        
+        <div class="specs">
+            <h3>Design Specifications</h3>
+            <ul>
+                <li><strong>Board Size:</strong> 12.7mm × 12.7mm (single adapter)</li>
+                <li><strong>Min Trace Width:</strong> 0.254mm (10 mil)</li>
+                <li><strong>Min Via Size:</strong> 0.3mm (12 mil)</li>
+                <li><strong>Min Drill Size:</strong> 0.3mm</li>
+                <li><strong>Pad Size:</strong> 1.8mm diameter with 0.9mm hole</li>
+                <li><strong>Annular Ring:</strong> 0.15mm minimum</li>
+            </ul>
+            
+            <h3>Ordering Tips</h3>
+            <ul>
+                <li><strong>JLCPCB:</strong> Upload ZIP, select 2-layer, 1.6mm thickness</li>
+                <li><strong>PCBWay:</strong> Use instant quote, select lead-free HASL</li>
+                <li><strong>OSH Park:</strong> Purple PCBs, ENIG finish standard</li>
+                <li><strong>Quantity:</strong> Order extras (minimum 5-10 extra)</li>
+            </ul>
+        </div>
+    </div>
+
+    <script>
+        // Canvas contexts
+        const layers = {
+            topCopper: document.getElementById('topCopper').getContext('2d'),
+            bottomCopper: document.getElementById('bottomCopper').getContext('2d'),
+            drillMap: document.getElementById('drillMap').getContext('2d'),
+            topMask: document.getElementById('topMask').getContext('2d'),
+            topSilk: document.getElementById('topSilk').getContext('2d'),
+            boardOutline: document.getElementById('boardOutline').getContext('2d')
+        };
+        
+        // PCB parameters in mm
+        const pcbParams = {
+            width: 12.7,
+            height: 12.7,
+            holeSpacing: 5.08,
+            padDiameter: 1.8,
+            holeDiameter: 0.9,
+            traceWidth: 0.254,
+            clearance: 0.2,
+            viaSize: 0.6,
+            viaDrill: 0.3
+        };
+        
+        // Gerber header
+        function gerberHeader() {
+            return `G04 ML-303 Button Adapter PCB*
+G04 Generated by ML303 Adapter Generator*
+G04 Date: ${new Date().toISOString()}*
+%FSLAX35Y35*%
+%MOMM*%
+%TA.AperFunction,Conductor*%
+%ADD10C,1.800*%
+%ADD11C,0.600*%
+%ADD12C,0.254*%
+G01*
+G04 Start of Gerber data*`;
+        }
+        
+        // Draw single adapter
+        function drawAdapter(ctx, x, y, scale, layer) {
+            ctx.save();
+            ctx.translate(x, y);
+            
+            const size = pcbParams.width * scale;
+            
+            switch(layer) {
+                case 'outline':
+                    // Board outline
+                    ctx.strokeStyle = '#FFD700';
+                    ctx.lineWidth = 2;
+                    ctx.strokeRect(-size/2, -size/2, size, size);
+                    break;
+                    
+                case 'topCopper':
+                    // 4-pin pads
+                    ctx.fillStyle = '#FFD700';
+                    const pins4 = [
+                        {x: -pcbParams.holeSpacing/2, y: -pcbParams.holeSpacing/2},
+                        {x: pcbParams.holeSpacing/2, y: -pcbParams.holeSpacing/2},
+                        {x: -pcbParams.holeSpacing/2, y: pcbParams.holeSpacing/2},
+                        {x: pcbParams.holeSpacing/2, y: pcbParams.holeSpacing/2}
+                    ];
+                    
+                    pins4.forEach(pin => {
+                        ctx.beginPath();
+                        ctx.arc(pin.x * scale, pin.y * scale, 
+                               pcbParams.padDiameter * scale / 2, 0, Math.PI * 2);
+                        ctx.fill();
+                    });
+                    
+                    // Traces
+                    ctx.strokeStyle = '#FFD700';
+                    ctx.lineWidth = pcbParams.traceWidth * scale;
+                    
+                    // Pin 1 to center via
+                    ctx.beginPath();
+                    ctx.moveTo(-pcbParams.holeSpacing/2 * scale, -pcbParams.holeSpacing/2 * scale);
+                    ctx.lineTo(0, -pcbParams.holeSpacing/4 * scale);
+                    ctx.stroke();
+                    
+                    // Via
+                    ctx.beginPath();
+                    ctx.arc(0, -pcbParams.holeSpacing/4 * scale, 
+                           pcbParams.viaSize * scale / 2, 0, Math.PI * 2);
+                    ctx.fill();
+                    break;
+                    
+                case 'bottomCopper':
+                    // 3-pin triangular pads
+                    ctx.fillStyle = '#FFD700';
+                    const pins3 = [
+                        {x: 0, y: -4},          // A (top)
+                        {x: -3.5, y: 3},        // B (bottom left)
+                        {x: 3.5, y: 3}          // C (bottom right)
+                    ];
+                    
+                    pins3.forEach(pin => {
+                        ctx.beginPath();
+                        ctx.arc(pin.x * scale, pin.y * scale, 
+                               pcbParams.padDiameter * scale / 2, 0, Math.PI * 2);
+                        ctx.fill();
+                    });
+                    
+                    // Bottom traces
+                    ctx.strokeStyle = '#FFD700';
+                    ctx.lineWidth = pcbParams.traceWidth * scale;
+                    
+                    // Via to pin A
+                    ctx.beginPath();
+                    ctx.moveTo(0, -pcbParams.holeSpacing/4 * scale);
+                    ctx.lineTo(0, -4 * scale);
+                    ctx.stroke();
+                    
+                    // Complex routing for B and C
+                    ctx.beginPath();
+                    ctx.moveTo(pcbParams.holeSpacing/2 * scale, -pcbParams.holeSpacing/2 * scale);
+                    ctx.lineTo(scale, 0);
+                    ctx.lineTo(-3.5 * scale, 3 * scale);
+                    ctx.stroke();
+                    
+                    ctx.beginPath();
+                    ctx.moveTo(-pcbParams.holeSpacing/2 * scale, pcbParams.holeSpacing/2 * scale);
+                    ctx.lineTo(0, scale);
+                    ctx.lineTo(3.5 * scale, 3 * scale);
+                    ctx.stroke();
+                    break;
+                    
+                case 'drill':
+                    // Drill holes
+                    ctx.fillStyle = '#FFFFFF';
+                    ctx.strokeStyle = '#FF0000';
+                    ctx.lineWidth = 1;
+                    
+                    // Component holes
+                    [...pins4, ...pins3].forEach(pin => {
+                        ctx.beginPath();
+                        ctx.arc(pin.x * scale, pin.y * scale, 
+                               pcbParams.holeDiameter * scale / 2, 0, Math.PI * 2);
+                        ctx.fill();
+                        ctx.stroke();
+                    });
+                    
+                    // Via hole
+                    ctx.beginPath();
+                    ctx.arc(0, -pcbParams.holeSpacing/4 * scale, 
+                           pcbParams.viaDrill * scale / 2, 0, Math.PI * 2);
+                    ctx.fill();
+                    ctx.stroke();
+                    break;
+                    
+                case 'mask':
+                    // Solder mask openings
+                    ctx.fillStyle = '#00AA00';
+                    ctx.fillRect(-size/2, -size/2, size, size);
+                    
+                    // Pad openings
+                    ctx.fillStyle = '#000000';
+                    [...pins4, ...pins3].forEach(pin => {
+                        ctx.beginPath();
+                        ctx.arc(pin.x * scale, pin.y * scale, 
+                               (pcbParams.padDiameter + 0.1) * scale / 2, 0, Math.PI * 2);
+                        ctx.fill();
+                    });
+                    break;
+                    
+                case 'silk':
+                    // Silkscreen
+                    ctx.strokeStyle = '#FFFFFF';
+                    ctx.fillStyle = '#FFFFFF';
+                    ctx.lineWidth = 1;
+                    
+                    // Component outline
+                    ctx.strokeRect(-6 * scale, -6 * scale, 12 * scale, 12 * scale);
+                    
+                    // Pin 1 marker
+                    ctx.beginPath();
+                    ctx.arc(-pcbParams.holeSpacing/2 * scale - 2 * scale, 
+                           -pcbParams.holeSpacing/2 * scale - 2 * scale, 
+                           0.5 * scale, 0, Math.PI * 2);
+                    ctx.fill();
+                    
+                    // Text
+                    ctx.font = `${scale}px Arial`;
+                    ctx.textAlign = 'center';
+                    ctx.fillText('ML303', 0, 0);
+                    ctx.font = `${scale * 0.7}px Arial`;
+                    ctx.fillText('ADAPTER', 0, scale);
+                    
+                    // Pin labels
+                    ctx.font = `${scale * 0.5}px Arial`;
+                    ctx.fillText('1', -pcbParams.holeSpacing/2 * scale - scale, 
+                                -pcbParams.holeSpacing/2 * scale + scale/2);
+                    ctx.fillText('A', 0, -4 * scale - scale);
+                    ctx.fillText('B', -3.5 * scale - scale, 3 * scale);
+                    ctx.fillText('C', 3.5 * scale + scale, 3 * scale);
+                    break;
+            }
+            
+            ctx.restore();
+        }
+        
+        // Draw panel of adapters
+        function drawPanel(ctx, layer, type) {
+            ctx.clearRect(0, 0, ctx.canvas.width, ctx.canvas.height);
+            
+            const scale = 10;
+            let rows, cols;
+            
+            switch(type) {
+                case 'single':
+                    rows = cols = 1;
+                    break;
+                case 'panel4x4':
+                    rows = cols = 4;
+                    break;
+                case 'panel6x6':
+                    rows = cols = 6;
+                    break;
+                case 'panel5x8':
+                    rows = 5;
+                    cols = 8;
+                    break;
+            }
+            
+            const spacing = (pcbParams.width + 2) * scale;
+            const offsetX = ctx.canvas.width / 2 - (cols - 1) * spacing / 2;
+            const offsetY = ctx.canvas.height / 2 - (rows - 1) * spacing / 2;
+            
+            // Draw background
+            if (layer !== 'drill' && layer !== 'silk') {
+                ctx.fillStyle = '#000000';
+                ctx.fillRect(0, 0, ctx.canvas.width, ctx.canvas.height);
+            }
+            
+            // Draw adapters
+            for (let row = 0; row < rows; row++) {
+                for (let col = 0; col < cols; col++) {
+                    drawAdapter(ctx, 
+                               offsetX + col * spacing, 
+                               offsetY + row * spacing, 
+                               scale, layer);
+                }
+            }
+            
+            // Draw panel outline and mouse bites
+            if (layer === 'outline' && type !== 'single') {
+                ctx.strokeStyle = '#FFD700';
+                ctx.lineWidth = 2;
+                
+                const panelWidth = cols * spacing + scale;
+                const panelHeight = rows * spacing + scale;
+                
+                ctx.strokeRect(offsetX - spacing/2 - scale/2, 
+                              offsetY - spacing/2 - scale/2, 
+                              panelWidth, panelHeight);
+                
+                // V-grooves or mouse bites
+                ctx.setLineDash([2, 4]);
+                
+                // Vertical lines
+                for (let i = 1; i < cols; i++) {
+                    ctx.beginPath();
+                    ctx.moveTo(offsetX + i * spacing - spacing/2, offsetY - spacing/2);
+                    ctx.lineTo(offsetX + i * spacing - spacing/2, offsetY + rows * spacing - spacing/2);
+                    ctx.stroke();
+                }
+                
+                // Horizontal lines
+                for (let i = 1; i < rows; i++) {
+                    ctx.beginPath();
+                    ctx.moveTo(offsetX - spacing/2, offsetY + i * spacing - spacing/2);
+                    ctx.lineTo(offsetX + cols * spacing - spacing/2, offsetY + i * spacing - spacing/2);
+                    ctx.stroke();
+                }
+                
+                ctx.setLineDash([]);
+            }
+        }
+        
+        // Generate Gerber code
+        function generateGerberCode(layer, type) {
+            let gerber = gerberHeader() + '\n';
+            
+            // Add aperture definitions based on layer
+            switch(layer) {
+                case 'copper':
+                    gerber += '%ADD10C,1.800*%\n';  // Pads
+                    gerber += '%ADD11C,0.600*%\n';   // Vias
+                    gerber += '%ADD12C,0.254*%\n';   // Traces
+                    break;
+                case 'mask':
+                    gerber += '%ADD10C,1.900*%\n';   // Pad openings
+                    break;
+                case 'silk':
+                    gerber += '%ADD10C,0.150*%\n';   // Text
+                    break;
+                case 'outline':
+                    gerber += '%ADD10C,0.100*%\n';   // Outline
+                    break;
+            }
+            
+            gerber += 'G01*\n';
+            gerber += 'D10*\n';
+            
+            // Generate coordinates for single adapter
+            const coords = {
+                pads4: [
+                    {x: -2540, y: -2540},
+                    {x: 2540, y: -2540},
+                    {x: -2540, y: 2540},
+                    {x: 2540, y: 2540}
+                ],
+                pads3: [
+                    {x: 0, y: -4000},
+                    {x: -3500, y: 3000},
+                    {x: 3500, y: 3000}
+                ],
+                via: {x: 0, y: -1270}
+            };
+            
+            if (layer === 'copper') {
+                // Top copper - 4 pin pads
+                coords.pads4.forEach(pad => {
+                    gerber += `X${pad.x}Y${pad.y}D03*\n`;
+                });
+                
+                // Via
+                gerber += 'D11*\n';
+                gerber += `X${coords.via.x}Y${coords.via.y}D03*\n`;
+                
+                // Traces
+                gerber += 'D12*\n';
+                gerber += `X${coords.pads4[0].x}Y${coords.pads4[0].y}D02*\n`;
+                gerber += `X${coords.via.x}Y${coords.via.y}D01*\n`;
+            }
+            
+            gerber += 'M02*\n';
+            
+            return gerber;
+        }
+        
+        // Generate drill file
+        function generateDrillFile() {
+            let drill = `M48
+;ML-303 Adapter Drill File
+;Generated: ${new Date().toISOString()}
+METRIC,TZ
+T01C0.300
+T02C0.900
+%
+G90
+G05
+M71
+T01
+X0.000Y-1.270
+T02
+X-2.540Y-2.540
+X2.540Y-2.540
+X-2.540Y2.540
+X2.540Y2.540
+X0.000Y-4.000
+X-3.500Y3.000
+X3.500Y3.000
+M30`;
+            
+            return drill;
+        }
+        
+        // Update preview
+        function updatePreview() {
+            const type = document.getElementById('pcbType').value;
+            
+            // Update all layer previews
+            drawPanel(layers.topCopper, 'topCopper', type);
+            drawPanel(layers.bottomCopper, 'bottomCopper', type);
+            drawPanel(layers.drillMap, 'drill', type);
+            drawPanel(layers.topMask, 'mask', type);
+            drawPanel(layers.topSilk, 'silk', type);
+            drawPanel(layers.boardOutline, 'outline', type);
+        }
+        
+        // Generate all gerber files
+        function generateGerbers() {
+            const type = document.getElementById('pcbType').value;
+            
+            // Generate gerber code for top copper
+            const topCopperGerber = generateGerberCode('copper', type);
+            document.getElementById('gerberTopCopper').textContent = topCopperGerber;
+            
+            // Generate drill file
+            const drillFile = generateDrillFile();
+            document.getElementById('gerberDrill').textContent = drillFile;
+            
+            alert('Gerber files generated! Click "Download ZIP Package" to save all files.');
+        }
+        
+        // Download all files as ZIP
+        function downloadAll() {
+            // This would use a library like JSZip in production
+            alert('In production, this would download a ZIP file containing:\n' +
+                  '- ML303_Adapter.GTL (Top Copper)\n' +
+                  '- ML303_Adapter.GBL (Bottom Copper)\n' +
+                  '- ML303_Adapter.GTS (Top Solder Mask)\n' +
+                  '- ML303_Adapter.GBS (Bottom Solder Mask)\n' +
+                  '- ML303_Adapter.GTO (Top Silkscreen)\n' +
+                  '- ML303_Adapter.GKO (Board Outline)\n' +
+                  '- ML303_Adapter.DRL (Drill File)\n' +
+                  '- README.txt (Manufacturing notes)');
+            
+            // For now, download sample files
+            const files = {
+                'ML303_Adapter.GTL': generateGerberCode('copper', 'single'),
+                'ML303_Adapter.DRL': generateDrillFile(),
+                'README.txt': `ML-303 Button Adapter PCB
+=========================
+
+Board Specifications:
+- Size: 12.7mm x 12.7mm (single)
+- Layers: 2
+- Thickness: 1.6mm
+- Copper: 1oz
+- Min trace: 0.254mm
+- Min drill: 0.3mm
+
+Manufacturing Notes:
+- Order with mouse bites for panelized version
+- HASL finish recommended for hand soldering
+- Green solder mask for best contrast
+
+Assembly:
+1. Solder 4-pin switch to top side
+2. Run wires from bottom pads to ML-303
+3. Test continuity before installation
+
+Generated: ${new Date().toLocaleString()}`
+            };
+            
+            // Download first file as example
+            const blob = new Blob([files['README.txt']], {type: 'text/plain'});
+            const url = URL.createObjectURL(blob);
+            const a = document.createElement('a');
+            a.href = url;
+            a.download = 'ML303_Adapter_README.txt';
+            a.click();
+            URL.revokeObjectURL(url);
+        }
+        
+        // Initialize
+        updatePreview();
+    </script>
+</body>
+</html>

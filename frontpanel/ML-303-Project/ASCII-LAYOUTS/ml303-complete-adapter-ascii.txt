@@ -1,0 +1,90 @@
+ML-303 3-PIN ADAPTER - DETAILED ASCII LAYOUT
+============================================
+
+ACTUAL SIZE STRIPBOARD (2.54mm spacing):
+=======================================
+
+Component Side View:
+                    CUT  CUT
+     A    B    C    D    E    F    G    H    I    J
+   +----+----+----+----+----+----+----+----+----+----+
+ 1 | o    o    o    o   [X]   o    o    o    o    o  |
+   +----+----+----+----+----+----+----+----+----+----+
+ 2 | o----o    o----o   [X]   o----o    o    o    o  | <- 4-pin button
+   |  ==== BUTTON ====        |    |                  |    connections
+   +----+----+----+----+----+-|----+----+----+----+----+
+ 3 | o----o    o----o   [X]   o    o----o    o    o  |
+   |  ==== BUTTON ====             |    |             |
+   +----+----+----+----+----+----+----+----+----+----+
+ 4 | o    o    o    o   [X]   o    o    o    o    o  |
+   +----+----+----+----+----+----+----+----+----+----+
+
+Bottom Side View (Copper Tracks):
+   +====+====+====+====+XXXX+====+====+====+====+====+
+ 1 |████|████|████|████|    |████|████|████|████|████|
+   +====+====+====+====+XXXX+====+====+====+====+====+
+ 2 |████|████|████|████|    |████|████|████|████|████|
+   +====+====+====+====+XXXX+====+====+====+====+====+
+ 3 |████|████|████|████|    |████|████|████|████|████|
+   +====+====+====+====+XXXX+====+====+====+====+====+
+ 4 |████|████|████|████|    |████|████|████|████|████|
+   +====+====+====+====+XXXX+====+====+====+====+====+
+
+3D Assembly View:
+================
+                    12x12mm Tactile Switch
+                    +------------------+
+                    |  +----+  +----+  |
+                    |  | o  |  | o  |  | <- Switch pins
+                    |  +----+  +----+  |
+                    |     [BUTTON]     |
+                    |  +----+  +----+  |
+                    |  | o  |  | o  |  |
+                    |  +----+  +----+  |
+                    +------------------+
+                           | | | |
+                           V V V V
+    Adapter PCB -->  [================]
+                           | | |
+                           V V V
+                     3-pin triangular
+                     
+Conrad 3-Pin Layout (Bottom of ML-303):
+          Pin 2
+            o
+           / \
+          /   \
+         /     \
+        o-------o
+     Pin 1    Pin 3
+
+Connections:
+===========
+4-Pin Side:          3-Pin Side:
+Pin 1 ----+          
+Pin 2 ----+----->    Pin 1 (Signal)
+Pin 3 ----+          
+Pin 4 ----+----->    Pin 3 (Ground)
+                     Pin 2 (Common)
+
+STEP-BY-STEP BUILD:
+==================
+1. Cut stripboard to 4x10 holes
+2. Make track cuts at column E, all rows
+3. Solder two jumper wires:
+   - B2 to F2 (blue wire)
+   - B3 to G3 (black wire)
+4. Add a bridge from F2 to G2 on bottom
+5. Test continuity
+6. Mount 4-pin switch on A2-B2, A3-B3
+
+Materials:
+- Stripboard piece: 10 x 4 holes
+- 2x jumper wires (5mm stripped ends)
+- Solder
+- Track cutter or 3mm drill bit
+
+Testing:
+- 4-pin 1&2 should connect to 3-pin 1
+- 4-pin 3&4 should connect to 3-pin 3
+- 3-pin 2 connects to 3-pin 1

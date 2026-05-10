@@ -1,0 +1,100 @@
+ML-303 BUTTON MATRIX WIRING - ASCII DIAGRAM
+===========================================
+
+ATMEGA328P PINOUT:
+                    +----U----+
+        (D0) PD0  1 |         | 28 PC5 (A5)  -> COL12
+        (D1) PD1  2 |         | 27 PC4 (A4)  -> COL11
+    ROW1 (D2) PD2  3 |         | 26 PC3 (A3)  -> COL10
+    ROW2 (D3) PD3  4 |         | 25 PC2 (A2)  -> COL9
+    COL1 (D4) PD4  5 |         | 24 PC1 (A1)  -> COL8
+         VCC      6 |         | 23 PC0 (A0)  -> COL7
+         GND      7 |         | 22 GND
+         XTAL1    8 |         | 21 AREF
+         XTAL2    9 |         | 20 AVCC
+    COL2 (D5) PD5 10 |         | 19 PB5 (D13) -> COL6
+    COL3 (D6) PD6 11 |         | 18 PB4 (D12) -> COL5
+    COL4 (D7) PD7 12 |         | 17 PB3 (D11) -> ROW6
+    ROW3 (D8) PB0 13 |         | 16 PB2 (D10) -> ROW5
+    ROW4 (D9) PB1 14 |         | 15 PB1 (D9)  -> ROW4
+                    +---------+
+
+BUTTON MATRIX LAYOUT:
+====================
+
+Function Matrix (4x2):
+         COL1   COL2   COL3   COL4
+ROW1  [ WRITE ] [RUN ] [PITCH] [TAP  ]
+ROW2  [ CLEAR] [FUNC ] [TIME ] [BACK ]
+
+Step Matrix (8x2):
+         COL5   COL6   COL7   COL8   COL9   COL10  COL11  COL12
+ROW3  [ 1    ] [ 2   ] [ 3   ] [ 4   ] [ 5   ] [ 6   ] [ 7   ] [ 8   ]
+ROW4  [ 9    ] [ 10  ] [ 11  ] [ 12  ] [ 13  ] [ 14  ] [ 15  ] [ 16  ]
+
+Note Matrix (6x2):
+         COL1   COL2   COL3   COL4   COL5   COL6
+ROW5  [ C    ] [ C#  ] [ D   ] [ D#  ] [ E   ] [ F   ]
+ROW6  [ F#   ] [ G   ] [ G#  ] [ A   ] [ A#  ] [ B   ]
+
+WIRING ON STRIPBOARD:
+====================
+
+Power Section:
+-------------
+VCC ----+---- 10K --- ROW1
+        +---- 10K --- ROW2
+        +---- 10K --- ROW3
+        +---- 10K --- ROW4
+        +---- 10K --- ROW5
+        +---- 10K --- ROW6
+        +---- 100nF -- GND  (Bypass cap)
+
+Crystal Section:
+---------------
+XTAL1 (Pin 8) ---- 16MHz ---- XTAL2 (Pin 9)
+        |                          |
+       22pF                       22pF
+        |                          |
+       GND                        GND
+
+Simple Stripboard Layout (Top View):
+===================================
+
+    1  2  3  4  5  6  7  8  9 10 11 12 13 14 15 16 17 18 19 20
+A [ VCC============================================ ] Power rail
+B [ o  o  R  o  R  o  R  o  R  o  R  o  R  o  o  o ] Resistors
+C [ o  o  |  o  |  o  |  o  |  o  |  o  |  o  o  o ] to rows
+D [ o  o  o  o  o  o  o  o  o  o  o  o  o  o  o  o ]
+E [ 1  o  o  o  o  o  o  o  o  o  o  o  o  o  o 28] ATmega328
+F [ 2  o  o  o  o  o  o  o  o  o  o  o  o  o  o 27]
+G [ 3  o  o  o  o  o  o  o  o  o  o  o  o  o  o 26]
+... (continue for all 28 pins)
+Z [ GND============================================ ] Ground rail
+
+R = 10K resistor
+Numbers = IC pins
+| = Wire connection
+
+RIBBON CABLE PINOUT (40-pin IDC):
+=================================
+Pin 1:  VCC          Pin 21: COL11
+Pin 2:  GND          Pin 22: COL12
+Pin 3:  ROW1         Pin 23: I2C_SDA (Arduino)
+Pin 4:  ROW2         Pin 24: I2C_SCL (Arduino)
+Pin 5:  ROW3         Pin 25: Reserved
+Pin 6:  ROW4         Pin 26: Reserved
+Pin 7:  ROW5         Pin 27: Reserved
+Pin 8:  ROW6         Pin 28: Reserved
+Pin 9:  COL1         Pin 29: Reserved
+Pin 10: COL2         Pin 30: Reserved
+Pin 11: COL3         Pin 31: Reserved
+Pin 12: COL4         Pin 32: Reserved
+Pin 13: COL5         Pin 33: Reserved
+Pin 14: COL6         Pin 34: Reserved
+Pin 15: COL7         Pin 35: Reserved
+Pin 16: COL8         Pin 36: Reserved
+Pin 17: COL9         Pin 37: Reserved
+Pin 18: COL10        Pin 38: Reserved
+Pin 19: Reserved     Pin 39: Reserved
+Pin 20: GND          Pin 40: GND

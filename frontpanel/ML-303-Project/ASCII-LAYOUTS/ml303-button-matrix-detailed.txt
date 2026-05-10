@@ -1,0 +1,129 @@
+ML-303 COMPLETE BUTTON MATRIX - DETAILED ASCII
+==============================================
+
+FULL MATRIX CONTROLLER BOARD (Actual component placement)
+========================================================
+
+Board size: 160mm x 100mm (stripboard)
+
+     1   5   10  15  20  25  30  35  40  45  50  55  60  65
+   +---+---+---+---+---+---+---+---+---+---+---+---+---+---+
+A  | V+====================================+10K===o ROW1    |
+   +---+---+---+---+---+---+---+---+---+---+---+---+---+---+
+B  | o=====+10K===o ROW2   +10K===o ROW3  +10K===o ROW4    |
+   +---+---+---+---+---+---+---+---+---+---+---+---+---+---+
+C  | o=====+10K===o ROW5   +10K===o ROW6   o   o   o   o   |
+   +---+---+---+---+---+---+---+---+---+---+---+---+---+---+
+D  | o   o   o   o   o   o   o   o   o   o   o   o   o   o |
+   +---+---+---+---+---+---+---+---+---+---+---+---+---+---+
+E  | o  +----------- ATmega328P DIP-28 -----------+  o   o |
+   | o  |1                                      28|  o   o |
+F  | o  |2  PD1                          PC5  27|  o   o |
+   | o  |3  PD2 (ROW1)                   PC4  26|  o   o |
+G  | o  |4  PD3 (ROW2)                   PC3  25|  o   o |
+   | o  |5  PD4 (COL1)                   PC2  24|  o   o |
+H  | o  |6  VCC                          PC1  23|  o   o |
+   | o  |7  GND                          PC0  22|  o   o |
+I  | o  |8  XTAL1                        GND  21|  o   o |
+   | o  |9  XTAL2                        AREF 20|  o   o |
+J  | o  |10 PD5 (COL2)                   AVCC 19|  o   o |
+   | o  |11 PD6 (COL3)              PB5 (COL6)18|  o   o |
+K  | o  |12 PD7 (COL4)              PB4 (COL5)17|  o   o |
+   | o  |13 PB0 (ROW3)              PB3 (ROW6)16|  o   o |
+L  | o  |14 PB1 (ROW4)              PB2 (ROW5)15|  o   o |
+   | o  +----------------------------------------+  o   o |
+M  | o   o   o   o  |C|  o  |C|  o   o   o   o   o   o   o |
+   +---+---+---+---+---+---+---+---+---+---+---+---+---+---+
+N  | o===16MHz XTAL==o   o   o   o   o   o   o   o   o   o |
+   +---+---+---+---+---+---+---+---+---+---+---+---+---+---+
+O  | GND============================================ o   o |
+   +---+---+---+---+---+---+---+---+---+---+---+---+---+---+
+
+Legend:
+V+ = Power rail (5V)
+GND = Ground rail
+==== = Wire connection on top
+|C| = 22pF capacitor to ground
++10K = 10K pull-up resistor
+ATmega328P shown in socket
+
+BUTTON CONNECTIONS (Separate board or section):
+==============================================
+
+Function Buttons (Connect to ROW1-2, COL1-4):
+     COL1        COL2        COL3        COL4
+     |           |           |           |
+ROW1-+--[WRITE]--+--[RUN]----+--[PITCH]--+--[TAP]
+     |           |           |           |
+ROW2-+--[CLEAR]--+--[FUNC]---+--[TIME]---+--[BACK]
+
+Step Buttons (Connect to ROW3-4, COL5-12):
+     COL5  COL6  COL7  COL8  COL9  COL10 COL11 COL12
+     |     |     |     |     |     |     |     |
+ROW3-+--[1]--[2]--[3]--[4]--[5]--[6]--[7]--[8]
+     |     |     |     |     |     |     |     |
+ROW4-+--[9]--[10]-[11]-[12]-[13]-[14]-[15]-[16]
+
+Note Buttons (Connect to ROW5-6, COL1-6):
+     COL1   COL2   COL3   COL4   COL5   COL6
+     |      |      |      |      |      |
+ROW5-+--[C]---[C#]--[D]---[D#]--[E]---[F]
+     |      |      |      |      |      |
+ROW6-+--[F#]--[G]---[G#]--[A]---[A#]--[B]
+
+40-PIN RIBBON CABLE CONNECTION:
+==============================
+
+Controller Board                  Button Board
+                                 +-----+-----+
+ATmega328 Pins:                  |  1  |  2  | VCC,GND
+ROW1 (Pin 3) ------------------- |  3  |  4  | ROW2
+ROW3 (Pin 13) ------------------ |  5  |  6  | ROW4  
+ROW5 (Pin 16) ------------------ |  7  |  8  | ROW6
+COL1 (Pin 5) ------------------- |  9  | 10  | COL2
+COL3 (Pin 11) ------------------ | 11  | 12  | COL4
+COL5 (Pin 18) ------------------ | 13  | 14  | COL6
+COL7 (Pin 22) ------------------ | 15  | 16  | COL8
+COL9 (Pin 24) ------------------ | 17  | 18  | COL10
+COL11 (Pin 26) ----------------- | 19  | 20  | COL12
+I2C_SDA ------------------------ | 21  | 22  | I2C_SCL
+(for Arduino)                    | ... | ... | (unused)
+                                 | 39  | 40  | GND
+                                 +-----+-----+
+
+POWER SUPPLY SECTION:
+====================
+     
+     USB/Wall Power
+           |
+           V
+    +------+------+
+    |   7805 Reg  |
+    | IN  GND  OUT|
+    +--+---+---+--+
+       |   |   |
+      C1  GND  +---> +5V to circuit
+      100u |   |
+       |   |  C2
+      GND GND 100u
+               |
+              GND
+
+C1: 100uF electrolytic (input filter)
+C2: 100uF electrolytic (output filter)
+Add 0.1uF ceramic near each IC for decoupling
+
+COMPLETE PARTS LIST:
+===================
+- ATmega328P-PU (DIP-28)
+- 28-pin IC socket
+- 16MHz crystal
+- 2x 22pF ceramic capacitors
+- 6x 10K resistors (1/4W)
+- 1x 100nF ceramic capacitor
+- Stripboard 160x100mm
+- 40-pin IDC male header
+- 40-pin ribbon cable with female connectors
+- 36x 12x12mm tactile switches
+- Hookup wire (various colors)
+- Optional: 7805 voltage regulator + caps

@@ -1,0 +1,47 @@
+ML-303 3-PIN ADAPTER - STRIPBOARD LAYOUT
+========================================
+
+Component View (Top):
+
+    A   B   C   D   E   F   G   H   I
+  +---+---+---+---+---+---+---+---+---+
+1 | o | o | o | o | X | o | o | o | o |  <- Cut here
+  +---+---+---+---+---+---+---+---+---+
+2 | o===o | o===o | X | o---o | o | o |  <- 4-pin button
+  +---+---+---+---+---+---+---+---+---+
+3 | o===o | o===o | X | o | o---o | o |  <- connects here
+  +---+---+---+---+---+---+---+---+---+
+4 | o | o | o | o | X | o | o | o | o |  <- Cut here
+  +---+---+---+---+---+---+---+---+---+
+
+Legend:
+o     = Hole
+===   = Component connection
+---   = Wire jumper
+X     = Track cut
+
+Bottom View (Copper Tracks):
+============================
+(All horizontal strips unless cut)
+
+Connections:
+- 4-pin button at A2-B2 and A3-B3
+- Jumpers: B2 to F2, B3 to G3
+- 3-pin output: F2 (Pin 1), G2 (Pin 2), G3 (Pin 3)
+
+3-Pin Triangle Pattern (Conrad style):
+      
+      F2 •
+          
+   G2 •   • G3
+
+Parts Needed:
+- Stripboard: 4x9 holes minimum
+- Wire for 2 jumpers
+- Track cutter or drill bit
+
+Instructions:
+1. Cut tracks at column E, rows 1-4
+2. Solder jumper wires on top
+3. Test with multimeter
+4. Install in ML-303

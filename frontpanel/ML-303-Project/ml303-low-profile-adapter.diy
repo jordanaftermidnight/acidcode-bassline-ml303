@@ -1,0 +1,196 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<project>
+  <fileVersion>
+    <major>5</major>
+    <minor>5</minor>
+    <build>0</build>
+  </fileVersion>
+  <title>ML-303 Low-Profile Adapter</title>
+  <author>ML-303 Project</author>
+  <description>Ultra-thin 0.8mm PCB adapter for tight clearance</description>
+  <width value="10.0" unit="cm"/>
+  <height value="10.0" unit="cm"/>
+  <gridSpacing value="1.27" unit="mm"/>
+  <dotSpacing>1</dotSpacing>
+  <components>
+    <diylc.boards.BlankBoard>
+      <name>PCB1</name>
+      <alpha>127</alpha>
+      <value></value>
+      <controlPoints>
+        <point x="2.39" y="2.59"/>
+        <point x="4.93" y="3.86"/>
+      </controlPoints>
+      <firstPoint x="2.39" y="2.59"/>
+      <secondPoint x="4.93" y="3.86"/>
+      <boardColor hex="c0c0c0"/>
+      <borderColor hex="808080"/>
+      <coordinateColor hex="b6b6b6"/>
+      <xType>Numbers</xType>
+      <coordinateOrigin>Top_Left</coordinateOrigin>
+      <coordinateDisplay>One_Side</coordinateDisplay>
+      <mode>TwoPoints</mode>
+      <boardUndersideDisplay>NONE</boardUndersideDisplay>
+      <type>SQUARE</type>
+    </diylc.boards.BlankBoard>
+    <diylc.connectivity.SolderPad>
+      <name>SW1</name>
+      <alpha>127</alpha>
+      <size value="2.0" unit="mm"/>
+      <color hex="f4d442"/>
+      <point x="3.175" y="2.921"/>
+      <type>SQUARE</type>
+      <holeSize value="0.0" unit="mm"/>
+      <layer>_1</layer>
+    </diylc.connectivity.SolderPad>
+    <diylc.connectivity.SolderPad>
+      <name>SW2</name>
+      <alpha>127</alpha>
+      <size value="2.0" unit="mm"/>
+      <color hex="f4d442"/>
+      <point x="3.6829999999999994" y="2.921"/>
+      <type>SQUARE</type>
+      <holeSize value="0.0" unit="mm"/>
+      <layer>_1</layer>
+    </diylc.connectivity.SolderPad>
+    <diylc.connectivity.SolderPad>
+      <name>SW3</name>
+      <alpha>127</alpha>
+      <size value="2.0" unit="mm"/>
+      <color hex="f4d442"/>
+      <point x="3.175" y="3.429"/>
+      <type>SQUARE</type>
+      <holeSize value="0.0" unit="mm"/>
+      <layer>_1</layer>
+    </diylc.connectivity.SolderPad>
+    <diylc.connectivity.SolderPad>
+      <name>SW4</name>
+      <alpha>127</alpha>
+      <size value="2.0" unit="mm"/>
+      <color hex="f4d442"/>
+      <point x="3.6829999999999994" y="3.429"/>
+      <type>SQUARE</type>
+      <holeSize value="0.0" unit="mm"/>
+      <layer>_1</layer>
+    </diylc.connectivity.SolderPad>
+    <diylc.connectivity.SolderPad>
+      <name>OUT1</name>
+      <alpha>127</alpha>
+      <size value="1.5" unit="mm"/>
+      <color hex="c9c9c9"/>
+      <point x="4.318" y="3.175"/>
+      <type>ROUND</type>
+      <holeSize value="0.8" unit="mm"/>
+      <layer>_2</layer>
+      <holeType>NTPH</holeType>
+    </diylc.connectivity.SolderPad>
+    <diylc.connectivity.SolderPad>
+      <name>OUT2</name>
+      <alpha>127</alpha>
+      <size value="1.5" unit="mm"/>
+      <color hex="c9c9c9"/>
+      <point x="4.572" y="2.921"/>
+      <type>ROUND</type>
+      <holeSize value="0.8" unit="mm"/>
+      <layer>_2</layer>
+      <holeType>NTPH</holeType>
+    </diylc.connectivity.SolderPad>
+    <diylc.connectivity.SolderPad>
+      <name>OUT3</name>
+      <alpha>127</alpha>
+      <size value="1.5" unit="mm"/>
+      <color hex="c9c9c9"/>
+      <point x="4.572" y="3.429"/>
+      <type>ROUND</type>
+      <holeSize value="0.8" unit="mm"/>
+      <layer>_2</layer>
+      <holeType>NTPH</holeType>
+    </diylc.connectivity.SolderPad>
+    <diylc.connectivity.CopperTrace>
+      <name>T1</name>
+      <alpha>127</alpha>
+      <points>
+        <point x="3.175" y="2.921"/>
+        <point x="3.6829999999999994" y="2.921"/>
+        <point x="3.429" y="2.921"/>
+      </points>
+      <bodyColor hex="da8a67"/>
+      <borderColor hex="b87333"/>
+      <labelColor hex="000000"/>
+      <leadColor hex="da8a67"/>
+      <display>NAME</display>
+      <flipStanding>false</flipStanding>
+      <labelOriantation>Directional</labelOriantation>
+      <moveLabel>false</moveLabel>
+      <thickness value="0.5" unit="mm"/>
+      <layer>_1</layer>
+    </diylc.connectivity.CopperTrace>
+    <diylc.connectivity.CopperTrace>
+      <name>T2</name>
+      <alpha>127</alpha>
+      <points>
+        <point x="3.175" y="3.429"/>
+        <point x="3.6829999999999994" y="3.429"/>
+        <point x="3.429" y="3.429"/>
+      </points>
+      <bodyColor hex="da8a67"/>
+      <borderColor hex="b87333"/>
+      <labelColor hex="000000"/>
+      <leadColor hex="da8a67"/>
+      <display>NAME</display>
+      <flipStanding>false</flipStanding>
+      <labelOriantation>Directional</labelOriantation>
+      <moveLabel>false</moveLabel>
+      <thickness value="0.5" unit="mm"/>
+      <layer>_1</layer>
+    </diylc.connectivity.CopperTrace>
+    <diylc.connectivity.SolderPad>
+      <name>VIA1</name>
+      <alpha>127</alpha>
+      <size value="0.8" unit="mm"/>
+      <color hex="c9c9c9"/>
+      <point x="3.429" y="2.921"/>
+      <type>ROUND</type>
+      <holeSize value="0.4" unit="mm"/>
+      <layer>_1</layer>
+      <holeType>NTPH</holeType>
+    </diylc.connectivity.SolderPad>
+    <diylc.connectivity.SolderPad>
+      <name>VIA2</name>
+      <alpha>127</alpha>
+      <size value="0.8" unit="mm"/>
+      <color hex="c9c9c9"/>
+      <point x="3.429" y="3.175"/>
+      <type>ROUND</type>
+      <holeSize value="0.4" unit="mm"/>
+      <layer>_1</layer>
+      <holeType>NTPH</holeType>
+    </diylc.connectivity.SolderPad>
+    <diylc.connectivity.SolderPad>
+      <name>VIA3</name>
+      <alpha>127</alpha>
+      <size value="0.8" unit="mm"/>
+      <color hex="c9c9c9"/>
+      <point x="3.429" y="3.429"/>
+      <type>ROUND</type>
+      <holeSize value="0.4" unit="mm"/>
+      <layer>_1</layer>
+      <holeType>NTPH</holeType>
+    </diylc.connectivity.SolderPad>
+    <diylc.misc.Label>
+      <name>L1</name>
+      <point x="3.81" y="2.286"/>
+      <text>LOW PROFILE 0.8mm</text>
+      <font name="Arial-BoldMT" size="12" style="1"/>
+      <color hex="ff0000"/>
+      <horizontalAlignment>CENTER</horizontalAlignment>
+      <verticalAlignment>CENTER</verticalAlignment>
+      <orientation>DEFAULT</orientation>
+    </diylc.misc.Label>
+  </components>
+  <groups/>
+  <lockedLayers/>
+  <lockedComponents/>
+  <hiddenLayers/>
+  <font name="ArialMT" size="14" style="0"/>
+</project>

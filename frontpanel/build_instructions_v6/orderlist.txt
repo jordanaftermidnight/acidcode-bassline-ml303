@@ -1,0 +1,159 @@
+ORDERLIST ACIDCODE XPO
+----------------------
+
+QTY	DESC				ORDERNO			SUPPLIER
+-------------------------------------------------------------------------------------
+01	MULTIFUSE 500mA			551244 - LN		CONRAD
+02	Resistor (0204) 1k2		400262 - LN		CONRAD
+01	Resistor (0204) 1k8		400289 - LN		CONRAD
+04	Resistor (0204) 1k		400254 - LN		CONRAD
+01	Resistor (0207) 1M5		403636 - LN		CONRAD
+01	Resistor (0204) 1M		400610 - LN		CONRAD
+15	Resistor (0204) 2k2		400297 - LN		CONRAD
+01	Resistor (0204) 3k3		400319 - LN		CONRAD
+02	Resistor (0204) 4k7		400335 - LN		CONRAD
+01	Resistor (0204) 5k6		400343 - LN		CONRAD
+33	Resistor (0204) 10k		400378 - LN		CONRAD
+02	Resistor (0204) 10 Ohms		400017 - LN		CONRAD
+25	Resistor (0204) 100k		400491 - LN		CONRAD
+01	Resistor (0204) 560k		400580 - LN		CONRAD
+01	Resistor (0204) 560		400220 - LN		CONRAD
+06	Resistor (0204) 220k		400530 - LN		CONRAD
+02	Resistor (0204) 6k8		400351 - LN		CONRAD
+01	Resistor (0204) 120k		400505 - LN		CONRAD
+01	Resistor (0204) 680k		400599 - LN		CONRAD
+01	Resistor (0204) 12k		400386 - LN		CONRAD
+01	Resistor (0204) 18k		400408 - LN		CONRAD
+12	Resistor (0204) 22k		400416 - LN		CONRAD
+02	Resistor (0204) 330 Ohms	400190 - LN		CONRAD
+01	Resistor (0204) 22 Ohms		400050 - LN		CONRAD
+07	Resistor (0204) 100 Ohms	400130 - LN		CONRAD
+06	Resistor (0204) 220 Ohms	400173 - LN		CONRAD
+02	Resistor (0204) 33k		400432 - LN		CONRAD
+01	Resistor (0204) 39k		400440 - LN		CONRAD
+05	Resistor (0204) 47k		400459 - LN		CONRAD
+01	Resistor (0204) 68k		400475 - LN		CONRAD
+01	Resistor 1W 6,8 Ohms		419303 - LN		CONRAD
+	(for DISPLAYTECH 6,8 Ohms, for TRONICO 68 Ohms, check LCD-Datasheet)
+01	Capacitor 18n (VCF)		460885 - PT		CONRAD
+05	Capacitor 33n (VCF)		500760 - LN 		CONRAD
+02	Capacitor 10n (VCO)		500868 - LN		CONRAD
+02	Capacitor 100n (VCF) (µ1)	501047 - PT		CONRAD
+01	RECOM 0515S DC/DC 1,2W		152684 - PT		CONRAD
+01	TRIM HIGH-PRECISION 5k		424404 - LN		CONRAD
+01	TRIM HIGH-PRECISION 50k		424439 - LN		CONRAD
+01	TRIM HIGH-PRECISION 500k	424463 - LN		CONRAD
+24	DELTRON TACTSWITCH		705268 - PT		CONRAD (or collected-order by Pempelson/Forum)
+24	DELTRON MULTIMEC CAP 11,5MM	705191 - PT		CONRAD (or collected-order by Pempelson/Forum)
+	(different forms and sizes available, check out also FARNELL for more types!)
+01	LED GREEN			LED 3MM ST GN		REICHELT
+01	LED RED 			LED 3MM ST RT		REICHELT
+21	LED BLUE 			LED 3MM ST BL		REICHELT
+01	Capacitor 0,47u			RAD 0,47/63		REICHELT
+01	Capacitor 1n (JINGUAN 1%) (VCO)	CY 22-3 1,0N		REICHELT
+15	Capacitor 1u			RAD 1/63		REICHELT
+02	Capacitor 1u (Tantalum)		TANTAL 1,0/35		REICHELT
+11	2SA733P				SA 733			REICHELT
+24	2SC945 ( or 2SC536 )		SC 945			REICHELT
+02	2SK30 (1xO/1xY/ OR 2xGR)	SK30			REICHELT
+01	Capacitor 2u2			RAD 2,2/63		REICHELT
+01	Capacitor 6n8			X7R-5 6,8N		REICHELT
+01	High-Precision Trimmer 5k	962-20 5,0K		REICHELT
+01	XTAL 10.0000 MHz		10-HC49U-S		REICHELT
+	(or use 10-HC18)
+13	Capacitor 10u			RAD 10/35		REICHELT
+01	EEPROM 24C64( or 65)		ST 24C64 BN6		REICHELT
+01	IC-Bracket DIP40		GS 40			REICHELT
+04	IC-Bracket DIP8			GS 8			REICHELT
+01	IC-Bracket DIP6			GS 6			REICHELT
+02	IC-Bracket DIP16		GS 16			REICHELT
+02	IC-Bracket DIP14		GS 14			REICHELT
+02	AN6562				AN 6562			REICHELT
+01	AN7112E ( or LA4140 )		AN 7112			REICHELT
+01	BA6110 ( or Original BA662A )	BA 6110			REICHELT
+01	LM2904N				LM 2904			REICHELT		
+02	Capacitor 33p			KERKO 33P		REICHELT
+01	IC MOS 4013			MOS 4013		REICHELT
+01 	IC MOS 4050			MOS 4050		REICHELT
+01	IC MOS 4066			MOS 4066		REICHELT
+01	IC MOS 40174			MOS 40174		REICHELT
+01	Capacitor 1000u			RAD 1.000/16		REICHELT
+01	IC CNY17/III			CNY 17/III		REICHELT
+01	DIP-SWITCH 2X			NT 02			REICHELT
+02	DIN 5				MABP 5S			REICHELT
+01	Resistor 27K			METALL 27,0K		REICHELT
+17	Resistor 200K			METALL 200K		REICHELT
+01	IC 78S05			µA 78S05		REICHELT
+01	Trim PT10LV 10k			PIHER 10-L 10K		REICHELT
+01	Trim PT10LV 100 Ohms		PIHER 10-L 100		REICHELT
+08	Capacitor 47u			RAD 47/35		REICHELT
+04	Capacitor 100u			RAD 100/35		REICHELT
+01	Capacitor 47n			Z5U-5 47N		REICHELT
+02	Capacitor 68n			Z5U-5 68N		REICHELT
+04	Capacitor 470n			Z5U-5 470N		REICHELT
+02	Capacitor 33n			Z5U-5 33N		REICHELT
+03	Capacitor 15n			Z5U-5 15N		REICHELT
+08	Capacitor 10n			Z5U-5 10N		REICHELT
+05	Capacitor 220n			Z5U-5 220N		REICHELT
+04 	Diodes 				1N4001 (or equiv.) 	REICHELT 
+14 	Diodes 				1N4148			REICHELT 
+01	Zener-Diode 6,2V 1,3W		ZD 6,2			REICHELT
+02	Jack 6,3 MM			EBS 63P			REICHELT
+01	DC-Jack 2.5 MM			HEBG 25			REICHELT
+05	SWITCHES 2UM			T 217			REICHELT
+01	LCD-Module			LCD162C			REICHELT (or collected-order PLED-Display by Pempelson/Forum)
+01	2SC2291(F)			2SC2291(F)		Lobtron/Strixner/Fibra-Brandt/etc.
+03	2SC1583(F)			2SC1583(F)		Lobtron/Strixner/Fibra-Brandt/etc.
+
+
+!---------------------------------------!
+
+Potentiometers - SEE NOTE
+
+!---------------------------------------!
+!- Order-Numbers for 6 mm / 4 mm Shaft -!
+!---------------------------------------!
+	
+01	POTENTIOMETER CLICK 50K LIN	63250-21610/3207	ALPHASTAT		(TUNING)
+                                        63250-21410/3047	<(or collected-order by Pempelson/Forum)			
+
+02	POTENTIOMETER 50K LIN		63250-21600/3167	ALPHASTAT		(RESONANCE, ACCENT)
+                                        63250-21400/3007	<(or collected-order by Pempelson/Forum)
+
+04	POTENTIOMETER 50K POSLOG	63250-21600/3180	ALPHASTAT		(CUTOFF, ENV.MOD,BASSDRUM, VOLUME) 
+                                        63250-21400/3020	<(or collected-order by Pempelson/Forum)
+
+01	POTENTIOMETER 1M POSLOG		63250-21600/3184	ALPHASTAT		(DECAY)
+                                        63250-21400/3024	<(or collected-order by Pempelson/Forum)
+
+
+SMALL POTS/SWITCHBOARD ! OR USE CONRAD PIHER PT10LV TRIMMERS WITH SEPARATE PLASTIC-SHAFT !
+
+01	POTENTIOMETER 1M POSLOG		63250-21800/3344	ALPHASTAT		(SLIDE TIME)
+                                                                (or collected-order by Pempelson/Forum)
+
+01	POTENTIOMETER 50K LIN		63250-21800/3327	ALPHASTAT		(DISTORTION)
+                                                                (or collected-order by Pempelson/Forum)
+
+02	Small Knobs for Potentiometers				?(or collected-order by Pempelson/Forum)
+
+06	Small Knobs for Potentiometers				?(or collected-order by Pempelson/Forum)
+02	Big Knobs for Potentiometers				?
+01	Ribbon Cable (1M or 2M)					?
+01	TO-220 Cooler						REICHELT
+
+NOTE: ALPHASTAT has a minimum order of 50 EUR. But you can also use other 
+types of potentiometers. The holes in the mainboard are for thru-hole mounting 
+of Monacor Alpha-Pots (available from www.kessler-elektronik.de) for 1,20 EUR 
+each. You need TWO screw-nuts per potentiometer so dont forget to order them. 
+On the switchboard there are holes for Conrad-Pots (you have to cut the
+plastic-shaft to the desired length). If your potentiometers do not fit in the
+holes you can mount them directly to the frontplate or a separate aluminium-
+plate which is mounted behind the frontplate.
+
+
+
+	
+
+
+

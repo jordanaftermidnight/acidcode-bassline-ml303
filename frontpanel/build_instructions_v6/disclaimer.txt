@@ -1,0 +1,90 @@
+Es ist vollbracht, "sie" ist fertig - und ich auch :-))
+
+Die XPO (V6) Final-Specs:
+
+- Bassdrum (!!!) (leicht modifizierte 606 BD)
+- Bassdrum-Level-Poti
+- Distortion (regelbar über Mini-Poti auf dem Switchboard)
+- Slide-Time (regelbar über Mini-Poti auf dem Switchboard)
+- Filter-Modulation-Input
+- Filter-Audio Mix-Input
+- Filter-Overdrive (entweder über separates Poti oder Schiebeschalter
+  steuerbar)
+- Highpass (Schiebeschalter)
+- Bassdrum-Single-Out
+- Acidizer/Spanker-Effekt (Schiebeschalter)
+- Manual-Accent-Taster mit Accent-Indicator auf dem Switchboard
+- Beat-Indicator LED über dem Bassdrum-Level Poti
+- Switchboard für Deltron-Taster mit transparenten Kappen
+- DC/DC Wandler für den Betrieb an einem herkömmlichen 9 Volt Netzeil!
+- direkter LCD-Anschluss auf der Platine, + Bohrlöcher für Displaytech
+- LCD-Kontrast-Trimmer
+- BA6110 Enhancer
+- BA662 Slot
+- Spindeltrimmer für VCO und CV Einstellung
+- nahezu exakte Leiterbahnführung und Bauteilpositionen wie in Real TB!
+- DIP-Schalter für LCD-Datendurchsatz (bei Firmware-Erweiterung in dieser
+  Sache braucht man daher nix mehr zu löten sondern einfach nur die Schalter
+  umlegen)
+- Midi In UND Out als Print ausgeführt (V5 war ja nur Midi In)
+- ...bin mir sicher das ich noch was vergessen habe... öhm.. nagut, dat reicht
+  ja erstma :-)
+
+Die V6 basiert auf dem Prototypen den ich damals nach der V5 gebaut hatte, dort
+habe ich aufwendig in Wochenlanger Arbeit mein gelayertes Original-Layout von
+der TB in Sprint als Layer eingefügt, nachgeroutet, von dort exportiert und als
+Layer in Target eingefügt, und dann mit dem verknüpften V5 Schaltplan NOCHMALS
+alles nachgeroutet und die Bauteile positionert. Zum Glück habe ich diese Datei
+noch gefunden. Trotzdem war es kein "Spaziergang" zur V6, ich habe die letzten
+Nächte fast gar nicht gepennt, war wirklich extrem viel Arbeit. Aber ich denke
+es hat sich gelohnt :-))))
+
+Die schlechte Nachricht: die Kohle reicht nicht für die CD-Rom. Macht aber nix,
+mir war es wichtiger Wert auf die Boards zu legen und trotzdem die 59 EUR zu
+halten (inkl. 5 EUR Donation an Kaspar aka Transistor je Kit). Damit ist die
+V6 vom Kosten/Leistungsverhältnis her allen vorangeganenen Version überlegen!
+
+Mein Vorschlag: wer es sich leisten kann und möchte, der kann mir ja eine kleine
+Donation mitüberweisen, dafür lege ich dann eine CDR mit meinem 303 Kram dabei,
+darunter auch mein berühmtes Layer-Layout von der TB (was ich eigentlich sonst
+nie rausrücke, zumal es zum Mailen auch viel zu groß ist). Alle anderen kriegen
+den Bestückungsplan und Bestellplan per Mail oder als Download.
+
+Ich werde als nun das Geld eintreiben (jeder kriegt noch eine separate Mail mit
+den Bankdaten) und sobald alle (bzw. der überwiegende Teil) überwiesen haben,
+werde ich die Prozessoren bestellen und die Platinen in Auftrag geben. Wie immer:
+es braucht niemand Angst haben das ich mit eurem Geld La-Paloma-Ohe mache ;-)
+
+WER ABSPRINGEN MÖCHTE (ich hoffe angesichts dieser Specs keiner *g*) DER SOLL 
+BITTE SO FAIR SEIN UND MIR KURZ PER MAIL BESCHEID GEBEN, DAMIT EVTL. JEMAND
+NACHRÜCKEN KANN.
+
+DISCLAIMER
+----------------
+Acidcode ML-303 ist ein rein privates Hobbyprojekt! Ich bin keine Firma, und erst
+recht kein beruflicher Synthesizer-Entwickler :-) Ich mache das Just-4-Fun!
+Bei den Platinen handelt es sich um Synthesizer-Experimentierplatinen. Obgleich
+der Schaltplan zahlreiche Revisionen und Prototypen durchlaufen hat und ich die
+Boards nach bestem Wissen und Gewissen entwickelt habe übernehme ich keinerlei
+Haftung oder Gewährleistung! Das betrifft insbesondere Passgenauigkeiten, aber 
+auch die Funktionsweise der Schaltung an sich. Zudem basiert die Schaltung auf
+abgekündigten Bauteilen. Niemand kann garantieren ob bzw. wie lange die Bauteile 
+überhaupt noch beschaffbar sind. Jeder ist für seine ML-303 selbst verantwortlich. 
+Es besteht kein Anspruch auf ein Funktionierendes Gerät. Ein "Kit" umfasst zwei
+hochwertige Platinen (Mainboard und Switchboard) in Standard-Industrie-Qualität
+mit 2 Lagen, Vorverzinnt, Durchkontaktiert, Bestückungsdruck, grünem Lötstopp-
+lack) und einen 40 MHz PIC Prozessor mit vorgeflashtem Bootloader.
+
+Jeder erkennt durch seine überweisung diese Bedingungen an!
+
+---
+
+Zum Abschluss hoffe ich sehr, das wir diesmal möglichst viele unter einen Hut
+kriegen was die Gehäuse betrifft, das reduziert für die alle die Kosten, denn 
+das Gehäuse ist ja meist das teuerste an solchen Projekten.
+
+Viel Spaß mit der (jetzt aber wirklich!) finalen ML-303 :-)
+
+Matzzze
+
+ 

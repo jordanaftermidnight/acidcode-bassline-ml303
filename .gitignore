@@ -1,0 +1,44 @@
+# macOS
+.DS_Store
+._*
+
+# Arduino / PlatformIO
+.pio/
+.pioenvs/
+.piolibdeps/
+build/
+*.elf
+*.bin
+
+# Arduino IDE 2 sidecars
+*.ino.cpp
+*.ino.with_bootloader.hex
+
+# MPLAB X
+build/
+dist/
+nbproject/private/
+*.o
+*.p1
+*.cof
+*.cmf
+*.lst
+*.sym
+*.sdb
+*.elf
+*.hex
+*.hxl
+*.obj
+*.mum
+*.rlf
+
+# Editor
+.vscode/
+.idea/
+*.swp
+*~
+
+# Secrets (defense in depth — none expected here)
+.env
+.env.*
+.secrets

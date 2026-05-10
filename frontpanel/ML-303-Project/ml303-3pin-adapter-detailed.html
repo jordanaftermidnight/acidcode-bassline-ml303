@@ -1,0 +1,1678 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>ML-303 3-Pin Triangular Adapter - Detailed Design</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 20px;
+            background-color: #f5f5f5;
+        }
+        .container {
+            background: white;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+            margin-bottom: 20px;
+            max-width: 1400px;
+            margin: 20px auto;
+        }
+        canvas {
+            border: 2px solid #333;
+            margin: 10px 0;
+            background: white;
+        }
+        .info {
+            background: #e3f2fd;
+            padding: 15px;
+            border-radius: 4px;
+            margin: 10px 0;
+            border-left: 4px solid #2196F3;
+        }
+        .warning {
+            background: #ffebee;
+            padding: 15px;
+            border-radius: 4px;
+            margin: 10px 0;
+            border-left: 4px solid #f44336;
+        }
+        .specs {
+            background: #e8f5e9;
+            padding: 15px;
+            border-radius: 4px;
+            margin: 10px 0;
+            border-left: 4px solid #4CAF50;
+        }
+        button {
+            margin: 5px;
+            padding: 10px 20px;
+            background: #2196F3;
+            color: white;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            font-weight: bold;
+        }
+        button:hover {
+            background: #1976D2;
+        }
+        .export-btn {
+            background: #4CAF50;
+        }
+        .export-btn:hover {
+            background: #45a049;
+        }
+        table {
+            border-collapse: collapse;
+            width: 100%;
+            margin: 10px 0;
+        }
+        th, td {
+            border: 1px solid #ddd;
+            padding: 8px;
+            text-align: left;
+        }
+        th {
+            background-color: #2196F3;
+            color: white;
+        }
+        .ml303-title {
+            font-family: 'Arial Black', sans-serif;
+            font-size: 24px;
+            color: #2196F3;
+            text-align: center;
+            margin: 20px 0;
+        }
+        code {
+            background: #f5f5f5;
+            padding: 2px 4px;
+            border-radius: 3px;
+            font-family: 'Courier New', monospace;
+        }
+    </style>
+</head>
+<body>
+    <div class="ml303-title">ML-303 3-PIN TRIANGULAR ADAPTER</div>
+    
+    <div class="container">
+        <h2>Problem & Solution Overview</h2>
+        
+        <div class="warning">
+            <h3>⚠️ The ML-303 Button Problem</h3>
+            <ul>
+                <li><strong>Original buttons:</strong> Conrad-exclusive 12x12mm switches with unique 3-pin triangular footprint</li>
+                <li><strong>Status:</strong> DISCONTINUED - No direct replacements exist</li>
+                <li><strong>Issue:</strong> Standard switches use 4-pin square layout, incompatible with ML-303 PCB</li>
+                <li><strong>Solution:</strong> Custom adapter boards convert standard 4-pin to ML-303 3-pin layout</li>
+            </ul>
+        </div>
+        
+        <div class="specs">
+            <h3>✅ Adapter Solution Benefits</h3>
+            <ul>
+                <li>Use widely available standard 12x12mm 4-pin switches</li>
+                <li>Maintains original 12-13mm button spacing</li>
+                <li>Minimal height addition (~2mm)</li>
+                <li>Can be built on stripboard or custom PCB</li>
+                <li>Cost: ~€0.50 per adapter vs €50+ for original switches</li>
+            </ul>
+        </div>
+    </div>
+
+    <div class="container">
+        <h2>Detailed Technical Drawings</h2>
+        
+        <div class="controls">
+            <button onclick="showView('comparison')">Pin Layout Comparison</button>
+            <button onclick="showView('adapter')">Adapter Design</button>
+            <button onclick="showView('assembly')">Assembly Steps</button>
+            <button onclick="showView('stripboard')">Stripboard Layout</button>
+            <button onclick="showView('matrix')">Matrix Wiring</button>
+            <button class="export-btn" onclick="exportDesign()">Export Design Files</button>
+        </div>
+        
+        <canvas id="mainCanvas" width="1200" height="800"></canvas>
+    </div>
+
+    <div class="container">
+        <h2>Pin Mapping & Connections</h2>
+        
+        <table>
+            <tr>
+                <th>4-Pin Switch</th>
+                <th>Function</th>
+                <th>ML-303 3-Pin</th>
+                <th>Wire Color</th>
+                <th>Notes</th>
+            </tr>
+            <tr>
+                <td>Pin 1 (NO)</td>
+                <td>Normally Open</td>
+                <td>Pin A (Common)</td>
+                <td>Red</td>
+                <td>Matrix scan common</td>
+            </tr>
+            <tr>
+                <td>Pin 2 (NO)</td>
+                <td>Normally Open</td>
+                <td>Pin B (Row)</td>
+                <td>Blue</td>
+                <td>Matrix row signal</td>
+            </tr>
+            <tr>
+                <td>Pin 3 (COM)</td>
+                <td>Common</td>
+                <td>Pin C (Column)</td>
+                <td>Green</td>
+                <td>Matrix column signal</td>
+            </tr>
+            <tr>
+                <td>Pin 4 (COM)</td>
+                <td>Common</td>
+                <td>Not Connected</td>
+                <td>-</td>
+                <td>Leave unconnected</td>
+            </tr>
+        </table>
+    </div>
+
+    <div class="container">
+        <h2>Building Instructions</h2>
+        
+        <div class="info">
+            <h3>Materials Needed (per adapter)</h3>
+            <ul>
+                <li>Stripboard piece: 5x5 holes (12.7mm × 12.7mm)</li>
+                <li>30 AWG wire: ~10cm total (3 colors recommended)</li>
+                <li>Solder and flux</li>
+                <li>Track cutting tool or 3mm drill bit</li>
+            </ul>
+        </div>
+        
+        <h3>Step-by-Step Assembly</h3>
+        <ol>
+            <li><strong>Cut stripboard:</strong> Use a sharp knife to cut 5x5 hole sections</li>
+            <li><strong>Make track cut:</strong> Break the copper track at position C3</li>
+            <li><strong>Prepare wires:</strong> Cut three 3cm pieces, strip 2mm from each end</li>
+            <li><strong>Solder switch side:</strong> Attach wires to positions matching 4-pin layout</li>
+            <li><strong>Route wires:</strong> Use angled routing for clean appearance</li>
+            <li><strong>Solder ML-303 side:</strong> Connect to triangular pad positions</li>
+            <li><strong>Test continuity:</strong> Verify connections with multimeter</li>
+        </ol>
+    </div>
+
+    <div class="container">
+        <h2>Alternative Solutions</h2>
+        
+        <canvas id="alternativeCanvas" width="1200" height="400"></canvas>
+        
+        <div class="specs">
+            <h3>Option A: Individual Adapters (Recommended)</h3>
+            <ul>
+                <li>One adapter per button</li>
+                <li>Easy to troubleshoot</li>
+                <li>Can replace individual buttons</li>
+                <li>Slightly more work to build</li>
+            </ul>
+            
+            <h3>Option B: Row/Matrix Adapters</h3>
+            <ul>
+                <li>One adapter per row of buttons</li>
+                <li>Faster to build</li>
+                <li>Cleaner wiring</li>
+                <li>Harder to troubleshoot individual buttons</li>
+            </ul>
+            
+            <h3>Option C: Custom PCB</h3>
+            <ul>
+                <li>Professional solution</li>
+                <li>Order from PCB manufacturer</li>
+                <li>Perfect fit and reliability</li>
+                <li>Higher initial cost</li>
+            </ul>
+        </div>
+    </div>
+
+    <script>
+        const mainCanvas = document.getElementById('mainCanvas');
+        const mainCtx = mainCanvas.getContext('2d');
+        const altCanvas = document.getElementById('alternativeCanvas');
+        const altCtx = altCanvas.getContext('2d');
+        
+        let currentView = 'comparison';
+        
+        // Color scheme
+        const colors = {
+            pcb: '#228b22',
+            pcbDark: '#1a5c1a',
+            copper: '#CD7F32',
+            pad: '#ffd700',
+            wire: {
+                red: '#ff0000',
+                blue: '#0000ff',
+                green: '#00cc00'
+            },
+            switch: '#333333',
+            button: '#666666'
+        };
+        
+        // Draw pin layout comparison
+        function drawComparison() {
+            mainCtx.clearRect(0, 0, mainCanvas.width, mainCanvas.height);
+            
+            // Title
+            mainCtx.fillStyle = '#000';
+            mainCtx.font = 'bold 24px Arial';
+            mainCtx.fillText('Pin Layout Comparison', 50, 50);
+            
+            // Standard 4-pin layout
+            drawStandard4Pin(mainCtx, 200, 150, 5);
+            
+            // ML-303 3-pin layout
+            drawML303_3Pin(mainCtx, 600, 150, 5);
+            
+            // Conversion diagram
+            drawConversionDiagram(mainCtx, 200, 450, 5);
+        }
+        
+        // Draw standard 4-pin switch
+        function drawStandard4Pin(ctx, x, y, scale) {
+            ctx.save();
+            ctx.translate(x, y);
+            
+            // Title
+            ctx.fillStyle = '#000';
+            ctx.font = 'bold 18px Arial';
+            ctx.textAlign = 'center';
+            ctx.fillText('Standard 4-Pin Switch', 0, -100);
+            ctx.font = '14px Arial';
+            ctx.fillText('(Available Everywhere)', 0, -80);
+            
+            // Switch body
+            ctx.fillStyle = colors.switch;
+            ctx.fillRect(-60, -60, 120, 120);
+            
+            // Button
+            ctx.fillStyle = colors.button;
+            ctx.fillRect(-40, -40, 80, 80);
+            
+            // Center actuator
+            ctx.fillStyle = '#999';
+            ctx.beginPath();
+            ctx.arc(0, 0, 15, 0, Math.PI * 2);
+            ctx.fill();
+            
+            // Pin positions
+            const pins = [
+                {x: -30, y: -30, label: '1', desc: 'NO'},
+                {x: 30, y: -30, label: '2', desc: 'NO'},
+                {x: -30, y: 30, label: '3', desc: 'COM'},
+                {x: 30, y: 30, label: '4', desc: 'COM'}
+            ];
+            
+            pins.forEach(pin => {
+                // Pin
+                ctx.fillStyle = colors.pad;
+                ctx.beginPath();
+                ctx.arc(pin.x, pin.y, 8, 0, Math.PI * 2);
+                ctx.fill();
+                
+                // Pin number
+                ctx.fillStyle = '#000';
+                ctx.font = 'bold 12px Arial';
+                ctx.textAlign = 'center';
+                ctx.fillText(pin.label, pin.x, pin.y + 3);
+                
+                // Description
+                ctx.font = '10px Arial';
+                ctx.fillText(pin.desc, pin.x, pin.y + 25);
+            });
+            
+            // Dimensions
+            ctx.strokeStyle = '#666';
+            ctx.lineWidth = 1;
+            ctx.setLineDash([2, 2]);
+            
+            // Horizontal dimension
+            ctx.beginPath();
+            ctx.moveTo(-30, 80);
+            ctx.lineTo(30, 80);
+            ctx.stroke();
+            
+            ctx.fillStyle = '#666';
+            ctx.font = '12px Arial';
+            ctx.fillText('5.08mm', 0, 95);
+            
+            // Vertical dimension
+            ctx.beginPath();
+            ctx.moveTo(80, -30);
+            ctx.lineTo(80, 30);
+            ctx.stroke();
+            
+            ctx.save();
+            ctx.translate(95, 0);
+            ctx.rotate(-Math.PI/2);
+            ctx.fillText('5.08mm', 0, 0);
+            ctx.restore();
+            
+            // Internal connections
+            ctx.setLineDash([]);
+            ctx.strokeStyle = '#00f';
+            ctx.lineWidth = 2;
+            
+            // Show internal switch connections
+            ctx.globalAlpha = 0.5;
+            ctx.beginPath();
+            ctx.moveTo(-30, -30);
+            ctx.lineTo(-10, -10);
+            ctx.moveTo(30, -30);
+            ctx.lineTo(10, -10);
+            ctx.stroke();
+            
+            ctx.beginPath();
+            ctx.moveTo(-30, 30);
+            ctx.lineTo(-10, 10);
+            ctx.moveTo(30, 30);
+            ctx.lineTo(10, 10);
+            ctx.stroke();
+            ctx.globalAlpha = 1.0;
+            
+            ctx.restore();
+        }
+        
+        // Draw ML-303 3-pin layout
+        function drawML303_3Pin(ctx, x, y, scale) {
+            ctx.save();
+            ctx.translate(x, y);
+            
+            // Title
+            ctx.fillStyle = '#000';
+            ctx.font = 'bold 18px Arial';
+            ctx.textAlign = 'center';
+            ctx.fillText('ML-303 3-Pin Layout', 0, -100);
+            ctx.font = '14px Arial';
+            ctx.fillStyle = '#f00';
+            ctx.fillText('(Conrad Exclusive - Discontinued)', 0, -80);
+            
+            // PCB representation
+            ctx.fillStyle = colors.pcb;
+            ctx.fillRect(-70, -70, 140, 140);
+            
+            // Button outline
+            ctx.strokeStyle = '#fff';
+            ctx.lineWidth = 2;
+            ctx.setLineDash([4, 4]);
+            ctx.strokeRect(-60, -60, 120, 120);
+            ctx.setLineDash([]);
+            
+            // Triangular pin layout
+            const pins = [
+                {x: 0, y: -40, label: 'A', desc: 'Common', angle: 0},
+                {x: -35, y: 30, label: 'B', desc: 'Row', angle: -120},
+                {x: 35, y: 30, label: 'C', desc: 'Column', angle: 120}
+            ];
+            
+            // Draw triangular connection lines
+            ctx.strokeStyle = 'rgba(255, 255, 0, 0.3)';
+            ctx.lineWidth = 3;
+            ctx.beginPath();
+            ctx.moveTo(pins[0].x, pins[0].y);
+            ctx.lineTo(pins[1].x, pins[1].y);
+            ctx.lineTo(pins[2].x, pins[2].y);
+            ctx.closePath();
+            ctx.stroke();
+            
+            // Draw pins
+            pins.forEach(pin => {
+                // Pad
+                ctx.fillStyle = colors.pad;
+                ctx.beginPath();
+                ctx.arc(pin.x, pin.y, 10, 0, Math.PI * 2);
+                ctx.fill();
+                
+                // Hole
+                ctx.fillStyle = '#333';
+                ctx.beginPath();
+                ctx.arc(pin.x, pin.y, 4, 0, Math.PI * 2);
+                ctx.fill();
+                
+                // Label
+                ctx.fillStyle = '#fff';
+                ctx.font = 'bold 14px Arial';
+                ctx.textAlign = 'center';
+                ctx.fillText(pin.label, pin.x, pin.y + 5);
+                
+                // Description with arrow
+                ctx.strokeStyle = '#000';
+                ctx.lineWidth = 1;
+                ctx.beginPath();
+                const arrowX = pin.x + Math.cos(pin.angle * Math.PI / 180) * 30;
+                const arrowY = pin.y + Math.sin(pin.angle * Math.PI / 180) * 30;
+                ctx.moveTo(pin.x + Math.cos(pin.angle * Math.PI / 180) * 15, 
+                          pin.y + Math.sin(pin.angle * Math.PI / 180) * 15);
+                ctx.lineTo(arrowX, arrowY);
+                ctx.stroke();
+                
+                ctx.fillStyle = '#000';
+                ctx.font = '12px Arial';
+                const textX = pin.x + Math.cos(pin.angle * Math.PI / 180) * 50;
+                const textY = pin.y + Math.sin(pin.angle * Math.PI / 180) * 50;
+                ctx.fillText(pin.desc, textX, textY);
+            });
+            
+            // Show matrix connections
+            ctx.font = '10px Arial';
+            ctx.fillStyle = '#666';
+            ctx.fillText('Matrix Scanning:', 0, 100);
+            ctx.fillText('A = Scan line (pulled low)', 0, 115);
+            ctx.fillText('B & C = Read lines (pull-up)', 0, 130);
+            
+            ctx.restore();
+        }
+        
+        // Draw conversion diagram
+        function drawConversionDiagram(ctx, x, y, scale) {
+            ctx.save();
+            ctx.translate(x, y);
+            
+            // Title
+            ctx.fillStyle = '#000';
+            ctx.font = 'bold 18px Arial';
+            ctx.textAlign = 'center';
+            ctx.fillText('Adapter Wiring with Angled Routes', 400, -50);
+            
+            // Left side - 4-pin
+            ctx.fillStyle = colors.switch;
+            ctx.fillRect(0, 0, 100, 100);
+            
+            const fourPins = [
+                {x: 20, y: 20, label: '1'},
+                {x: 80, y: 20, label: '2'},
+                {x: 20, y: 80, label: '3'},
+                {x: 80, y: 80, label: '4'}
+            ];
+            
+            fourPins.forEach(pin => {
+                ctx.fillStyle = colors.pad;
+                ctx.beginPath();
+                ctx.arc(pin.x, pin.y, 6, 0, Math.PI * 2);
+                ctx.fill();
+                
+                ctx.fillStyle = '#000';
+                ctx.font = '10px Arial';
+                ctx.fillText(pin.label, pin.x - 3, pin.y + 3);
+            });
+            
+            // Adapter board in middle
+            ctx.fillStyle = colors.pcb;
+            ctx.fillRect(200, -20, 150, 140);
+            
+            ctx.fillStyle = '#fff';
+            ctx.font = '12px Arial';
+            ctx.textAlign = 'center';
+            ctx.fillText('ADAPTER', 275, 55);
+            ctx.fillText('BOARD', 275, 70);
+            
+            // Right side - 3-pin
+            ctx.fillStyle = colors.pcbDark;
+            ctx.fillRect(450, 0, 100, 100);
+            
+            const threePins = [
+                {x: 500, y: 20, label: 'A'},
+                {x: 470, y: 80, label: 'B'},
+                {x: 530, y: 80, label: 'C'}
+            ];
+            
+            threePins.forEach(pin => {
+                ctx.fillStyle = colors.pad;
+                ctx.beginPath();
+                ctx.arc(pin.x, pin.y, 8, 0, Math.PI * 2);
+                ctx.fill();
+                
+                ctx.fillStyle = '#000';
+                ctx.font = 'bold 12px Arial';
+                ctx.fillText(pin.label, pin.x - 4, pin.y + 4);
+            });
+            
+            // Draw angled wire connections
+            ctx.lineWidth = 3;
+            
+            // Pin 1 to A (red wire with angles)
+            ctx.strokeStyle = colors.wire.red;
+            ctx.beginPath();
+            ctx.moveTo(fourPins[0].x, fourPins[0].y);
+            ctx.lineTo(150, 20);
+            ctx.lineTo(250, 10);
+            ctx.lineTo(350, 10);
+            ctx.lineTo(450, 20);
+            ctx.lineTo(threePins[0].x, threePins[0].y);
+            ctx.stroke();
+            
+            // Pin 2 to B (blue wire with angles)
+            ctx.strokeStyle = colors.wire.blue;
+            ctx.beginPath();
+            ctx.moveTo(fourPins[1].x, fourPins[1].y);
+            ctx.lineTo(150, 30);
+            ctx.lineTo(250, 50);
+            ctx.lineTo(300, 90);
+            ctx.lineTo(350, 90);
+            ctx.lineTo(450, 80);
+            ctx.lineTo(threePins[1].x, threePins[1].y);
+            ctx.stroke();
+            
+            // Pin 3 to C (green wire with angles)
+            ctx.strokeStyle = colors.wire.green;
+            ctx.beginPath();
+            ctx.moveTo(fourPins[2].x, fourPins[2].y);
+            ctx.lineTo(150, 80);
+            ctx.lineTo(250, 100);
+            ctx.lineTo(350, 100);
+            ctx.lineTo(450, 85);
+            ctx.lineTo(threePins[2].x, threePins[2].y);
+            ctx.stroke();
+            
+            // Pin 4 NC
+            ctx.strokeStyle = '#ccc';
+            ctx.lineWidth = 1;
+            ctx.setLineDash([2, 2]);
+            ctx.beginPath();
+            ctx.moveTo(fourPins[3].x, fourPins[3].y);
+            ctx.lineTo(150, 85);
+            ctx.stroke();
+            ctx.setLineDash([]);
+            
+            ctx.fillStyle = '#666';
+            ctx.font = '10px Arial';
+            ctx.fillText('NC', 165, 88);
+            
+            // Labels
+            ctx.fillStyle = '#000';
+            ctx.font = '14px Arial';
+            ctx.textAlign = 'center';
+            ctx.fillText('4-Pin Switch', 50, 130);
+            ctx.fillText('ML-303 PCB', 500, 130);
+            
+            // Connection labels
+            ctx.font = '10px Arial';
+            ctx.fillStyle = colors.wire.red;
+            ctx.fillText('Common', 275, 25);
+            ctx.fillStyle = colors.wire.blue;
+            ctx.fillText('Row', 275, 85);
+            ctx.fillStyle = colors.wire.green;
+            ctx.fillText('Column', 275, 115);
+            
+            ctx.restore();
+        }
+        
+        // Draw detailed adapter design
+        function drawAdapterDesign() {
+            mainCtx.clearRect(0, 0, mainCanvas.width, mainCanvas.height);
+            
+            // Title
+            mainCtx.fillStyle = '#000';
+            mainCtx.font = 'bold 24px Arial';
+            mainCtx.fillText('Adapter Board Detailed Design', 50, 50);
+            
+            // Multiple views
+            drawAdapterLayers(mainCtx, 150, 150, 8);
+            drawAdapterDimensions(mainCtx, 600, 150, 8);
+            drawAdapterBottom(mainCtx, 150, 450, 8);
+            drawAdapterProfile(mainCtx, 600, 450, 8);
+        }
+        
+        // Draw adapter layers
+        function drawAdapterLayers(ctx, x, y, scale) {
+            ctx.save();
+            ctx.translate(x, y);
+            
+            ctx.font = 'bold 14px Arial';
+            ctx.fillText('Exploded View', -50, -50);
+            
+            // Switch layer
+            ctx.save();
+            ctx.translate(0, -60);
+            ctx.globalAlpha = 0.8;
+            ctx.fillStyle = colors.switch;
+            ctx.fillRect(-6*scale, -6*scale, 12*scale, 12*scale);
+            ctx.fillStyle = colors.button;
+            ctx.fillRect(-4*scale, -4*scale, 8*scale, 8*scale);
+            ctx.globalAlpha = 1.0;
+            ctx.fillStyle = '#000';
+            ctx.font = '10px Arial';
+            ctx.fillText('12x12mm Switch', 7*scale, 0);
+            ctx.restore();
+            
+            // Adapter PCB
+            ctx.fillStyle = colors.pcb;
+            ctx.fillRect(-6.35*scale, -6.35*scale, 12.7*scale, 12.7*scale);
+            
+            // Copper pads on top
+            const topPads = [
+                {x: -2.54, y: -2.54},
+                {x: 2.54, y: -2.54},
+                {x: -2.54, y: 2.54},
+                {x: 2.54, y: 2.54}
+            ];
+            
+            topPads.forEach(pad => {
+                ctx.fillStyle = colors.pad;
+                ctx.beginPath();
+                ctx.arc(pad.x*scale, pad.y*scale, 0.8*scale, 0, Math.PI * 2);
+                ctx.fill();
+            });
+            
+            // Wires (show routing)
+            ctx.strokeStyle = colors.wire.red;
+            ctx.lineWidth = 2;
+            ctx.beginPath();
+            ctx.moveTo(-2.54*scale, -2.54*scale);
+            ctx.lineTo(-1*scale, -1*scale);
+            ctx.lineTo(0, -4*scale);
+            ctx.stroke();
+            
+            ctx.strokeStyle = colors.wire.blue;
+            ctx.beginPath();
+            ctx.moveTo(2.54*scale, -2.54*scale);
+            ctx.lineTo(1*scale, 0);
+            ctx.lineTo(-3*scale, 3*scale);
+            ctx.stroke();
+            
+            ctx.strokeStyle = colors.wire.green;
+            ctx.beginPath();
+            ctx.moveTo(-2.54*scale, 2.54*scale);
+            ctx.lineTo(0, 2*scale);
+            ctx.lineTo(3*scale, 3*scale);
+            ctx.stroke();
+            
+            // ML-303 PCB layer
+            ctx.save();
+            ctx.translate(0, 60);
+            ctx.globalAlpha = 0.8;
+            ctx.fillStyle = colors.pcbDark;
+            ctx.fillRect(-7*scale, -7*scale, 14*scale, 14*scale);
+            
+            // 3-pin pads
+            const bottomPads = [
+                {x: 0, y: -4},
+                {x: -3.5, y: 3},
+                {x: 3.5, y: 3}
+            ];
+            
+            bottomPads.forEach(pad => {
+                ctx.fillStyle = colors.pad;
+                ctx.beginPath();
+                ctx.arc(pad.x*scale, pad.y*scale, 1*scale, 0, Math.PI * 2);
+                ctx.fill();
+            });
+            
+            ctx.globalAlpha = 1.0;
+            ctx.fillStyle = '#000';
+            ctx.font = '10px Arial';
+            ctx.fillText('ML-303 Main PCB', 7*scale, 0);
+            ctx.restore();
+            
+            ctx.restore();
+        }
+        
+        // Draw adapter dimensions
+        function drawAdapterDimensions(ctx, x, y, scale) {
+            ctx.save();
+            ctx.translate(x, y);
+            
+            ctx.font = 'bold 14px Arial';
+            ctx.fillText('Dimensions (mm)', -50, -50);
+            
+            // PCB outline
+            ctx.fillStyle = colors.pcb;
+            ctx.fillRect(-6.35*scale, -6.35*scale, 12.7*scale, 12.7*scale);
+            
+            // Grid pattern
+            ctx.strokeStyle = 'rgba(255,255,255,0.3)';
+            ctx.lineWidth = 0.5;
+            for (let i = -2; i <= 2; i++) {
+                ctx.beginPath();
+                ctx.moveTo(i*2.54*scale, -6.35*scale);
+                ctx.lineTo(i*2.54*scale, 6.35*scale);
+                ctx.stroke();
+                
+                ctx.beginPath();
+                ctx.moveTo(-6.35*scale, i*2.54*scale);
+                ctx.lineTo(6.35*scale, i*2.54*scale);
+                ctx.stroke();
+            }
+            
+            // Dimension lines
+            ctx.strokeStyle = '#000';
+            ctx.lineWidth = 1;
+            ctx.fillStyle = '#000';
+            ctx.font = '10px Arial';
+            
+            // Width
+            drawDimensionLine(ctx, -6.35*scale, 8*scale, 6.35*scale, 8*scale, '12.7mm');
+            
+            // Height
+            drawDimensionLine(ctx, 8*scale, -6.35*scale, 8*scale, 6.35*scale, '12.7mm', true);
+            
+            // Hole spacing
+            drawDimensionLine(ctx, -2.54*scale, -8*scale, 2.54*scale, -8*scale, '5.08mm');
+            
+            // Detailed measurements
+            ctx.fillStyle = '#666';
+            ctx.font = '9px Arial';
+            ctx.fillText('2.54mm pitch', 0, 10*scale);
+            ctx.fillText('(0.1" standard)', 0, 11*scale);
+            
+            ctx.restore();
+        }
+        
+        // Draw adapter bottom view
+        function drawAdapterBottom(ctx, x, y, scale) {
+            ctx.save();
+            ctx.translate(x, y);
+            
+            ctx.font = 'bold 14px Arial';
+            ctx.fillText('Bottom View (Solder Side)', -50, -50);
+            
+            // PCB
+            ctx.fillStyle = colors.pcb;
+            ctx.fillRect(-6.35*scale, -6.35*scale, 12.7*scale, 12.7*scale);
+            
+            // Show solder points
+            const solderPoints = [
+                {x: -2.54, y: -2.54, connect: 'A'},
+                {x: 2.54, y: -2.54, connect: 'B'},
+                {x: -2.54, y: 2.54, connect: 'C'},
+                {x: 2.54, y: 2.54, connect: 'NC'}
+            ];
+            
+            solderPoints.forEach(point => {
+                // Solder pad
+                ctx.fillStyle = colors.copper;
+                ctx.beginPath();
+                ctx.arc(point.x*scale, point.y*scale, 1*scale, 0, Math.PI * 2);
+                ctx.fill();
+                
+                // Label
+                ctx.fillStyle = '#fff';
+                ctx.font = '8px Arial';
+                ctx.textAlign = 'center';
+                ctx.fillText(point.connect, point.x*scale, point.y*scale + 3);
+            });
+            
+            // Wire solder points (triangular)
+            const wirePads = [
+                {x: 0, y: -4, label: 'A', color: colors.wire.red},
+                {x: -3.5, y: 3, label: 'B', color: colors.wire.blue},
+                {x: 3.5, y: 3, label: 'C', color: colors.wire.green}
+            ];
+            
+            wirePads.forEach(pad => {
+                ctx.fillStyle = pad.color;
+                ctx.beginPath();
+                ctx.arc(pad.x*scale, pad.y*scale, 0.8*scale, 0, Math.PI * 2);
+                ctx.fill();
+            });
+            
+            // Show wire routes
+            ctx.strokeStyle = colors.wire.red;
+            ctx.lineWidth = 2;
+            ctx.globalAlpha = 0.5;
+            drawAngledWire(ctx, -2.54*scale, -2.54*scale, 0, -4*scale);
+            
+            ctx.strokeStyle = colors.wire.blue;
+            drawAngledWire(ctx, 2.54*scale, -2.54*scale, -3.5*scale, 3*scale);
+            
+            ctx.strokeStyle = colors.wire.green;
+            drawAngledWire(ctx, -2.54*scale, 2.54*scale, 3.5*scale, 3*scale);
+            ctx.globalAlpha = 1.0;
+            
+            ctx.restore();
+        }
+        
+        // Draw adapter profile view
+        function drawAdapterProfile(ctx, x, y, scale) {
+            ctx.save();
+            ctx.translate(x, y);
+            
+            ctx.font = 'bold 14px Arial';
+            ctx.fillText('Side Profile', -50, -50);
+            
+            // Panel
+            ctx.fillStyle = '#ccc';
+            ctx.fillRect(-10*scale, -2*scale, 20*scale, 0.3*scale);
+            ctx.fillStyle = '#000';
+            ctx.font = '10px Arial';
+            ctx.fillText('Panel (2-3mm)', -4*scale, -3*scale);
+            
+            // Switch body
+            ctx.fillStyle = colors.switch;
+            ctx.fillRect(-6*scale, -1.7*scale, 12*scale, 5*scale);
+            
+            // Switch actuator
+            ctx.fillStyle = '#999';
+            ctx.fillRect(-0.5*scale, -4*scale, 1*scale, 2.3*scale);
+            
+            // Adapter PCB
+            ctx.fillStyle = colors.pcb;
+            ctx.fillRect(-7*scale, 3.3*scale, 14*scale, 0.4*scale);
+            
+            // Wires (angled)
+            ctx.strokeStyle = colors.wire.red;
+            ctx.lineWidth = 1.5;
+            ctx.beginPath();
+            ctx.moveTo(-3*scale, 3.7*scale);
+            ctx.lineTo(-3*scale, 5*scale);
+            ctx.lineTo(-1*scale, 6*scale);
+            ctx.lineTo(-1*scale, 7*scale);
+            ctx.stroke();
+            
+            ctx.strokeStyle = colors.wire.blue;
+            ctx.beginPath();
+            ctx.moveTo(0, 3.7*scale);
+            ctx.lineTo(0, 5*scale);
+            ctx.lineTo(2*scale, 6*scale);
+            ctx.lineTo(2*scale, 7*scale);
+            ctx.stroke();
+            
+            ctx.strokeStyle = colors.wire.green;
+            ctx.beginPath();
+            ctx.moveTo(3*scale, 3.7*scale);
+            ctx.lineTo(3*scale, 5*scale);
+            ctx.lineTo(1*scale, 6*scale);
+            ctx.lineTo(1*scale, 7*scale);
+            ctx.stroke();
+            
+            // Main PCB
+            ctx.fillStyle = colors.pcbDark;
+            ctx.fillRect(-8*scale, 7*scale, 16*scale, 0.6*scale);
+            ctx.fillStyle = '#000';
+            ctx.font = '10px Arial';
+            ctx.fillText('ML-303 PCB', -4*scale, 9*scale);
+            
+            // Height dimension
+            ctx.strokeStyle = '#666';
+            ctx.lineWidth = 0.5;
+            ctx.setLineDash([2, 2]);
+            ctx.beginPath();
+            ctx.moveTo(11*scale, -1.7*scale);
+            ctx.lineTo(11*scale, 7.6*scale);
+            ctx.stroke();
+            ctx.setLineDash([]);
+            
+            ctx.fillStyle = '#666';
+            ctx.font = '10px Arial';
+            ctx.fillText('~8mm', 12*scale, 3*scale);
+            ctx.fillText('total', 12*scale, 4*scale);
+            
+            ctx.restore();
+        }
+        
+        // Draw assembly steps
+        function drawAssemblySteps() {
+            mainCtx.clearRect(0, 0, mainCanvas.width, mainCanvas.height);
+            
+            mainCtx.fillStyle = '#000';
+            mainCtx.font = 'bold 24px Arial';
+            mainCtx.fillText('Step-by-Step Assembly', 50, 50);
+            
+            // Step 1
+            drawAssemblyStep(mainCtx, 150, 150, 1, 'Cut Stripboard');
+            
+            // Step 2
+            drawAssemblyStep(mainCtx, 450, 150, 2, 'Make Track Cut');
+            
+            // Step 3
+            drawAssemblyStep(mainCtx, 750, 150, 3, 'Add Wires');
+            
+            // Step 4
+            drawAssemblyStep(mainCtx, 150, 450, 4, 'Mount Switch');
+            
+            // Step 5
+            drawAssemblyStep(mainCtx, 450, 450, 5, 'Solder to PCB');
+            
+            // Step 6
+            drawAssemblyStep(mainCtx, 750, 450, 6, 'Test & Install');
+        }
+        
+        // Draw individual assembly step
+        function drawAssemblyStep(ctx, x, y, step, title) {
+            ctx.save();
+            ctx.translate(x, y);
+            
+            // Step number
+            ctx.fillStyle = '#2196F3';
+            ctx.beginPath();
+            ctx.arc(-50, -50, 20, 0, Math.PI * 2);
+            ctx.fill();
+            
+            ctx.fillStyle = '#fff';
+            ctx.font = 'bold 18px Arial';
+            ctx.textAlign = 'center';
+            ctx.fillText(step.toString(), -50, -45);
+            
+            // Title
+            ctx.fillStyle = '#000';
+            ctx.font = 'bold 14px Arial';
+            ctx.textAlign = 'left';
+            ctx.fillText(title, -20, -45);
+            
+            // Draw specific step
+            switch(step) {
+                case 1:
+                    // Stripboard cutting
+                    ctx.fillStyle = colors.copper;
+                    ctx.fillRect(-40, -20, 80, 80);
+                    
+                    // Grid
+                    ctx.strokeStyle = '#333';
+                    ctx.lineWidth = 0.5;
+                    for (let i = 0; i < 5; i++) {
+                        for (let j = 0; j < 5; j++) {
+                            ctx.beginPath();
+                            ctx.arc(-32 + i*16, -12 + j*16, 2, 0, Math.PI * 2);
+                            ctx.stroke();
+                        }
+                    }
+                    
+                    // Cut lines
+                    ctx.strokeStyle = '#f00';
+                    ctx.lineWidth = 2;
+                    ctx.setLineDash([3, 3]);
+                    ctx.strokeRect(-40, -20, 80, 80);
+                    ctx.setLineDash([]);
+                    
+                    ctx.fillStyle = '#000';
+                    ctx.font = '10px Arial';
+                    ctx.fillText('5x5 holes', -10, 75);
+                    break;
+                    
+                case 2:
+                    // Track cut
+                    ctx.fillStyle = colors.copper;
+                    ctx.fillRect(-40, -20, 80, 80);
+                    
+                    // Show cut
+                    ctx.strokeStyle = '#f00';
+                    ctx.lineWidth = 4;
+                    ctx.beginPath();
+                    ctx.moveTo(-8, 12);
+                    ctx.lineTo(8, 28);
+                    ctx.stroke();
+                    
+                    ctx.fillStyle = '#000';
+                    ctx.font = '10px Arial';
+                    ctx.fillText('Cut at C3', -10, 75);
+                    break;
+                    
+                case 3:
+                    // Wires
+                    ctx.fillStyle = colors.pcb;
+                    ctx.fillRect(-40, -20, 80, 80);
+                    
+                    // Wire pieces
+                    ctx.strokeStyle = colors.wire.red;
+                    ctx.lineWidth = 3;
+                    drawAngledWire(ctx, -20, -10, 0, -30);
+                    
+                    ctx.strokeStyle = colors.wire.blue;
+                    drawAngledWire(ctx, 20, -10, -30, 30);
+                    
+                    ctx.strokeStyle = colors.wire.green;
+                    drawAngledWire(ctx, -20, 30, 30, 30);
+                    
+                    ctx.fillStyle = '#000';
+                    ctx.font = '10px Arial';
+                    ctx.fillText('30 AWG wire', -20, 75);
+                    break;
+                    
+                case 4:
+                    // Mount switch
+                    ctx.fillStyle = colors.pcb;
+                    ctx.fillRect(-40, -20, 80, 80);
+                    
+                    ctx.fillStyle = colors.switch;
+                    ctx.globalAlpha = 0.8;
+                    ctx.fillRect(-30, -10, 60, 60);
+                    ctx.globalAlpha = 1.0;
+                    
+                    // Pins through holes
+                    const pins = [
+                        {x: -20, y: 0},
+                        {x: 20, y: 0},
+                        {x: -20, y: 40},
+                        {x: 20, y: 40}
+                    ];
+                    
+                    pins.forEach(pin => {
+                        ctx.fillStyle = colors.pad;
+                        ctx.beginPath();
+                        ctx.arc(pin.x, pin.y, 4, 0, Math.PI * 2);
+                        ctx.fill();
+                    });
+                    break;
+                    
+                case 5:
+                    // Solder to PCB
+                    ctx.fillStyle = colors.pcbDark;
+                    ctx.fillRect(-50, 20, 100, 40);
+                    
+                    ctx.fillStyle = colors.pcb;
+                    ctx.fillRect(-30, -30, 60, 40);
+                    
+                    // Show solder joints
+                    const joints = [
+                        {x: 0, y: 25, color: colors.wire.red},
+                        {x: -20, y: 35, color: colors.wire.blue},
+                        {x: 20, y: 35, color: colors.wire.green}
+                    ];
+                    
+                    joints.forEach(joint => {
+                        ctx.fillStyle = joint.color;
+                        ctx.beginPath();
+                        ctx.arc(joint.x, joint.y, 3, 0, Math.PI * 2);
+                        ctx.fill();
+                    });
+                    break;
+                    
+                case 6:
+                    // Complete assembly
+                    ctx.fillStyle = '#4CAF50';
+                    ctx.beginPath();
+                    ctx.arc(0, 20, 30, 0, Math.PI * 2);
+                    ctx.fill();
+                    
+                    ctx.strokeStyle = '#fff';
+                    ctx.lineWidth = 4;
+                    ctx.beginPath();
+                    ctx.moveTo(-15, 20);
+                    ctx.lineTo(-5, 30);
+                    ctx.lineTo(15, 10);
+                    ctx.stroke();
+                    
+                    ctx.fillStyle = '#000';
+                    ctx.font = '10px Arial';
+                    ctx.fillText('Ready!', -10, 75);
+                    break;
+            }
+            
+            ctx.restore();
+        }
+        
+        // Draw stripboard layout
+        function drawStripboardLayout() {
+            mainCtx.clearRect(0, 0, mainCanvas.width, mainCanvas.height);
+            
+            mainCtx.fillStyle = '#000';
+            mainCtx.font = 'bold 24px Arial';
+            mainCtx.fillText('Stripboard Implementation Details', 50, 50);
+            
+            // Large detailed view
+            drawStripboardDetail(mainCtx, 400, 300, 15);
+            
+            // Batch production layout
+            drawBatchLayout(mainCtx, 850, 300, 3);
+        }
+        
+        // Detailed stripboard view
+        function drawStripboardDetail(ctx, x, y, scale) {
+            ctx.save();
+            ctx.translate(x, y);
+            
+            ctx.font = 'bold 16px Arial';
+            ctx.textAlign = 'center';
+            ctx.fillText('Single Adapter - Enlarged View', 0, -150);
+            
+            // Base board
+            ctx.fillStyle = '#8B4513';
+            ctx.fillRect(-2.5*scale, -2.5*scale, 5*scale, 5*scale);
+            
+            // Copper strips
+            ctx.fillStyle = colors.copper;
+            for (let row = 0; row < 5; row++) {
+                ctx.fillRect(-2.5*scale, (-2 + row)*scale - scale/3, 5*scale, scale/3);
+            }
+            
+            // Holes
+            for (let row = 0; row < 5; row++) {
+                for (let col = 0; col < 5; col++) {
+                    ctx.fillStyle = '#333';
+                    ctx.beginPath();
+                    ctx.arc((-2 + col)*scale, (-2 + row)*scale, scale/4, 0, Math.PI * 2);
+                    ctx.fill();
+                    
+                    // Hole labels
+                    ctx.fillStyle = '#fff';
+                    ctx.font = '8px Arial';
+                    ctx.fillText(String.fromCharCode(65 + col) + (row + 1), 
+                               (-2 + col)*scale, (-2 + row)*scale + 2);
+                }
+            }
+            
+            // Track cut
+            ctx.strokeStyle = '#f00';
+            ctx.lineWidth = scale/2;
+            ctx.beginPath();
+            ctx.moveTo(-0.3*scale, 0);
+            ctx.lineTo(0.3*scale, 0);
+            ctx.stroke();
+            
+            // Component pads
+            const componentPads = [
+                {x: -1, y: -1, label: '1', color: colors.wire.red},
+                {x: 1, y: -1, label: '2', color: colors.wire.blue},
+                {x: -1, y: 1, label: '3', color: colors.wire.green},
+                {x: 1, y: 1, label: '4', color: '#666'}
+            ];
+            
+            componentPads.forEach(pad => {
+                ctx.fillStyle = colors.pad;
+                ctx.beginPath();
+                ctx.arc(pad.x*scale, pad.y*scale, scale/2, 0, Math.PI * 2);
+                ctx.fill();
+                
+                ctx.fillStyle = pad.color;
+                ctx.font = 'bold 10px Arial';
+                ctx.fillText(pad.label, pad.x*scale + scale, pad.y*scale - scale/2);
+            });
+            
+            // Wire connections
+            ctx.lineWidth = scale/5;
+            
+            // Red wire (1 to A)
+            ctx.strokeStyle = colors.wire.red;
+            ctx.beginPath();
+            ctx.moveTo(-scale, -scale);
+            ctx.lineTo(-scale/2, -scale/2);
+            ctx.lineTo(0, -1.5*scale);
+            ctx.stroke();
+            
+            // Blue wire (2 to B)
+            ctx.strokeStyle = colors.wire.blue;
+            ctx.beginPath();
+            ctx.moveTo(scale, -scale);
+            ctx.lineTo(scale/2, 0);
+            ctx.lineTo(-scale, 1.5*scale);
+            ctx.stroke();
+            
+            // Green wire (3 to C)
+            ctx.strokeStyle = colors.wire.green;
+            ctx.beginPath();
+            ctx.moveTo(-scale, scale);
+            ctx.lineTo(0, scale/2);
+            ctx.lineTo(scale, 1.5*scale);
+            ctx.stroke();
+            
+            // Output pads
+            const outputPads = [
+                {x: 0, y: -1.5, label: 'A', color: colors.wire.red},
+                {x: -1, y: 1.5, label: 'B', color: colors.wire.blue},
+                {x: 1, y: 1.5, label: 'C', color: colors.wire.green}
+            ];
+            
+            outputPads.forEach(pad => {
+                ctx.fillStyle = pad.color;
+                ctx.beginPath();
+                ctx.arc(pad.x*scale, pad.y*scale, scale/3, 0, Math.PI * 2);
+                ctx.fill();
+                
+                ctx.fillStyle = '#fff';
+                ctx.font = 'bold 8px Arial';
+                ctx.fillText(pad.label, pad.x*scale, pad.y*scale + 2);
+            });
+            
+            // Labels and notes
+            ctx.fillStyle = '#000';
+            ctx.font = '12px Arial';
+            ctx.textAlign = 'left';
+            ctx.fillText('Track cut at C3', 3*scale, 0);
+            ctx.fillText('Switch pins 1-4', -4*scale, -3*scale);
+            ctx.fillText('To ML-303 A,B,C', -4*scale, 3*scale);
+            
+            ctx.restore();
+        }
+        
+        // Batch production layout
+        function drawBatchLayout(ctx, x, y, scale) {
+            ctx.save();
+            ctx.translate(x, y);
+            
+            ctx.font = 'bold 14px Arial';
+            ctx.textAlign = 'center';
+            ctx.fillText('Batch Production', 0, -120);
+            ctx.font = '12px Arial';
+            ctx.fillText('(Cut along lines)', 0, -100);
+            
+            // Draw 6x6 grid for 36 adapters
+            for (let row = 0; row < 6; row++) {
+                for (let col = 0; col < 6; col++) {
+                    const x = (col - 2.5) * 13 * scale;
+                    const y = (row - 2.5) * 13 * scale;
+                    
+                    // Adapter
+                    ctx.fillStyle = colors.pcb;
+                    ctx.fillRect(x - 6*scale, y - 6*scale, 12*scale, 12*scale);
+                    
+                    // Simplified representation
+                    ctx.fillStyle = colors.pad;
+                    ctx.beginPath();
+                    ctx.arc(x, y, 2*scale, 0, Math.PI * 2);
+                    ctx.fill();
+                }
+            }
+            
+            // Cut lines
+            ctx.strokeStyle = '#f00';
+            ctx.lineWidth = 1;
+            ctx.setLineDash([3, 3]);
+            
+            for (let i = 0; i < 7; i++) {
+                // Vertical lines
+                ctx.beginPath();
+                ctx.moveTo((i - 3) * 13 * scale, -3 * 13 * scale);
+                ctx.lineTo((i - 3) * 13 * scale, 3 * 13 * scale);
+                ctx.stroke();
+                
+                // Horizontal lines
+                ctx.beginPath();
+                ctx.moveTo(-3 * 13 * scale, (i - 3) * 13 * scale);
+                ctx.lineTo(3 * 13 * scale, (i - 3) * 13 * scale);
+                ctx.stroke();
+            }
+            ctx.setLineDash([]);
+            
+            ctx.fillStyle = '#000';
+            ctx.font = '10px Arial';
+            ctx.fillText('Makes 36 adapters', 0, 100);
+            ctx.fillText('from one board', 0, 115);
+            
+            ctx.restore();
+        }
+        
+        // Draw matrix wiring
+        function drawMatrixWiring() {
+            mainCtx.clearRect(0, 0, mainCanvas.width, mainCanvas.height);
+            
+            mainCtx.fillStyle = '#000';
+            mainCtx.font = 'bold 24px Arial';
+            mainCtx.fillText('ML-303 Matrix Wiring with Adapters', 50, 50);
+            
+            // Function matrix example
+            drawMatrixExample(mainCtx, 200, 200, 'Function Matrix (4x2)', 4, 2);
+            
+            // Wiring color code
+            drawWiringGuide(mainCtx, 700, 200);
+            
+            // PCB connection diagram
+            drawPCBConnections(mainCtx, 400, 500);
+        }
+        
+        // Helper functions
+        function drawDimensionLine(ctx, x1, y1, x2, y2, text, vertical = false) {
+            ctx.beginPath();
+            if (vertical) {
+                ctx.moveTo(x1 - 3, y1);
+                ctx.lineTo(x1 + 3, y1);
+                ctx.moveTo(x1, y1);
+                ctx.lineTo(x2, y2);
+                ctx.moveTo(x2 - 3, y2);
+                ctx.lineTo(x2 + 3, y2);
+            } else {
+                ctx.moveTo(x1, y1 - 3);
+                ctx.lineTo(x1, y1 + 3);
+                ctx.moveTo(x1, y1);
+                ctx.lineTo(x2, y2);
+                ctx.moveTo(x2, y2 - 3);
+                ctx.lineTo(x2, y2 + 3);
+            }
+            ctx.stroke();
+            
+            ctx.save();
+            if (vertical) {
+                ctx.translate((x1 + x2) / 2 + 15, (y1 + y2) / 2);
+                ctx.rotate(-Math.PI / 2);
+            } else {
+                ctx.translate((x1 + x2) / 2, (y1 + y2) / 2 - 5);
+            }
+            ctx.textAlign = 'center';
+            ctx.fillText(text, 0, 0);
+            ctx.restore();
+        }
+        
+        function drawAngledWire(ctx, x1, y1, x2, y2) {
+            const midX = (x1 + x2) / 2;
+            const midY = (y1 + y2) / 2;
+            
+            ctx.beginPath();
+            ctx.moveTo(x1, y1);
+            ctx.lineTo(midX, y1);
+            ctx.lineTo(midX, midY);
+            ctx.lineTo(x2, midY);
+            ctx.lineTo(x2, y2);
+            ctx.stroke();
+        }
+        
+        function drawMatrixExample(ctx, x, y, title, cols, rows) {
+            ctx.save();
+            ctx.translate(x, y);
+            
+            ctx.fillStyle = '#000';
+            ctx.font = 'bold 14px Arial';
+            ctx.fillText(title, -50, -50);
+            
+            // Draw matrix
+            const cellSize = 50;
+            
+            for (let row = 0; row < rows; row++) {
+                for (let col = 0; col < cols; col++) {
+                    // Button with adapter
+                    ctx.fillStyle = '#ddd';
+                    ctx.fillRect(col * cellSize - 20, row * cellSize - 20, 40, 40);
+                    
+                    // Adapter indication
+                    ctx.fillStyle = colors.pcb;
+                    ctx.fillRect(col * cellSize - 15, row * cellSize + 5, 30, 10);
+                    
+                    // Button number
+                    ctx.fillStyle = '#000';
+                    ctx.font = '12px Arial';
+                    ctx.textAlign = 'center';
+                    ctx.fillText((row * cols + col + 1).toString(), 
+                               col * cellSize, row * cellSize);
+                }
+            }
+            
+            // Row wires
+            ctx.strokeStyle = colors.wire.blue;
+            ctx.lineWidth = 2;
+            for (let row = 0; row < rows; row++) {
+                ctx.beginPath();
+                ctx.moveTo(-30, row * cellSize);
+                ctx.lineTo(cols * cellSize - 30, row * cellSize);
+                ctx.stroke();
+                
+                ctx.fillStyle = colors.wire.blue;
+                ctx.fillText(`R${row + 1}`, -50, row * cellSize + 5);
+            }
+            
+            // Column wires
+            ctx.strokeStyle = colors.wire.green;
+            for (let col = 0; col < cols; col++) {
+                ctx.beginPath();
+                ctx.moveTo(col * cellSize, -30);
+                ctx.lineTo(col * cellSize, rows * cellSize - 30);
+                ctx.stroke();
+                
+                ctx.fillStyle = colors.wire.green;
+                ctx.fillText(`C${col + 1}`, col * cellSize, -40);
+            }
+            
+            ctx.restore();
+        }
+        
+        function drawWiringGuide(ctx, x, y) {
+            ctx.save();
+            ctx.translate(x, y);
+            
+            ctx.fillStyle = '#000';
+            ctx.font = 'bold 14px Arial';
+            ctx.fillText('Wiring Color Code', -50, -50);
+            
+            const guide = [
+                {color: colors.wire.red, text: 'Red: Common (A pin)'},
+                {color: colors.wire.blue, text: 'Blue: Row signals (B pin)'},
+                {color: colors.wire.green, text: 'Green: Column signals (C pin)'},
+                {color: '#666', text: 'Gray: Not connected (pin 4)'}
+            ];
+            
+            guide.forEach((item, i) => {
+                ctx.strokeStyle = item.color;
+                ctx.lineWidth = 4;
+                ctx.beginPath();
+                ctx.moveTo(-40, i * 30);
+                ctx.lineTo(-10, i * 30);
+                ctx.stroke();
+                
+                ctx.fillStyle = '#000';
+                ctx.font = '12px Arial';
+                ctx.fillText(item.text, 0, i * 30 + 5);
+            });
+            
+            ctx.restore();
+        }
+        
+        function drawPCBConnections(ctx, x, y) {
+            ctx.save();
+            ctx.translate(x, y);
+            
+            ctx.fillStyle = '#000';
+            ctx.font = 'bold 14px Arial';
+            ctx.textAlign = 'center';
+            ctx.fillText('PCB Connection Overview', 0, -50);
+            
+            // Simplified PCB
+            ctx.fillStyle = colors.pcbDark;
+            ctx.fillRect(-150, -30, 300, 100);
+            
+            // Matrix connectors
+            ctx.fillStyle = colors.pad;
+            ctx.font = '10px Arial';
+            
+            // Row connectors
+            for (let i = 0; i < 6; i++) {
+                ctx.fillRect(-140 + i * 20, 10, 15, 20);
+                ctx.fillStyle = '#000';
+                ctx.fillText(`R${i + 1}`, -132 + i * 20, 45);
+                ctx.fillStyle = colors.pad;
+            }
+            
+            // Column connectors
+            for (let i = 0; i < 8; i++) {
+                ctx.fillRect(10 + i * 17, 10, 15, 20);
+                ctx.fillStyle = '#000';
+                ctx.fillText(`C${i + 1}`, 18 + i * 17, 45);
+                ctx.fillStyle = colors.pad;
+            }
+            
+            // Microcontroller
+            ctx.fillStyle = '#333';
+            ctx.fillRect(-40, -20, 80, 40);
+            ctx.fillStyle = '#fff';
+            ctx.font = '12px Arial';
+            ctx.fillText('ATmega', 0, 5);
+            
+            ctx.restore();
+        }
+        
+        // Draw alternative solutions
+        function drawAlternatives() {
+            altCtx.clearRect(0, 0, altCanvas.width, altCanvas.height);
+            
+            // Individual adapters
+            drawIndividualAdapter(altCtx, 150, 200, 3);
+            
+            // Row adapter
+            drawRowAdapter(altCtx, 450, 200, 3);
+            
+            // Custom PCB
+            drawCustomPCB(altCtx, 750, 200, 3);
+        }
+        
+        function drawIndividualAdapter(ctx, x, y, scale) {
+            ctx.save();
+            ctx.translate(x, y);
+            
+            ctx.fillStyle = '#000';
+            ctx.font = 'bold 14px Arial';
+            ctx.textAlign = 'center';
+            ctx.fillText('Individual Adapters', 0, -80);
+            
+            // Multiple small adapters
+            for (let i = 0; i < 4; i++) {
+                const xPos = (i % 2) * 30 - 15;
+                const yPos = Math.floor(i / 2) * 30 - 15;
+                
+                ctx.fillStyle = colors.pcb;
+                ctx.fillRect(xPos - 10, yPos - 10, 20, 20);
+                
+                ctx.fillStyle = colors.pad;
+                ctx.beginPath();
+                ctx.arc(xPos, yPos, 3, 0, Math.PI * 2);
+                ctx.fill();
+            }
+            
+            ctx.fillStyle = '#4CAF50';
+            ctx.font = '12px Arial';
+            ctx.fillText('✓ Easy repair', 0, 50);
+            ctx.fillText('✓ Modular', 0, 65);
+            
+            ctx.restore();
+        }
+        
+        function drawRowAdapter(ctx, x, y, scale) {
+            ctx.save();
+            ctx.translate(x, y);
+            
+            ctx.fillStyle = '#000';
+            ctx.font = 'bold 14px Arial';
+            ctx.textAlign = 'center';
+            ctx.fillText('Row Adapters', 0, -80);
+            
+            // Long adapter for multiple buttons
+            ctx.fillStyle = colors.pcb;
+            ctx.fillRect(-60, -15, 120, 30);
+            
+            // Multiple button positions
+            for (let i = 0; i < 4; i++) {
+                ctx.fillStyle = colors.pad;
+                ctx.beginPath();
+                ctx.arc(-45 + i * 30, 0, 5, 0, Math.PI * 2);
+                ctx.fill();
+            }
+            
+            ctx.fillStyle = '#2196F3';
+            ctx.font = '12px Arial';
+            ctx.fillText('✓ Faster build', 0, 50);
+            ctx.fillText('✓ Cleaner', 0, 65);
+            
+            ctx.restore();
+        }
+        
+        function drawCustomPCB(ctx, x, y, scale) {
+            ctx.save();
+            ctx.translate(x, y);
+            
+            ctx.fillStyle = '#000';
+            ctx.font = 'bold 14px Arial';
+            ctx.textAlign = 'center';
+            ctx.fillText('Custom PCB', 0, -80);
+            
+            // Professional PCB
+            ctx.fillStyle = '#1a5c1a';
+            ctx.fillRect(-50, -40, 100, 80);
+            
+            // ENIG pads
+            ctx.fillStyle = '#FFD700';
+            for (let row = 0; row < 3; row++) {
+                for (let col = 0; col < 3; col++) {
+                    ctx.beginPath();
+                    ctx.arc(-30 + col * 30, -20 + row * 30, 4, 0, Math.PI * 2);
+                    ctx.fill();
+                }
+            }
+            
+            ctx.fillStyle = '#9C27B0';
+            ctx.font = '12px Arial';
+            ctx.fillText('✓ Professional', 0, 50);
+            ctx.fillText('✓ Reliable', 0, 65);
+            
+            ctx.restore();
+        }
+        
+        // View control
+        function showView(view) {
+            currentView = view;
+            switch(view) {
+                case 'comparison':
+                    drawComparison();
+                    drawAlternatives();
+                    break;
+                case 'adapter':
+                    drawAdapterDesign();
+                    drawAlternatives();
+                    break;
+                case 'assembly':
+                    drawAssemblySteps();
+                    drawAlternatives();
+                    break;
+                case 'stripboard':
+                    drawStripboardLayout();
+                    drawAlternatives();
+                    break;
+                case 'matrix':
+                    drawMatrixWiring();
+                    drawAlternatives();
+                    break;
+            }
+        }
+        
+        // Export function
+        function exportDesign() {
+            // Create a text file with measurements and instructions
+            const designData = `ML-303 3-Pin Adapter Design Specifications
+==========================================
+
+ADAPTER DIMENSIONS:
+- Size: 12.7mm x 12.7mm (5x5 holes on 0.1" stripboard)
+- Thickness: 1.6mm (standard stripboard)
+- Track cut: Position C3
+
+PIN MAPPING:
+4-Pin Switch -> ML-303 3-Pin
+Pin 1 (NO) -> Pin A (Common) - RED wire
+Pin 2 (NO) -> Pin B (Row) - BLUE wire  
+Pin 3 (COM) -> Pin C (Column) - GREEN wire
+Pin 4 (COM) -> Not Connected
+
+ML-303 PIN LAYOUT (Triangular):
+- Pin A: Center top (0, -4mm from center)
+- Pin B: Bottom left (-3.5mm, +3mm from center)
+- Pin C: Bottom right (+3.5mm, +3mm from center)
+
+MATERIALS PER ADAPTER:
+- Stripboard: 5x5 holes (12.7mm x 12.7mm)
+- 30 AWG wire: 3 pieces x 30mm each
+- Solder
+
+ASSEMBLY STEPS:
+1. Cut stripboard to 5x5 holes
+2. Make track cut at position C3
+3. Solder switch pins 1-3 to board
+4. Add angled wires to ML-303 positions
+5. Test continuity
+6. Install on ML-303 PCB
+
+TOTAL REQUIRED:
+- Function buttons: 8 adapters
+- Step buttons: 16 adapters  
+- Note buttons: 12 adapters
+- Total: 36 adapters minimum (order 40)
+
+Created: ${new Date().toLocaleDateString()}
+`;
+            
+            const blob = new Blob([designData], {type: 'text/plain'});
+            const url = URL.createObjectURL(blob);
+            const a = document.createElement('a');
+            a.href = url;
+            a.download = 'ml303-adapter-specifications.txt';
+            a.click();
+            URL.revokeObjectURL(url);
+        }
+        
+        // Initialize
+        drawComparison();
+        drawAlternatives();
+    </script>
+</body>
+</html>

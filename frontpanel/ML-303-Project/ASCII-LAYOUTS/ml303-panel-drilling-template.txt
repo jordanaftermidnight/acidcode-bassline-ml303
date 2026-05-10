@@ -1,0 +1,124 @@
+ML-303 PANEL DRILLING TEMPLATE - 1:1 SCALE ASCII
+================================================
+
+Panel Size: 279.4mm x 177.8mm (Actual ML-303 V5 dimensions)
+Print this page at 100% scale - DO NOT FIT TO PAGE
+
+MEASUREMENTS FROM TOP-LEFT CORNER (0,0):
+=======================================
+
+Function Buttons (12mm square holes):
+------------------------------------
+WRITE:  X=25mm,  Y=45mm   [#]
+RUN:    X=50mm,  Y=45mm   [#]  
+PITCH:  X=75mm,  Y=45mm   [#]
+TAP:    X=100mm, Y=45mm   [#]
+
+CLEAR:  X=25mm,  Y=70mm   [#]
+FUNC:   X=50mm,  Y=70mm   [#]
+TIME:   X=75mm,  Y=70mm   [#]
+BACK:   X=100mm, Y=70mm   [#]
+
+Step Buttons (12mm square holes):
+---------------------------------
+Row 1 (Y=100mm):
+1:  X=25mm   [#]
+2:  X=50mm   [#]
+3:  X=75mm   [#]
+4:  X=100mm  [#]
+5:  X=125mm  [#]
+6:  X=150mm  [#]
+7:  X=175mm  [#]
+8:  X=200mm  [#]
+
+Row 2 (Y=125mm):
+9:  X=25mm   [#]
+10: X=50mm   [#]
+11: X=75mm   [#]
+12: X=100mm  [#]
+13: X=125mm  [#]
+14: X=150mm  [#]
+15: X=175mm  [#]
+16: X=200mm  [#]
+
+Note Buttons (12mm square holes):
+---------------------------------
+Row 1 (Y=155mm):
+C:  X=25mm   [#]
+C#: X=50mm   [#]
+D:  X=75mm   [#]
+D#: X=100mm  [#]
+E:  X=125mm  [#]
+F:  X=150mm  [#]
+
+Row 2 (Y=180mm):
+F#: X=25mm   [#]
+G:  X=50mm   [#]
+G#: X=75mm   [#]
+A:  X=100mm  [#]
+A#: X=125mm  [#]
+B:  X=150mm  [#]
+
+DRILLING TEMPLATE (Actual Size - Print at 100%):
+================================================
+
+0mm     50mm    100mm   150mm   200mm   250mm
+|-------|-------|-------|-------|-------|
++----------------------------------------+ 0mm
+|                                        |
+|   FUNCTION           ML-303            | 
+|   [#] [#] [#] [#]                     | 45mm
+|   WRT RUN PIT TAP                     |
+|   [#] [#] [#] [#]                     | 70mm
+|   CLR FNC TIM BAK                     |
+|                                        |
+|   STEP SEQUENCER                      | 100mm
+|   [#] [#] [#] [#] [#] [#] [#] [#]    |
+|    1   2   3   4   5   6   7   8     | 125mm
+|   [#] [#] [#] [#] [#] [#] [#] [#]    |
+|    9  10  11  12  13  14  15  16     |
+|                                        | 155mm
+|   NOTE ENTRY                          |
+|   [#] [#] [#] [#] [#] [#]            |
+|    C  C#  D  D#  E   F               | 180mm
+|   [#] [#] [#] [#] [#] [#]            |
+|   F#  G  G#  A  A#  B                |
++----------------------------------------+
+
+[#] = 12mm x 12mm square hole for button
+
+DRILLING INSTRUCTIONS:
+=====================
+1. Print template at 100% scale (no scaling)
+2. Verify dimensions with ruler
+3. Tape template to panel
+4. Center punch each [#] location
+5. Drill pilot holes (3mm)
+6. Use step drill or nibbler for square holes
+7. File to exact 12mm x 12mm size
+
+CLEARANCE NOTES:
+===============
+- Minimum 3mm clearance from panel edge
+- 13mm spacing between button centers (minimum)
+- Allow 2mm clearance for button caps
+- Consider component height behind panel
+
+ALTERNATE ROUND HOLE PATTERN:
+============================
+If square holes are too difficult:
+- Drill 10mm round holes at each [#] center
+- Buttons will still fit but may rotate
+- Use button caps to hide gaps
+
+CUTTING TEMPLATE FOR LASER/CNC:
+==============================
+DXF coordinates for 12x12mm squares:
+(Top-left corner of each square)
+
+WRITE: (19, 39) to (31, 51)
+RUN:   (44, 39) to (56, 51)
+...etc
+
+Add 0.5mm kerf compensation for laser
+Add 0.2mm tolerance for tight fit

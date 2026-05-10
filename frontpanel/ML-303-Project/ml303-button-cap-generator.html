@@ -1,0 +1,530 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>ML-303 Button Cap STL Generator</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 20px;
+            background-color: #f5f5f5;
+        }
+        .container {
+            background: white;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+            margin-bottom: 20px;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+        .controls {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 15px;
+            margin-bottom: 20px;
+        }
+        .control-group {
+            padding: 10px;
+            background: #f8f9fa;
+            border-radius: 4px;
+        }
+        label {
+            display: block;
+            margin-bottom: 5px;
+            font-weight: bold;
+            color: #333;
+        }
+        input[type="number"], input[type="text"], select {
+            width: 100%;
+            padding: 8px;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+            box-sizing: border-box;
+        }
+        button {
+            margin: 5px;
+            padding: 12px 24px;
+            background: #2196F3;
+            color: white;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            font-size: 16px;
+            font-weight: bold;
+        }
+        button:hover {
+            background: #1976D2;
+        }
+        button.export {
+            background: #4CAF50;
+        }
+        button.export:hover {
+            background: #45a049;
+        }
+        canvas {
+            border: 2px solid #ddd;
+            margin: 10px 0;
+            background: #fafafa;
+        }
+        .preview-container {
+            text-align: center;
+        }
+        .color-options {
+            display: flex;
+            gap: 10px;
+            margin: 10px 0;
+        }
+        .color-swatch {
+            width: 40px;
+            height: 40px;
+            border: 2px solid #ddd;
+            border-radius: 4px;
+            cursor: pointer;
+        }
+        .color-swatch.selected {
+            border-color: #2196F3;
+            border-width: 3px;
+        }
+        .info {
+            background: #e3f2fd;
+            padding: 15px;
+            border-radius: 4px;
+            margin: 10px 0;
+            border-left: 4px solid #2196F3;
+        }
+        .scad-output {
+            background: #f5f5f5;
+            padding: 15px;
+            border-radius: 4px;
+            font-family: 'Courier New', monospace;
+            white-space: pre-wrap;
+            overflow-x: auto;
+            max-height: 300px;
+            overflow-y: auto;
+        }
+    </style>
+</head>
+<body>
+    <h1>ML-303 Button Cap 3D Design Generator</h1>
+    
+    <div class="container">
+        <h2>Button Cap Parameters</h2>
+        
+        <div class="controls">
+            <div class="control-group">
+                <label>Cap Width (mm):</label>
+                <input type="number" id="capWidth" value="11.5" step="0.1" min="8" max="15">
+            </div>
+            
+            <div class="control-group">
+                <label>Cap Height (mm):</label>
+                <input type="number" id="capHeight" value="11.5" step="0.1" min="8" max="15">
+            </div>
+            
+            <div class="control-group">
+                <label>Total Height (mm):</label>
+                <input type="number" id="totalHeight" value="5.0" step="0.1" min="3" max="10">
+            </div>
+            
+            <div class="control-group">
+                <label>Corner Radius (mm):</label>
+                <input type="number" id="cornerRadius" value="1.0" step="0.1" min="0" max="3">
+            </div>
+            
+            <div class="control-group">
+                <label>Button Label:</label>
+                <input type="text" id="buttonLabel" value="1" maxlength="3">
+            </div>
+            
+            <div class="control-group">
+                <label>Label Size:</label>
+                <input type="number" id="labelSize" value="4" step="0.5" min="2" max="8">
+            </div>
+            
+            <div class="control-group">
+                <label>Stem Type:</label>
+                <select id="stemType">
+                    <option value="cross">Cross Split (Flexible)</option>
+                    <option value="solid">Solid</option>
+                    <option value="hollow">Hollow</option>
+                </select>
+            </div>
+            
+            <div class="control-group">
+                <label>Surface Texture:</label>
+                <select id="texture">
+                    <option value="smooth">Smooth</option>
+                    <option value="grip">Grip Lines</option>
+                    <option value="dots">Dot Pattern</option>
+                    <option value="concentric">Concentric Circles</option>
+                </select>
+            </div>
+        </div>
+        
+        <div class="control-group">
+            <label>Color Preview:</label>
+            <div class="color-options">
+                <div class="color-swatch selected" style="background: #f44336" data-color="#f44336"></div>
+                <div class="color-swatch" style="background: #2196F3" data-color="#2196F3"></div>
+                <div class="color-swatch" style="background: #4CAF50" data-color="#4CAF50"></div>
+                <div class="color-swatch" style="background: #FFC107" data-color="#FFC107"></div>
+                <div class="color-swatch" style="background: #9C27B0" data-color="#9C27B0"></div>
+                <div class="color-swatch" style="background: #FF9800" data-color="#FF9800"></div>
+                <div class="color-swatch" style="background: #795548" data-color="#795548"></div>
+                <div class="color-swatch" style="background: #607D8B" data-color="#607D8B"></div>
+            </div>
+        </div>
+        
+        <div style="text-align: center; margin: 20px 0;">
+            <button onclick="updatePreview()">Update Preview</button>
+            <button onclick="generateArray()">Generate 4x4 Array</button>
+            <button class="export" onclick="exportSCAD()">Export OpenSCAD File</button>
+            <button class="export" onclick="copyToClipboard()">Copy SCAD Code</button>
+        </div>
+    </div>
+    
+    <div class="container">
+        <h2>3D Preview</h2>
+        <div class="preview-container">
+            <canvas id="preview3D" width="800" height="400"></canvas>
+        </div>
+        
+        <div class="info">
+            <h3>3D Printing Recommendations:</h3>
+            <ul>
+                <li><strong>Layer Height:</strong> 0.1-0.2mm for smooth finish</li>
+                <li><strong>Infill:</strong> 50% for durability</li>
+                <li><strong>Support:</strong> None needed with proper orientation</li>
+                <li><strong>Material:</strong> PLA for prototypes, PETG/ABS for final use</li>
+                <li><strong>Print Time:</strong> ~15 minutes per cap</li>
+                <li><strong>Colors:</strong> Match your button color scheme</li>
+            </ul>
+        </div>
+    </div>
+    
+    <div class="container">
+        <h2>Generated OpenSCAD Code</h2>
+        <div class="scad-output" id="scadOutput"></div>
+    </div>
+    
+    <script>
+        const canvas = document.getElementById('preview3D');
+        const ctx = canvas.getContext('2d');
+        let selectedColor = '#f44336';
+        let viewMode = 'single';
+        
+        // Color selection
+        document.querySelectorAll('.color-swatch').forEach(swatch => {
+            swatch.addEventListener('click', function() {
+                document.querySelectorAll('.color-swatch').forEach(s => s.classList.remove('selected'));
+                this.classList.add('selected');
+                selectedColor = this.dataset.color;
+                updatePreview();
+            });
+        });
+        
+        // Draw 3D preview
+        function draw3DPreview() {
+            ctx.clearRect(0, 0, canvas.width, canvas.height);
+            
+            const width = parseFloat(document.getElementById('capWidth').value);
+            const height = parseFloat(document.getElementById('capHeight').value);
+            const totalHeight = parseFloat(document.getElementById('totalHeight').value);
+            const cornerRadius = parseFloat(document.getElementById('cornerRadius').value);
+            const label = document.getElementById('buttonLabel').value;
+            const texture = document.getElementById('texture').value;
+            
+            const scale = 15;
+            const centerX = canvas.width / 2;
+            const centerY = canvas.height / 2;
+            
+            if (viewMode === 'single') {
+                // Draw single button cap
+                drawButtonCap(centerX, centerY, width, height, totalHeight, cornerRadius, label, texture, scale);
+            } else {
+                // Draw 4x4 array
+                const spacing = 13;
+                const startX = centerX - (1.5 * spacing * scale);
+                const startY = centerY - (1.5 * spacing * scale);
+                
+                for (let row = 0; row < 4; row++) {
+                    for (let col = 0; col < 4; col++) {
+                        const x = startX + col * spacing * scale;
+                        const y = startY + row * spacing * scale;
+                        const num = row * 4 + col + 1;
+                        drawButtonCap(x, y, width, height, totalHeight, cornerRadius, num.toString(), texture, scale * 0.7);
+                    }
+                }
+            }
+        }
+        
+        // Draw individual button cap
+        function drawButtonCap(x, y, width, height, totalHeight, radius, label, texture, scale) {
+            // 3D effect - draw multiple layers
+            const layers = 5;
+            for (let i = layers; i >= 0; i--) {
+                const offset = i * 2;
+                const alpha = 1 - (i / layers) * 0.3;
+                
+                // Shadow/depth effect
+                ctx.save();
+                ctx.translate(x + offset, y - offset);
+                
+                // Main body
+                ctx.fillStyle = adjustColor(selectedColor, alpha);
+                drawRoundedRect(ctx, -width * scale / 2, -height * scale / 2, 
+                               width * scale, height * scale, radius * scale);
+                ctx.fill();
+                
+                // Top surface (only on top layer)
+                if (i === 0) {
+                    // Highlight
+                    ctx.fillStyle = adjustColor(selectedColor, 1.2);
+                    drawRoundedRect(ctx, -width * scale / 2 + 2, -height * scale / 2 + 2,
+                                   width * scale - 4, height * scale - 4, radius * scale);
+                    ctx.fill();
+                    
+                    // Texture
+                    drawTexture(ctx, width * scale, height * scale, texture);
+                    
+                    // Label
+                    ctx.fillStyle = '#fff';
+                    ctx.font = `bold ${4 * scale}px Arial`;
+                    ctx.textAlign = 'center';
+                    ctx.textBaseline = 'middle';
+                    ctx.fillText(label, 0, 0);
+                }
+                
+                ctx.restore();
+            }
+            
+            // Draw stem preview
+            ctx.save();
+            ctx.translate(x, y + height * scale / 2 + 10);
+            
+            // Stem
+            ctx.fillStyle = '#666';
+            ctx.fillRect(-3 * scale, 0, 6 * scale, 20);
+            
+            // Stem splits
+            const stemType = document.getElementById('stemType').value;
+            if (stemType === 'cross') {
+                ctx.fillStyle = '#fff';
+                ctx.fillRect(-0.5 * scale, 0, 1 * scale, 20);
+                ctx.fillRect(-3 * scale, 9, 6 * scale, 2);
+            }
+            
+            ctx.restore();
+        }
+        
+        // Draw rounded rectangle
+        function drawRoundedRect(ctx, x, y, width, height, radius) {
+            ctx.beginPath();
+            ctx.moveTo(x + radius, y);
+            ctx.lineTo(x + width - radius, y);
+            ctx.quadraticCurveTo(x + width, y, x + width, y + radius);
+            ctx.lineTo(x + width, y + height - radius);
+            ctx.quadraticCurveTo(x + width, y + height, x + width - radius, y + height);
+            ctx.lineTo(x + radius, y + height);
+            ctx.quadraticCurveTo(x, y + height, x, y + height - radius);
+            ctx.lineTo(x, y + radius);
+            ctx.quadraticCurveTo(x, y, x + radius, y);
+            ctx.closePath();
+        }
+        
+        // Draw surface texture
+        function drawTexture(ctx, width, height, type) {
+            ctx.strokeStyle = 'rgba(0,0,0,0.1)';
+            ctx.lineWidth = 1;
+            
+            switch(type) {
+                case 'grip':
+                    for (let i = -width/2 + 10; i < width/2 - 10; i += 10) {
+                        ctx.beginPath();
+                        ctx.moveTo(i, -height/2 + 5);
+                        ctx.lineTo(i, height/2 - 5);
+                        ctx.stroke();
+                    }
+                    break;
+                    
+                case 'dots':
+                    for (let x = -width/2 + 15; x < width/2; x += 15) {
+                        for (let y = -height/2 + 15; y < height/2; y += 15) {
+                            ctx.beginPath();
+                            ctx.arc(x, y, 2, 0, Math.PI * 2);
+                            ctx.fill();
+                        }
+                    }
+                    break;
+                    
+                case 'concentric':
+                    for (let r = 10; r < Math.min(width, height) / 2 - 5; r += 10) {
+                        ctx.beginPath();
+                        ctx.arc(0, 0, r, 0, Math.PI * 2);
+                        ctx.stroke();
+                    }
+                    break;
+            }
+        }
+        
+        // Adjust color brightness
+        function adjustColor(color, factor) {
+            const rgb = hexToRgb(color);
+            const adjusted = {
+                r: Math.min(255, Math.floor(rgb.r * factor)),
+                g: Math.min(255, Math.floor(rgb.g * factor)),
+                b: Math.min(255, Math.floor(rgb.b * factor))
+            };
+            return `rgb(${adjusted.r}, ${adjusted.g}, ${adjusted.b})`;
+        }
+        
+        // Convert hex to RGB
+        function hexToRgb(hex) {
+            const result = /^#?([a-f\d]{2})([a-f\d]{2})([a-f\d]{2})$/i.exec(hex);
+            return result ? {
+                r: parseInt(result[1], 16),
+                g: parseInt(result[2], 16),
+                b: parseInt(result[3], 16)
+            } : null;
+        }
+        
+        // Generate OpenSCAD code
+        function generateSCAD() {
+            const params = {
+                width: document.getElementById('capWidth').value,
+                height: document.getElementById('capHeight').value,
+                totalHeight: document.getElementById('totalHeight').value,
+                cornerRadius: document.getElementById('cornerRadius').value,
+                label: document.getElementById('buttonLabel').value,
+                labelSize: document.getElementById('labelSize').value,
+                stemType: document.getElementById('stemType').value,
+                texture: document.getElementById('texture').value
+            };
+            
+            const code = `// ML-303 Custom Button Cap
+// Generated by Button Cap Designer
+// Dimensions: ${params.width}x${params.height}x${params.totalHeight}mm
+
+$fn = 64;
+
+// Parameters
+cap_width = ${params.width};
+cap_height = ${params.height};
+cap_total_height = ${params.totalHeight};
+corner_radius = ${params.cornerRadius};
+text_string = "${params.label}";
+text_size = ${params.labelSize};
+
+// Main cap
+difference() {
+    // Body
+    hull() {
+        for (x = [-1, 1]) {
+            for (y = [-1, 1]) {
+                translate([x * (cap_width/2 - corner_radius), 
+                          y * (cap_height/2 - corner_radius), 
+                          cap_total_height/2])
+                    cylinder(r = corner_radius, h = cap_total_height, center = true);
+            }
+        }
+    }
+    
+    // Text
+    translate([0, 0, cap_total_height - 0.3])
+        linear_extrude(height = 0.4)
+            text(text_string, size = text_size, halign = "center", valign = "center");
+    
+    ${generateTextureCode(params.texture)}
+}
+
+// Stem
+translate([0, 0, -1.75])
+    ${generateStemCode(params.stemType)}
+
+${generateTextureCode(params.texture)}
+
+${generateStemCode(params.stemType)}`;
+            
+            return code;
+        }
+        
+        function generateTextureCode(texture) {
+            switch(texture) {
+                case 'grip':
+                    return `// Grip lines
+    for (i = [-4:2:4]) {
+        translate([i, -cap_height/2, cap_total_height - 0.2])
+            cube([0.5, cap_height, 0.3], center = false);
+    }`;
+                case 'dots':
+                    return `// Dot pattern
+    for (x = [-4:2:4]) {
+        for (y = [-4:2:4]) {
+            translate([x, y, cap_total_height - 0.2])
+                cylinder(d = 1, h = 0.3);
+        }
+    }`;
+                default:
+                    return '';
+            }
+        }
+        
+        function generateStemCode(type) {
+            switch(type) {
+                case 'cross':
+                    return `difference() {
+        cylinder(d = 3.8, h = 3.5, center = true);
+        cylinder(d = 3.4, h = 3.6, center = true);
+        cube([0.3, 4, 3.6], center = true);
+        cube([4, 0.3, 3.6], center = true);
+    }`;
+                case 'solid':
+                    return `cylinder(d = 3.8, h = 3.5, center = true);`;
+                case 'hollow':
+                    return `difference() {
+        cylinder(d = 3.8, h = 3.5, center = true);
+        cylinder(d = 3.0, h = 3.6, center = true);
+    }`;
+            }
+        }
+        
+        // Update functions
+        function updatePreview() {
+            viewMode = 'single';
+            draw3DPreview();
+            updateSCADOutput();
+        }
+        
+        function generateArray() {
+            viewMode = 'array';
+            draw3DPreview();
+        }
+        
+        function updateSCADOutput() {
+            document.getElementById('scadOutput').textContent = generateSCAD();
+        }
+        
+        function exportSCAD() {
+            const code = generateSCAD();
+            const blob = new Blob([code], {type: 'text/plain'});
+            const url = URL.createObjectURL(blob);
+            const a = document.createElement('a');
+            a.href = url;
+            a.download = 'ml303-button-cap.scad';
+            a.click();
+            URL.revokeObjectURL(url);
+        }
+        
+        function copyToClipboard() {
+            const code = generateSCAD();
+            navigator.clipboard.writeText(code).then(() => {
+                alert('OpenSCAD code copied to clipboard!');
+            });
+        }
+        
+        // Initialize
+        updatePreview();
+    </script>
+</body>
+</html>

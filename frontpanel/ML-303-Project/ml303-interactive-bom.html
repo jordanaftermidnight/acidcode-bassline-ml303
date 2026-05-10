@@ -1,0 +1,892 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>ML-303 Interactive BOM with Pricing</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 20px;
+            background-color: #f5f5f5;
+        }
+        .container {
+            background: white;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+            margin-bottom: 20px;
+            max-width: 1400px;
+            margin: 20px auto;
+        }
+        .ml303-title {
+            font-family: 'Arial Black', sans-serif;
+            font-size: 24px;
+            color: #4CAF50;
+            text-align: center;
+            margin: 20px 0;
+        }
+        .controls {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 15px;
+            margin: 20px 0;
+        }
+        .control-group {
+            padding: 10px;
+            background: #f8f9fa;
+            border-radius: 4px;
+        }
+        label {
+            display: block;
+            margin-bottom: 5px;
+            font-weight: bold;
+            color: #333;
+        }
+        select, input {
+            width: 100%;
+            padding: 8px;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+            box-sizing: border-box;
+        }
+        table {
+            border-collapse: collapse;
+            width: 100%;
+            margin: 10px 0;
+        }
+        th {
+            background-color: #4CAF50;
+            color: white;
+            padding: 12px;
+            text-align: left;
+            position: sticky;
+            top: 0;
+            z-index: 10;
+        }
+        td {
+            border: 1px solid #ddd;
+            padding: 8px;
+        }
+        tr:nth-child(even) {
+            background-color: #f9f9f9;
+        }
+        tr:hover {
+            background-color: #f5f5f5;
+        }
+        .part-number {
+            font-family: 'Courier New', monospace;
+            font-size: 12px;
+            color: #0066cc;
+            cursor: pointer;
+        }
+        .part-number:hover {
+            text-decoration: underline;
+        }
+        .price {
+            font-weight: bold;
+            text-align: right;
+        }
+        .price.best {
+            color: #4CAF50;
+        }
+        .price.good {
+            color: #FF9800;
+        }
+        .price.expensive {
+            color: #f44336;
+        }
+        .total-row {
+            background-color: #e8f5e9 !important;
+            font-weight: bold;
+        }
+        .category-header {
+            background-color: #2196F3 !important;
+            color: white;
+            font-weight: bold;
+        }
+        .status-indicator {
+            display: inline-block;
+            width: 12px;
+            height: 12px;
+            border-radius: 50%;
+            margin-right: 5px;
+        }
+        .in-stock {
+            background-color: #4CAF50;
+        }
+        .low-stock {
+            background-color: #FF9800;
+        }
+        .out-of-stock {
+            background-color: #f44336;
+        }
+        .supplier-logo {
+            height: 20px;
+            vertical-align: middle;
+            margin-right: 5px;
+        }
+        .chart-container {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 20px;
+            margin: 20px 0;
+        }
+        canvas {
+            border: 1px solid #ddd;
+            background: white;
+        }
+        .summary-cards {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 15px;
+            margin: 20px 0;
+        }
+        .summary-card {
+            background: #f8f9fa;
+            padding: 20px;
+            border-radius: 8px;
+            text-align: center;
+            border-left: 4px solid #4CAF50;
+        }
+        .summary-card h3 {
+            margin: 0 0 10px 0;
+            color: #333;
+        }
+        .summary-card .value {
+            font-size: 24px;
+            font-weight: bold;
+            color: #4CAF50;
+        }
+        .info {
+            background: #e3f2fd;
+            padding: 15px;
+            border-radius: 4px;
+            margin: 10px 0;
+            border-left: 4px solid #2196F3;
+        }
+        .export-buttons {
+            text-align: center;
+            margin: 20px 0;
+        }
+        .export-buttons button {
+            margin: 0 5px;
+            padding: 10px 20px;
+            background: #4CAF50;
+            color: white;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            font-weight: bold;
+        }
+        .export-buttons button:hover {
+            background: #45a049;
+        }
+        .alternative-part {
+            font-size: 11px;
+            color: #666;
+            font-style: italic;
+        }
+    </style>
+</head>
+<body>
+    <div class="ml303-title">ML-303 INTERACTIVE BOM WITH LIVE PRICING</div>
+    
+    <div class="container">
+        <h2>Project Configuration</h2>
+        
+        <div class="controls">
+            <div class="control-group">
+                <label>Currency:</label>
+                <select id="currency" onchange="updatePrices()">
+                    <option value="EUR">EUR (€)</option>
+                    <option value="USD">USD ($)</option>
+                    <option value="GBP">GBP (£)</option>
+                </select>
+            </div>
+            
+            <div class="control-group">
+                <label>Quantity:</label>
+                <input type="number" id="quantity" value="1" min="1" max="100" onchange="updatePrices()">
+            </div>
+            
+            <div class="control-group">
+                <label>Region:</label>
+                <select id="region" onchange="updatePrices()">
+                    <option value="EU">Europe</option>
+                    <option value="US">USA</option>
+                    <option value="ASIA">Asia</option>
+                </select>
+            </div>
+            
+            <div class="control-group">
+                <label>Quality:</label>
+                <select id="quality" onchange="updatePrices()">
+                    <option value="budget">Budget</option>
+                    <option value="standard">Standard</option>
+                    <option value="premium">Premium</option>
+                </select>
+            </div>
+        </div>
+    </div>
+
+    <div class="container">
+        <h2>Bill of Materials</h2>
+        
+        <div class="info">
+            <strong>💡 Note:</strong> Prices are estimates based on December 2024 data. Click part numbers to search current prices. 
+            Green = best price, Orange = moderate, Red = expensive.
+        </div>
+        
+        <table id="bomTable">
+            <thead>
+                <tr>
+                    <th>Category</th>
+                    <th>Description</th>
+                    <th>Part Number</th>
+                    <th>Manufacturer</th>
+                    <th>Qty</th>
+                    <th>Unit Price</th>
+                    <th>Ext Price</th>
+                    <th>Supplier</th>
+                    <th>Stock</th>
+                    <th>Notes</th>
+                </tr>
+            </thead>
+            <tbody id="bomBody">
+                <!-- Table content will be generated by JavaScript -->
+            </tbody>
+        </table>
+    </div>
+
+    <div class="container">
+        <h2>Cost Analysis</h2>
+        
+        <div class="summary-cards">
+            <div class="summary-card">
+                <h3>Total Cost</h3>
+                <div class="value" id="totalCost">€0.00</div>
+            </div>
+            <div class="summary-card">
+                <h3>Components</h3>
+                <div class="value" id="componentCount">0</div>
+            </div>
+            <div class="summary-card">
+                <h3>Suppliers</h3>
+                <div class="value" id="supplierCount">0</div>
+            </div>
+            <div class="summary-card">
+                <h3>Lead Time</h3>
+                <div class="value" id="leadTime">0 days</div>
+            </div>
+        </div>
+        
+        <div class="chart-container">
+            <canvas id="costBreakdown" width="400" height="300"></canvas>
+            <canvas id="supplierChart" width="400" height="300"></canvas>
+        </div>
+    </div>
+
+    <div class="container">
+        <h2>Alternative Sources & Substitutions</h2>
+        
+        <table>
+            <thead>
+                <tr>
+                    <th>Original Part</th>
+                    <th>Alternative 1</th>
+                    <th>Alternative 2</th>
+                    <th>Notes</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>Omron B3F-4055</td>
+                    <td>C&K PTS645SM12</td>
+                    <td>Alps SKQG series</td>
+                    <td>All are 12×12mm 4-pin compatible</td>
+                </tr>
+                <tr>
+                    <td>Original Conrad 3-pin</td>
+                    <td>Use 4-pin + adapter</td>
+                    <td>Custom PCB solution</td>
+                    <td>No direct replacement exists</td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+
+    <div class="container">
+        <div class="export-buttons">
+            <button onclick="exportCSV()">Export CSV</button>
+            <button onclick="exportPDF()">Export PDF</button>
+            <button onclick="generateCart()">Generate Shopping Cart</button>
+            <button onclick="saveConfiguration()">Save Configuration</button>
+        </div>
+    </div>
+
+    <script>
+        // BOM data structure
+        const bomData = [
+            // Buttons
+            {
+                category: 'Buttons',
+                description: '12×12mm Tactile Switch, 4-pin',
+                partNumber: 'B3F-4055',
+                manufacturer: 'Omron',
+                quantity: 40,
+                prices: {
+                    EUR: {budget: 0.08, standard: 0.35, premium: 0.45},
+                    USD: {budget: 0.10, standard: 0.40, premium: 0.50},
+                    GBP: {budget: 0.07, standard: 0.30, premium: 0.40}
+                },
+                suppliers: {
+                    EU: 'Mouser',
+                    US: 'Digi-Key',
+                    ASIA: 'LCSC'
+                },
+                stock: 'in-stock',
+                notes: '36 required + 10% spare',
+                alternatives: ['PTS645SM12SMTR92', 'SKQGABE010']
+            },
+            {
+                category: 'Buttons',
+                description: 'Button Caps - Red',
+                partNumber: 'CAP-12MM-RED',
+                manufacturer: 'Generic',
+                quantity: 4,
+                prices: {
+                    EUR: {budget: 0.05, standard: 0.10, premium: 0.15},
+                    USD: {budget: 0.06, standard: 0.12, premium: 0.18},
+                    GBP: {budget: 0.04, standard: 0.09, premium: 0.13}
+                },
+                suppliers: {
+                    EU: 'AliExpress',
+                    US: 'Amazon',
+                    ASIA: 'Taobao'
+                },
+                stock: 'in-stock',
+                notes: 'RUN/STOP, BACK buttons'
+            },
+            {
+                category: 'Buttons',
+                description: 'Button Caps - Blue',
+                partNumber: 'CAP-12MM-BLUE',
+                manufacturer: 'Generic',
+                quantity: 4,
+                prices: {
+                    EUR: {budget: 0.05, standard: 0.10, premium: 0.15},
+                    USD: {budget: 0.06, standard: 0.12, premium: 0.18},
+                    GBP: {budget: 0.04, standard: 0.09, premium: 0.13}
+                },
+                suppliers: {
+                    EU: 'AliExpress',
+                    US: 'Amazon',
+                    ASIA: 'Taobao'
+                },
+                stock: 'in-stock',
+                notes: 'WRITE, TAP buttons'
+            },
+            {
+                category: 'Buttons',
+                description: 'Button Caps - Yellow',
+                partNumber: 'CAP-12MM-YELLOW',
+                manufacturer: 'Generic',
+                quantity: 4,
+                prices: {
+                    EUR: {budget: 0.05, standard: 0.10, premium: 0.15},
+                    USD: {budget: 0.06, standard: 0.12, premium: 0.18},
+                    GBP: {budget: 0.04, standard: 0.09, premium: 0.13}
+                },
+                suppliers: {
+                    EU: 'AliExpress',
+                    US: 'Amazon',
+                    ASIA: 'Taobao'
+                },
+                stock: 'in-stock',
+                notes: 'CLEAR, TIME buttons'
+            },
+            {
+                category: 'Buttons',
+                description: 'Button Caps - White',
+                partNumber: 'CAP-12MM-WHITE',
+                manufacturer: 'Generic',
+                quantity: 18,
+                prices: {
+                    EUR: {budget: 0.05, standard: 0.10, premium: 0.15},
+                    USD: {budget: 0.06, standard: 0.12, premium: 0.18},
+                    GBP: {budget: 0.04, standard: 0.09, premium: 0.13}
+                },
+                suppliers: {
+                    EU: 'AliExpress',
+                    US: 'Amazon',
+                    ASIA: 'Taobao'
+                },
+                stock: 'in-stock',
+                notes: 'Step buttons, FUNCTION'
+            },
+            {
+                category: 'Buttons',
+                description: 'Button Caps - Black',
+                partNumber: 'CAP-12MM-BLACK',
+                manufacturer: 'Generic',
+                quantity: 6,
+                prices: {
+                    EUR: {budget: 0.05, standard: 0.10, premium: 0.15},
+                    USD: {budget: 0.06, standard: 0.12, premium: 0.18},
+                    GBP: {budget: 0.04, standard: 0.09, premium: 0.13}
+                },
+                suppliers: {
+                    EU: 'AliExpress',
+                    US: 'Amazon',
+                    ASIA: 'Taobao'
+                },
+                stock: 'in-stock',
+                notes: 'PITCH, black note keys'
+            },
+            
+            // Adapter Materials
+            {
+                category: 'Adapters',
+                description: 'Stripboard, 100×100mm',
+                partNumber: 'STRIPBOARD-100',
+                manufacturer: 'Generic',
+                quantity: 2,
+                prices: {
+                    EUR: {budget: 1.50, standard: 2.00, premium: 3.00},
+                    USD: {budget: 1.80, standard: 2.40, premium: 3.60},
+                    GBP: {budget: 1.30, standard: 1.75, premium: 2.60}
+                },
+                suppliers: {
+                    EU: 'Conrad',
+                    US: 'Jameco',
+                    ASIA: 'Element14'
+                },
+                stock: 'in-stock',
+                notes: 'Makes 40+ adapters'
+            },
+            {
+                category: 'Adapters',
+                description: 'Wire 30AWG, Red (10m)',
+                partNumber: 'WIRE-30AWG-RED',
+                manufacturer: 'Generic',
+                quantity: 1,
+                prices: {
+                    EUR: {budget: 2.00, standard: 3.00, premium: 4.00},
+                    USD: {budget: 2.40, standard: 3.60, premium: 4.80},
+                    GBP: {budget: 1.75, standard: 2.60, premium: 3.50}
+                },
+                suppliers: {
+                    EU: 'RS Components',
+                    US: 'Digi-Key',
+                    ASIA: 'LCSC'
+                },
+                stock: 'in-stock',
+                notes: 'Common connections'
+            },
+            {
+                category: 'Adapters',
+                description: 'Wire 30AWG, Blue (10m)',
+                partNumber: 'WIRE-30AWG-BLUE',
+                manufacturer: 'Generic',
+                quantity: 1,
+                prices: {
+                    EUR: {budget: 2.00, standard: 3.00, premium: 4.00},
+                    USD: {budget: 2.40, standard: 3.60, premium: 4.80},
+                    GBP: {budget: 1.75, standard: 2.60, premium: 3.50}
+                },
+                suppliers: {
+                    EU: 'RS Components',
+                    US: 'Digi-Key',
+                    ASIA: 'LCSC'
+                },
+                stock: 'in-stock',
+                notes: 'Row connections'
+            },
+            {
+                category: 'Adapters',
+                description: 'Wire 30AWG, Green (10m)',
+                partNumber: 'WIRE-30AWG-GREEN',
+                manufacturer: 'Generic',
+                quantity: 1,
+                prices: {
+                    EUR: {budget: 2.00, standard: 3.00, premium: 4.00},
+                    USD: {budget: 2.40, standard: 3.60, premium: 4.80},
+                    GBP: {budget: 1.75, standard: 2.60, premium: 3.50}
+                },
+                suppliers: {
+                    EU: 'RS Components',
+                    US: 'Digi-Key',
+                    ASIA: 'LCSC'
+                },
+                stock: 'in-stock',
+                notes: 'Column connections'
+            },
+            
+            // PCB Option
+            {
+                category: 'PCB Option',
+                description: 'Custom Adapter PCB (Set of 40)',
+                partNumber: 'ML303-ADAPTER-PCB',
+                manufacturer: 'JLCPCB',
+                quantity: 1,
+                prices: {
+                    EUR: {budget: 15.00, standard: 20.00, premium: 30.00},
+                    USD: {budget: 18.00, standard: 24.00, premium: 36.00},
+                    GBP: {budget: 13.00, standard: 17.50, premium: 26.00}
+                },
+                suppliers: {
+                    EU: 'Aisler',
+                    US: 'OSH Park',
+                    ASIA: 'JLCPCB'
+                },
+                stock: 'made-to-order',
+                notes: 'Professional PCB solution'
+            },
+            
+            // Consumables
+            {
+                category: 'Consumables',
+                description: 'Solder 0.8mm (100g)',
+                partNumber: 'SOLDER-08MM',
+                manufacturer: 'Kester',
+                quantity: 1,
+                prices: {
+                    EUR: {budget: 8.00, standard: 12.00, premium: 18.00},
+                    USD: {budget: 9.60, standard: 14.40, premium: 21.60},
+                    GBP: {budget: 7.00, standard: 10.50, premium: 15.75}
+                },
+                suppliers: {
+                    EU: 'Conrad',
+                    US: 'Digi-Key',
+                    ASIA: 'Element14'
+                },
+                stock: 'in-stock',
+                notes: 'Lead-free recommended'
+            },
+            {
+                category: 'Consumables',
+                description: 'Flux Pen',
+                partNumber: 'FLUX-PEN',
+                manufacturer: 'MG Chemicals',
+                quantity: 1,
+                prices: {
+                    EUR: {budget: 5.00, standard: 8.00, premium: 12.00},
+                    USD: {budget: 6.00, standard: 9.60, premium: 14.40},
+                    GBP: {budget: 4.35, standard: 7.00, premium: 10.50}
+                },
+                suppliers: {
+                    EU: 'RS Components',
+                    US: 'Amazon',
+                    ASIA: 'LCSC'
+                },
+                stock: 'in-stock',
+                notes: 'No-clean flux'
+            }
+        ];
+        
+        // Currency symbols
+        const currencySymbols = {
+            EUR: '€',
+            USD: '$',
+            GBP: '£'
+        };
+        
+        // Update prices based on settings
+        function updatePrices() {
+            const currency = document.getElementById('currency').value;
+            const quantity = parseInt(document.getElementById('quantity').value);
+            const region = document.getElementById('region').value;
+            const quality = document.getElementById('quality').value;
+            
+            renderBOM(currency, quantity, region, quality);
+            updateSummary(currency, quantity, quality);
+            updateCharts(currency, quality);
+        }
+        
+        // Render BOM table
+        function renderBOM(currency, quantity, region, quality) {
+            const tbody = document.getElementById('bomBody');
+            tbody.innerHTML = '';
+            
+            let currentCategory = '';
+            let categoryTotal = 0;
+            let grandTotal = 0;
+            
+            bomData.forEach(item => {
+                // Category header
+                if (item.category !== currentCategory) {
+                    if (currentCategory !== '') {
+                        // Add category subtotal
+                        const subtotalRow = tbody.insertRow();
+                        subtotalRow.className = 'total-row';
+                        subtotalRow.innerHTML = `
+                            <td colspan="6" style="text-align: right">Subtotal ${currentCategory}:</td>
+                            <td class="price">${currencySymbols[currency]}${categoryTotal.toFixed(2)}</td>
+                            <td colspan="3"></td>
+                        `;
+                    }
+                    
+                    currentCategory = item.category;
+                    categoryTotal = 0;
+                    
+                    const headerRow = tbody.insertRow();
+                    headerRow.className = 'category-header';
+                    headerRow.innerHTML = `<td colspan="10">${item.category}</td>`;
+                }
+                
+                // Item row
+                const row = tbody.insertRow();
+                const unitPrice = item.prices[currency][quality];
+                const extPrice = unitPrice * item.quantity * quantity;
+                categoryTotal += extPrice;
+                grandTotal += extPrice;
+                
+                // Price class
+                let priceClass = 'price';
+                if (quality === 'budget') priceClass += ' best';
+                else if (quality === 'standard') priceClass += ' good';
+                else priceClass += ' expensive';
+                
+                // Stock indicator
+                let stockIndicator = '';
+                if (item.stock === 'in-stock') {
+                    stockIndicator = '<span class="status-indicator in-stock"></span>In Stock';
+                } else if (item.stock === 'low-stock') {
+                    stockIndicator = '<span class="status-indicator low-stock"></span>Low Stock';
+                } else if (item.stock === 'out-of-stock') {
+                    stockIndicator = '<span class="status-indicator out-of-stock"></span>Out of Stock';
+                } else {
+                    stockIndicator = '<span class="status-indicator low-stock"></span>Made to Order';
+                }
+                
+                row.innerHTML = `
+                    <td></td>
+                    <td>${item.description}</td>
+                    <td class="part-number" onclick="searchPart('${item.partNumber}')">${item.partNumber}</td>
+                    <td>${item.manufacturer}</td>
+                    <td style="text-align: center">${item.quantity * quantity}</td>
+                    <td class="${priceClass}">${currencySymbols[currency]}${unitPrice.toFixed(2)}</td>
+                    <td class="${priceClass}">${currencySymbols[currency]}${extPrice.toFixed(2)}</td>
+                    <td>${item.suppliers[region]}</td>
+                    <td>${stockIndicator}</td>
+                    <td>${item.notes}</td>
+                `;
+            });
+            
+            // Final category subtotal
+            if (currentCategory !== '') {
+                const subtotalRow = tbody.insertRow();
+                subtotalRow.className = 'total-row';
+                subtotalRow.innerHTML = `
+                    <td colspan="6" style="text-align: right">Subtotal ${currentCategory}:</td>
+                    <td class="price">${currencySymbols[currency]}${categoryTotal.toFixed(2)}</td>
+                    <td colspan="3"></td>
+                `;
+            }
+            
+            // Grand total
+            const totalRow = tbody.insertRow();
+            totalRow.className = 'total-row';
+            totalRow.style.fontSize = '16px';
+            totalRow.innerHTML = `
+                <td colspan="6" style="text-align: right"><strong>GRAND TOTAL:</strong></td>
+                <td class="price"><strong>${currencySymbols[currency]}${grandTotal.toFixed(2)}</strong></td>
+                <td colspan="3"></td>
+            `;
+        }
+        
+        // Update summary cards
+        function updateSummary(currency, quantity, quality) {
+            let total = 0;
+            let componentCount = 0;
+            const suppliers = new Set();
+            
+            bomData.forEach(item => {
+                total += item.prices[currency][quality] * item.quantity * quantity;
+                componentCount += item.quantity * quantity;
+                suppliers.add(item.suppliers.EU);
+            });
+            
+            document.getElementById('totalCost').textContent = 
+                `${currencySymbols[currency]}${total.toFixed(2)}`;
+            document.getElementById('componentCount').textContent = componentCount;
+            document.getElementById('supplierCount').textContent = suppliers.size;
+            
+            // Lead time based on quality
+            const leadTimes = {
+                budget: '15-30',
+                standard: '5-10',
+                premium: '2-5'
+            };
+            document.getElementById('leadTime').textContent = `${leadTimes[quality]} days`;
+        }
+        
+        // Update charts
+        function updateCharts(currency, quality) {
+            // Cost breakdown by category
+            const costCtx = document.getElementById('costBreakdown').getContext('2d');
+            costCtx.clearRect(0, 0, 400, 300);
+            
+            const categories = {};
+            bomData.forEach(item => {
+                if (!categories[item.category]) categories[item.category] = 0;
+                categories[item.category] += item.prices[currency][quality] * item.quantity;
+            });
+            
+            // Draw pie chart
+            const total = Object.values(categories).reduce((a, b) => a + b, 0);
+            let currentAngle = 0;
+            const colors = ['#4CAF50', '#2196F3', '#FF9800', '#f44336', '#9C27B0'];
+            let colorIndex = 0;
+            
+            // Title
+            costCtx.fillStyle = '#000';
+            costCtx.font = 'bold 16px Arial';
+            costCtx.fillText('Cost Breakdown by Category', 100, 20);
+            
+            Object.entries(categories).forEach(([category, cost]) => {
+                const sliceAngle = (cost / total) * 2 * Math.PI;
+                
+                // Draw slice
+                costCtx.fillStyle = colors[colorIndex % colors.length];
+                costCtx.beginPath();
+                costCtx.moveTo(200, 150);
+                costCtx.arc(200, 150, 80, currentAngle, currentAngle + sliceAngle);
+                costCtx.closePath();
+                costCtx.fill();
+                
+                // Draw label
+                const labelAngle = currentAngle + sliceAngle / 2;
+                const labelX = 200 + Math.cos(labelAngle) * 100;
+                const labelY = 150 + Math.sin(labelAngle) * 100;
+                
+                costCtx.fillStyle = '#000';
+                costCtx.font = '12px Arial';
+                costCtx.fillText(`${category}: ${((cost/total)*100).toFixed(1)}%`, labelX, labelY);
+                
+                currentAngle += sliceAngle;
+                colorIndex++;
+            });
+            
+            // Supplier distribution chart
+            const supplierCtx = document.getElementById('supplierChart').getContext('2d');
+            supplierCtx.clearRect(0, 0, 400, 300);
+            
+            // Title
+            supplierCtx.fillStyle = '#000';
+            supplierCtx.font = 'bold 16px Arial';
+            supplierCtx.fillText('Components by Supplier', 100, 20);
+            
+            const supplierCounts = {};
+            bomData.forEach(item => {
+                const supplier = item.suppliers.EU;
+                if (!supplierCounts[supplier]) supplierCounts[supplier] = 0;
+                supplierCounts[supplier] += item.quantity;
+            });
+            
+            // Draw bar chart
+            let barX = 50;
+            const barWidth = 60;
+            const maxCount = Math.max(...Object.values(supplierCounts));
+            
+            Object.entries(supplierCounts).forEach(([supplier, count]) => {
+                const barHeight = (count / maxCount) * 200;
+                
+                supplierCtx.fillStyle = '#2196F3';
+                supplierCtx.fillRect(barX, 250 - barHeight, barWidth, barHeight);
+                
+                supplierCtx.fillStyle = '#000';
+                supplierCtx.font = '10px Arial';
+                supplierCtx.save();
+                supplierCtx.translate(barX + barWidth/2, 260);
+                supplierCtx.rotate(-Math.PI/4);
+                supplierCtx.fillText(supplier, 0, 0);
+                supplierCtx.restore();
+                
+                supplierCtx.fillText(count.toString(), barX + barWidth/2 - 10, 245 - barHeight);
+                
+                barX += barWidth + 20;
+            });
+        }
+        
+        // Search for part
+        function searchPart(partNumber) {
+            const searchUrls = {
+                'B3F-4055': 'https://www.mouser.com/ProductDetail/Omron/B3F-4055',
+                'CAP-12MM-RED': 'https://www.aliexpress.com/wholesale?SearchText=12mm+tactile+switch+cap+red',
+                'STRIPBOARD-100': 'https://www.conrad.com/search?search=stripboard',
+                'ML303-ADAPTER-PCB': 'https://jlcpcb.com/'
+            };
+            
+            const url = searchUrls[partNumber] || 
+                       `https://www.google.com/search?q=${encodeURIComponent(partNumber)}+price`;
+            window.open(url, '_blank');
+        }
+        
+        // Export functions
+        function exportCSV() {
+            let csv = 'Category,Description,Part Number,Manufacturer,Quantity,Unit Price,Extended Price,Supplier,Notes\n';
+            
+            const currency = document.getElementById('currency').value;
+            const quantity = parseInt(document.getElementById('quantity').value);
+            const region = document.getElementById('region').value;
+            const quality = document.getElementById('quality').value;
+            
+            bomData.forEach(item => {
+                const unitPrice = item.prices[currency][quality];
+                const extPrice = unitPrice * item.quantity * quantity;
+                
+                csv += `"${item.category}","${item.description}","${item.partNumber}","${item.manufacturer}",` +
+                       `${item.quantity * quantity},${unitPrice.toFixed(2)},${extPrice.toFixed(2)},` +
+                       `"${item.suppliers[region]}","${item.notes}"\n`;
+            });
+            
+            const blob = new Blob([csv], { type: 'text/csv' });
+            const url = URL.createObjectURL(blob);
+            const a = document.createElement('a');
+            a.href = url;
+            a.download = 'ML303_BOM.csv';
+            a.click();
+            URL.revokeObjectURL(url);
+        }
+        
+        function generateCart() {
+            alert('Shopping cart generation would create separate carts for each supplier:\n\n' +
+                  '• Mouser: Electronics components\n' +
+                  '• AliExpress: Button caps\n' +
+                  '• RS Components: Wire and consumables\n' +
+                  '• JLCPCB: Custom PCBs (optional)\n\n' +
+                  'This feature would use supplier APIs in production.');
+        }
+        
+        function saveConfiguration() {
+            const config = {
+                currency: document.getElementById('currency').value,
+                quantity: document.getElementById('quantity').value,
+                region: document.getElementById('region').value,
+                quality: document.getElementById('quality').value,
+                timestamp: new Date().toISOString()
+            };
+            
+            localStorage.setItem('ml303-bom-config', JSON.stringify(config));
+            alert('Configuration saved! It will be restored on your next visit.');
+        }
+        
+        // Load saved configuration
+        function loadConfiguration() {
+            const saved = localStorage.getItem('ml303-bom-config');
+            if (saved) {
+                const config = JSON.parse(saved);
+                document.getElementById('currency').value = config.currency;
+                document.getElementById('quantity').value = config.quantity;
+                document.getElementById('region').value = config.region;
+                document.getElementById('quality').value = config.quality;
+            }
+        }
+        
+        // Initialize
+        loadConfiguration();
+        updatePrices();
+    </script>
+</body>
+</html>
