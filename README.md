@@ -17,13 +17,18 @@ Hardware build, firmware, and integration work for the **ML-303** — Mathias Sc
 
 ## Enclosure constraints
 
-The metal panel stays as stock as possible. **No new holes** will be drilled. Anything that needs panel I/O has to reuse what's already there:
+The metal panel stays as stock as possible. **No new holes** will be drilled. The existing panel inventory on this 2018-revision panel:
 
-- existing **AT-ONE** jack
-- existing **DRIVE** jack
-- existing **Input** jack
+**Audio I/O (front, except where noted)**
+- **AUDIO IN** jack (rear) — external audio routed through the VCF + VCA (not a passive mix like a real TB-303); gain set by the internal "Adj. Input" trimmer; activates when WAVEFORM switch is in middle (EXT) position
+- **LINE OUT** jack (front, top-right)
+- **HEADPHONE** jack (front, top-right)
 
-These three are the only audio I/O budget for any effect added to the system.
+**Mod controls (front)**
+- **AT-ONE** toggle (upper-left) with LED indicator above — sits in the same spot V6 documents as the **BASSDRUM** area on page 21. Likely a BD ON/OFF with status LED. Function inherited with the 2018 panel; not described in V5 or V6 build docs verbatim.
+- **DRIVE** pot (next to AT-ONE) — identified from the V6 PCB silkscreen "**HIGHP DISTORTION**" (xpo_construction.pdf p.14). Internal distortion stage with optional HIGHPASS toggle near VOLUME ("if switch is not used you must solder a bridge here").
+
+Effects routing for added gear (Phase 3+) uses **LINE OUT → external box → AUDIO IN** as an effects loop, with WAVEFORM=EXT muting the internal VCO. No internal taps, no new holes.
 
 ## Phase plan
 
@@ -31,12 +36,12 @@ These three are the only audio I/O budget for any effect added to the system.
 |-------|------|--------|
 | 1 | I2C bus PIC → Arduino → LCD; sequencer data on display | Firmware scaffolded; bench-test pending |
 | 2 | Multi-page LCD (sequencer / effects / system) | Pending |
-| 3 | Great Destroyer bit crusher, routed through existing panel jacks | Pending |
-| 4 | BD trigger I/O + V6 features | Pending |
+| 3 | Great Destroyer bit crusher in the LINE OUT → AUDIO IN loop | Pending |
+| 4 | BD trigger I/O integration + remaining V6 mods | Pending |
 
 ### Deferred
 
-- **JF-33 PT2399 analog delay** — there is not enough space inside the enclosure for the PT2399 PCB. The mod is on hold and can only re-enter scope if (a) the JF-33 can be mounted directly on the metal panel and (b) its knobs are removed (control would then come from the Arduino or external CV). No new holes either way, so audio routing would still use the AT-ONE / DRIVE / Input jacks rather than tapping internal nets.
+- **JF-33 PT2399 analog delay** — there is not enough space inside the enclosure for the PT2399 PCB. The mod is on hold and can only re-enter scope if (a) the JF-33 can be mounted directly on the metal panel and (b) its knobs are removed (control would then come from the Arduino or external CV). No new holes either way, so audio routing would still go through the LINE OUT → AUDIO IN effects loop rather than tapping internal nets.
 
 ## Phase 1 design
 

@@ -73,5 +73,5 @@ Pass = Phase 1 complete.
 ## What's next
 
 - Phase 2 will replace the simple page rotation with button-controllable pages and richer rendering (step grid bargraph, pattern name, etc.).
-- Phase 3 wires the Great Destroyer bit crusher into the audio path through the existing AT-ONE / DRIVE / Input panel jacks. No new holes in the metal panel — that's a hard constraint.
+- Phase 3 wires the Great Destroyer bit crusher into the LINE OUT → AUDIO IN effects loop (WAVEFORM=EXT mutes the internal VCO; external audio is then re-routed through the VCF+VCA before exiting). No new holes in the metal panel — that's a hard constraint. AT-ONE (BD-related toggle) and DRIVE (HIGHP DISTORTION mod) are existing panel controls, not jacks; they stay independent of the bit-crusher loop.
 - The JF-33 PT2399 delay is deferred (won't fit inside the enclosure). See the README "Deferred" section for the conditions under which it could come back.
