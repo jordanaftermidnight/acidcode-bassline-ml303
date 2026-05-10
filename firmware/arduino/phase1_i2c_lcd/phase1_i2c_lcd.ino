@@ -35,6 +35,7 @@ typedef struct __attribute__((packed)) {
 } PIC_to_Arduino_t;
 
 static const uint8_t PACKET_SIZE = sizeof(PIC_to_Arduino_t);  // 9 bytes
+static_assert(sizeof(PIC_to_Arduino_t) == 9, "packet must be exactly 9 bytes — check struct packing");
 
 // ---- Display timing ----
 // Don't redraw faster than this — the LCD is slow and the I2C bus is
@@ -82,20 +83,38 @@ static uint8_t computeChecksum(const uint8_t *buf, uint8_t len) {
   return x;
 }
 
+// Cached last rendered text for each LCD row. writeLine() compares against
+// these so unchanged rows skip the ~24 ms of I2C+LCD traffic per refresh.
+static char prevLine[LCD_ROWS][LCD_COLS + 1];
+
+// Pads to LCD_COLS with spaces and only writes if the row changed.
+static void writeLine(uint8_t row, const char *s) {
+  if (row >= LCD_ROWS) return;
+  if (strcmp(s, prevLine[row]) == 0) return;
+  lcd.setCursor(0, row);
+  lcd.print(s);
+  for (uint8_t i = strlen(s); i < LCD_COLS; i++) lcd.print(' ');
+  strncpy(prevLine[row], s, LCD_COLS);
+  prevLine[row][LCD_COLS] = '\0';
+}
+
+// Forces the next writeLine() for every row to actually push to the LCD.
+// Call when leaving a page so the new page paints over whatever was there.
+static void invalidateLineCache() {
+  for (uint8_t r = 0; r < LCD_ROWS; r++) prevLine[r][0] = '\1';  // sentinel, can't match snprintf output
+}
+
 static void renderPage0_sequencer() {
   // Line 1: "P001 S03 120BPM " (pattern, step, tempo)
-  lcd.setCursor(0, 0);
-  char l1[17];
+  char l1[LCD_COLS + 1];
   snprintf(l1, sizeof(l1), "P%03u S%02u %3uBPM",
            (unsigned)(pic.current_pattern + 1),
            (unsigned)(pic.current_step + 1),
            (unsigned)pic.tempo_bpm);
-  lcd.print(l1);
-  for (uint8_t i = strlen(l1); i < LCD_COLS; i++) lcd.print(' ');
+  writeLine(0, l1);
 
   // Line 2: "N060 V100 RAS   " (note, velocity, run/accent/slide flags)
-  lcd.setCursor(0, 1);
-  char l2[17];
+  char l2[LCD_COLS + 1];
   char rFlag = (pic.sequencer_flags & SEQ_RUNNING) ? 'R' : '.';
   char aFlag = (pic.sequencer_flags & SEQ_ACCENT)  ? 'A' : '.';
   char sFlag = (pic.sequencer_flags & SEQ_SLIDE)   ? 'S' : '.';
@@ -103,16 +122,13 @@ static void renderPage0_sequencer() {
            (unsigned)pic.note_value,
            (unsigned)pic.velocity,
            rFlag, aFlag, sFlag);
-  lcd.print(l2);
-  for (uint8_t i = strlen(l2); i < LCD_COLS; i++) lcd.print(' ');
+  writeLine(1, l2);
 }
 
 static void renderPage1_effects() {
   // Phase 3/4 will populate this. Until then, show the placeholder.
-  lcd.setCursor(0, 0);
-  lcd.print(F("FX: bypass      "));
-  lcd.setCursor(0, 1);
-  lcd.print(F("Delay -- BC --  "));
+  writeLine(0, "FX: bypass");
+  writeLine(1, "Delay -- BC --");
 }
 
 static void renderPage2_system() {
@@ -124,17 +140,13 @@ static void renderPage2_system() {
   errs = errorCount;
   interrupts();
 
-  char l1[17];
+  char l1[LCD_COLS + 1];
   snprintf(l1, sizeof(l1), "Pkt %lu", (unsigned long)pkts);
-  lcd.setCursor(0, 0);
-  lcd.print(l1);
-  for (uint8_t i = strlen(l1); i < LCD_COLS; i++) lcd.print(' ');
+  writeLine(0, l1);
 
-  char l2[17];
+  char l2[LCD_COLS + 1];
   snprintf(l2, sizeof(l2), "Err %u Up %lus", (unsigned)errs, (unsigned long)uptimeS);
-  lcd.setCursor(0, 1);
-  lcd.print(l2);
-  for (uint8_t i = strlen(l2); i < LCD_COLS; i++) lcd.print(' ');
+  writeLine(1, l2);
 }
 
 static void renderCurrentPage() {
@@ -196,7 +208,8 @@ void loop() {
   if (now - lastPageSwitchMs >= PAGE_ROTATE_MS) {
     lastPageSwitchMs = now;
     currentPage = (currentPage + 1) % 3;
-    lastDrawMs = 0;   // Force redraw on page switch
+    invalidateLineCache();   // Force redraw on page switch
+    lastDrawMs = 0;
   }
 
   // 3. Redraw at most every MIN_DISPLAY_INTERVAL_MS.
