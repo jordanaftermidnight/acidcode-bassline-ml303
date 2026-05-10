@@ -25,7 +25,7 @@ arduino-cli upload  --fqbn arduino:avr:leonardo --port /dev/cu.usbmodem* phase1_
 ## Pages
 
 - **Page 0 — sequencer**: pattern, step, tempo / note, velocity, R-A-S flags
-- **Page 1 — effects**: placeholder until Phase 3 (JF-33 + Great Destroyer)
+- **Page 1 — effects**: placeholder until Phase 3 (Great Destroyer routing)
 - **Page 2 — system**: packet count, error count, uptime
 
 ## Debug

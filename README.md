@@ -13,8 +13,17 @@ Hardware build, firmware, and integration work for the **ML-303** — Mathias Sc
 - ML-303 V5 mainboard (PIC18LF452 @ 10 MHz, firmware V7.02 from July 2008)
 - Arduino Pro Micro (ATmega32U4, 5 V / 16 MHz)
 - I2C LCD 16x2 (PCF8574 backpack, red backlight)
-- JF-33 PT2399 analog delay (Phase 3)
-- Great Destroyer bit crusher (Phase 4)
+- Great Destroyer bit crusher (Phase 3)
+
+## Enclosure constraints
+
+The metal panel stays as stock as possible. **No new holes** will be drilled. Anything that needs panel I/O has to reuse what's already there:
+
+- existing **AT-ONE** jack
+- existing **DRIVE** jack
+- existing **Input** jack
+
+These three are the only audio I/O budget for any effect added to the system.
 
 ## Phase plan
 
@@ -22,8 +31,12 @@ Hardware build, firmware, and integration work for the **ML-303** — Mathias Sc
 |-------|------|--------|
 | 1 | I2C bus PIC → Arduino → LCD; sequencer data on display | Firmware scaffolded; bench-test pending |
 | 2 | Multi-page LCD (sequencer / effects / system) | Pending |
-| 3 | JF-33 delay PWM control, tempo sync, audio path insertion | Pending |
-| 4 | Great Destroyer + BD trigger I/O + V6 features | Pending |
+| 3 | Great Destroyer bit crusher, routed through existing panel jacks | Pending |
+| 4 | BD trigger I/O + V6 features | Pending |
+
+### Deferred
+
+- **JF-33 PT2399 analog delay** — there is not enough space inside the enclosure for the PT2399 PCB. The mod is on hold and can only re-enter scope if (a) the JF-33 can be mounted directly on the metal panel and (b) its knobs are removed (control would then come from the Arduino or external CV). No new holes either way, so audio routing would still use the AT-ONE / DRIVE / Input jacks rather than tapping internal nets.
 
 ## Phase 1 design
 

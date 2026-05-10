@@ -73,4 +73,5 @@ Pass = Phase 1 complete.
 ## What's next
 
 - Phase 2 will replace the simple page rotation with button-controllable pages and richer rendering (step grid bargraph, pattern name, etc.).
-- Phase 3 introduces JF-33 control via PWM pins 5/6/9 and inserts the delay between VCF and VCA.
+- Phase 3 wires the Great Destroyer bit crusher into the audio path through the existing AT-ONE / DRIVE / Input panel jacks. No new holes in the metal panel — that's a hard constraint.
+- The JF-33 PT2399 delay is deferred (won't fit inside the enclosure). See the README "Deferred" section for the conditions under which it could come back.
