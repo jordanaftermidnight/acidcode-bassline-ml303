@@ -1,0 +1,149 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1000 720" width="1000" height="720">
+<defs>
+  <filter id="textshadow" x="-20%" y="-20%" width="140%" height="140%">
+    <feFlood flood-color="white" flood-opacity="0.9" result="bg"/>
+    <feMorphology in="SourceGraphic" operator="dilate" radius="1.5" result="dilated"/>
+    <feComposite in="bg" in2="dilated" operator="in" result="shadow"/>
+    <feMerge><feMergeNode in="shadow"/><feMergeNode in="SourceGraphic"/></feMerge>
+  </filter>
+  <style>
+    .title { font: bold 16px "SF Mono", Consolas, monospace; fill: #1a1a1a; filter: url(#textshadow); }
+    .subtitle { font: 11px "SF Mono", Consolas, monospace; fill: #555; filter: url(#textshadow); }
+    .label { font: bold 10px "SF Mono", Consolas, monospace; fill: #1a1a1a; filter: url(#textshadow); }
+    .value { font: 9px "SF Mono", Consolas, monospace; fill: #555; filter: url(#textshadow); }
+    .pin { font: 10px "SF Mono", Consolas, monospace; fill: #555; filter: url(#textshadow); }
+    .anno { font: 9px "SF Mono", Consolas, monospace; fill: #0066CC; filter: url(#textshadow); }
+    .wire { stroke: #1a1a1a; stroke-width: 1.5; fill: none; transition: all 0.2s; cursor: pointer; }
+    .wire:hover { stroke: #ff6600; stroke-width: 2.5; filter: drop-shadow(0 0 3px #ff6600); }
+    .wire-thick { stroke: #1a1a1a; stroke-width: 2.5; fill: none; transition: all 0.2s; cursor: pointer; }
+    .wire-thick:hover { stroke: #ff6600; stroke-width: 3.5; filter: drop-shadow(0 0 3px #ff6600); }
+    .sda { stroke: #FF9800; stroke-width: 2.5; fill: none; }
+    .scl { stroke: #2196F3; stroke-width: 2.5; fill: none; }
+    .vcc { stroke: #D44; stroke-width: 2; fill: none; }
+    .gnd { stroke: #1a1a1a; stroke-width: 2; fill: none; }
+    .component { stroke: #1a1a1a; stroke-width: 1.5; fill: none; }
+    .filled { fill: #1a1a1a; }
+    .junction { fill: #0066CC; }
+  </style>
+  <marker id="arrow" markerWidth="8" markerHeight="6" refX="7" refY="3" orient="auto">
+    <polygon points="0 0, 8 3, 0 6" fill="#0066CC"/>
+  </marker>
+</defs>
+<rect width="1000" height="720" fill="#FEFEFE"/>
+<text x="500" y="25" class="title" text-anchor="middle">ML-303 Phase 1 — I²C Bus Topology</text>
+<text x="500" y="42" class="subtitle" text-anchor="middle">PIC18LF452 (master) ↔ Arduino Pro Micro (slave 0x43) ↔ PCF8574 LCD backpack (0x27/0x3F)</text>
+
+<!-- PIC18LF452 (master) -->
+<rect x="60" y="100" width="220" height="200" fill="#3a3a3a" stroke="#1a1a1a" stroke-width="2" rx="4"/>
+<text x="170" y="125" class="label" text-anchor="middle" fill="#FFF" font-size="12">PIC18LF452</text>
+<text x="170" y="142" class="value" text-anchor="middle" fill="#CCC" font-size="9">ML-303 V5 — firmware V7.02</text>
+<text x="170" y="156" class="value" text-anchor="middle" fill="#CCC" font-size="9">10 MHz · I²C master role</text>
+
+<!-- PIC pins -->
+<circle cx="280" cy="190" r="5" fill="gold" stroke="#B8860B"/>
+<text x="270" y="194" class="pin" text-anchor="end" fill="#FFF">RC3 (pin 18)</text>
+<text x="288" y="194" class="value" font-size="8" fill="#2196F3">SCL</text>
+
+<circle cx="280" cy="230" r="5" fill="gold" stroke="#B8860B"/>
+<text x="270" y="234" class="pin" text-anchor="end" fill="#FFF">RC4 (pin 23)</text>
+<text x="288" y="234" class="value" font-size="8" fill="#FF9800">SDA</text>
+
+<circle cx="280" cy="270" r="5" fill="gold" stroke="#B8860B"/>
+<text x="270" y="274" class="pin" text-anchor="end" fill="#FFF">VSS (pin 12)</text>
+<text x="288" y="274" class="value" font-size="8" fill="#1a1a1a">GND</text>
+
+<!-- Arduino Pro Micro (slave) -->
+<rect x="400" y="100" width="220" height="200" fill="#1B5E20" stroke="#1a1a1a" stroke-width="2" rx="4"/>
+<text x="510" y="125" class="label" text-anchor="middle" fill="#FFF" font-size="12">Arduino Pro Micro</text>
+<text x="510" y="142" class="value" text-anchor="middle" fill="#CCC" font-size="9">ATmega32U4 · 5V / 16 MHz</text>
+<text x="510" y="156" class="value" text-anchor="middle" fill="#CCC" font-size="9">I²C slave · addr 0x43</text>
+
+<!-- Arduino pins -->
+<circle cx="400" cy="190" r="5" fill="gold" stroke="#B8860B"/>
+<text x="412" y="194" class="pin" fill="#FFF">D3 (SCL)</text>
+<text x="394" y="194" class="value" text-anchor="end" font-size="8" fill="#2196F3">SCL</text>
+
+<circle cx="400" cy="230" r="5" fill="gold" stroke="#B8860B"/>
+<text x="412" y="234" class="pin" fill="#FFF">D2 (SDA)</text>
+<text x="394" y="234" class="value" text-anchor="end" font-size="8" fill="#FF9800">SDA</text>
+
+<circle cx="400" cy="270" r="5" fill="gold" stroke="#B8860B"/>
+<text x="412" y="274" class="pin" fill="#FFF">GND</text>
+<text x="394" y="274" class="value" text-anchor="end" font-size="8" fill="#1a1a1a">GND</text>
+
+<circle cx="620" cy="190" r="5" fill="gold" stroke="#B8860B"/>
+<text x="608" y="194" class="pin" text-anchor="end" fill="#FFF">VCC</text>
+<text x="628" y="194" class="value" font-size="8" fill="#D44">+5V (USB or VIN)</text>
+
+<!-- PCF8574 LCD backpack -->
+<rect x="740" y="100" width="220" height="200" fill="#0D47A1" stroke="#1a1a1a" stroke-width="2" rx="4"/>
+<text x="850" y="125" class="label" text-anchor="middle" fill="#FFF" font-size="12">PCF8574 + 16×2 LCD</text>
+<text x="850" y="142" class="value" text-anchor="middle" fill="#CCC" font-size="9">I²C-to-parallel backpack</text>
+<text x="850" y="156" class="value" text-anchor="middle" fill="#CCC" font-size="9">addr 0x27 (or 0x3F variant)</text>
+
+<!-- LCD backpack pins -->
+<circle cx="740" cy="190" r="5" fill="gold" stroke="#B8860B"/>
+<text x="752" y="194" class="pin" fill="#FFF">SCL</text>
+<text x="734" y="194" class="value" text-anchor="end" font-size="8" fill="#2196F3">SCL</text>
+
+<circle cx="740" cy="230" r="5" fill="gold" stroke="#B8860B"/>
+<text x="752" y="234" class="pin" fill="#FFF">SDA</text>
+<text x="734" y="234" class="value" text-anchor="end" font-size="8" fill="#FF9800">SDA</text>
+
+<circle cx="740" cy="270" r="5" fill="gold" stroke="#B8860B"/>
+<text x="752" y="274" class="pin" fill="#FFF">GND</text>
+<text x="734" y="274" class="value" text-anchor="end" font-size="8" fill="#1a1a1a">GND</text>
+
+<circle cx="960" cy="190" r="5" fill="gold" stroke="#B8860B"/>
+<text x="948" y="194" class="pin" text-anchor="end" fill="#FFF">VCC</text>
+<text x="968" y="194" class="value" font-size="8" fill="#D44">+5V (ML-303 rail)</text>
+
+<!-- SCL bus (blue) -->
+<path d="M280,190 L400,190" class="scl"/>
+<path d="M620,190 L740,190 M620,190 L740,190" stroke="none"/>
+<!-- Continue SCL across Arduino to LCD -->
+<path d="M400,190 L400,330 L740,330 L740,190" class="scl" fill="none" stroke-dasharray="0"/>
+<path d="M400,330 L400,330" class="scl"/>
+<text x="340" y="183" class="anno" text-anchor="middle" fill="#2196F3">SCL</text>
+<text x="570" y="324" class="anno" text-anchor="middle" fill="#2196F3">SCL (shared bus)</text>
+
+<!-- SDA bus (orange) -->
+<path d="M280,230 L400,230" class="sda"/>
+<path d="M400,230 L400,370 L740,370 L740,230" class="sda" fill="none"/>
+<text x="340" y="223" class="anno" text-anchor="middle" fill="#FF9800">SDA</text>
+<text x="570" y="364" class="anno" text-anchor="middle" fill="#FF9800">SDA (shared bus)</text>
+
+<!-- GND bus -->
+<path d="M280,270 L400,270 M400,270 L400,410 L740,410 L740,270" class="gnd" fill="none"/>
+<text x="570" y="404" class="value" text-anchor="middle">GND (shared return at PIC VSS)</text>
+
+<!-- Direction arrows -->
+<path d="M335,180 L355,180" stroke="#0066CC" stroke-width="1.5" fill="none" marker-end="url(#arrow)"/>
+<text x="345" y="172" class="anno" text-anchor="middle">writes</text>
+
+<!-- Pull-ups callout -->
+<rect x="430" y="450" width="500" height="80" fill="#FFF3E0" stroke="#CC6600" stroke-width="1" rx="4"/>
+<text x="680" y="472" class="label" text-anchor="middle" fill="#CC6600">Pull-ups: already present on PCF8574 backpack — DO NOT ADD MORE</text>
+<text x="450" y="492" class="value" font-size="9">Stacking extra 4.7 kΩ pull-ups will load the bus and cause edge degradation.</text>
+<text x="450" y="508" class="value" font-size="9">If the backpack model is missing them (check for SMD 4.7 kΩ near the PCF8574),</text>
+<text x="450" y="522" class="value" font-size="9">add ONE 4.7 kΩ from SDA→+5V and ONE from SCL→+5V — total, not per device.</text>
+
+<!-- Power notes -->
+<rect x="50" y="450" width="360" height="80" fill="#E3F2FD" stroke="#0066CC" stroke-width="1" rx="4"/>
+<text x="230" y="472" class="label" text-anchor="middle" fill="#0066CC">Power topology</text>
+<text x="65" y="492" class="value" font-size="9">• PIC and LCD share the ML-303's existing +5V rail.</text>
+<text x="65" y="508" class="value" font-size="9">• Arduino runs from its own USB OR can be fed +5V via VCC.</text>
+<text x="65" y="522" class="value" font-size="9">• Critical: tie ALL grounds together — common return is mandatory.</text>
+
+<!-- Bus / timing notes -->
+<rect x="50" y="560" width="900" height="140" fill="#F5F5F5" stroke="#666" stroke-width="0.5" rx="4"/>
+<text x="500" y="580" class="label" text-anchor="middle">Bus &amp; timing notes</text>
+<text x="65" y="600" class="value" font-size="9">• Speed: 100 kHz Standard Mode (PIC SSPADD = 24 at Fosc = 10 MHz). 400 kHz NOT recommended on the existing ML-303 wiring.</text>
+<text x="65" y="615" class="value" font-size="9">• Single-master normal operation: PIC drives the bus. Arduino acts as master only when writing to the LCD, and only from loop() — never the receive ISR.</text>
+<text x="65" y="630" class="value" font-size="9">• Wire library handles bus arbitration. If you see garbled LCD text under heavy traffic, raise MIN_DISPLAY_INTERVAL_MS in phase1_i2c_lcd.ino.</text>
+<text x="65" y="645" class="value" font-size="9">• Cable length: keep PIC↔Arduino under ~20 cm and PIC↔LCD under ~30 cm at 100 kHz. Longer runs need lower speed or active termination.</text>
+<text x="65" y="660" class="value" font-size="9">• Addresses on this bus: 0x27 (or 0x3F) = LCD backpack, 0x43 = Arduino slave. Confirm with i2c_scanner.ino before flashing phase1_i2c_lcd.ino.</text>
+<text x="65" y="675" class="value" font-size="9">• Packet flow: PIC builds 9-byte frame in its step-advance routine → I2C_Master_SendPacket() → Arduino onI2CReceive() → loop() → LCD.</text>
+<text x="65" y="690" class="value" font-size="9">• Disconnect tip: pulling the SDA/SCL header while powered is safe — the PIC's transmits will NACK silently and the ML-303 keeps running.</text>
+</svg>

@@ -2,7 +2,14 @@
 
 Four wires — PIC, Arduino, and LCD share a single 100 kHz I2C bus.
 
-## Bus topology
+## Diagrams
+
+Full SVG versions live in [`diagrams/`](diagrams/):
+
+- [I²C bus topology](diagrams/i2c_bus_topology.svg) — pin-level node-and-net diagram with addresses, pull-up rules, and timing notes
+- [Packet layout](diagrams/packet_layout.svg) — 9-byte struct with field offsets, flag-bit breakdown, and a worked checksum example
+
+## Bus topology (ASCII)
 
 ```
         +5V ────┬─────────┬─────────┬─────

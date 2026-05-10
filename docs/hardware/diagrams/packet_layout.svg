@@ -1,0 +1,187 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1000 720" width="1000" height="720">
+<defs>
+  <filter id="textshadow" x="-20%" y="-20%" width="140%" height="140%">
+    <feFlood flood-color="white" flood-opacity="0.9" result="bg"/>
+    <feMorphology in="SourceGraphic" operator="dilate" radius="1.5" result="dilated"/>
+    <feComposite in="bg" in2="dilated" operator="in" result="shadow"/>
+    <feMerge><feMergeNode in="shadow"/><feMergeNode in="SourceGraphic"/></feMerge>
+  </filter>
+  <style>
+    .title { font: bold 16px "SF Mono", Consolas, monospace; fill: #1a1a1a; filter: url(#textshadow); }
+    .subtitle { font: 11px "SF Mono", Consolas, monospace; fill: #555; filter: url(#textshadow); }
+    .label { font: bold 10px "SF Mono", Consolas, monospace; fill: #1a1a1a; filter: url(#textshadow); }
+    .value { font: 9px "SF Mono", Consolas, monospace; fill: #555; filter: url(#textshadow); }
+    .pin { font: 10px "SF Mono", Consolas, monospace; fill: #555; filter: url(#textshadow); }
+    .anno { font: 9px "SF Mono", Consolas, monospace; fill: #0066CC; filter: url(#textshadow); }
+    .byte-label { font: bold 11px "SF Mono", Consolas, monospace; fill: #FFF; filter: url(#textshadow); }
+    .byte-detail { font: 8px "SF Mono", Consolas, monospace; fill: #FFF; filter: url(#textshadow); }
+    .byte-index { font: bold 10px "SF Mono", Consolas, monospace; fill: #1a1a1a; }
+    .bit-label { font: 9px "SF Mono", Consolas, monospace; fill: #1a1a1a; }
+    .filled { fill: #1a1a1a; }
+  </style>
+  <marker id="arrow" markerWidth="8" markerHeight="6" refX="7" refY="3" orient="auto">
+    <polygon points="0 0, 8 3, 0 6" fill="#0066CC"/>
+  </marker>
+</defs>
+<rect width="1000" height="720" fill="#FEFEFE"/>
+<text x="500" y="25" class="title" text-anchor="middle">PIC → Arduino Packet Layout</text>
+<text x="500" y="42" class="subtitle" text-anchor="middle">9 bytes, packed, transmitted every sequencer tick — checksum = XOR of bytes 0..7</text>
+
+<!-- Byte ruler -->
+<text x="50" y="85" class="label">Byte offset</text>
+<text x="125" y="100" class="byte-index" text-anchor="middle">0</text>
+<text x="225" y="100" class="byte-index" text-anchor="middle">1</text>
+<text x="325" y="100" class="byte-index" text-anchor="middle">2</text>
+<text x="425" y="100" class="byte-index" text-anchor="middle">3</text>
+<text x="525" y="100" class="byte-index" text-anchor="middle">4</text>
+<text x="625" y="100" class="byte-index" text-anchor="middle">5</text>
+<text x="725" y="100" class="byte-index" text-anchor="middle">6</text>
+<text x="825" y="100" class="byte-index" text-anchor="middle">7</text>
+<text x="925" y="100" class="byte-index" text-anchor="middle">8</text>
+
+<!-- Byte 0: current_step -->
+<rect x="80" y="115" width="90" height="80" fill="#FF9800" stroke="#1a1a1a" stroke-width="1.5" rx="3"/>
+<text x="125" y="135" class="byte-label" text-anchor="middle">current_step</text>
+<text x="125" y="155" class="byte-detail" text-anchor="middle">uint8_t</text>
+<text x="125" y="170" class="byte-detail" text-anchor="middle">0 .. 15</text>
+<text x="125" y="186" class="byte-detail" text-anchor="middle" font-size="7">(seq position)</text>
+
+<!-- Byte 1: current_pattern -->
+<rect x="180" y="115" width="90" height="80" fill="#2196F3" stroke="#1a1a1a" stroke-width="1.5" rx="3"/>
+<text x="225" y="135" class="byte-label" text-anchor="middle">current_pattern</text>
+<text x="225" y="155" class="byte-detail" text-anchor="middle">uint8_t</text>
+<text x="225" y="170" class="byte-detail" text-anchor="middle">0 .. 127</text>
+<text x="225" y="186" class="byte-detail" text-anchor="middle" font-size="7">(pattern bank)</text>
+
+<!-- Bytes 2-3: tempo_bpm (uint16, little-endian) -->
+<rect x="280" y="115" width="190" height="80" fill="#4CAF50" stroke="#1a1a1a" stroke-width="1.5" rx="3"/>
+<text x="375" y="135" class="byte-label" text-anchor="middle">tempo_bpm</text>
+<text x="375" y="155" class="byte-detail" text-anchor="middle">uint16_t (LE)</text>
+<text x="375" y="170" class="byte-detail" text-anchor="middle">60 .. 200</text>
+<text x="375" y="186" class="byte-detail" text-anchor="middle" font-size="7">[low byte | high byte]</text>
+<line x1="375" y1="115" x2="375" y2="195" stroke="#FFF" stroke-width="0.5" stroke-dasharray="3,2"/>
+
+<!-- Byte 4: button_state -->
+<rect x="480" y="115" width="90" height="80" fill="#E91E63" stroke="#1a1a1a" stroke-width="1.5" rx="3"/>
+<text x="525" y="135" class="byte-label" text-anchor="middle">button_state</text>
+<text x="525" y="155" class="byte-detail" text-anchor="middle">uint8_t</text>
+<text x="525" y="170" class="byte-detail" text-anchor="middle">bitmask</text>
+<text x="525" y="186" class="byte-detail" text-anchor="middle" font-size="7">(panel buttons)</text>
+
+<!-- Byte 5: sequencer_flags -->
+<rect x="580" y="115" width="90" height="80" fill="#9C27B0" stroke="#1a1a1a" stroke-width="1.5" rx="3"/>
+<text x="625" y="135" class="byte-label" text-anchor="middle">seq_flags</text>
+<text x="625" y="155" class="byte-detail" text-anchor="middle">uint8_t</text>
+<text x="625" y="170" class="byte-detail" text-anchor="middle">SEQ_* bits</text>
+<text x="625" y="186" class="byte-detail" text-anchor="middle" font-size="7">(see breakdown)</text>
+
+<!-- Byte 6: note_value -->
+<rect x="680" y="115" width="90" height="80" fill="#FFC107" stroke="#1a1a1a" stroke-width="1.5" rx="3"/>
+<text x="725" y="135" class="byte-label" text-anchor="middle" fill="#1a1a1a">note_value</text>
+<text x="725" y="155" class="byte-detail" text-anchor="middle" fill="#1a1a1a">uint8_t</text>
+<text x="725" y="170" class="byte-detail" text-anchor="middle" fill="#1a1a1a">24 .. 96</text>
+<text x="725" y="186" class="byte-detail" text-anchor="middle" font-size="7" fill="#1a1a1a">(MIDI note)</text>
+
+<!-- Byte 7: velocity -->
+<rect x="780" y="115" width="90" height="80" fill="#00BCD4" stroke="#1a1a1a" stroke-width="1.5" rx="3"/>
+<text x="825" y="135" class="byte-label" text-anchor="middle">velocity</text>
+<text x="825" y="155" class="byte-detail" text-anchor="middle">uint8_t</text>
+<text x="825" y="170" class="byte-detail" text-anchor="middle">0 .. 127</text>
+<text x="825" y="186" class="byte-detail" text-anchor="middle" font-size="7">(accent level)</text>
+
+<!-- Byte 8: checksum -->
+<rect x="880" y="115" width="90" height="80" fill="#D44" stroke="#1a1a1a" stroke-width="1.5" rx="3"/>
+<text x="925" y="135" class="byte-label" text-anchor="middle">checksum</text>
+<text x="925" y="155" class="byte-detail" text-anchor="middle">uint8_t</text>
+<text x="925" y="170" class="byte-detail" text-anchor="middle">XOR(b0..b7)</text>
+<text x="925" y="186" class="byte-detail" text-anchor="middle" font-size="7">(integrity check)</text>
+
+<!-- Field-byte tick marks between cells -->
+<line x1="170" y1="105" x2="170" y2="115" stroke="#1a1a1a" stroke-width="0.5"/>
+<line x1="270" y1="105" x2="270" y2="115" stroke="#1a1a1a" stroke-width="0.5"/>
+<line x1="370" y1="105" x2="370" y2="115" stroke="#1a1a1a" stroke-width="0.5"/>
+<line x1="470" y1="105" x2="470" y2="115" stroke="#1a1a1a" stroke-width="0.5"/>
+<line x1="570" y1="105" x2="570" y2="115" stroke="#1a1a1a" stroke-width="0.5"/>
+<line x1="670" y1="105" x2="670" y2="115" stroke="#1a1a1a" stroke-width="0.5"/>
+<line x1="770" y1="105" x2="770" y2="115" stroke="#1a1a1a" stroke-width="0.5"/>
+<line x1="870" y1="105" x2="870" y2="115" stroke="#1a1a1a" stroke-width="0.5"/>
+<line x1="970" y1="105" x2="970" y2="115" stroke="#1a1a1a" stroke-width="0.5"/>
+
+<!-- Total size label -->
+<line x1="80" y1="210" x2="970" y2="210" stroke="#1a1a1a" stroke-width="1"/>
+<line x1="80" y1="205" x2="80" y2="215" stroke="#1a1a1a" stroke-width="1"/>
+<line x1="970" y1="205" x2="970" y2="215" stroke="#1a1a1a" stroke-width="1"/>
+<text x="525" y="226" class="label" text-anchor="middle">Total: 9 bytes — sizeof(PIC_to_Arduino_t) — verified at compile time via static_assert</text>
+
+<!-- Byte 5 flag-bit detail -->
+<text x="625" y="280" class="label" text-anchor="middle">Byte 5 (seq_flags) — bit breakdown</text>
+<path d="M625,195 L625,250" stroke="#9C27B0" stroke-width="1" stroke-dasharray="3,2" fill="none"/>
+<g transform="translate(280,290)">
+  <!-- bit cells -->
+  <rect x="0"   y="0" width="80" height="40" fill="#F5F5F5" stroke="#1a1a1a" stroke-width="1"/>
+  <rect x="80"  y="0" width="80" height="40" fill="#F5F5F5" stroke="#1a1a1a" stroke-width="1"/>
+  <rect x="160" y="0" width="80" height="40" fill="#F5F5F5" stroke="#1a1a1a" stroke-width="1"/>
+  <rect x="240" y="0" width="80" height="40" fill="#F5F5F5" stroke="#1a1a1a" stroke-width="1"/>
+  <rect x="320" y="0" width="80" height="40" fill="#F5F5F5" stroke="#1a1a1a" stroke-width="1"/>
+  <rect x="400" y="0" width="80" height="40" fill="#9C27B0" stroke="#1a1a1a" stroke-width="1"/>
+  <rect x="480" y="0" width="80" height="40" fill="#9C27B0" stroke="#1a1a1a" stroke-width="1"/>
+  <rect x="560" y="0" width="80" height="40" fill="#9C27B0" stroke="#1a1a1a" stroke-width="1"/>
+  <!-- bit index above -->
+  <text x="40"  y="-6" class="bit-label" text-anchor="middle">bit 7</text>
+  <text x="120" y="-6" class="bit-label" text-anchor="middle">bit 6</text>
+  <text x="200" y="-6" class="bit-label" text-anchor="middle">bit 5</text>
+  <text x="280" y="-6" class="bit-label" text-anchor="middle">bit 4</text>
+  <text x="360" y="-6" class="bit-label" text-anchor="middle">bit 3</text>
+  <text x="440" y="-6" class="bit-label" text-anchor="middle">bit 2</text>
+  <text x="520" y="-6" class="bit-label" text-anchor="middle">bit 1</text>
+  <text x="600" y="-6" class="bit-label" text-anchor="middle">bit 0</text>
+  <!-- contents -->
+  <text x="40"  y="24" class="bit-label" text-anchor="middle" font-size="8" fill="#888">reserved</text>
+  <text x="120" y="24" class="bit-label" text-anchor="middle" font-size="8" fill="#888">reserved</text>
+  <text x="200" y="24" class="bit-label" text-anchor="middle" font-size="8" fill="#888">reserved</text>
+  <text x="280" y="24" class="bit-label" text-anchor="middle" font-size="8" fill="#888">reserved</text>
+  <text x="360" y="24" class="bit-label" text-anchor="middle" font-size="8" fill="#888">reserved</text>
+  <text x="440" y="24" class="bit-label" text-anchor="middle" fill="#FFF" font-weight="bold">SLIDE</text>
+  <text x="520" y="24" class="bit-label" text-anchor="middle" fill="#FFF" font-weight="bold">ACCENT</text>
+  <text x="600" y="24" class="bit-label" text-anchor="middle" fill="#FFF" font-weight="bold">RUNNING</text>
+  <!-- bit hex masks below -->
+  <text x="440" y="55" class="value" text-anchor="middle">0x04</text>
+  <text x="520" y="55" class="value" text-anchor="middle">0x02</text>
+  <text x="600" y="55" class="value" text-anchor="middle">0x01</text>
+</g>
+
+<!-- Flag-bit notes -->
+<text x="500" y="385" class="value" text-anchor="middle">High 5 bits are reserved — read as zero, ignore on receive, leave as zero on send.</text>
+
+<!-- Checksum example block -->
+<rect x="50" y="410" width="430" height="180" fill="#FFEBEE" stroke="#D44" stroke-width="1" rx="4"/>
+<text x="265" y="430" class="label" text-anchor="middle" fill="#D44">Checksum (byte 8) — worked example</text>
+<text x="65" y="452" class="value" font-size="9">Pattern 1, step 3, 120 BPM, button=0, RUNNING|ACCENT, note 60, vel 100:</text>
+<text x="65" y="472" class="value" font-size="9" font-family="SF Mono">  bytes = [0x02, 0x00, 0x78, 0x00, 0x00, 0x03, 0x3C, 0x64, ??]</text>
+<text x="65" y="492" class="value" font-size="9" font-family="SF Mono">  checksum = 0x02 ^ 0x00 ^ 0x78 ^ 0x00 ^ 0x00 ^ 0x03 ^ 0x3C ^ 0x64</text>
+<text x="65" y="510" class="value" font-size="9" font-family="SF Mono">           = 0x25</text>
+<text x="65" y="530" class="value" font-size="9">Final wire bytes: [0x02, 0x00, 0x78, 0x00, 0x00, 0x03, 0x3C, 0x64, 0x25]</text>
+<text x="65" y="552" class="value" font-size="9">Arduino computeChecksum(buf, 8) over the first 8 must equal buf[8],</text>
+<text x="65" y="568" class="value" font-size="9">or the packet is dropped and errorCount increments.</text>
+
+<!-- Endianness + alignment notes -->
+<rect x="510" y="410" width="440" height="180" fill="#E3F2FD" stroke="#0066CC" stroke-width="1" rx="4"/>
+<text x="730" y="430" class="label" text-anchor="middle" fill="#0066CC">Cross-compiler safety</text>
+<text x="525" y="452" class="value" font-size="9">• Both PIC18 (XC8) and AVR (avr-gcc) are little-endian — tempo_bpm</text>
+<text x="525" y="467" class="value" font-size="9">  serializes the same way on both sides. Low byte first at offset 2.</text>
+<text x="525" y="487" class="value" font-size="9">• __attribute__((packed)) on both struct definitions prevents the</text>
+<text x="525" y="502" class="value" font-size="9">  compiler from inserting padding bytes between fields.</text>
+<text x="525" y="522" class="value" font-size="9">• The struct is DEFINED IN TWO PLACES: firmware/pic/ml303_data.h and</text>
+<text x="525" y="537" class="value" font-size="9">  firmware/arduino/phase1_i2c_lcd/phase1_i2c_lcd.ino. They must match.</text>
+<text x="525" y="557" class="value" font-size="9">  static_assert(sizeof(...) == 9) on the Arduino side catches any</text>
+<text x="525" y="572" class="value" font-size="9">  accidental drift at compile time.</text>
+
+<!-- General transmission notes -->
+<rect x="50" y="610" width="900" height="100" fill="#F5F5F5" stroke="#666" stroke-width="0.5" rx="4"/>
+<text x="500" y="630" class="label" text-anchor="middle">Transmission notes</text>
+<text x="65" y="650" class="value" font-size="9">• Transmitted as ONE contiguous 9-byte I²C write from PIC master to Arduino slave (addr 0x43). No sub-addressing, no register selection.</text>
+<text x="65" y="665" class="value" font-size="9">• PIC sends one packet per sequencer step. The packet is built and dispatched from the step-advance routine — see firmware/pic/README.md.</text>
+<text x="65" y="680" class="value" font-size="9">• Arduino's onI2CReceive() is registered on Wire.begin(0x43). It copies bytes into a volatile buffer, sets packetReady, and returns immediately.</text>
+<text x="65" y="695" class="value" font-size="9">• Validation (length + XOR) runs in loop(), not in the ISR. Bad packets bump errorCount (visible on system status page); good packets shadow into `pic`.</text>
+</svg>
