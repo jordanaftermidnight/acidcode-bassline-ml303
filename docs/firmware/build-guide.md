@@ -2,6 +2,10 @@
 
 End-to-end procedure to get the LCD displaying real-time sequencer data from the PIC.
 
+For visual references while reading along:
+- [`../hardware/diagrams/i2c_bus_topology.svg`](../hardware/diagrams/i2c_bus_topology.svg) — pin-level bus diagram
+- [`../hardware/diagrams/packet_layout.svg`](../hardware/diagrams/packet_layout.svg) — 9-byte packet anatomy
+
 ## Prerequisites
 
 - ML-303 V5 with PIC18LF452, firmware V7.02 source available
@@ -52,6 +56,8 @@ With both devices powered down:
 4. **Power up both.** The LCD should switch from `Waiting for PIC` to live sequencer data within one step.
 
 Stage 3 done when: Status LED toggles per step, page 0 shows live `P### S## ###BPM`, and pages 1/2 cycle every 3 s.
+
+> **Note on LCD behaviour during bench-test.** The Arduino dirty-tracks each LCD row — it only redraws a row when the formatted text changes. So if you pause the sequencer with `RUNNING` cleared, the screen will appear "frozen" on the last live frame. That's not a bug, that's the bus-quieting optimization at work. The status LED still toggles on every received packet, so use that to confirm the link is alive.
 
 ## Acceptance test
 

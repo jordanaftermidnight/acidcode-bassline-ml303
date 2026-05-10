@@ -1,5 +1,13 @@
 # Troubleshooting
 
+See [`diagrams/i2c_bus_topology.svg`](diagrams/i2c_bus_topology.svg) for the bus reference and [`diagrams/packet_layout.svg`](diagrams/packet_layout.svg) for the protocol.
+
+## LCD appears frozen on stable values
+
+**Not a bug.** The Arduino dirty-tracks LCD rows — each row is only redrawn when its formatted text changes since the last render. Pause the sequencer (clear `SEQ_RUNNING`) or hold on the same step and the display will look static. To confirm the link is still alive without changing what's shown: watch the status LED (toggles per packet) or open Serial Monitor at 115200 (no `checksum mismatch` errors = packets flowing).
+
+If you genuinely need a forced refresh for debugging, set `MIN_DISPLAY_INTERVAL_MS = 0` and add `invalidateLineCache()` at the top of `loop()`.
+
 ## LCD shows nothing
 
 1. **Contrast pot.** PCF8574 backpacks ship with the contrast pot fully turned down. Adjust it (small blue pot) until block characters appear, then drop in real text.

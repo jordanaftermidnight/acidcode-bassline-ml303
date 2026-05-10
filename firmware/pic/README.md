@@ -2,10 +2,12 @@
 
 These three files add I2C-master capability to the existing ML-303 firmware (V7.02). The PIC pushes a sequencer-state packet to the Arduino at address `0x43` once per step.
 
+See [`../../docs/hardware/diagrams/packet_layout.svg`](../../docs/hardware/diagrams/packet_layout.svg) for the byte-by-byte protocol view (field offsets, `seq_flags` bit map, worked checksum example).
+
 ## Files
 
-- `ml303_data.h` — protocol contract (struct layout + flag bits + checksum). Shared in spirit with `firmware/arduino/phase1_i2c_lcd/`.
-- `i2c_master.h` / `i2c_master.c` — MSSP-based I2C master driver. 100 kHz at 10 MHz Fosc.
+- `ml303_data.h` — protocol contract (struct layout + flag bits + checksum). Defines `ARDUINO_I2C_ADDRESS`, `ML303_PACKET_SIZE = 9`, the `PIC_to_Arduino_t` struct, and `ml303_checksum()`. The same struct is mirrored in the Arduino `.ino` because XC8 and avr-gcc can't share a header; a `static_assert` on the Arduino side catches any drift at compile time.
+- `i2c_master.h` / `i2c_master.c` — MSSP-based I2C master driver. 100 kHz at 10 MHz Fosc (`SSPADD = 24`).
 
 ## Integrating into the existing firmware
 

@@ -6,12 +6,12 @@ Hardware build, firmware, and integration work for the **ML-303** — Mathias Sc
 
 - **Frontpanel** (`frontpanel/`) — Panel design files, button matrix adapters, build instructions (V5/V6), DIYLC layouts, BOM tools. The original Conrad 3-pin tactile switches are discontinued; this directory contains the complete adapter solution for using standard 4-pin switches.
 - **Firmware** (`firmware/`) — Arduino Pro Micro and PIC18LF452 code for adding an I2C LCD and Arduino-controlled effects chain to the ML-303.
-- **Docs** (`docs/`) — Wiring diagrams, build guide, troubleshooting.
+- **Docs** (`docs/`) — Wiring diagrams, packet-protocol diagram, build guide, troubleshooting.
 
 ## Hardware
 
-- ML-303 V5 mainboard (PIC18LF452, firmware V7.02)
-- Arduino Pro Micro (5V/16MHz)
+- ML-303 V5 mainboard (PIC18LF452 @ 10 MHz, firmware V7.02 from July 2008)
+- Arduino Pro Micro (ATmega32U4, 5 V / 16 MHz)
 - I2C LCD 16x2 (PCF8574 backpack, red backlight)
 - JF-33 PT2399 analog delay (Phase 3)
 - Great Destroyer bit crusher (Phase 4)
@@ -20,23 +20,38 @@ Hardware build, firmware, and integration work for the **ML-303** — Mathias Sc
 
 | Phase | Goal | Status |
 |-------|------|--------|
-| 1 | I2C bus PIC → Arduino → LCD; sequencer data on display | In progress |
+| 1 | I2C bus PIC → Arduino → LCD; sequencer data on display | Firmware scaffolded; bench-test pending |
 | 2 | Multi-page LCD (sequencer / effects / system) | Pending |
 | 3 | JF-33 delay PWM control, tempo sync, audio path insertion | Pending |
 | 4 | Great Destroyer + BD trigger I/O + V6 features | Pending |
+
+## Phase 1 design
+
+The PIC18LF452 acts as I²C master on a 100 kHz bus and pushes a **9-byte, XOR-checksummed sequencer packet** to the Arduino slave (address `0x43`) once per step. The Arduino drives a PCF8574-backed 16×2 LCD that lives on the same bus.
+
+Two diagrams in [`docs/hardware/diagrams/`](docs/hardware/diagrams/) cover the moving parts:
+
+- [`i2c_bus_topology.svg`](docs/hardware/diagrams/i2c_bus_topology.svg) — three-node bus with pin numbers, addresses, pull-up rules, timing notes
+- [`packet_layout.svg`](docs/hardware/diagrams/packet_layout.svg) — 9 bytes byte-by-byte, the `seq_flags` bit map, and a worked checksum example
+
+Firmware notes worth knowing before reading the code:
+
+- The struct is defined in **two places** on purpose — `firmware/pic/ml303_data.h` (XC8) and `firmware/arduino/phase1_i2c_lcd/phase1_i2c_lcd.ino` (avr-gcc). A `static_assert(sizeof(...) == 9)` on the Arduino side catches drift at compile time.
+- LCD writes are **dirty-tracked**: each row is only redrawn when its formatted text actually changed since the last frame. This keeps the shared I²C bus quiet while the sequencer holds steady on a step.
+- The Arduino's `onI2CReceive` handler does the bare minimum (copy bytes, set flag). Checksum validation and LCD output run in `loop()`.
 
 ## Build flow (Phase 1)
 
 ```
 1. firmware/arduino/tests/i2c_scanner.ino    → confirm LCD address (0x27 vs 0x3F)
 2. firmware/arduino/tests/lcd_test.ino       → confirm LCD wiring
-3. firmware/arduino/phase1_i2c_lcd/          → upload main firmware
+3. firmware/arduino/phase1_i2c_lcd/          → upload main firmware (LCD shows "Waiting for PIC")
 4. firmware/pic/                             → integrate I2C master into PIC firmware
 5. Connect PIC ↔ Arduino ↔ LCD on shared I2C bus
 ```
 
-See `docs/firmware/build-guide.md` for step-by-step.
+See [`docs/firmware/build-guide.md`](docs/firmware/build-guide.md) for the step-by-step, [`docs/hardware/wiring-diagram.md`](docs/hardware/wiring-diagram.md) for pin maps, and [`docs/hardware/troubleshooting.md`](docs/hardware/troubleshooting.md) when something goes wrong.
 
 ## Status
 
-Buttons replaced (frontpanel work complete). Phase 1 firmware ready to flash and bench-test.
+Buttons replaced (frontpanel work complete). Phase 1 firmware written but not yet flashed to hardware — the next concrete step is Stage 1 of the build guide (Arduino-only bringup, PIC disconnected).
