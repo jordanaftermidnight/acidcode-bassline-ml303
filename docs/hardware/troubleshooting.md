@@ -1,6 +1,6 @@
 # Troubleshooting
 
-See [`diagrams/i2c_bus_topology.svg`](diagrams/i2c_bus_topology.svg) for the bus reference and [`diagrams/packet_layout.svg`](diagrams/packet_layout.svg) for the protocol.
+See [`diagrams/i2c_bus_topology.svg`](diagrams/i2c_bus_topology.svg) for the bus reference and [`diagrams/packet_layout.svg`](diagrams/packet_layout.svg) for the protocol. For the original V5 analog↔digital inter-board cabling (10-pin `DIGITAL_CON1` and the 2-pin power harness), see [`inter-board-cable-pinout.md`](inter-board-cable-pinout.md) — the V5 board has no reverse-polarity protection so verify continuity before powering up if the cables have been reworked.
 
 ## LCD appears frozen on stable values
 
