@@ -1,8 +1,11 @@
-# Arduino Phase 1 firmware
+# Arduino Phase 1 + 3 firmware
 
 I2C slave on the ML-303 bus. Receives a 9-byte sequencer packet from the
 PIC every step, validates the XOR checksum, and renders the state across
-three auto-rotating LCD pages.
+three auto-rotating LCD pages. Also generates a triangle-wave LFO on D9
+(PWM → RC filter → AT-ONE toggle → VCF cutoff modulation input) with the
+LED on D10 tracking the waveform — see
+`../../../docs/hardware/diagrams/lfo_mod_wiring.svg` for the analog side.
 
 ## Build
 

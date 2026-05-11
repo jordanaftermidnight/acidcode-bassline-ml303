@@ -1,8 +1,14 @@
-// ML-303 Phase 1 — Arduino Nano firmware.
+// ML-303 Phase 1 + Phase 3 — Arduino Nano firmware.
 //
-// Role: I2C slave on the ML-303 bus. Receives a 9-byte sequencer packet
+// Phase 1: I2C slave on the ML-303 bus. Receives a 9-byte sequencer packet
 // from the PIC18LF452 every step and renders the current state on a
 // PCF8574-backed 16x2 LCD that lives on the same I2C bus.
+//
+// Phase 3: generates a triangle-wave LFO on D9 (PWM → RC smoothing → AT-ONE
+// toggle → VCF CUTOFF MODULATION INPUT pads on the V6 PCB). The same LFO
+// drives D10 to dim/brighten the panel LED so the rate is always visible.
+// LFO runs continuously; the AT-ONE toggle physically gates whether the
+// smoothed CV reaches the filter input.
 //
 // Bus topology:
 //   PIC (master, 100 kHz)  ──┬── Arduino (slave 0x43, this firmware)
@@ -60,6 +66,14 @@ static uint32_t lastPageSwitchMs = 0;
 static uint32_t lastDrawMs = 0;
 static uint32_t bootMs = 0;
 
+// ---- LFO state ----
+// 16-bit phase accumulator (top 8 bits index the waveform).
+static uint16_t lfoPhase     = 0;
+static uint16_t lfoRateHzX10 = LFO_DEFAULT_RATE_HZ_X10;
+static uint8_t  lfoDepth     = LFO_DEFAULT_DEPTH;
+static uint8_t  lfoCenter    = LFO_DEFAULT_CENTER;
+static uint32_t lfoLastMicros = 0;
+
 // ---------------------------------------------------------------------------
 // Receive ISR. Keep it minimal: copy bytes into a buffer, set a flag, leave.
 // Validation and LCD work happen in loop().
@@ -81,6 +95,42 @@ static uint8_t computeChecksum(const uint8_t *buf, uint8_t len) {
   uint8_t x = 0;
   for (uint8_t i = 0; i < len; i++) x ^= buf[i];
   return x;
+}
+
+// ---------------------------------------------------------------------------
+// LFO. Triangle wave on a 16-bit phase accumulator; updates at ~1 kHz.
+// ---------------------------------------------------------------------------
+static uint8_t lfoSample(uint8_t phaseHi) {
+  // Triangle: 0..127 ramp up to 254, 128..255 ramp down to 0.
+  return (phaseHi < 128) ? (phaseHi * 2) : ((255 - phaseHi) * 2);
+}
+
+static void updateLFO() {
+  uint32_t now = micros();
+  uint32_t elapsed = now - lfoLastMicros;
+  if (elapsed < 1000) return;
+  lfoLastMicros = now;
+
+  // Phase increment per microsecond ≈ rate_Hz_x10 / 152, scaled by elapsed.
+  // (Exact factor would be 65536 / 10_000_000 ≈ 1/152.59; integer /152 keeps
+  // us inside uint32_t for all practical rate × elapsed combinations and adds
+  // ~0.4 % to the realised rate — well below audible drift on an LFO.)
+  uint32_t inc = ((uint32_t)elapsed * lfoRateHzX10) / 152UL;
+  lfoPhase = (uint16_t)(lfoPhase + (uint16_t)inc);
+
+  uint8_t raw = lfoSample(lfoPhase >> 8);
+
+  // Scale around centre by depth for the filter modulation output.
+  int16_t scaled = (((int16_t)raw - 128) * lfoDepth) >> 7;
+  int16_t out = (int16_t)lfoCenter + scaled;
+  if (out < 0)   out = 0;
+  if (out > 255) out = 255;
+  analogWrite(LFO_PWM_PIN, (uint8_t)out);
+
+  // LED tracks the raw waveform — depth doesn't dim the indicator,
+  // so the user always sees the rate regardless of how shallow the
+  // modulation depth is.
+  analogWrite(LFO_LED_PIN, raw);
 }
 
 // Cached last rendered text for each LCD row. writeLine() compares against
@@ -162,6 +212,15 @@ void setup() {
   pinMode(STATUS_LED, OUTPUT);
   digitalWrite(STATUS_LED, LOW);
 
+  // LFO outputs (PWM via analogWrite). The Nano's Timer1 defaults to
+  // ~490 Hz on D9/D10 which the 10 kΩ + 1 µF RC filter knocks down well
+  // before it reaches the audio path.
+  pinMode(LFO_PWM_PIN, OUTPUT);
+  pinMode(LFO_LED_PIN, OUTPUT);
+  analogWrite(LFO_PWM_PIN, lfoCenter);
+  analogWrite(LFO_LED_PIN, 0);
+  lfoLastMicros = micros();
+
   Serial.begin(DEBUG_BAUD);
   // Don't block on Serial — Nano runs headless once bench-bringup is done.
 
@@ -176,10 +235,11 @@ void setup() {
   lcd.setCursor(0, 1);
   lcd.print(F("Waiting for PIC"));
 
-  Serial.println(F("Phase 1 firmware up."));
+  Serial.println(F("Phase 1+3 firmware up."));
   Serial.print(F("  arduino addr: 0x")); Serial.println(ARDUINO_I2C_ADDRESS, HEX);
   Serial.print(F("  lcd addr:     0x")); Serial.println(LCD_I2C_ADDRESS, HEX);
   Serial.print(F("  packet size:  ")); Serial.println(PACKET_SIZE);
+  Serial.print(F("  lfo rate x10: ")); Serial.println(lfoRateHzX10);
 }
 
 void loop() {
@@ -217,4 +277,7 @@ void loop() {
     renderCurrentPage();
     lastDrawMs = now;
   }
+
+  // 4. LFO runs continuously, independent of the I2C link state.
+  updateLFO();
 }

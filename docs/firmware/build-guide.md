@@ -72,6 +72,7 @@ Pass = Phase 1 complete.
 
 ## What's next
 
-- Phase 2 will replace the simple page rotation with button-controllable pages and richer rendering (step grid bargraph, pattern name, etc.).
-- Phase 3 wires the Great Destroyer bit crusher into the LINE OUT → AUDIO IN effects loop (WAVEFORM=EXT mutes the internal VCO; external audio is then re-routed through the VCF+VCA before exiting). No new holes in the metal panel — that's a hard constraint. AT-ONE (BD-related toggle) and DRIVE (HIGHP DISTORTION mod) are existing panel controls, not jacks; they stay independent of the bit-crusher loop.
+- Phase 2 will replace the simple page rotation with button-controllable pages and richer rendering (step grid bargraph, pattern name, LFO rate/depth controls on the FX page, etc.).
+- Phase 3 wires the Arduino-generated LFO into the V6 "VCF CUTOFF MODULATION INPUT" pads via a small stripboard sub-assembly (RC smoothing filter + series resistor + LED current-limit) and the AT-ONE toggle as the gate. See `docs/hardware/diagrams/lfo_mod_wiring.svg` for the full diagram and BOM. The LFO firmware is already in `phase1_i2c_lcd.ino` (runs continuously on PWM pin D9; LED brightness tracks waveform on D10) — bench-tested once the stripboard is built.
+- The Great Destroyer bit crusher is dropped (the onboard DRIVE pot = V6 HIGHP DISTORTION already provides analog distortion). JF-33 PT2399 delay stays deferred — see README for the conditions under which it could come back.
 - The JF-33 PT2399 delay is deferred (won't fit inside the enclosure). See the README "Deferred" section for the conditions under which it could come back.

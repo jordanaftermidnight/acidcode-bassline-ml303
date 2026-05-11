@@ -13,7 +13,7 @@ Hardware build, firmware, and integration work for the **ML-303** — Mathias Sc
 - ML-303 V5 mainboard (PIC18LF452 @ 10 MHz, firmware V7.02 from July 2008)
 - Arduino Nano (ATmega328P, 5 V / 16 MHz)
 - I2C LCD 16x2 (PCF8574 backpack, red backlight)
-- Great Destroyer bit crusher (Phase 3 — under review)
+- LFO modulation sub-assembly on stripboard (Phase 3 — see [`docs/hardware/diagrams/lfo_mod_wiring.svg`](docs/hardware/diagrams/lfo_mod_wiring.svg))
 
 ## Enclosure constraints
 
@@ -25,7 +25,7 @@ The metal panel stays as stock as possible. **No new holes** will be drilled. Th
 - **HEADPHONE** jack (front, top-right)
 
 **Mod controls (front)**
-- **AT-ONE** toggle (upper-left) with LED indicator above — panel label corresponds to xpo's **AT-1 attenuator kit** (referenced in Acidcode sale listings as "delivered separately, not installed"). The kit was not supplied with this unit, no public schematic exists, and the toggle is currently unwired. Function pending re-purpose; the panel sticker can be reprinted once a new function is wired.
+- **AT-ONE** toggle (upper-left) with LED indicator above — panel label inherited from xpo's **AT-1 attenuator kit** (Acidcode sale listings reference it as "delivered separately, not installed"). The kit was not supplied with this unit and its schematic is undocumented. Repurposed for **Phase 3** as the LFO enable toggle: gates the Arduino-generated CV to the VCF cutoff modulation input. The LED indicator above the toggle is PWM-driven by the Arduino at the LFO rate (visible regardless of toggle position, so the rate is always observable). Panel sticker can be reprinted as `LFO` / `MOD` once verified.
 - **DRIVE** pot (next to AT-ONE) — identified from the V6 PCB silkscreen "**HIGHP DISTORTION**" (xpo_construction.pdf p.14). Internal distortion stage with optional HIGHPASS toggle near VOLUME ("if switch is not used you must solder a bridge here").
 
 Effects routing for added gear (Phase 3+) uses **LINE OUT → external box → AUDIO IN** as an effects loop, with WAVEFORM=EXT muting the internal VCO. No internal taps, no new holes.
@@ -35,13 +35,22 @@ Effects routing for added gear (Phase 3+) uses **LINE OUT → external box → A
 | Phase | Goal | Status |
 |-------|------|--------|
 | 1 | I2C bus PIC → Arduino → LCD; sequencer data on display | Firmware scaffolded; bench-test pending |
-| 2 | Multi-page LCD (sequencer / effects / system) | Pending |
-| 3 | Great Destroyer bit crusher in the LINE OUT → AUDIO IN loop | Pending |
+| 2 | Multi-page LCD with button-navigable UI (LFO rate/depth on FX page) | Pending |
+| 3 | Arduino-generated LFO → VCF cutoff modulation via AT-ONE toggle | Firmware drafted; stripboard build pending |
 | 4 | BD trigger I/O integration + remaining V6 mods | Pending |
 
-### Deferred
+## Phase 3 design
 
-- **JF-33 PT2399 analog delay** — there is not enough space inside the enclosure for the PT2399 PCB. The mod is on hold and can only re-enter scope if (a) the JF-33 can be mounted directly on the metal panel and (b) its knobs are removed (control would then come from the Arduino or external CV). No new holes either way, so audio routing would still go through the LINE OUT → AUDIO IN effects loop rather than tapping internal nets.
+A triangle-wave LFO is generated on the Nano as PWM, smoothed by a small RC network on a stripboard, gated by the AT-ONE toggle, and injected into the ML-303's existing **V6 "VCF CUTOFF MODULATION INPUT"** pads. The LED above the AT-ONE toggle is driven separately by Arduino PWM and tracks the LFO waveform — so the rate is always visible regardless of whether the toggle has the CV routed to the filter.
+
+See [`docs/hardware/diagrams/lfo_mod_wiring.svg`](docs/hardware/diagrams/lfo_mod_wiring.svg) for the full wiring (Arduino pins → stripboard → toggle → V6 pad → LED), the BOM, and behaviour notes.
+
+Defaults in `firmware/arduino/phase1_i2c_lcd/pins.h`: rate 2.5 Hz, depth ~78 %, centre at mid-rail (~2.5 V after the RC filter). Phase 2's LCD UI will expose these for live tweaking.
+
+### Deferred / dropped
+
+- **JF-33 PT2399 analog delay** (deferred) — no space inside the enclosure for the PCB. Could only re-enter scope if it can be panel-mounted without new holes and its knobs are removed (control would come from the Arduino or external CV).
+- **Great Destroyer bit crusher** (dropped) — the onboard DRIVE pot is the V6 "HIGHP DISTORTION" stage, which already provides analog distortion. An external bit crusher in a LINE OUT → AUDIO IN loop would be redundant.
 
 ## Phase 1 design
 

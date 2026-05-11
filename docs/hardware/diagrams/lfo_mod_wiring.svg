@@ -1,0 +1,183 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1100 820" width="1100" height="820">
+<defs>
+  <filter id="textshadow" x="-20%" y="-20%" width="140%" height="140%">
+    <feFlood flood-color="white" flood-opacity="0.9" result="bg"/>
+    <feMorphology in="SourceGraphic" operator="dilate" radius="1.5" result="dilated"/>
+    <feComposite in="bg" in2="dilated" operator="in" result="shadow"/>
+    <feMerge><feMergeNode in="shadow"/><feMergeNode in="SourceGraphic"/></feMerge>
+  </filter>
+  <style>
+    .title { font: bold 16px "SF Mono", Consolas, monospace; fill: #1a1a1a; filter: url(#textshadow); }
+    .subtitle { font: 11px "SF Mono", Consolas, monospace; fill: #555; filter: url(#textshadow); }
+    .label { font: bold 10px "SF Mono", Consolas, monospace; fill: #1a1a1a; filter: url(#textshadow); }
+    .value { font: 9px "SF Mono", Consolas, monospace; fill: #555; filter: url(#textshadow); }
+    .pin { font: 10px "SF Mono", Consolas, monospace; fill: #555; filter: url(#textshadow); }
+    .anno { font: 9px "SF Mono", Consolas, monospace; fill: #0066CC; filter: url(#textshadow); }
+    .wire { stroke: #1a1a1a; stroke-width: 1.5; fill: none; }
+    .wire-cv { stroke: #FF9800; stroke-width: 2.5; fill: none; }
+    .wire-led { stroke: #E91E63; stroke-width: 2; fill: none; }
+    .wire-gnd { stroke: #1a1a1a; stroke-width: 2; fill: none; }
+    .component { stroke: #1a1a1a; stroke-width: 1.5; fill: #FFF; }
+    .resistor { stroke: #1a1a1a; stroke-width: 1.5; fill: #FFEB3B; }
+    .cap { stroke: #1a1a1a; stroke-width: 1.5; fill: #4CAF50; }
+    .junction { fill: #0066CC; }
+  </style>
+  <marker id="arrow" markerWidth="8" markerHeight="6" refX="7" refY="3" orient="auto">
+    <polygon points="0 0, 8 3, 0 6" fill="#0066CC"/>
+  </marker>
+</defs>
+<rect width="1100" height="820" fill="#FEFEFE"/>
+<text x="550" y="25" class="title" text-anchor="middle">ML-303 Phase 3 — Arduino LFO Modulation Wiring</text>
+<text x="550" y="42" class="subtitle" text-anchor="middle">Nano PWM → RC smoothing → AT-ONE toggle → V6 "VCF CUTOFF MODULATION INPUT" pads</text>
+
+<!-- Arduino Nano block -->
+<rect x="40" y="90" width="200" height="220" fill="#1B5E20" stroke="#1a1a1a" stroke-width="2" rx="4"/>
+<text x="140" y="115" class="label" text-anchor="middle" fill="#FFF" font-size="12">Arduino Nano</text>
+<text x="140" y="132" class="value" text-anchor="middle" fill="#CCC" font-size="9">ATmega328P · 5V · 16 MHz</text>
+
+<!-- Arduino pins -->
+<circle cx="240" cy="160" r="5" fill="gold" stroke="#B8860B"/>
+<text x="228" y="164" class="pin" text-anchor="end" fill="#FFF">D9 (OC1A)</text>
+<text x="248" y="164" class="value" font-size="8" fill="#FF9800">LFO PWM</text>
+
+<circle cx="240" cy="200" r="5" fill="gold" stroke="#B8860B"/>
+<text x="228" y="204" class="pin" text-anchor="end" fill="#FFF">D10 (OC1B)</text>
+<text x="248" y="204" class="value" font-size="8" fill="#E91E63">LED PWM</text>
+
+<circle cx="240" cy="240" r="5" fill="gold" stroke="#B8860B"/>
+<text x="228" y="244" class="pin" text-anchor="end" fill="#FFF">GND</text>
+<text x="248" y="244" class="value" font-size="8" fill="#1a1a1a">GND</text>
+
+<circle cx="240" cy="280" r="5" fill="gold" stroke="#B8860B"/>
+<text x="228" y="284" class="pin" text-anchor="end" fill="#FFF">A4 / A5</text>
+<text x="248" y="284" class="value" font-size="8" fill="#888">I²C (Phase 1)</text>
+
+<!-- Stripboard region -->
+<rect x="320" y="90" width="430" height="380" fill="#FFF8E1" stroke="#FBC02D" stroke-width="2" rx="6"/>
+<text x="535" y="115" class="label" text-anchor="middle" fill="#FBC02D">Stripboard — ~5 strips × 10 holes</text>
+
+<!-- R1 = 10 kΩ -->
+<rect x="350" y="150" width="60" height="20" class="resistor" rx="3"/>
+<text x="380" y="142" class="label" text-anchor="middle">R1</text>
+<text x="380" y="186" class="value" text-anchor="middle">10 kΩ</text>
+
+<!-- C1 = 1 µF -->
+<rect x="450" y="200" width="40" height="40" class="cap" rx="3"/>
+<text x="470" y="194" class="label" text-anchor="middle">C1</text>
+<text x="470" y="258" class="value" text-anchor="middle">1 µF</text>
+
+<!-- R2 = 100 kΩ -->
+<rect x="540" y="150" width="60" height="20" class="resistor" rx="3"/>
+<text x="570" y="142" class="label" text-anchor="middle">R2</text>
+<text x="570" y="186" class="value" text-anchor="middle">100 kΩ</text>
+
+<!-- R3 = 1 kΩ (LED current limit) -->
+<rect x="540" y="270" width="60" height="20" class="resistor" rx="3"/>
+<text x="570" y="262" class="label" text-anchor="middle">R3</text>
+<text x="570" y="306" class="value" text-anchor="middle">1 kΩ</text>
+
+<!-- internal stripboard wiring -->
+<!-- D9 → R1 in → R1 out → C1 + R2 in junction -->
+<path d="M240,160 L350,160" class="wire-cv"/>
+<text x="295" y="153" class="anno" text-anchor="middle">D9 (LFO PWM)</text>
+<path d="M410,160 L540,160" class="wire-cv"/>
+<text x="475" y="153" class="anno" text-anchor="middle">smoothed CV</text>
+
+<!-- junction node between R1, C1 top, R2 -->
+<circle cx="470" cy="160" r="3" class="junction"/>
+<path d="M470,160 L470,200" class="wire-cv"/>
+
+<!-- C1 bottom → GND -->
+<path d="M470,240 L470,330 L350,330" class="wire-gnd"/>
+<text x="490" y="295" class="value">GND</text>
+
+<!-- R2 → output to toggle T2 -->
+<path d="M600,160 L700,160 L700,310 L760,310" class="wire-cv"/>
+<text x="700" y="153" class="anno">to toggle T2 (on)</text>
+
+<!-- D10 → R3 → output to LED+ -->
+<path d="M240,200 L300,200 L300,280 L540,280" class="wire-led"/>
+<text x="380" y="273" class="anno" text-anchor="middle">D10 (LED PWM)</text>
+<path d="M600,280 L780,280 L780,470" class="wire-led"/>
+<text x="700" y="273" class="anno">to LED anode</text>
+
+<!-- GND rail to stripboard -->
+<path d="M240,240 L350,240 L350,330" class="wire-gnd"/>
+<text x="280" y="232" class="anno">GND</text>
+
+<!-- T1 (off) to GND on stripboard -->
+<path d="M760,360 L660,360 L660,330 L450,330" class="wire-gnd"/>
+<text x="600" y="353" class="anno">T1 (off) → GND</text>
+
+<!-- AT-ONE toggle representation -->
+<rect x="780" y="280" width="100" height="160" fill="#3a3a3a" stroke="#1a1a1a" stroke-width="2" rx="4"/>
+<text x="830" y="300" class="label" text-anchor="middle" fill="#FFF" font-size="11">AT-ONE</text>
+<text x="830" y="316" class="value" text-anchor="middle" fill="#CCC" font-size="9">SPDT toggle</text>
+
+<!-- toggle lugs -->
+<circle cx="760" cy="310" r="5" fill="gold" stroke="#B8860B"/>
+<text x="752" y="314" class="pin" text-anchor="end" fill="#FFF">T2 (on)</text>
+
+<circle cx="760" cy="360" r="5" fill="gold" stroke="#B8860B"/>
+<text x="752" y="364" class="pin" text-anchor="end" fill="#FFF">T1 (off)</text>
+
+<circle cx="760" cy="410" r="5" fill="gold" stroke="#B8860B"/>
+<text x="752" y="414" class="pin" text-anchor="end" fill="#FFF">COMMON</text>
+
+<!-- LED above the toggle (panel cutout) -->
+<circle cx="830" cy="260" r="14" fill="#E91E63" stroke="#1a1a1a" stroke-width="1.5"/>
+<text x="830" y="264" class="label" text-anchor="middle" fill="#FFF" font-size="10">LED</text>
+<text x="830" y="245" class="value" text-anchor="middle">panel indicator</text>
+
+<!-- LED leads -->
+<path d="M820,275 L820,470" class="wire-led"/>
+<text x="868" y="465" class="value">anode</text>
+<path d="M840,275 L840,490 L900,490" class="wire-gnd"/>
+<text x="870" y="486" class="value">cathode → GND</text>
+
+<!-- toggle COMMON → output -->
+<path d="M880,410 L960,410" class="wire-cv"/>
+<text x="920" y="404" class="anno">to V6 PCB pad</text>
+
+<!-- ML-303 PCB target -->
+<rect x="960" y="370" width="120" height="100" fill="#0D47A1" stroke="#1a1a1a" stroke-width="2" rx="4"/>
+<text x="1020" y="395" class="label" text-anchor="middle" fill="#FFF" font-size="10">ML-303</text>
+<text x="1020" y="412" class="value" text-anchor="middle" fill="#CCC" font-size="9">V6 PCB</text>
+<text x="1020" y="438" class="value" text-anchor="middle" fill="#FFC107" font-size="9">VCF CUTOFF</text>
+<text x="1020" y="453" class="value" text-anchor="middle" fill="#FFC107" font-size="9">MODULATION IN</text>
+
+<!-- Bill of materials -->
+<rect x="40" y="500" width="500" height="280" fill="#F5F5F5" stroke="#666" stroke-width="0.5" rx="4"/>
+<text x="290" y="522" class="label" text-anchor="middle">Bill of materials (stripboard sub-assembly)</text>
+<text x="55" y="546" class="value" font-size="10">  R1   10 kΩ 1% metal-film ¼W    PWM smoothing series</text>
+<text x="55" y="564" class="value" font-size="10">  R2   100 kΩ 1% metal-film ¼W   output series (limits depth + protects filter input)</text>
+<text x="55" y="582" class="value" font-size="10">  R3   1 kΩ ¼W                    LED current-limit (~3 mA on a red LED at 5 V)</text>
+<text x="55" y="600" class="value" font-size="10">  C1   1 µF film or X7R ceramic   PWM smoothing shunt (RC corner ≈ 16 Hz)</text>
+<text x="55" y="618" class="value" font-size="10">  AT-ONE   existing 3-pin SPDT toggle on panel</text>
+<text x="55" y="636" class="value" font-size="10">  LED      existing panel LED in cutout above the toggle</text>
+<text x="55" y="654" class="value" font-size="10">  Stripboard fragment, ~5 strips × 10 holes (or any spare scrap that fits)</text>
+<text x="55" y="672" class="value" font-size="10">  ~6 × hookup wire 22–26 AWG, two or three colours for legibility</text>
+<text x="55" y="700" class="label" font-size="10">PWM carrier suppression</text>
+<text x="55" y="716" class="value" font-size="9">R1 (10 kΩ) + C1 (1 µF) gives a low-pass corner at 1 / (2π · 10kΩ · 1µF) ≈ 16 Hz.</text>
+<text x="55" y="732" class="value" font-size="9">Arduino default PWM = 490 Hz on D9/D10, so the carrier is attenuated ~30×</text>
+<text x="55" y="748" class="value" font-size="9">(roughly −30 dB) at the smoothed node. Plenty quiet for the modulation path.</text>
+<text x="55" y="768" class="value" font-size="9">For an audibly cleaner result you can swap to a faster Timer1 PWM in firmware.</text>
+
+<!-- Behaviour table -->
+<rect x="560" y="500" width="520" height="280" fill="#E3F2FD" stroke="#0066CC" stroke-width="0.5" rx="4"/>
+<text x="820" y="522" class="label" text-anchor="middle" fill="#0066CC">Behaviour</text>
+<text x="575" y="546" class="value" font-size="10">• AT-ONE toggle in <tspan font-weight="bold">T1 (off)</tspan>: COMMON shorts to GND → no CV reaches the filter.</text>
+<text x="575" y="562" class="value" font-size="10">  LED still pulses at the LFO rate (Arduino keeps generating internally).</text>
+<text x="575" y="582" class="value" font-size="10">• AT-ONE toggle in <tspan font-weight="bold">T2 (on)</tspan>: smoothed CV reaches the VCF cutoff modulation input</text>
+<text x="575" y="598" class="value" font-size="10">  through R2 = 100 kΩ. Filter cutoff oscillates at the LFO rate.</text>
+<text x="575" y="618" class="value" font-size="10">• LED brightness follows the raw triangle waveform regardless of</text>
+<text x="575" y="634" class="value" font-size="10">  toggle position or modulation depth — so the rate is always visible.</text>
+<text x="575" y="654" class="value" font-size="10">• Modulation depth is firmware-controlled (LFO_DEFAULT_DEPTH = 200 / 255).</text>
+<text x="575" y="670" class="value" font-size="10">• Rate is firmware-controlled (LFO_DEFAULT_RATE_HZ_X10 = 25 → 2.5 Hz).</text>
+<text x="575" y="690" class="value" font-size="10">  Phase 2 LCD UI will surface rate/depth on the FX page for live tweaking.</text>
+<text x="575" y="710" class="value" font-size="10">• If 100 kΩ feels too gentle, drop R2 to 47 kΩ or 22 kΩ for deeper sweep.</text>
+<text x="575" y="730" class="value" font-size="10">• Verification: with toggle OFF, scope C1's downstream side — you should see</text>
+<text x="575" y="746" class="value" font-size="10">  a clean ~2.5 V DC level slewing between ~0.5 V and ~4.5 V at 2.5 Hz.</text>
+<text x="575" y="766" class="value" font-size="10">• Audio test: hold a long note (RUN), flip the toggle. Filter should wobble.</text>
+</svg>
