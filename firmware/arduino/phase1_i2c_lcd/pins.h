@@ -22,12 +22,17 @@ static const uint8_t  LCD_COLS = 16;
 static const uint8_t  LCD_ROWS = 2;
 
 // ---- Status LED ----
-// Pro Micro on-board LED. Toggles on every successful packet receive so a
+// Nano on-board LED (D13). Toggles on every successful packet receive so a
 // stalled link is obvious without a serial monitor.
 #ifndef STATUS_LED
 #define STATUS_LED LED_BUILTIN
 #endif
 
+// ---- I2C pins (informational) ----
+// The Wire library uses the board's hardware I2C pins automatically:
+//   Nano (ATmega328P):    SDA = A4, SCL = A5
+//   Pro Micro (32U4):     SDA = D2, SCL = D3
+// No pin numbers are passed to Wire.begin() — changing boards just works.
+
 // ---- Serial debug ----
-// 115200 keeps Pro Micro USB-CDC happy and is fast enough not to delay loop().
 static const uint32_t DEBUG_BAUD = 115200;

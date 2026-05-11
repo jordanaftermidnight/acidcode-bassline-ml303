@@ -11,9 +11,9 @@ Hardware build, firmware, and integration work for the **ML-303** — Mathias Sc
 ## Hardware
 
 - ML-303 V5 mainboard (PIC18LF452 @ 10 MHz, firmware V7.02 from July 2008)
-- Arduino Pro Micro (ATmega32U4, 5 V / 16 MHz)
+- Arduino Nano (ATmega328P, 5 V / 16 MHz)
 - I2C LCD 16x2 (PCF8574 backpack, red backlight)
-- Great Destroyer bit crusher (Phase 3)
+- Great Destroyer bit crusher (Phase 3 — under review)
 
 ## Enclosure constraints
 
@@ -25,7 +25,7 @@ The metal panel stays as stock as possible. **No new holes** will be drilled. Th
 - **HEADPHONE** jack (front, top-right)
 
 **Mod controls (front)**
-- **AT-ONE** toggle (upper-left) with LED indicator above — sits in the same spot V6 documents as the **BASSDRUM** area on page 21. Likely a BD ON/OFF with status LED. Function inherited with the 2018 panel; not described in V5 or V6 build docs verbatim.
+- **AT-ONE** toggle (upper-left) with LED indicator above — panel label corresponds to xpo's **AT-1 attenuator kit** (referenced in Acidcode sale listings as "delivered separately, not installed"). The kit was not supplied with this unit, no public schematic exists, and the toggle is currently unwired. Function pending re-purpose; the panel sticker can be reprinted once a new function is wired.
 - **DRIVE** pot (next to AT-ONE) — identified from the V6 PCB silkscreen "**HIGHP DISTORTION**" (xpo_construction.pdf p.14). Internal distortion stage with optional HIGHPASS toggle near VOLUME ("if switch is not used you must solder a bridge here").
 
 Effects routing for added gear (Phase 3+) uses **LINE OUT → external box → AUDIO IN** as an effects loop, with WAVEFORM=EXT muting the internal VCO. No internal taps, no new holes.

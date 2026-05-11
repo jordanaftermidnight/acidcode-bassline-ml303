@@ -7,12 +7,13 @@ three auto-rotating LCD pages.
 ## Build
 
 - **IDE:** Arduino IDE 2.x or `arduino-cli`
-- **Board:** SparkFun Pro Micro (5V/16MHz) — or "Arduino Leonardo" for clones
+- **Board:** Arduino Nano (ATmega328P, 5V/16MHz). "Old Bootloader" variant for many clones.
 - **Library:** `LiquidCrystal I2C` by Frank de Brabander (install via Library Manager)
 
 ```bash
-arduino-cli compile --fqbn arduino:avr:leonardo phase1_i2c_lcd
-arduino-cli upload  --fqbn arduino:avr:leonardo --port /dev/cu.usbmodem* phase1_i2c_lcd
+arduino-cli compile --fqbn arduino:avr:nano:cpu=atmega328 phase1_i2c_lcd
+arduino-cli upload  --fqbn arduino:avr:nano:cpu=atmega328 --port /dev/cu.usbserial-* phase1_i2c_lcd
+# For clones with the older bootloader, use cpu=atmega328old instead.
 ```
 
 ## Bringup order
@@ -30,7 +31,7 @@ arduino-cli upload  --fqbn arduino:avr:leonardo --port /dev/cu.usbmodem* phase1_
 
 ## Debug
 
-Open the Arduino Serial Monitor at 115200. The firmware prints addresses on boot and logs every checksum mismatch. If you don't see boot output: the Pro Micro USB-CDC takes ~1.5 s to enumerate, so reconnect after upload.
+Open the Arduino Serial Monitor at 115200. The firmware prints addresses on boot and logs every checksum mismatch. The Nano uses a CH340/FT232 USB-serial bridge — enumeration is immediate; if you don't see boot output, check that the right `/dev/cu.usbserial-*` port is selected and that no other monitor (e.g. screen, minicom) is holding it.
 
 ## Tunables (in `pins.h`)
 

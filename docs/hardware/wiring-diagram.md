@@ -16,20 +16,20 @@ Full SVG versions live in [`diagrams/`](diagrams/):
                 │         │         │
               [PIC]    [Arduino] [LCD]
                 │         │         │
-        SDA ────┼─────────┼─────────┼─────  Pin 2 on Arduino
-        SCL ────┼─────────┼─────────┼─────  Pin 3 on Arduino
+        SDA ────┼─────────┼─────────┼─────  A4 on Arduino Nano
+        SCL ────┼─────────┼─────────┼─────  A5 on Arduino Nano
                 │         │         │
         GND ────┴─────────┴─────────┴─────
 ```
 
 ## Pin map
 
-| Net  | PIC18LF452       | Arduino Pro Micro | LCD backpack |
-|------|------------------|-------------------|--------------|
-| SDA  | Pin 23 (RC4)     | Pin 2 (SDA)       | SDA          |
-| SCL  | Pin 18 (RC3)     | Pin 3 (SCL)       | SCL          |
-| +5V  | Pin 11 (VDD)     | VCC               | VCC          |
-| GND  | Pin 12, 31 (VSS) | GND               | GND          |
+| Net  | PIC18LF452       | Arduino Nano | LCD backpack |
+|------|------------------|--------------|--------------|
+| SDA  | Pin 23 (RC4)     | A4           | SDA          |
+| SCL  | Pin 18 (RC3)     | A5           | SCL          |
+| +5V  | Pin 11 (VDD)     | 5V (or VIN)  | VCC          |
+| GND  | Pin 12, 31 (VSS) | GND          | GND          |
 
 ## Pull-ups
 
@@ -43,13 +43,13 @@ Keep the total bus under 30 cm at 100 kHz. The Arduino mounts directly above the
 
 | Device           | Current (mA) |
 |------------------|--------------|
-| Arduino Pro Micro | ~50 |
+| Arduino Nano (no USB) | ~30 |
 | PCF8574 LCD (backlight on) | ~30 |
-| **Total added** | **~80** |
+| **Total added** | **~60** |
 
-The ML-303 on-board +5V regulator (LM7805 in a TO-220 with heatsink) is rated for 1 A and currently draws well under that. 80 mA additional load is comfortable.
+The ML-303 on-board +5V regulator (LM7805 in a TO-220 with heatsink) is rated for 1 A and currently draws well under that. 60 mA additional load is comfortable.
 
-If the regulator runs hot after adding the Arduino + LCD: feed the Arduino's RAW pin (not VCC) from the unregulated +9V rail — Pro Micro's onboard regulator drops it to 5 V locally and offloads heat from the ML-303 regulator.
+If the regulator runs hot after adding the Arduino + LCD: feed the Arduino's **VIN** pin (not 5V) from the unregulated +9V rail — the Nano's onboard regulator drops it to 5 V locally and offloads heat from the ML-303 regulator.
 
 ## Mounting
 

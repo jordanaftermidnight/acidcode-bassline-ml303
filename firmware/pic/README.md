@@ -51,9 +51,9 @@ See [`../../docs/hardware/diagrams/packet_layout.svg`](../../docs/hardware/diagr
 
 ## Pin reference
 
-| Signal | PIC pin | Arduino pin |
-|--------|---------|-------------|
-| SCL    | 18 (RC3) | 3 |
-| SDA    | 23 (RC4) | 2 |
+| Signal | PIC pin | Arduino Nano pin |
+|--------|---------|------------------|
+| SCL    | 18 (RC3) | A5 |
+| SDA    | 23 (RC4) | A4 |
 | GND    | 12 / 31  | GND |
-| VCC    | 11 (+5V) | VCC (+5V) |
+| VCC    | 11 (+5V) | 5V |

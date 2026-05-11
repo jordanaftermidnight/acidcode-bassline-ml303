@@ -1,4 +1,4 @@
-// ML-303 Phase 1 — Arduino Pro Micro firmware.
+// ML-303 Phase 1 — Arduino Nano firmware.
 //
 // Role: I2C slave on the ML-303 bus. Receives a 9-byte sequencer packet
 // from the PIC18LF452 every step and renders the current state on a
@@ -163,7 +163,7 @@ void setup() {
   digitalWrite(STATUS_LED, LOW);
 
   Serial.begin(DEBUG_BAUD);
-  // Don't block on Serial — Pro Micro can run headless when bench-bringup is done.
+  // Don't block on Serial — Nano runs headless once bench-bringup is done.
 
   Wire.begin(ARDUINO_I2C_ADDRESS);
   Wire.onReceive(onI2CReceive);

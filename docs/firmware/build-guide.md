@@ -9,7 +9,7 @@ For visual references while reading along:
 ## Prerequisites
 
 - ML-303 V5 with PIC18LF452, firmware V7.02 source available
-- Arduino Pro Micro (5V/16MHz)
+- Arduino Nano (ATmega328P, 5V/16MHz)
 - I2C LCD 16x2 with PCF8574 backpack
 - Arduino IDE 2.x or `arduino-cli`
 - MPLAB X IDE 5.x+ with XC8 compiler 2.x
@@ -18,7 +18,7 @@ For visual references while reading along:
 ## Stage 1 — Arduino-side bringup (no PIC connected)
 
 1. **Install the Arduino library** "LiquidCrystal I2C" by Frank de Brabander.
-2. **Wire the LCD** to the Arduino: VCC→VCC, GND→GND, SDA→Pin 2, SCL→Pin 3.
+2. **Wire the LCD** to the Arduino: VCC→5V, GND→GND, SDA→A4, SCL→A5.
 3. **Upload `firmware/arduino/tests/i2c_scanner.ino`**. Open Serial Monitor at 115200. Confirm the LCD address (expect 0x27 or 0x3F). Write it down.
 4. **Upload `firmware/arduino/tests/lcd_test.ino`**. The LCD should read `ML-303 LCD OK / Phase 1 ready` with backlight blinking once per second. If blank: contrast pot, then verify wiring. See `docs/hardware/troubleshooting.md`.
 5. **If the LCD address is 0x3F**, edit `firmware/arduino/phase1_i2c_lcd/pins.h` and change `LCD_I2C_ADDRESS` to 0x3F (or pass `-DLCD_I2C_ADDRESS=0x3F` to `arduino-cli compile`).
@@ -50,8 +50,8 @@ Stage 2 done when: ML-303 still functions normally (audio works, sequencer runs)
 
 With both devices powered down:
 
-1. **Run SDA** from PIC pin 23 (RC4) to Arduino pin 2.
-2. **Run SCL** from PIC pin 18 (RC3) to Arduino pin 3.
+1. **Run SDA** from PIC pin 23 (RC4) to Arduino A4.
+2. **Run SCL** from PIC pin 18 (RC3) to Arduino A5.
 3. **Confirm shared ground** — the PIC's GND and the Arduino's GND must be the same net.
 4. **Power up both.** The LCD should switch from `Waiting for PIC` to live sequencer data within one step.
 
