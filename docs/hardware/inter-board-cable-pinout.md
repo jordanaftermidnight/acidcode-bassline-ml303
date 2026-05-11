@@ -1,5 +1,7 @@
 # ML-303 V5 inter-board cable pinout
 
+See [`diagrams/inter_board_cable_pinout.svg`](diagrams/inter_board_cable_pinout.svg) for a visual version of the same table.
+
 The original V5 design routes signals between the **analog board** (audio path, VCF, VCA, VCO, 6-bit pitch DAC) and the **digital board** (PIC18LF452 sequencer, button matrix, LEDs, MIDI) through four separate ribbon-style cables. Per `frontpanel/build_instructions_v5/303xmas.pdf` and the parts list on page 62:
 
 | Cable | Width | xpo name | Carries |

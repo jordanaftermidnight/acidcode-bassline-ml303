@@ -77,7 +77,7 @@ Firmware notes worth knowing before reading the code:
 5. Connect PIC ↔ Arduino ↔ LCD on shared I2C bus
 ```
 
-See [`docs/firmware/build-guide.md`](docs/firmware/build-guide.md) for the step-by-step, [`docs/hardware/wiring-diagram.md`](docs/hardware/wiring-diagram.md) for pin maps, [`docs/hardware/inter-board-cable-pinout.md`](docs/hardware/inter-board-cable-pinout.md) for the V5 analog↔digital cable pinout (10-pin DIGITAL_CON1 with PIC18LF452 mapping), and [`docs/hardware/troubleshooting.md`](docs/hardware/troubleshooting.md) when something goes wrong.
+See [`docs/firmware/build-guide.md`](docs/firmware/build-guide.md) for the step-by-step, [`docs/hardware/wiring-diagram.md`](docs/hardware/wiring-diagram.md) for pin maps, [`docs/hardware/inter-board-cable-pinout.md`](docs/hardware/inter-board-cable-pinout.md) + [`docs/hardware/diagrams/inter_board_cable_pinout.svg`](docs/hardware/diagrams/inter_board_cable_pinout.svg) for the V5 analog↔digital cable pinout (10-pin DIGITAL_CON1 with PIC18LF452 mapping), and [`docs/hardware/troubleshooting.md`](docs/hardware/troubleshooting.md) when something goes wrong.
 
 ## Status
 
